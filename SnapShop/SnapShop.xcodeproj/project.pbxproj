@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		769C03CE2BFD78CE00F7F17C /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 769C03CD2BFD78CE00F7F17C /* Constants.swift */; };
+		769C03D02BFD7E1700F7F17C /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 769C03CF2BFD7E1700F7F17C /* Theme.swift */; };
 		769C64272BFD33B900FD5150 /* SnapShopApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 769C64262BFD33B900FD5150 /* SnapShopApp.swift */; };
 		769C64292BFD33B900FD5150 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 769C64282BFD33B900FD5150 /* ContentView.swift */; };
 		769C642B2BFD33BB00FD5150 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 769C642A2BFD33BB00FD5150 /* Assets.xcassets */; };
@@ -14,6 +16,7 @@
 		769C64382BFD33BC00FD5150 /* SnapShopTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 769C64372BFD33BC00FD5150 /* SnapShopTests.swift */; };
 		769C64422BFD33BC00FD5150 /* SnapShopUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 769C64412BFD33BC00FD5150 /* SnapShopUITests.swift */; };
 		769C64442BFD33BC00FD5150 /* SnapShopUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 769C64432BFD33BC00FD5150 /* SnapShopUITestsLaunchTests.swift */; };
+		76A089C02BFD47D7003A3DFF /* AppButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76A089BF2BFD47D7003A3DFF /* AppButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,6 +37,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		769C03C42BFD6C6600F7F17C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		769C03C62BFD6EDB00F7F17C /* Cairo-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Cairo-Bold.ttf"; path = "../../../../../../Downloads/cairo-2/Cairo-Bold.ttf"; sourceTree = "<group>"; };
+		769C03C72BFD6EDB00F7F17C /* Cairo-ExtraLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Cairo-ExtraLight.ttf"; path = "../../../../../../Downloads/cairo-2/Cairo-ExtraLight.ttf"; sourceTree = "<group>"; };
+		769C03C82BFD6EDB00F7F17C /* Cairo-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Cairo-Regular.ttf"; path = "../../../../../../Downloads/cairo-2/Cairo-Regular.ttf"; sourceTree = "<group>"; };
+		769C03C92BFD6EDB00F7F17C /* Cairo-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Cairo-SemiBold.ttf"; path = "../../../../../../Downloads/cairo-2/Cairo-SemiBold.ttf"; sourceTree = "<group>"; };
+		769C03CA2BFD6EDB00F7F17C /* Cairo-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Cairo-Black.ttf"; path = "../../../../../../Downloads/cairo-2/Cairo-Black.ttf"; sourceTree = "<group>"; };
+		769C03CB2BFD6EDB00F7F17C /* Cairo-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Cairo-Light.ttf"; path = "../../../../../../Downloads/cairo-2/Cairo-Light.ttf"; sourceTree = "<group>"; };
+		769C03CD2BFD78CE00F7F17C /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		769C03CF2BFD7E1700F7F17C /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		769C64232BFD33B900FD5150 /* SnapShop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SnapShop.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		769C64262BFD33B900FD5150 /* SnapShopApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapShopApp.swift; sourceTree = "<group>"; };
 		769C64282BFD33B900FD5150 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -44,6 +56,7 @@
 		769C643D2BFD33BC00FD5150 /* SnapShopUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SnapShopUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		769C64412BFD33BC00FD5150 /* SnapShopUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapShopUITests.swift; sourceTree = "<group>"; };
 		769C64432BFD33BC00FD5150 /* SnapShopUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapShopUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		76A089BF2BFD47D7003A3DFF /* AppButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,6 +84,38 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		765AD9CE2BFE24710084EE1A /* CustomUI */ = {
+			isa = PBXGroup;
+			children = (
+				76A089BF2BFD47D7003A3DFF /* AppButton.swift */,
+			);
+			path = CustomUI;
+			sourceTree = "<group>";
+		};
+		769C03C52BFD6D0300F7F17C /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				769C03CA2BFD6EDB00F7F17C /* Cairo-Black.ttf */,
+				769C03C62BFD6EDB00F7F17C /* Cairo-Bold.ttf */,
+				769C03C72BFD6EDB00F7F17C /* Cairo-ExtraLight.ttf */,
+				769C03CB2BFD6EDB00F7F17C /* Cairo-Light.ttf */,
+				769C03C82BFD6EDB00F7F17C /* Cairo-Regular.ttf */,
+				769C03C92BFD6EDB00F7F17C /* Cairo-SemiBold.ttf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
+		769C03CC2BFD78A400F7F17C /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				765AD9CE2BFE24710084EE1A /* CustomUI */,
+				769C03C52BFD6D0300F7F17C /* Fonts */,
+				769C03CD2BFD78CE00F7F17C /* Constants.swift */,
+				769C03CF2BFD7E1700F7F17C /* Theme.swift */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
 		769C641A2BFD33B800FD5150 = {
 			isa = PBXGroup;
 			children = (
@@ -94,6 +139,8 @@
 		769C64252BFD33B900FD5150 /* SnapShop */ = {
 			isa = PBXGroup;
 			children = (
+				769C03CC2BFD78A400F7F17C /* Core */,
+				769C03C42BFD6C6600F7F17C /* Info.plist */,
 				769C64262BFD33B900FD5150 /* SnapShopApp.swift */,
 				769C64282BFD33B900FD5150 /* ContentView.swift */,
 				769C642A2BFD33BB00FD5150 /* Assets.xcassets */,
@@ -257,8 +304,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				76A089C02BFD47D7003A3DFF /* AppButton.swift in Sources */,
 				769C64292BFD33B900FD5150 /* ContentView.swift in Sources */,
+				769C03D02BFD7E1700F7F17C /* Theme.swift in Sources */,
 				769C64272BFD33B900FD5150 /* SnapShopApp.swift in Sources */,
+				769C03CE2BFD78CE00F7F17C /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -424,6 +474,8 @@
 				DEVELOPMENT_ASSET_PATHS = "\"SnapShop/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = SnapShop/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -452,6 +504,8 @@
 				DEVELOPMENT_ASSET_PATHS = "\"SnapShop/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = SnapShop/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
