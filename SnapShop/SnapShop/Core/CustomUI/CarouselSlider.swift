@@ -23,7 +23,7 @@ struct CarouselSlider: View {
                             .tag(index)
                             .frame(height: 200)
                     }
-                  
+                    
                 }
             }
             .frame(height: 300)
@@ -33,12 +33,12 @@ struct CarouselSlider: View {
             HStack{
                 ForEach(0..<adsImages.count,id:\.self){index in
                     Capsule()
-                        .fill(Color.black.opacity(selectedImageIndex == index ? 0.88 : 0.22))
+                        .fill(Color.black.opacity(selectedImageIndex == index ? 0.7 : 0.2))
                         .frame(width: 8,height: 8)
                         .onTapGesture {
                             selectedImageIndex = index
                         }
-                }.offset(y:130)
+                }.offset(y:90)
             }.onReceive(timer) { _ in
                 withAnimation(.default){
                     selectedImageIndex = (selectedImageIndex+1) % adsImages.count
