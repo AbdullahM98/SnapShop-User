@@ -20,31 +20,31 @@ struct AppTabBar: View {
                 selectedTab = .home
             } label: {
                 TabBarButton(buttonText: "Home", imageName: "home", isActive: selectedTab == .home)
-            }.tint(Color.black)
+            }.tint(Theme.primaryColor)
             Button {
                 //switch to collections
                 selectedTab = .explore
             } label: {
                 TabBarButton(buttonText: "Explore", imageName: "search", isActive: selectedTab == .explore)
-            }.tint(Color.black)
+            }.tint(Theme.primaryColor)
             Button {
                 //switch to cart
                 selectedTab = .cart
             } label: {
                 TabBarButton(buttonText: "Cart", imageName: "cart", isActive: selectedTab == .cart)
-            }.tint(.black)
+            }.tint(Theme.primaryColor)
             Button {
                 //switch to saved
                 selectedTab = .saved
             } label: {
                 TabBarButton(buttonText: "Saved", imageName: "heart", isActive: selectedTab == .saved)
-            }.tint(Color.black)
+            }.tint(Theme.primaryColor)
             Button {
                 //switch to profile
                 selectedTab = .profile
             } label: {
                 TabBarButton(buttonText: "Profile", imageName: "person", isActive: selectedTab == .profile)
-            }.tint(Color.black)
+            }.tint(Theme.primaryColor)
             
         }.frame(height: 82 )
     }
