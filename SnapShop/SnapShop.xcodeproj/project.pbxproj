@@ -10,6 +10,7 @@
 		562572462C00AA9500B3967B /* CarouselSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562572452C00AA9500B3967B /* CarouselSlider.swift */; };
 		5656F04D2C00DA390037AA33 /* AppTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5656F04C2C00DA390037AA33 /* AppTabBar.swift */; };
 		5656F0512C00E6D60037AA33 /* TabBarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5656F0502C00E6D60037AA33 /* TabBarButton.swift */; };
+		5699A1D02C010DC7004C6999 /* Apollo in Frameworks */ = {isa = PBXBuildFile; productRef = 5699A1CF2C010DC7004C6999 /* Apollo */; };
 		769C03CE2BFD78CE00F7F17C /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 769C03CD2BFD78CE00F7F17C /* Constants.swift */; };
 		769C03D02BFD7E1700F7F17C /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 769C03CF2BFD7E1700F7F17C /* Theme.swift */; };
 		769C64272BFD33B900FD5150 /* SnapShopApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 769C64262BFD33B900FD5150 /* SnapShopApp.swift */; };
@@ -70,6 +71,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5699A1D02C010DC7004C6999 /* Apollo in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -97,6 +99,13 @@
 				5656F0502C00E6D60037AA33 /* TabBarButton.swift */,
 			);
 			path = CustomTabBar;
+			sourceTree = "<group>";
+		};
+		5699A1CE2C010DC7004C6999 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		765AD9CE2BFE24710084EE1A /* CustomUI */ = {
@@ -140,6 +149,7 @@
 				769C64362BFD33BC00FD5150 /* SnapShopTests */,
 				769C64402BFD33BC00FD5150 /* SnapShopUITests */,
 				769C64242BFD33B900FD5150 /* Products */,
+				5699A1CE2C010DC7004C6999 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -208,6 +218,7 @@
 			);
 			name = SnapShop;
 			packageProductDependencies = (
+				5699A1CF2C010DC7004C6999 /* Apollo */,
 			);
 			productName = SnapShop;
 			productReference = 769C64232BFD33B900FD5150 /* SnapShop.app */;
@@ -674,6 +685,14 @@
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		5699A1CF2C010DC7004C6999 /* Apollo */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5699A1C12C00FF1A004C6999 /* XCRemoteSwiftPackageReference "apollo-ios" */;
+			productName = Apollo;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 769C641B2BFD33B800FD5150 /* Project object */;
 }
