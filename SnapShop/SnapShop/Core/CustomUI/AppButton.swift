@@ -49,7 +49,9 @@ struct AppButton: View {
 
 struct AppButton_Previews: PreviewProvider {
     static var previews: some View {
+
             AppButton(text: "confirm",width: 100,height: 50,bgColor: Color.black , isFilled: true)
     }
 }
+
 

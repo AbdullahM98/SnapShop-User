@@ -23,7 +23,7 @@ struct CarouselSlider: View {
                             .tag(index)
                             .frame(height: 200)
                     }
-                    .shadow(radius: 20)
+                  
                 }
             }
             .frame(height: 300)

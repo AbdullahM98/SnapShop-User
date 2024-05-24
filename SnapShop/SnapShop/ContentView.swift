@@ -10,8 +10,8 @@ import SwiftUI
 struct ContentView: View {
     var body: some View {
         VStack {
-            AppButton(text: "confirm",width: 100,height: 50,bgColor: Color.black,isFilled:  true)
-
+            AppButton(text: "confirm",width: 100,height: 50,bgColor: Color.black,isFilled:  false)
+            
         }
         .padding()
     }
