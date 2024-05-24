@@ -10,12 +10,6 @@
 		562572462C00AA9500B3967B /* CarouselSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562572452C00AA9500B3967B /* CarouselSlider.swift */; };
 		5656F04D2C00DA390037AA33 /* AppTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5656F04C2C00DA390037AA33 /* AppTabBar.swift */; };
 		5656F0512C00E6D60037AA33 /* TabBarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5656F0502C00E6D60037AA33 /* TabBarButton.swift */; };
-		5699A1C32C00FF1A004C6999 /* Apollo in Frameworks */ = {isa = PBXBuildFile; productRef = 5699A1C22C00FF1A004C6999 /* Apollo */; };
-		5699A1C52C00FF1A004C6999 /* Apollo-Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = 5699A1C42C00FF1A004C6999 /* Apollo-Dynamic */; };
-		5699A1C72C00FF1A004C6999 /* ApolloAPI in Frameworks */ = {isa = PBXBuildFile; productRef = 5699A1C62C00FF1A004C6999 /* ApolloAPI */; };
-		5699A1C92C00FF1A004C6999 /* ApolloSQLite in Frameworks */ = {isa = PBXBuildFile; productRef = 5699A1C82C00FF1A004C6999 /* ApolloSQLite */; };
-		5699A1CB2C00FF1A004C6999 /* ApolloTestSupport in Frameworks */ = {isa = PBXBuildFile; productRef = 5699A1CA2C00FF1A004C6999 /* ApolloTestSupport */; };
-		5699A1CD2C00FF1A004C6999 /* ApolloWebSocket in Frameworks */ = {isa = PBXBuildFile; productRef = 5699A1CC2C00FF1A004C6999 /* ApolloWebSocket */; };
 		769C03CE2BFD78CE00F7F17C /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 769C03CD2BFD78CE00F7F17C /* Constants.swift */; };
 		769C03D02BFD7E1700F7F17C /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 769C03CF2BFD7E1700F7F17C /* Theme.swift */; };
 		769C64272BFD33B900FD5150 /* SnapShopApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 769C64262BFD33B900FD5150 /* SnapShopApp.swift */; };
@@ -76,12 +70,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5699A1C72C00FF1A004C6999 /* ApolloAPI in Frameworks */,
-				5699A1CD2C00FF1A004C6999 /* ApolloWebSocket in Frameworks */,
-				5699A1CB2C00FF1A004C6999 /* ApolloTestSupport in Frameworks */,
-				5699A1C92C00FF1A004C6999 /* ApolloSQLite in Frameworks */,
-				5699A1C32C00FF1A004C6999 /* Apollo in Frameworks */,
-				5699A1C52C00FF1A004C6999 /* Apollo-Dynamic in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -220,12 +208,6 @@
 			);
 			name = SnapShop;
 			packageProductDependencies = (
-				5699A1C22C00FF1A004C6999 /* Apollo */,
-				5699A1C42C00FF1A004C6999 /* Apollo-Dynamic */,
-				5699A1C62C00FF1A004C6999 /* ApolloAPI */,
-				5699A1C82C00FF1A004C6999 /* ApolloSQLite */,
-				5699A1CA2C00FF1A004C6999 /* ApolloTestSupport */,
-				5699A1CC2C00FF1A004C6999 /* ApolloWebSocket */,
 			);
 			productName = SnapShop;
 			productReference = 769C64232BFD33B900FD5150 /* SnapShop.app */;
@@ -692,39 +674,6 @@
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		5699A1C22C00FF1A004C6999 /* Apollo */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 5699A1C12C00FF1A004C6999 /* XCRemoteSwiftPackageReference "apollo-ios" */;
-			productName = Apollo;
-		};
-		5699A1C42C00FF1A004C6999 /* Apollo-Dynamic */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 5699A1C12C00FF1A004C6999 /* XCRemoteSwiftPackageReference "apollo-ios" */;
-			productName = "Apollo-Dynamic";
-		};
-		5699A1C62C00FF1A004C6999 /* ApolloAPI */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 5699A1C12C00FF1A004C6999 /* XCRemoteSwiftPackageReference "apollo-ios" */;
-			productName = ApolloAPI;
-		};
-		5699A1C82C00FF1A004C6999 /* ApolloSQLite */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 5699A1C12C00FF1A004C6999 /* XCRemoteSwiftPackageReference "apollo-ios" */;
-			productName = ApolloSQLite;
-		};
-		5699A1CA2C00FF1A004C6999 /* ApolloTestSupport */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 5699A1C12C00FF1A004C6999 /* XCRemoteSwiftPackageReference "apollo-ios" */;
-			productName = ApolloTestSupport;
-		};
-		5699A1CC2C00FF1A004C6999 /* ApolloWebSocket */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 5699A1C12C00FF1A004C6999 /* XCRemoteSwiftPackageReference "apollo-ios" */;
-			productName = ApolloWebSocket;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 769C641B2BFD33B800FD5150 /* Project object */;
 }
