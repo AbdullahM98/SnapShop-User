@@ -47,6 +47,7 @@ struct AppTabBar: View {
             }.tint(Theme.primaryColor)
             
         }.frame(height: 82 )
+            .ignoresSafeArea(edges: .bottom)
     }
 }
 

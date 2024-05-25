@@ -15,7 +15,7 @@ struct TabBarButton: View {
         GeometryReader{ geo in
             if isActive {
                 Rectangle()
-                    .foregroundColor(Theme.primaryColor)
+                    .foregroundColor(Color.black)
                     .frame(width: geo.size.width/2,height: 3)
                     .padding(.leading,geo.size.width/4)
             }

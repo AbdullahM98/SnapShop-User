@@ -24,6 +24,7 @@ struct ContentView: View {
                 Text("Explore")
             case .cart:
                 Text("Cart")
+                CartList()
             case .saved:
                 Text("Saved")
             case .profile:
@@ -31,7 +32,7 @@ struct ContentView: View {
             }
             Spacer()
             AppTabBar(selectedTab: $selectedTab)
-        }
+        }.ignoresSafeArea(edges: .bottom)
     }
 }
 
