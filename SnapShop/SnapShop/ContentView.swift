@@ -13,7 +13,13 @@ struct ContentView: View {
         VStack {
             switch selectedTab{
             case .home:
+                Spacer()
                 CarouselSlider(adsImages: ["1","2"])
+                ScrollView{
+                    BrandsGrid()
+                    ProductGrid()
+                }
+                
             case .explore:
                 Text("Explore")
             case .cart:

@@ -26,7 +26,7 @@ struct CarouselSlider: View {
                     
                 }
             }
-            .frame(height: 300)
+            .frame(height: UIScreen.screenHeight/4)
             .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
             .ignoresSafeArea()
             
