@@ -21,7 +21,7 @@ struct CarouselSlider: View {
                         Image("\(adsImages[index])")
                             .resizable()
                             .tag(index)
-                            .frame(height: 200)
+                            .frame(height: 150)
                     }
                     
                 }
@@ -44,7 +44,7 @@ struct CarouselSlider: View {
                     selectedImageIndex = (selectedImageIndex+1) % adsImages.count
                 }
             }
-        }
+        }.frame(height: 150)
     }
 }
 

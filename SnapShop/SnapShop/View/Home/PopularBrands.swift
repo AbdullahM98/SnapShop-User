@@ -1,21 +1,17 @@
 //
-//  BrandsGrid.swift
+//  BrandsView.swift
 //  SnapShop
 //
-//  Created by Mostfa Sobaih on 25/05/2024.
+//  Created by Mostfa Sobaih on 26/05/2024.
 //
 
 import SwiftUI
 
-struct BrandsGrid: View {
-    var columns: [GridItem] = [
-        GridItem(.adaptive(minimum: 70)) ,// Minimum item width of 50
-
-    ]
+struct PopularBrands: View {
     var body: some View {
         VStack(alignment: .leading){
-            Text("Brands").bold()
-            
+            Text("Popular Brands")               
+                .font(.system(size: 20, weight: .semibold))
             ScrollView(.horizontal){
                 HStack{
                     BrandCell()
@@ -27,16 +23,20 @@ struct BrandsGrid: View {
                     BrandCell()
                     BrandCell()
                     BrandCell()
+                    BrandCell()
+                    BrandCell()
+                    BrandCell()
+                    BrandCell()
+                    BrandCell()
+                    BrandCell()
                 }
             }.scrollIndicators(.hidden)
-        }.padding(.all,8)
-        
+        }.padding(.horizontal,16).padding(.top,16)
     }
 }
 
-struct BrandsGrid_Previews: PreviewProvider {
+struct BrandsView_Previews: PreviewProvider {
     static var previews: some View {
-        BrandsGrid()
+        PopularBrands()
     }
 }
-

@@ -1,15 +1,13 @@
 //
-//  ProductGrid.swift
+//  BestSeller.swift
 //  SnapShop
 //
-//  Created by Mostfa Sobaih on 25/05/2024.
+//  Created by Mostfa Sobaih on 27/05/2024.
 //
 
 import SwiftUI
 
-
-struct ProductGrid: View {
-    
+struct BestSeller: View {
     private let
     adaptiveColumns = [
         GridItem(.adaptive (minimum: 170))
@@ -17,7 +15,7 @@ struct ProductGrid: View {
     
     var body: some View {
         VStack(alignment:.leading ){
-            Text("Products").bold()
+            Text("Best Seller").font(.system(size: 20, weight: .semibold))
             ScrollView {
                 LazyVGrid(columns: [GridItem(.adaptive(minimum: UIScreen.screenWidth/2-35,maximum: UIScreen.screenWidth/2-5))]) {
                     ForEach(0..<20) { index in
@@ -25,15 +23,11 @@ struct ProductGrid: View {
                     }
                 }
             }
-        }.padding(.all,8)
+        }.padding(.horizontal,16).padding(.top,8)
         
     }
 }
-extension UIScreen{
-    static let screenWidth = UIScreen.main.bounds.size.width
-    static let screenHeight = UIScreen.main.bounds.size.height
-    static let screenSize = UIScreen.main.bounds.size
-}
+
 #Preview {
-    ProductGrid()
+    BestSeller()
 }

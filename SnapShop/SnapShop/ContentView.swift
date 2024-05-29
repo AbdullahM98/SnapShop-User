@@ -13,13 +13,7 @@ struct ContentView: View {
         VStack {
             switch selectedTab{
             case .home:
-                Spacer()
-                CarouselSlider(adsImages: ["1","2"])
-                ScrollView{
-                    BrandsGrid()
-                    ProductGrid()
-                }
-                
+                HomeView()
             case .explore:
                 Text("Explore")
             case .cart:
@@ -35,10 +29,6 @@ struct ContentView: View {
         }.ignoresSafeArea(edges: .bottom)
     }
 }
-
-//#Preview {
-//    ContentView()
-//}
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
