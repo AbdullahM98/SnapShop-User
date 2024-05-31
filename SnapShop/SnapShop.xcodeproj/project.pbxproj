@@ -18,6 +18,8 @@
 		5699A1D02C010DC7004C6999 /* Apollo in Frameworks */ = {isa = PBXBuildFile; productRef = 5699A1CF2C010DC7004C6999 /* Apollo */; };
 		56FE96C02C01174500F425DF /* CartCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56FE96BF2C01174500F425DF /* CartCard.swift */; };
 		56FE96C22C01265500F425DF /* CartList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56FE96C12C01265500F425DF /* CartList.swift */; };
+		7604E6CC2C097020003B14B3 /* schema.json in Resources */ = {isa = PBXBuildFile; fileRef = 7604E6CB2C097020003B14B3 /* schema.json */; };
+		7604E6CE2C097039003B14B3 /* store_schema.json in Resources */ = {isa = PBXBuildFile; fileRef = 7604E6CD2C097039003B14B3 /* store_schema.json */; };
 		769C03CE2BFD78CE00F7F17C /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 769C03CD2BFD78CE00F7F17C /* Constants.swift */; };
 		769C03D02BFD7E1700F7F17C /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 769C03CF2BFD7E1700F7F17C /* Theme.swift */; };
 		769C64272BFD33B900FD5150 /* SnapShopApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 769C64262BFD33B900FD5150 /* SnapShopApp.swift */; };
@@ -58,6 +60,8 @@
 		5656F0502C00E6D60037AA33 /* TabBarButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarButton.swift; sourceTree = "<group>"; };
 		56FE96BF2C01174500F425DF /* CartCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartCard.swift; sourceTree = "<group>"; };
 		56FE96C12C01265500F425DF /* CartList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartList.swift; sourceTree = "<group>"; };
+		7604E6CB2C097020003B14B3 /* schema.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = schema.json; sourceTree = SOURCE_ROOT; };
+		7604E6CD2C097039003B14B3 /* store_schema.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = store_schema.json; sourceTree = SOURCE_ROOT; };
 		769C03C42BFD6C6600F7F17C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		769C03C62BFD6EDB00F7F17C /* Cairo-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Cairo-Bold.ttf"; path = "../../../../../../Downloads/cairo-2/Cairo-Bold.ttf"; sourceTree = "<group>"; };
 		769C03C72BFD6EDB00F7F17C /* Cairo-ExtraLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Cairo-ExtraLight.ttf"; path = "../../../../../../Downloads/cairo-2/Cairo-ExtraLight.ttf"; sourceTree = "<group>"; };
@@ -130,6 +134,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		7604E6CA2C097007003B14B3 /* schemas */ = {
+			isa = PBXGroup;
+			children = (
+				7604E6CD2C097039003B14B3 /* store_schema.json */,
+				7604E6CB2C097020003B14B3 /* schema.json */,
+			);
+			path = schemas;
+			sourceTree = "<group>";
+		};
 		765AD9CE2BFE24710084EE1A /* CustomUI */ = {
 			isa = PBXGroup;
 			children = (
@@ -188,6 +201,7 @@
 		769C64252BFD33B900FD5150 /* SnapShop */ = {
 			isa = PBXGroup;
 			children = (
+				7604E6CA2C097007003B14B3 /* schemas */,
 				0A1085AA2C01F2D900C09C05 /* Services */,
 				769C03CC2BFD78A400F7F17C /* Core */,
 				769C03C42BFD6C6600F7F17C /* Info.plist */,
@@ -341,6 +355,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				769C642E2BFD33BB00FD5150 /* Preview Assets.xcassets in Resources */,
+				7604E6CC2C097020003B14B3 /* schema.json in Resources */,
+				7604E6CE2C097039003B14B3 /* store_schema.json in Resources */,
 				769C642B2BFD33BB00FD5150 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -716,7 +732,7 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/apollographql/apollo-ios.git";
 			requirement = {
-				kind = upToNextMajorVersion;
+				kind = upToNextMinorVersion;
 				minimumVersion = 1.0.0;
 			};
 		};
