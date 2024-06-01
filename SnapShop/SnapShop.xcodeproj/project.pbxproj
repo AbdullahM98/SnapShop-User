@@ -151,6 +151,13 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		0AE062A32C0B5B6C006D0EBB /* Schemas */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Schemas;
+			sourceTree = "<group>";
+		};
 		5656F04B2C00D9E30037AA33 /* CustomTabBar */ = {
 			isa = PBXGroup;
 			children = (
@@ -226,6 +233,7 @@
 		769C64252BFD33B900FD5150 /* SnapShop */ = {
 			isa = PBXGroup;
 			children = (
+				0AE062A32C0B5B6C006D0EBB /* Schemas */,
 				0AB9036A2C03E166007A7BA0 /* Extensions */,
 				0AB9035A2C03CE88007A7BA0 /* View */,
 				0A1085AA2C01F2D900C09C05 /* Services */,
