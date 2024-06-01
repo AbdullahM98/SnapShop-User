@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct PopularBrands: View {
-    @ObservedObject var viewModel = HomeViewModel()
+    @ObservedObject var viewModel = HomeScreenViewModel()
 
     var body: some View {
         VStack(alignment: .leading){
