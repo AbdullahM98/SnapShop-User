@@ -16,6 +16,7 @@
 		0AB903692C03E14D007A7BA0 /* BestSeller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB903682C03E14D007A7BA0 /* BestSeller.swift */; };
 		0AB9036C2C03E19C007A7BA0 /* UIScreen + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB9036B2C03E19C007A7BA0 /* UIScreen + Extension.swift */; };
 		0AB9036E2C03E41F007A7BA0 /* ProductCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB9036D2C03E41F007A7BA0 /* ProductCell.swift */; };
+		0AE062A52C0B5C6E006D0EBB /* schemaaaas in Resources */ = {isa = PBXBuildFile; fileRef = 0AE062A42C0B5C6E006D0EBB /* schemaaaas */; };
 		562572462C00AA9500B3967B /* CarouselSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562572452C00AA9500B3967B /* CarouselSlider.swift */; };
 		5656F04D2C00DA390037AA33 /* AppTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5656F04C2C00DA390037AA33 /* AppTabBar.swift */; };
 		5656F0512C00E6D60037AA33 /* TabBarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5656F0502C00E6D60037AA33 /* TabBarButton.swift */; };
@@ -61,6 +62,7 @@
 		0AB903682C03E14D007A7BA0 /* BestSeller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BestSeller.swift; sourceTree = "<group>"; };
 		0AB9036B2C03E19C007A7BA0 /* UIScreen + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScreen + Extension.swift"; sourceTree = "<group>"; };
 		0AB9036D2C03E41F007A7BA0 /* ProductCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCell.swift; sourceTree = "<group>"; };
+		0AE062A42C0B5C6E006D0EBB /* schemaaaas */ = {isa = PBXFileReference; lastKnownFileType = text; path = schemaaaas; sourceTree = "<group>"; };
 		562572452C00AA9500B3967B /* CarouselSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselSlider.swift; sourceTree = "<group>"; };
 		5656F04C2C00DA390037AA33 /* AppTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTabBar.swift; sourceTree = "<group>"; };
 		5656F0502C00E6D60037AA33 /* TabBarButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarButton.swift; sourceTree = "<group>"; };
@@ -154,6 +156,7 @@
 		0AE062A32C0B5B6C006D0EBB /* Schemas */ = {
 			isa = PBXGroup;
 			children = (
+				0AE062A42C0B5C6E006D0EBB /* schemaaaas */,
 			);
 			path = Schemas;
 			sourceTree = "<group>";
@@ -385,6 +388,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				769C642E2BFD33BB00FD5150 /* Preview Assets.xcassets in Resources */,
+				0AE062A52C0B5C6E006D0EBB /* schemaaaas in Resources */,
 				769C642B2BFD33BB00FD5150 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
