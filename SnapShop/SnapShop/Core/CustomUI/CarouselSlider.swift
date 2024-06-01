@@ -21,30 +21,30 @@ struct CarouselSlider: View {
                         Image("\(adsImages[index])")
                             .resizable()
                             .tag(index)
-                            .frame(height: 200)
+                            .frame(height: 150)
                     }
-                  
+                    
                 }
             }
-            .frame(height: 300)
+            .frame(height: UIScreen.screenHeight/4)
             .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
             .ignoresSafeArea()
             
             HStack{
                 ForEach(0..<adsImages.count,id:\.self){index in
                     Capsule()
-                        .fill(Color.black.opacity(selectedImageIndex == index ? 0.88 : 0.22))
+                        .fill(Color.black.opacity(selectedImageIndex == index ? 0.7 : 0.2))
                         .frame(width: 8,height: 8)
                         .onTapGesture {
                             selectedImageIndex = index
                         }
-                }.offset(y:130)
+                }.offset(y:90)
             }.onReceive(timer) { _ in
                 withAnimation(.default){
                     selectedImageIndex = (selectedImageIndex+1) % adsImages.count
                 }
             }
-        }
+        }.frame(height: 150)
     }
 }
 
