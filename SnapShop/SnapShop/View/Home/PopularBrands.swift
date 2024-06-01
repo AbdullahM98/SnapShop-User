@@ -8,30 +8,24 @@
 import SwiftUI
 
 struct PopularBrands: View {
+    @ObservedObject var viewModel = HomeViewModel()
+
     var body: some View {
         VStack(alignment: .leading){
-            Text("Popular Brands")               
+            Text("Popular Brands")
                 .font(.system(size: 20, weight: .semibold))
             ScrollView(.horizontal){
                 HStack{
-                    BrandCell()
-                    BrandCell()
-                    BrandCell()
-                    BrandCell()
-                    BrandCell()
-                    BrandCell()
-                    BrandCell()
-                    BrandCell()
-                    BrandCell()
-                    BrandCell()
-                    BrandCell()
-                    BrandCell()
-                    BrandCell()
-                    BrandCell()
-                    BrandCell()
+                    ForEach(viewModel.smartCollections, id: \.id) { brand in
+                        BrandCell(brand: brand)
+                    }
                 }
             }.scrollIndicators(.hidden)
-        }.padding(.horizontal,16).padding(.top,16)
+        }.padding(.horizontal,16)
+            .padding(.top,16)
+            .onAppear {
+            viewModel.fetchData()
+        }
     }
 }
 

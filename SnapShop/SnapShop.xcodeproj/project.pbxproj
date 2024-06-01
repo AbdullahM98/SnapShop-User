@@ -17,6 +17,9 @@
 		0AB9036C2C03E19C007A7BA0 /* UIScreen + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB9036B2C03E19C007A7BA0 /* UIScreen + Extension.swift */; };
 		0AB9036E2C03E41F007A7BA0 /* ProductCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB9036D2C03E41F007A7BA0 /* ProductCell.swift */; };
 		0AE062AF2C0B5DE2006D0EBB /* schema.json in Resources */ = {isa = PBXBuildFile; fileRef = 0AE062AE2C0B5DE2006D0EBB /* schema.json */; };
+		0AEBDC442C0BC98A00A74187 /* APIServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AEBDC432C0BC98A00A74187 /* APIServices.swift */; };
+		0AEBDC4A2C0BC99C00A74187 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AEBDC482C0BC99C00A74187 /* HomeViewModel.swift */; };
+		0AEBDC4D2C0BC99F00A74187 /* BrandsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AEBDC4C2C0BC99F00A74187 /* BrandsModel.swift */; };
 		562572462C00AA9500B3967B /* CarouselSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562572452C00AA9500B3967B /* CarouselSlider.swift */; };
 		5656F04D2C00DA390037AA33 /* AppTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5656F04C2C00DA390037AA33 /* AppTabBar.swift */; };
 		5656F0512C00E6D60037AA33 /* TabBarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5656F0502C00E6D60037AA33 /* TabBarButton.swift */; };
@@ -63,6 +66,9 @@
 		0AB9036B2C03E19C007A7BA0 /* UIScreen + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScreen + Extension.swift"; sourceTree = "<group>"; };
 		0AB9036D2C03E41F007A7BA0 /* ProductCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCell.swift; sourceTree = "<group>"; };
 		0AE062AE2C0B5DE2006D0EBB /* schema.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = schema.json; sourceTree = "<group>"; };
+		0AEBDC432C0BC98A00A74187 /* APIServices.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = APIServices.swift; path = ../../../../../SnapShop/SnapShop/SnapShop/Services/APIServices.swift; sourceTree = "<group>"; };
+		0AEBDC482C0BC99C00A74187 /* HomeViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		0AEBDC4C2C0BC99F00A74187 /* BrandsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrandsModel.swift; sourceTree = "<group>"; };
 		562572452C00AA9500B3967B /* CarouselSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselSlider.swift; sourceTree = "<group>"; };
 		5656F04C2C00DA390037AA33 /* AppTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTabBar.swift; sourceTree = "<group>"; };
 		5656F0502C00E6D60037AA33 /* TabBarButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarButton.swift; sourceTree = "<group>"; };
@@ -120,6 +126,7 @@
 			isa = PBXGroup;
 			children = (
 				0A1085AB2C01F30100C09C05 /* Network.swift */,
+				0AEBDC432C0BC98A00A74187 /* APIServices.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -159,6 +166,23 @@
 				0AE062AE2C0B5DE2006D0EBB /* schema.json */,
 			);
 			path = Schemas;
+			sourceTree = "<group>";
+		};
+		0AEBDC492C0BC99C00A74187 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				0AEBDC482C0BC99C00A74187 /* HomeViewModel.swift */,
+			);
+			name = ViewModels;
+			path = ../../../../SnapShop/SnapShop/SnapShop/ViewModels;
+			sourceTree = "<group>";
+		};
+		0AEBDC4B2C0BC99F00A74187 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				0AEBDC4C2C0BC99F00A74187 /* BrandsModel.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		5656F04B2C00D9E30037AA33 /* CustomTabBar */ = {
@@ -236,6 +260,8 @@
 		769C64252BFD33B900FD5150 /* SnapShop */ = {
 			isa = PBXGroup;
 			children = (
+				0AEBDC4B2C0BC99F00A74187 /* Models */,
+				0AEBDC492C0BC99C00A74187 /* ViewModels */,
 				0AE062A32C0B5B6C006D0EBB /* Schemas */,
 				0AB9036A2C03E166007A7BA0 /* Extensions */,
 				0AB9035A2C03CE88007A7BA0 /* View */,
@@ -415,12 +441,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				5656F04D2C00DA390037AA33 /* AppTabBar.swift in Sources */,
+				0AEBDC4A2C0BC99C00A74187 /* HomeViewModel.swift in Sources */,
 				0AB9036E2C03E41F007A7BA0 /* ProductCell.swift in Sources */,
 				76A089C02BFD47D7003A3DFF /* AppButton.swift in Sources */,
 				0AB903672C03DA6F007A7BA0 /* HomeSearchBar.swift in Sources */,
 				769C64292BFD33B900FD5150 /* ContentView.swift in Sources */,
 				0AB903652C03D587007A7BA0 /* BrandCell.swift in Sources */,
 				0AB9035F2C03D00D007A7BA0 /* CustomAppBar.swift in Sources */,
+				0AEBDC4D2C0BC99F00A74187 /* BrandsModel.swift in Sources */,
 				0A1085AC2C01F30100C09C05 /* Network.swift in Sources */,
 				56FE96C22C01265500F425DF /* CartList.swift in Sources */,
 				769C03D02BFD7E1700F7F17C /* Theme.swift in Sources */,
@@ -428,6 +456,7 @@
 				5656F0512C00E6D60037AA33 /* TabBarButton.swift in Sources */,
 				0AB9036C2C03E19C007A7BA0 /* UIScreen + Extension.swift in Sources */,
 				56FE96C02C01174500F425DF /* CartCard.swift in Sources */,
+				0AEBDC442C0BC98A00A74187 /* APIServices.swift in Sources */,
 				562572462C00AA9500B3967B /* CarouselSlider.swift in Sources */,
 				0AB903612C03D4C2007A7BA0 /* PopularBrands.swift in Sources */,
 				0AB903692C03E14D007A7BA0 /* BestSeller.swift in Sources */,
