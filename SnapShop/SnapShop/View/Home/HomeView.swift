@@ -10,7 +10,6 @@ import SwiftUI
 struct HomeView: View {
     var body: some View {
         CustomAppBar()
-        HomeSearchBar()
         CarouselSlider(adsImages: ["1","2"])
         ScrollView{
             PopularBrands()

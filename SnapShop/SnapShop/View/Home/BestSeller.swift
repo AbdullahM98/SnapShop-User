@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct BestSeller: View {
+    @ObservedObject var viewModel = HomeViewModel()
     private let
     adaptiveColumns = [
         GridItem(.adaptive (minimum: 170))
@@ -18,8 +19,8 @@ struct BestSeller: View {
             Text("Best Seller").font(.system(size: 20, weight: .semibold))
             ScrollView {
                 LazyVGrid(columns: [GridItem(.adaptive(minimum: UIScreen.screenWidth/2-35,maximum: UIScreen.screenWidth/2-5))]) {
-                    ForEach(0..<20) { index in
-                        ProductCell()
+                    ForEach(viewModel.products, id: \.id) { product in
+                        ProductCell(product: product)
                     }
                 }
             }

@@ -18,6 +18,7 @@
 		0AB9036E2C03E41F007A7BA0 /* ProductCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB9036D2C03E41F007A7BA0 /* ProductCell.swift */; };
 		0AE062AF2C0B5DE2006D0EBB /* schema.json in Resources */ = {isa = PBXBuildFile; fileRef = 0AE062AE2C0B5DE2006D0EBB /* schema.json */; };
 		0AEBDC4D2C0BC99F00A74187 /* BrandsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AEBDC4C2C0BC99F00A74187 /* BrandsModel.swift */; };
+		0AEBDC572C0BFD8200A74187 /* BestSellerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AEBDC562C0BFD8200A74187 /* BestSellerModel.swift */; };
 		562572462C00AA9500B3967B /* CarouselSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562572452C00AA9500B3967B /* CarouselSlider.swift */; };
 		5630EA152C0BCF8100CF89B0 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5630EA142C0BCF8100CF89B0 /* HomeViewModel.swift */; };
 		5630EA172C0BD36700CF89B0 /* CouponsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5630EA162C0BD36700CF89B0 /* CouponsModel.swift */; };
@@ -68,6 +69,7 @@
 		0AE062AE2C0B5DE2006D0EBB /* schema.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = schema.json; sourceTree = "<group>"; };
 		0AEBDC4C2C0BC99F00A74187 /* BrandsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrandsModel.swift; sourceTree = "<group>"; };
 		0AEBDC512C0BCE5700A74187 /* HomeScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenViewModel.swift; sourceTree = "<group>"; };
+		0AEBDC562C0BFD8200A74187 /* BestSellerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BestSellerModel.swift; sourceTree = "<group>"; };
 		562572452C00AA9500B3967B /* CarouselSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselSlider.swift; sourceTree = "<group>"; };
 		5630EA142C0BCF8100CF89B0 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		5630EA162C0BD36700CF89B0 /* CouponsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouponsModel.swift; sourceTree = "<group>"; };
@@ -173,6 +175,7 @@
 			children = (
 				0AEBDC4C2C0BC99F00A74187 /* BrandsModel.swift */,
 				5630EA162C0BD36700CF89B0 /* CouponsModel.swift */,
+				0AEBDC562C0BFD8200A74187 /* BestSellerModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -454,6 +457,7 @@
 				56FE96C22C01265500F425DF /* CartList.swift in Sources */,
 				769C03D02BFD7E1700F7F17C /* Theme.swift in Sources */,
 				769C64272BFD33B900FD5150 /* SnapShopApp.swift in Sources */,
+				0AEBDC572C0BFD8200A74187 /* BestSellerModel.swift in Sources */,
 				5656F0512C00E6D60037AA33 /* TabBarButton.swift in Sources */,
 				0AB9036C2C03E19C007A7BA0 /* UIScreen + Extension.swift in Sources */,
 				56FE96C02C01174500F425DF /* CartCard.swift in Sources */,
