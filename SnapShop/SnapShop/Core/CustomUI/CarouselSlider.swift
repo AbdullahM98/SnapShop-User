@@ -22,6 +22,28 @@ struct CarouselSlider: View {
                             .resizable()
                             .tag(index)
                             .frame(height: 150)
+                        VStack(alignment: .center){
+                            Text("Up to 50%")
+                                .offset(.init(width: 20, height: 20))
+                            Text("On everything today")
+                                .offset(.init(width: 20, height: 20))
+                            Text("With code: Hadir2001")
+                                .offset(.init(width: 20, height: 20))
+                            Button {
+                                print("Cart")
+                            } label: {
+                                RoundedRectangle(cornerRadius: 30)
+                                    .overlay {
+                                        Text("Click Me")
+                                            .font(.caption2)
+                                            .foregroundColor(.white)
+                                    }
+                            }
+                            .frame(width: 80, height: 36)
+                            .tint(.black.opacity(0.9))
+                            .offset(.init(width: 28, height: 28))
+
+                        }
                     }
                     
                 }

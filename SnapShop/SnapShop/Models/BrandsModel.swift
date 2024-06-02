@@ -36,3 +36,6 @@ struct BrandImage: Codable {
     let createdAt: String?
     let height: Int?
 }
+
+
+

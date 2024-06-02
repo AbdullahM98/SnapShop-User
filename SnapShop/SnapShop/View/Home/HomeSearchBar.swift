@@ -30,6 +30,10 @@ struct HomeSearchBar: View {
     }
 }
 
-#Preview {
-    HomeSearchBar()
+struct HomeSearchBar_Previews: PreviewProvider {
+    static var previews: some View {
+        HomeSearchBar()
+    }
 }
+
+

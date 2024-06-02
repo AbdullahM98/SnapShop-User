@@ -28,6 +28,9 @@ struct BestSeller: View {
     }
 }
 
-#Preview {
-    BestSeller()
+
+struct BestSeller_Previews: PreviewProvider {
+    static var previews: some View {
+        BestSeller()
+    }
 }

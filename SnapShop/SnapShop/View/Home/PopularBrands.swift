@@ -8,8 +8,7 @@
 import SwiftUI
 
 struct PopularBrands: View {
-    @ObservedObject var viewModel = HomeScreenViewModel()
-
+    @ObservedObject var viewModel = HomeViewModel()
     var body: some View {
         VStack(alignment: .leading){
             Text("Popular Brands")
@@ -24,7 +23,8 @@ struct PopularBrands: View {
         }.padding(.horizontal,16)
             .padding(.top,16)
             .onAppear {
-            viewModel.fetchData()
+            viewModel.fetchBrands()
+                viewModel.fetchCoupons()
         }
     }
 }
