@@ -20,7 +20,7 @@ struct HomeSearchBar: View {
                    .cornerRadius(8)
                    .frame(height: 44)
            }
-           .frame(height: 44)
+           .frame(height: 30).frame(width: 260)
            .padding(.horizontal)
            .padding(.vertical, 8)
            .background(Color(.systemGray6))

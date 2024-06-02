@@ -21,7 +21,7 @@ struct PopularBrands: View {
                 }
             }.scrollIndicators(.hidden)
         }.padding(.horizontal,16)
-            .padding(.top,16)
+            .padding(.top,8)
             .onAppear {
             viewModel.fetchBrands()
                 viewModel.fetchCoupons()

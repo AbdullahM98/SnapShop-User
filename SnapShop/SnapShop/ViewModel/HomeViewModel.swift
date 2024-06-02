@@ -11,6 +11,8 @@ class HomeViewModel :ObservableObject{
     @Published var smartCollections: [SmartCollectionsItem] = []
     @Published var coupones: [DiscountCodes] = []
     @Published var products: [PopularProductItem] = []
+    @Published var categoryProducts: [PopularProductItem] = []
+    @Published var singleCategoryProducts: [PopularProductItem] = []
     
     init(){
         fetchBrands()
@@ -57,6 +59,43 @@ class HomeViewModel :ObservableObject{
                         }
                     }
                     self?.products = uniqueProducts
+                    self?.categoryProducts = uniqueProducts
+                }
+            case .failure(let error):
+                print("Error fetching data: \(error)")
+            }
+        }
+    }
+    func fetchProductsInCollection(collectionID:String){
+        Network.shared.request("\(Support.baseUrl)/collections/\(collectionID)/products.json", method: "GET", responseType: PopularProductsResponse.self) { [weak self] result in
+            switch result {
+            case .success(let response):
+                DispatchQueue.main.async {
+                    self?.categoryProducts = response.products ?? []
+                }
+            case .failure(let error):
+                print("Error fetching data: \(error)")
+            }
+        }
+    }
+    func fetchProductsInCollectionSingle(collectionID:String){
+        Network.shared.request("\(Support.baseUrl)/collections/\(collectionID)/products.json", method: "GET", responseType: PopularProductsResponse.self) { [weak self] result in
+            switch result {
+            case .success(let response):
+                DispatchQueue.main.async {
+                    self?.singleCategoryProducts = response.products ?? []
+                }
+            case .failure(let error):
+                print("Error fetching data: \(error)")
+            }
+        }
+    }
+    func fetchProductsByCategory(category: String) {
+        Network.shared.request("\(Support.baseUrl)/products.json?product_type=\(category)", method: "GET", responseType: PopularProductsResponse.self) { [weak self] result in
+            switch result {
+            case .success(let response):
+                DispatchQueue.main.async {
+                    self?.categoryProducts = response.products ?? []
                 }
             case .failure(let error):
                 print("Error fetching data: \(error)")
