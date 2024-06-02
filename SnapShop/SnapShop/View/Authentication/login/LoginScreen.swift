@@ -10,16 +10,17 @@ import SwiftUI
 
 struct LoginScreen: View {
     @State private var text: String = ""
+    @State private var password: String = ""
     @StateObject var viewModel:LoginViewModel
     var body: some View {
         VStack{
             Spacer()
             
-            AppTextField(fieldModel: $viewModel.emailField).onSubmit {
+            AppTextField(fieldModel: $viewModel.emailField ,text: $text).onSubmit {
                 viewModel.emailField.onSubmitError()
             }
             
-            AppTextField(fieldModel: $viewModel.passwordField).onSubmit {
+            AppTextField(fieldModel: $viewModel.passwordField , text: $password).onSubmit {
                 viewModel.passwordField.onSubmitError()
             }
             
@@ -31,7 +32,9 @@ struct LoginScreen: View {
                 
             }.padding(.bottom,180)
             
-            AppButton(text: "Login", width: UIScreen.main.bounds.width * 0.9, height: UIScreen.main.bounds.height * 0.05, bgColor: Color.black,isFilled: true).padding(.bottom,50)
+            AppButton(text: "Login", width: UIScreen.main.bounds.width * 0.9, height: UIScreen.main.bounds.height * 0.05,isFilled: true , onClick: {
+                viewModel.login(email: text, password: password)
+            }).padding(.bottom,50)
                       
                       
         }.padding(.all,20)

@@ -51,7 +51,7 @@ struct CartList: View {
                     Text("$1075")
                 }.padding()
             }
-            AppButton(text: "Checkout",width: 300,height: 40,bgColor: Color.black.opacity(0.9) , isFilled: true)
+            AppButton(text: "Checkout",width: 300,height: 40 , isFilled: true , onClick: {})
             Spacer()
         }
         

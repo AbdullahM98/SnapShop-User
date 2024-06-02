@@ -9,10 +9,10 @@ import SwiftUI
 
 struct AppTextField: View {
     var fieldModel :Binding<FieldModel>
-    
+    var text:Binding<String>
     var body: some View {
         VStack(alignment: .leading){
-            TextField(fieldModel.fieldType.wrappedValue.placeHolder, text: fieldModel.value)
+            TextField(fieldModel.fieldType.wrappedValue.placeHolder, text: text).foregroundStyle(Color.gray)
                       .padding(10)
                        .overlay(
                         RoundedRectangle(cornerRadius: 5)

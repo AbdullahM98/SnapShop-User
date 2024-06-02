@@ -27,6 +27,7 @@ struct ContentView: View {
             Spacer()
             AppTabBar(selectedTab: $selectedTab)
         }.ignoresSafeArea(edges: .bottom)
+        
     }
 }
 

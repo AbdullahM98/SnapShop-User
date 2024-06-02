@@ -18,6 +18,8 @@
 		0AB9036E2C03E41F007A7BA0 /* ProductCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB9036D2C03E41F007A7BA0 /* ProductCell.swift */; };
 		0AE062AF2C0B5DE2006D0EBB /* schema.json in Resources */ = {isa = PBXBuildFile; fileRef = 0AE062AE2C0B5DE2006D0EBB /* schema.json */; };
 		0AEBDC4D2C0BC99F00A74187 /* BrandsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AEBDC4C2C0BC99F00A74187 /* BrandsModel.swift */; };
+		17693A09D4822F4D1197936B /* Pods_SnapShopTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D7FCCB730B31B99DE8A013C5 /* Pods_SnapShopTests.framework */; };
+		1989D8B29CA2144F1C3B51B3 /* Pods_SnapShop.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A330F0A48A85A8EC3AD2D2D /* Pods_SnapShop.framework */; };
 		562572462C00AA9500B3967B /* CarouselSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562572452C00AA9500B3967B /* CarouselSlider.swift */; };
 		5630EA152C0BCF8100CF89B0 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5630EA142C0BCF8100CF89B0 /* HomeViewModel.swift */; };
 		5630EA172C0BD36700CF89B0 /* CouponsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5630EA162C0BD36700CF89B0 /* CouponsModel.swift */; };
@@ -30,6 +32,10 @@
 		765F6E972C0BFD64002A121D /* TextFieldValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 765F6E962C0BFD64002A121D /* TextFieldValidator.swift */; };
 		765F6E992C0BFDEE002A121D /* AppTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 765F6E982C0BFDEE002A121D /* AppTextField.swift */; };
 		765F6E9C2C0BFEBA002A121D /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 765F6E9B2C0BFEBA002A121D /* LoginViewModel.swift */; };
+		765F6EA32C0C0F79002A121D /* SignUpScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 765F6EA22C0C0F79002A121D /* SignUpScreen.swift */; };
+		765F6EA52C0C1002002A121D /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 765F6EA42C0C1002002A121D /* SignUpViewModel.swift */; };
+		765F6EA72C0C188C002A121D /* FireBase Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 765F6EA62C0C188C002A121D /* FireBase Manager.swift */; };
+		765F6EAC2C0C2873002A121D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 765F6EAB2C0C2873002A121D /* GoogleService-Info.plist */; };
 		769C03CE2BFD78CE00F7F17C /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 769C03CD2BFD78CE00F7F17C /* Constants.swift */; };
 		769C03D02BFD7E1700F7F17C /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 769C03CF2BFD7E1700F7F17C /* Theme.swift */; };
 		769C64272BFD33B900FD5150 /* SnapShopApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 769C64262BFD33B900FD5150 /* SnapShopApp.swift */; };
@@ -40,6 +46,7 @@
 		769C64422BFD33BC00FD5150 /* SnapShopUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 769C64412BFD33BC00FD5150 /* SnapShopUITests.swift */; };
 		769C64442BFD33BC00FD5150 /* SnapShopUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 769C64432BFD33BC00FD5150 /* SnapShopUITestsLaunchTests.swift */; };
 		76A089C02BFD47D7003A3DFF /* AppButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76A089BF2BFD47D7003A3DFF /* AppButton.swift */; };
+		ED0C010546C8C98D787420E7 /* Pods_SnapShop_SnapShopUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC8DA6F2D3FDE0AF9E9E219F /* Pods_SnapShop_SnapShopUITests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,6 +67,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		02C8809CA68F12D02DB6F580 /* Pods-SnapShop-SnapShopUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SnapShop-SnapShopUITests.debug.xcconfig"; path = "Target Support Files/Pods-SnapShop-SnapShopUITests/Pods-SnapShop-SnapShopUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		0A1085AB2C01F30100C09C05 /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		0AB9035E2C03D00D007A7BA0 /* CustomAppBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAppBar.swift; sourceTree = "<group>"; };
 		0AB903602C03D4C2007A7BA0 /* PopularBrands.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularBrands.swift; sourceTree = "<group>"; };
@@ -72,6 +80,7 @@
 		0AE062AE2C0B5DE2006D0EBB /* schema.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = schema.json; sourceTree = "<group>"; };
 		0AEBDC4C2C0BC99F00A74187 /* BrandsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrandsModel.swift; sourceTree = "<group>"; };
 		0AEBDC512C0BCE5700A74187 /* HomeScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenViewModel.swift; sourceTree = "<group>"; };
+		222BA2B918040BBA64808964 /* Pods-SnapShop-SnapShopUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SnapShop-SnapShopUITests.release.xcconfig"; path = "Target Support Files/Pods-SnapShop-SnapShopUITests/Pods-SnapShop-SnapShopUITests.release.xcconfig"; sourceTree = "<group>"; };
 		562572452C00AA9500B3967B /* CarouselSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselSlider.swift; sourceTree = "<group>"; };
 		5630EA142C0BCF8100CF89B0 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		5630EA162C0BD36700CF89B0 /* CouponsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouponsModel.swift; sourceTree = "<group>"; };
@@ -80,10 +89,15 @@
 		56ECF9F92C0BF02000059F9B /* Support.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Support.swift; sourceTree = "<group>"; };
 		56FE96BF2C01174500F425DF /* CartCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartCard.swift; sourceTree = "<group>"; };
 		56FE96C12C01265500F425DF /* CartList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartList.swift; sourceTree = "<group>"; };
+		5A04FBD4F960C1D3E2D6C5BB /* Pods-SnapShop.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SnapShop.release.xcconfig"; path = "Target Support Files/Pods-SnapShop/Pods-SnapShop.release.xcconfig"; sourceTree = "<group>"; };
 		765F6E942C0BFB27002A121D /* LoginScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreen.swift; sourceTree = "<group>"; };
 		765F6E962C0BFD64002A121D /* TextFieldValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldValidator.swift; sourceTree = "<group>"; };
 		765F6E982C0BFDEE002A121D /* AppTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTextField.swift; sourceTree = "<group>"; };
 		765F6E9B2C0BFEBA002A121D /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		765F6EA22C0C0F79002A121D /* SignUpScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpScreen.swift; sourceTree = "<group>"; };
+		765F6EA42C0C1002002A121D /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
+		765F6EA62C0C188C002A121D /* FireBase Manager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FireBase Manager.swift"; sourceTree = "<group>"; };
+		765F6EAB2C0C2873002A121D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../Desktop/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		769C03C42BFD6C6600F7F17C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		769C03C62BFD6EDB00F7F17C /* Cairo-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Cairo-Bold.ttf"; path = "../../../../../../Downloads/cairo-2/Cairo-Bold.ttf"; sourceTree = "<group>"; };
 		769C03C72BFD6EDB00F7F17C /* Cairo-ExtraLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Cairo-ExtraLight.ttf"; path = "../../../../../../Downloads/cairo-2/Cairo-ExtraLight.ttf"; sourceTree = "<group>"; };
@@ -104,6 +118,12 @@
 		769C64412BFD33BC00FD5150 /* SnapShopUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapShopUITests.swift; sourceTree = "<group>"; };
 		769C64432BFD33BC00FD5150 /* SnapShopUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapShopUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		76A089BF2BFD47D7003A3DFF /* AppButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppButton.swift; sourceTree = "<group>"; };
+		8A330F0A48A85A8EC3AD2D2D /* Pods_SnapShop.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SnapShop.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B2AFA08B1BC7003B867FB678 /* Pods-SnapShopTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SnapShopTests.debug.xcconfig"; path = "Target Support Files/Pods-SnapShopTests/Pods-SnapShopTests.debug.xcconfig"; sourceTree = "<group>"; };
+		BCECEC01BAD37E2AF2A4C0C8 /* Pods-SnapShop.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SnapShop.debug.xcconfig"; path = "Target Support Files/Pods-SnapShop/Pods-SnapShop.debug.xcconfig"; sourceTree = "<group>"; };
+		D7FCCB730B31B99DE8A013C5 /* Pods_SnapShopTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SnapShopTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E105981BB2DBB2106B8FBC38 /* Pods-SnapShopTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SnapShopTests.release.xcconfig"; path = "Target Support Files/Pods-SnapShopTests/Pods-SnapShopTests.release.xcconfig"; sourceTree = "<group>"; };
+		EC8DA6F2D3FDE0AF9E9E219F /* Pods_SnapShop_SnapShopUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SnapShop_SnapShopUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,6 +131,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1989D8B29CA2144F1C3B51B3 /* Pods_SnapShop.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -118,6 +139,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				17693A09D4822F4D1197936B /* Pods_SnapShopTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -125,6 +147,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ED0C010546C8C98D787420E7 /* Pods_SnapShop_SnapShopUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -135,6 +158,7 @@
 			isa = PBXGroup;
 			children = (
 				0A1085AB2C01F30100C09C05 /* Network.swift */,
+				765F6EA62C0C188C002A121D /* FireBase Manager.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -208,6 +232,9 @@
 		5699A1CE2C010DC7004C6999 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8A330F0A48A85A8EC3AD2D2D /* Pods_SnapShop.framework */,
+				EC8DA6F2D3FDE0AF9E9E219F /* Pods_SnapShop_SnapShopUITests.framework */,
+				D7FCCB730B31B99DE8A013C5 /* Pods_SnapShopTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -226,6 +253,7 @@
 		765F6E902C0BF9CE002A121D /* Authentication */ = {
 			isa = PBXGroup;
 			children = (
+				765F6EA12C0C0F46002A121D /* Register */,
 				765F6E912C0BFA23002A121D /* login */,
 			);
 			path = Authentication;
@@ -243,8 +271,17 @@
 			isa = PBXGroup;
 			children = (
 				765F6E9B2C0BFEBA002A121D /* LoginViewModel.swift */,
+				765F6EA42C0C1002002A121D /* SignUpViewModel.swift */,
 			);
 			path = loginViewModel;
+			sourceTree = "<group>";
+		};
+		765F6EA12C0C0F46002A121D /* Register */ = {
+			isa = PBXGroup;
+			children = (
+				765F6EA22C0C0F79002A121D /* SignUpScreen.swift */,
+			);
+			path = Register;
 			sourceTree = "<group>";
 		};
 		769C03C52BFD6D0300F7F17C /* Fonts */ = {
@@ -281,6 +318,7 @@
 				769C64402BFD33BC00FD5150 /* SnapShopUITests */,
 				769C64242BFD33B900FD5150 /* Products */,
 				5699A1CE2C010DC7004C6999 /* Frameworks */,
+				96EC25D53361E435C91E99ED /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -297,6 +335,7 @@
 		769C64252BFD33B900FD5150 /* SnapShop */ = {
 			isa = PBXGroup;
 			children = (
+				765F6EAB2C0C2873002A121D /* GoogleService-Info.plist */,
 				0AEBDC502C0BCE4E00A74187 /* ViewModel */,
 				0AEBDC4B2C0BC99F00A74187 /* Models */,
 				0AE062A32C0B5B6C006D0EBB /* Schemas */,
@@ -341,6 +380,19 @@
 			path = SnapShopUITests;
 			sourceTree = "<group>";
 		};
+		96EC25D53361E435C91E99ED /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				BCECEC01BAD37E2AF2A4C0C8 /* Pods-SnapShop.debug.xcconfig */,
+				5A04FBD4F960C1D3E2D6C5BB /* Pods-SnapShop.release.xcconfig */,
+				02C8809CA68F12D02DB6F580 /* Pods-SnapShop-SnapShopUITests.debug.xcconfig */,
+				222BA2B918040BBA64808964 /* Pods-SnapShop-SnapShopUITests.release.xcconfig */,
+				B2AFA08B1BC7003B867FB678 /* Pods-SnapShopTests.debug.xcconfig */,
+				E105981BB2DBB2106B8FBC38 /* Pods-SnapShopTests.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -348,17 +400,17 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 769C64472BFD33BC00FD5150 /* Build configuration list for PBXNativeTarget "SnapShop" */;
 			buildPhases = (
+				3D4A1A6C2CDB7B8FF6354C4D /* [CP] Check Pods Manifest.lock */,
 				769C641F2BFD33B900FD5150 /* Sources */,
 				769C64202BFD33B900FD5150 /* Frameworks */,
 				769C64212BFD33B900FD5150 /* Resources */,
+				23814F7C30EA113D3E0E02FD /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = SnapShop;
-			packageProductDependencies = (
-			);
 			productName = SnapShop;
 			productReference = 769C64232BFD33B900FD5150 /* SnapShop.app */;
 			productType = "com.apple.product-type.application";
@@ -367,6 +419,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 769C644A2BFD33BC00FD5150 /* Build configuration list for PBXNativeTarget "SnapShopTests" */;
 			buildPhases = (
+				89628DC64B365F29013C5966 /* [CP] Check Pods Manifest.lock */,
 				769C642F2BFD33BC00FD5150 /* Sources */,
 				769C64302BFD33BC00FD5150 /* Frameworks */,
 				769C64312BFD33BC00FD5150 /* Resources */,
@@ -385,9 +438,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 769C644D2BFD33BC00FD5150 /* Build configuration list for PBXNativeTarget "SnapShopUITests" */;
 			buildPhases = (
+				4CA3FBFFA9080A2500C7AD09 /* [CP] Check Pods Manifest.lock */,
 				769C64392BFD33BC00FD5150 /* Sources */,
 				769C643A2BFD33BC00FD5150 /* Frameworks */,
 				769C643B2BFD33BC00FD5150 /* Resources */,
+				922996C3BDF21137A262CFD9 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -431,8 +486,6 @@
 				Base,
 			);
 			mainGroup = 769C641A2BFD33B800FD5150;
-			packageReferences = (
-			);
 			productRefGroup = 769C64242BFD33B900FD5150 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -450,6 +503,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0AE062AF2C0B5DE2006D0EBB /* schema.json in Resources */,
+				765F6EAC2C0C2873002A121D /* GoogleService-Info.plist in Resources */,
 				769C642E2BFD33BB00FD5150 /* Preview Assets.xcassets in Resources */,
 				769C642B2BFD33BB00FD5150 /* Assets.xcassets in Resources */,
 			);
@@ -471,6 +525,109 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		23814F7C30EA113D3E0E02FD /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-SnapShop/Pods-SnapShop-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-SnapShop/Pods-SnapShop-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-SnapShop/Pods-SnapShop-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		3D4A1A6C2CDB7B8FF6354C4D /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-SnapShop-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		4CA3FBFFA9080A2500C7AD09 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-SnapShop-SnapShopUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		89628DC64B365F29013C5966 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-SnapShopTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		922996C3BDF21137A262CFD9 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-SnapShop-SnapShopUITests/Pods-SnapShop-SnapShopUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-SnapShop-SnapShopUITests/Pods-SnapShop-SnapShopUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-SnapShop-SnapShopUITests/Pods-SnapShop-SnapShopUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		769C641F2BFD33B900FD5150 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -483,6 +640,7 @@
 				76A089C02BFD47D7003A3DFF /* AppButton.swift in Sources */,
 				0AB903672C03DA6F007A7BA0 /* HomeSearchBar.swift in Sources */,
 				765F6E952C0BFB27002A121D /* LoginScreen.swift in Sources */,
+				765F6EA72C0C188C002A121D /* FireBase Manager.swift in Sources */,
 				769C64292BFD33B900FD5150 /* ContentView.swift in Sources */,
 				765F6E9C2C0BFEBA002A121D /* LoginViewModel.swift in Sources */,
 				0AB903652C03D587007A7BA0 /* BrandCell.swift in Sources */,
@@ -492,6 +650,7 @@
 				0A1085AC2C01F30100C09C05 /* Network.swift in Sources */,
 				56FE96C22C01265500F425DF /* CartList.swift in Sources */,
 				769C03D02BFD7E1700F7F17C /* Theme.swift in Sources */,
+				765F6EA52C0C1002002A121D /* SignUpViewModel.swift in Sources */,
 				769C64272BFD33B900FD5150 /* SnapShopApp.swift in Sources */,
 				5656F0512C00E6D60037AA33 /* TabBarButton.swift in Sources */,
 				765F6E992C0BFDEE002A121D /* AppTextField.swift in Sources */,
@@ -499,6 +658,7 @@
 				56FE96C02C01174500F425DF /* CartCard.swift in Sources */,
 				562572462C00AA9500B3967B /* CarouselSlider.swift in Sources */,
 				5630EA152C0BCF8100CF89B0 /* HomeViewModel.swift in Sources */,
+				765F6EA32C0C0F79002A121D /* SignUpScreen.swift in Sources */,
 				0AB903612C03D4C2007A7BA0 /* PopularBrands.swift in Sources */,
 				0AB903692C03E14D007A7BA0 /* BestSeller.swift in Sources */,
 				769C03CE2BFD78CE00F7F17C /* Constants.swift in Sources */,
@@ -576,7 +736,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -639,7 +799,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -660,6 +820,7 @@
 		};
 		769C64482BFD33BC00FD5150 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = BCECEC01BAD37E2AF2A4C0C8 /* Pods-SnapShop.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -691,6 +852,7 @@
 		};
 		769C64492BFD33BC00FD5150 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5A04FBD4F960C1D3E2D6C5BB /* Pods-SnapShop.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -722,6 +884,7 @@
 		};
 		769C644B2BFD33BC00FD5150 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B2AFA08B1BC7003B867FB678 /* Pods-SnapShopTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -741,6 +904,7 @@
 		};
 		769C644C2BFD33BC00FD5150 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E105981BB2DBB2106B8FBC38 /* Pods-SnapShopTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -760,6 +924,7 @@
 		};
 		769C644E2BFD33BC00FD5150 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 02C8809CA68F12D02DB6F580 /* Pods-SnapShop-SnapShopUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -777,6 +942,7 @@
 		};
 		769C644F2BFD33BC00FD5150 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 222BA2B918040BBA64808964 /* Pods-SnapShop-SnapShopUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
