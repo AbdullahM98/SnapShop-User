@@ -26,6 +26,10 @@
 		56ECF9FA2C0BF02000059F9B /* Support.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56ECF9F92C0BF02000059F9B /* Support.swift */; };
 		56FE96C02C01174500F425DF /* CartCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56FE96BF2C01174500F425DF /* CartCard.swift */; };
 		56FE96C22C01265500F425DF /* CartList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56FE96C12C01265500F425DF /* CartList.swift */; };
+		765F6E952C0BFB27002A121D /* LoginScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 765F6E942C0BFB27002A121D /* LoginScreen.swift */; };
+		765F6E972C0BFD64002A121D /* TextFieldValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 765F6E962C0BFD64002A121D /* TextFieldValidator.swift */; };
+		765F6E992C0BFDEE002A121D /* AppTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 765F6E982C0BFDEE002A121D /* AppTextField.swift */; };
+		765F6E9C2C0BFEBA002A121D /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 765F6E9B2C0BFEBA002A121D /* LoginViewModel.swift */; };
 		769C03CE2BFD78CE00F7F17C /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 769C03CD2BFD78CE00F7F17C /* Constants.swift */; };
 		769C03D02BFD7E1700F7F17C /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 769C03CF2BFD7E1700F7F17C /* Theme.swift */; };
 		769C64272BFD33B900FD5150 /* SnapShopApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 769C64262BFD33B900FD5150 /* SnapShopApp.swift */; };
@@ -76,6 +80,10 @@
 		56ECF9F92C0BF02000059F9B /* Support.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Support.swift; sourceTree = "<group>"; };
 		56FE96BF2C01174500F425DF /* CartCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartCard.swift; sourceTree = "<group>"; };
 		56FE96C12C01265500F425DF /* CartList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartList.swift; sourceTree = "<group>"; };
+		765F6E942C0BFB27002A121D /* LoginScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreen.swift; sourceTree = "<group>"; };
+		765F6E962C0BFD64002A121D /* TextFieldValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldValidator.swift; sourceTree = "<group>"; };
+		765F6E982C0BFDEE002A121D /* AppTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTextField.swift; sourceTree = "<group>"; };
+		765F6E9B2C0BFEBA002A121D /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		769C03C42BFD6C6600F7F17C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		769C03C62BFD6EDB00F7F17C /* Cairo-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Cairo-Bold.ttf"; path = "../../../../../../Downloads/cairo-2/Cairo-Bold.ttf"; sourceTree = "<group>"; };
 		769C03C72BFD6EDB00F7F17C /* Cairo-ExtraLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Cairo-ExtraLight.ttf"; path = "../../../../../../Downloads/cairo-2/Cairo-ExtraLight.ttf"; sourceTree = "<group>"; };
@@ -134,6 +142,7 @@
 		0AB9035A2C03CE88007A7BA0 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				765F6E902C0BF9CE002A121D /* Authentication */,
 				0AB9035D2C03CECB007A7BA0 /* Home */,
 			);
 			path = View;
@@ -180,6 +189,7 @@
 		0AEBDC502C0BCE4E00A74187 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				765F6E9A2C0BFE97002A121D /* loginViewModel */,
 				0AEBDC512C0BCE5700A74187 /* HomeScreenViewModel.swift */,
 				5630EA142C0BCF8100CF89B0 /* HomeViewModel.swift */,
 			);
@@ -208,8 +218,33 @@
 				76A089BF2BFD47D7003A3DFF /* AppButton.swift */,
 				562572452C00AA9500B3967B /* CarouselSlider.swift */,
 				0AB9035E2C03D00D007A7BA0 /* CustomAppBar.swift */,
+				765F6E982C0BFDEE002A121D /* AppTextField.swift */,
 			);
 			path = CustomUI;
+			sourceTree = "<group>";
+		};
+		765F6E902C0BF9CE002A121D /* Authentication */ = {
+			isa = PBXGroup;
+			children = (
+				765F6E912C0BFA23002A121D /* login */,
+			);
+			path = Authentication;
+			sourceTree = "<group>";
+		};
+		765F6E912C0BFA23002A121D /* login */ = {
+			isa = PBXGroup;
+			children = (
+				765F6E942C0BFB27002A121D /* LoginScreen.swift */,
+			);
+			path = login;
+			sourceTree = "<group>";
+		};
+		765F6E9A2C0BFE97002A121D /* loginViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				765F6E9B2C0BFEBA002A121D /* LoginViewModel.swift */,
+			);
+			path = loginViewModel;
 			sourceTree = "<group>";
 		};
 		769C03C52BFD6D0300F7F17C /* Fonts */ = {
@@ -233,6 +268,7 @@
 				769C03C52BFD6D0300F7F17C /* Fonts */,
 				769C03CD2BFD78CE00F7F17C /* Constants.swift */,
 				769C03CF2BFD7E1700F7F17C /* Theme.swift */,
+				765F6E962C0BFD64002A121D /* TextFieldValidator.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -440,12 +476,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				765F6E972C0BFD64002A121D /* TextFieldValidator.swift in Sources */,
 				5656F04D2C00DA390037AA33 /* AppTabBar.swift in Sources */,
 				5630EA172C0BD36700CF89B0 /* CouponsModel.swift in Sources */,
 				0AB9036E2C03E41F007A7BA0 /* ProductCell.swift in Sources */,
 				76A089C02BFD47D7003A3DFF /* AppButton.swift in Sources */,
 				0AB903672C03DA6F007A7BA0 /* HomeSearchBar.swift in Sources */,
+				765F6E952C0BFB27002A121D /* LoginScreen.swift in Sources */,
 				769C64292BFD33B900FD5150 /* ContentView.swift in Sources */,
+				765F6E9C2C0BFEBA002A121D /* LoginViewModel.swift in Sources */,
 				0AB903652C03D587007A7BA0 /* BrandCell.swift in Sources */,
 				0AB9035F2C03D00D007A7BA0 /* CustomAppBar.swift in Sources */,
 				0AEBDC4D2C0BC99F00A74187 /* BrandsModel.swift in Sources */,
@@ -455,6 +494,7 @@
 				769C03D02BFD7E1700F7F17C /* Theme.swift in Sources */,
 				769C64272BFD33B900FD5150 /* SnapShopApp.swift in Sources */,
 				5656F0512C00E6D60037AA33 /* TabBarButton.swift in Sources */,
+				765F6E992C0BFDEE002A121D /* AppTextField.swift in Sources */,
 				0AB9036C2C03E19C007A7BA0 /* UIScreen + Extension.swift in Sources */,
 				56FE96C02C01174500F425DF /* CartCard.swift in Sources */,
 				562572462C00AA9500B3967B /* CarouselSlider.swift in Sources */,
