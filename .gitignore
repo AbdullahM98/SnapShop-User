@@ -1,2 +1,7 @@
 # Ignore Support.swift file
 SnapShop-User/SnapShop/SnapShop
+
+Support.swift
+# Operating system files
+.DS_Store
+Thumbs.db
