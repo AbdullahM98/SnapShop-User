@@ -36,6 +36,9 @@
 		765F6EA52C0C1002002A121D /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 765F6EA42C0C1002002A121D /* SignUpViewModel.swift */; };
 		765F6EA72C0C188C002A121D /* FireBase Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 765F6EA62C0C188C002A121D /* FireBase Manager.swift */; };
 		765F6EAC2C0C2873002A121D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 765F6EAB2C0C2873002A121D /* GoogleService-Info.plist */; };
+		765F6EAE2C0C864A002A121D /* AddressModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 765F6EAD2C0C864A002A121D /* AddressModel.swift */; };
+		765F6EB02C0C91C2002A121D /* CustomerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 765F6EAF2C0C91C2002A121D /* CustomerModel.swift */; };
+		765F6EB22C0CC5A7002A121D /* CustomerResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 765F6EB12C0CC5A7002A121D /* CustomerResponse.swift */; };
 		769C03CE2BFD78CE00F7F17C /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 769C03CD2BFD78CE00F7F17C /* Constants.swift */; };
 		769C03D02BFD7E1700F7F17C /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 769C03CF2BFD7E1700F7F17C /* Theme.swift */; };
 		769C64272BFD33B900FD5150 /* SnapShopApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 769C64262BFD33B900FD5150 /* SnapShopApp.swift */; };
@@ -98,6 +101,9 @@
 		765F6EA42C0C1002002A121D /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
 		765F6EA62C0C188C002A121D /* FireBase Manager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FireBase Manager.swift"; sourceTree = "<group>"; };
 		765F6EAB2C0C2873002A121D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../Desktop/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		765F6EAD2C0C864A002A121D /* AddressModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressModel.swift; sourceTree = "<group>"; };
+		765F6EAF2C0C91C2002A121D /* CustomerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerModel.swift; sourceTree = "<group>"; };
+		765F6EB12C0CC5A7002A121D /* CustomerResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerResponse.swift; sourceTree = "<group>"; };
 		769C03C42BFD6C6600F7F17C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		769C03C62BFD6EDB00F7F17C /* Cairo-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Cairo-Bold.ttf"; path = "../../../../../../Downloads/cairo-2/Cairo-Bold.ttf"; sourceTree = "<group>"; };
 		769C03C72BFD6EDB00F7F17C /* Cairo-ExtraLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Cairo-ExtraLight.ttf"; path = "../../../../../../Downloads/cairo-2/Cairo-ExtraLight.ttf"; sourceTree = "<group>"; };
@@ -206,6 +212,9 @@
 			children = (
 				0AEBDC4C2C0BC99F00A74187 /* BrandsModel.swift */,
 				5630EA162C0BD36700CF89B0 /* CouponsModel.swift */,
+				765F6EAD2C0C864A002A121D /* AddressModel.swift */,
+				765F6EAF2C0C91C2002A121D /* CustomerModel.swift */,
+				765F6EB12C0CC5A7002A121D /* CustomerResponse.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -640,6 +649,7 @@
 				76A089C02BFD47D7003A3DFF /* AppButton.swift in Sources */,
 				0AB903672C03DA6F007A7BA0 /* HomeSearchBar.swift in Sources */,
 				765F6E952C0BFB27002A121D /* LoginScreen.swift in Sources */,
+				765F6EAE2C0C864A002A121D /* AddressModel.swift in Sources */,
 				765F6EA72C0C188C002A121D /* FireBase Manager.swift in Sources */,
 				769C64292BFD33B900FD5150 /* ContentView.swift in Sources */,
 				765F6E9C2C0BFEBA002A121D /* LoginViewModel.swift in Sources */,
@@ -649,8 +659,10 @@
 				56ECF9FA2C0BF02000059F9B /* Support.swift in Sources */,
 				0A1085AC2C01F30100C09C05 /* Network.swift in Sources */,
 				56FE96C22C01265500F425DF /* CartList.swift in Sources */,
+				765F6EB02C0C91C2002A121D /* CustomerModel.swift in Sources */,
 				769C03D02BFD7E1700F7F17C /* Theme.swift in Sources */,
 				765F6EA52C0C1002002A121D /* SignUpViewModel.swift in Sources */,
+				765F6EB22C0CC5A7002A121D /* CustomerResponse.swift in Sources */,
 				769C64272BFD33B900FD5150 /* SnapShopApp.swift in Sources */,
 				5656F0512C00E6D60037AA33 /* TabBarButton.swift in Sources */,
 				765F6E992C0BFDEE002A121D /* AppTextField.swift in Sources */,
