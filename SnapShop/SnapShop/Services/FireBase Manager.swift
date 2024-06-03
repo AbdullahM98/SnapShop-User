@@ -13,18 +13,24 @@ import FirebaseFirestore
 class FirebaseManager {
     
     static let shared = FirebaseManager()
+ 
     
     private init(){}
     
-    func registerUser(email:String, password:String , compeltionHandler:@escaping (Bool,Error?)->Void){
-        
+    func registerUser(email:String, password:String , compeltionHandler:@escaping (Bool,String?,Error?)->Void){
+        var userId = ""
         Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
                  if let error = error {
                      print("Error creating user: \(error.localizedDescription)")
-                     compeltionHandler(false, error)
+                     compeltionHandler(false,nil, error)
                  } else {
                      print("User registered successfully")
-                     compeltionHandler(true, nil)
+                     
+                     if let user = Auth.auth().currentUser {
+                         let uid = user.uid
+                       userId = uid
+                     }
+                     compeltionHandler(true,userId, nil)
                  }
              }
     }
