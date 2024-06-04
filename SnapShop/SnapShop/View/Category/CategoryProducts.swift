@@ -1,14 +1,14 @@
 //
-//  BestSeller.swift
+//  CategoryProducts.swift
 //  SnapShop
 //
-//  Created by Mostfa Sobaih on 27/05/2024.
+//  Created by Mostfa Sobaih on 02/06/2024.
 //
 
 import SwiftUI
 
-struct BestSeller: View {
-    @ObservedObject var viewModel = HomeViewModel()
+struct CategoryProducts: View {
+    var products: [PopularProductItem]
     private let
     adaptiveColumns = [
         GridItem(.adaptive (minimum: 170))
@@ -16,11 +16,10 @@ struct BestSeller: View {
     
     var body: some View {
         VStack(alignment:.leading ){
-            Text("Best Seller").font(.system(size: 20, weight: .semibold))
             ScrollView {
                 LazyVGrid(columns: [GridItem(.adaptive(minimum: UIScreen.screenWidth/2-35,maximum: UIScreen.screenWidth/2-5))]) {
-                    ForEach(viewModel.products, id: \.id) { product in
-                        ProductCell(product: product)
+                    ForEach(products, id: \.id) { product in
+                        CategoryProductCell(product: product)
                     }
                 }
             }
@@ -29,8 +28,8 @@ struct BestSeller: View {
 }
 
 
-struct BestSeller_Previews: PreviewProvider {
+struct CategoryProducts_Previews: PreviewProvider {
     static var previews: some View {
-        BestSeller()
+        CategoryProducts(products: [PopularProductItem]())
     }
 }

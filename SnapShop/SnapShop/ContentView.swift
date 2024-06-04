@@ -10,26 +10,25 @@ import SwiftUI
 struct ContentView: View {
     @State var selectedTab:Tabs = .home
     var body: some View {
-        VStack {
-            switch selectedTab{
-            case .home:
-                HomeView()
-            case .explore:
-                Text("Explore")
-            case .cart:
-                Text("Cart")
-                CartList()
-            case .saved:
-                Text("Saved")
-            case .profile:
-                Text("Profile")
-            }
-            Spacer()
-            AppTabBar(selectedTab: $selectedTab)
-        }.ignoresSafeArea(edges: .bottom)
-        
-       
-        
+        NavigationStack{
+            VStack {
+                switch selectedTab{
+                case .home:
+                    HomeView()
+                case .explore:
+                    CategoryView()
+                case .cart:
+                    Text("Cart")
+                    CartList()
+                case .saved:
+                    Text("Saved")
+                case .profile:
+                    Text("Profile")
+                }
+                Spacer()
+                AppTabBar(selectedTab: $selectedTab)
+            }.ignoresSafeArea(edges: .bottom)
+        }
     }
 }
 
