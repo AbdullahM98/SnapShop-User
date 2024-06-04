@@ -9,7 +9,8 @@ import SwiftUI
 
 struct HomeSearchBar: View {
     @State private var searchText: String = ""
-    
+    @ObservedObject var viewModel: HomeViewModel
+
     var body: some View {
            HStack {
                Image(systemName: "magnifyingglass")
@@ -19,6 +20,9 @@ struct HomeSearchBar: View {
                    .background(Color(.systemGray6))
                    .cornerRadius(8)
                    .frame(height: 44)
+                   .onChange(of: searchText) { newValue in
+                       viewModel.filterProducts(by: newValue)
+                   }
            }
            .frame(height: 30).frame(width: 260)
            .padding(.horizontal)
@@ -26,13 +30,12 @@ struct HomeSearchBar: View {
            .background(Color(.systemGray6))
            .cornerRadius(10)
            .padding(.horizontal,16)
-           
     }
 }
 
 struct HomeSearchBar_Previews: PreviewProvider {
     static var previews: some View {
-        HomeSearchBar()
+        HomeSearchBar(viewModel: HomeViewModel())
     }
 }
 

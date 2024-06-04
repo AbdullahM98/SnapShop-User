@@ -13,12 +13,23 @@ class HomeViewModel :ObservableObject{
     @Published var products: [PopularProductItem] = []
     @Published var categoryProducts: [PopularProductItem] = []
     @Published var singleCategoryProducts: [PopularProductItem] = []
+    @Published var filteredProducts: [PopularProductItem] = []
+
     
     init(){
         fetchBrands()
         fetchCoupons()
         fetchProducts()
+        filteredProducts = categoryProducts
     }
+    
+    func filterProducts(by searchText: String) {
+            if searchText.isEmpty {
+                filteredProducts = categoryProducts
+            } else {
+                filteredProducts = categoryProducts.filter { $0.title?.localizedCaseInsensitiveContains(searchText) ?? false }
+            }
+        }
     
     func fetchBrands() {
         Network.shared.request("\(Support.baseUrl)/smart_collections.json", method: "GET", responseType: BrandsResponse.self) { [weak self] result in
@@ -60,6 +71,7 @@ class HomeViewModel :ObservableObject{
                     }
                     self?.products = uniqueProducts
                     self?.categoryProducts = uniqueProducts
+                    self?.filteredProducts = uniqueProducts
                 }
             case .failure(let error):
                 print("Error fetching data: \(error)")
@@ -72,6 +84,7 @@ class HomeViewModel :ObservableObject{
             case .success(let response):
                 DispatchQueue.main.async {
                     self?.categoryProducts = response.products ?? []
+                    self?.filteredProducts = response.products ?? []
                 }
             case .failure(let error):
                 print("Error fetching data: \(error)")
@@ -96,6 +109,7 @@ class HomeViewModel :ObservableObject{
             case .success(let response):
                 DispatchQueue.main.async {
                     self?.categoryProducts = response.products ?? []
+                    self?.filteredProducts = response.products ?? []
                 }
             case .failure(let error):
                 print("Error fetching data: \(error)")

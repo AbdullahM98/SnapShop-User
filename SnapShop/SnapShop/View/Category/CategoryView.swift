@@ -14,7 +14,7 @@ struct CategoryView: View {
     @AppStorage("selectedOption") private var selectedOption: String = "ALL"
     var body: some View {
         HStack{
-            HomeSearchBar()
+            HomeSearchBar(viewModel: viewModel)
             Button(action: {
                 isPresented.toggle()
             }, label: {
@@ -30,7 +30,7 @@ struct CategoryView: View {
         }      
         Divider().background(Color.black)
         FilterBar(viewModel: viewModel)
-        CategoryProducts(products: viewModel.categoryProducts)
+        CategoryProducts(products: viewModel.filteredProducts)
             .onDisappear {
                 selectedOption = "ALL"
             }
