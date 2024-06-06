@@ -55,7 +55,7 @@ struct CarouselSlider: View {
         }
         .onAppear {
             // Create the timer when the view appears
-            timer = Timer.publish(every: 5.0, on: .main, in: .common)
+            timer = Timer.publish(every: 60, on: .main, in: .common)
                 .autoconnect()
                 .sink(receiveValue: { _ in
                     if !didNavigate { // Check if navigation has occurred

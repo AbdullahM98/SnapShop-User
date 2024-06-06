@@ -24,7 +24,6 @@ struct PopularBrands: View {
             .padding(.top,8)
             .onAppear {
             viewModel.fetchBrands()
-                viewModel.fetchCoupons()
         }
     }
 }
