@@ -36,6 +36,10 @@
 		5606E7A92C120C5600B728FD /* CouponsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5606E7A82C120C5600B728FD /* CouponsViewModel.swift */; };
 		5606E7AB2C120C7B00B728FD /* PriceRuleModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5606E7AA2C120C7B00B728FD /* PriceRuleModel.swift */; };
 		5606E7AD2C120CB900B728FD /* DiscountsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5606E7AC2C120CB900B728FD /* DiscountsModel.swift */; };
+		5627DB272C1229C700AB6464 /* PofileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5627DB262C1229C700AB6464 /* PofileView.swift */; };
+		5627DB292C12311300AB6464 /* ProfileEdit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5627DB282C12311300AB6464 /* ProfileEdit.swift */; };
+		5627DB2B2C12320000AB6464 /* AddAddress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5627DB2A2C12320000AB6464 /* AddAddress.swift */; };
+		5627DB2D2C12324100AB6464 /* AddressCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5627DB2C2C12324100AB6464 /* AddressCell.swift */; };
 		564B1E752C11FE9E005D515E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 564B1E742C11FE9E005D515E /* GoogleService-Info.plist */; };
 		7606FB982C0F74DB00E1D3AF /* Netwrok.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7606FB972C0F74DB00E1D3AF /* Netwrok.swift */; };
 		7606FB9C2C0F765200E1D3AF /* LoginScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7606FB9B2C0F765200E1D3AF /* LoginScreen.swift */; };
@@ -111,6 +115,10 @@
 		5606E7A82C120C5600B728FD /* CouponsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouponsViewModel.swift; sourceTree = "<group>"; };
 		5606E7AA2C120C7B00B728FD /* PriceRuleModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceRuleModel.swift; sourceTree = "<group>"; };
 		5606E7AC2C120CB900B728FD /* DiscountsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscountsModel.swift; sourceTree = "<group>"; };
+		5627DB262C1229C700AB6464 /* PofileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PofileView.swift; sourceTree = "<group>"; };
+		5627DB282C12311300AB6464 /* ProfileEdit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEdit.swift; sourceTree = "<group>"; };
+		5627DB2A2C12320000AB6464 /* AddAddress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAddress.swift; sourceTree = "<group>"; };
+		5627DB2C2C12324100AB6464 /* AddressCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressCell.swift; sourceTree = "<group>"; };
 		564B1E742C11FE9E005D515E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		7606FB972C0F74DB00E1D3AF /* Netwrok.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Netwrok.swift; sourceTree = "<group>"; };
 		7606FB9B2C0F765200E1D3AF /* LoginScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreen.swift; sourceTree = "<group>"; };
@@ -261,6 +269,33 @@
 			path = SubViews;
 			sourceTree = "<group>";
 		};
+		5627DB232C12297100AB6464 /* ProfilePage */ = {
+			isa = PBXGroup;
+			children = (
+				5627DB252C12299900AB6464 /* ViewModel */,
+				5627DB242C12299200AB6464 /* View */,
+			);
+			path = ProfilePage;
+			sourceTree = "<group>";
+		};
+		5627DB242C12299200AB6464 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				5627DB262C1229C700AB6464 /* PofileView.swift */,
+				5627DB282C12311300AB6464 /* ProfileEdit.swift */,
+				5627DB2A2C12320000AB6464 /* AddAddress.swift */,
+				5627DB2C2C12324100AB6464 /* AddressCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		5627DB252C12299900AB6464 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		7606FB892C0F721500E1D3AF /* Services */ = {
 			isa = PBXGroup;
 			children = (
@@ -288,6 +323,7 @@
 		7606FB8B2C0F736100E1D3AF /* Features */ = {
 			isa = PBXGroup;
 			children = (
+				5627DB232C12297100AB6464 /* ProfilePage */,
 				5606E79E2C1207AC00B728FD /* CouponsPage */,
 				0AF5836D2C11F165006D5059 /* CategoryPage */,
 				0AF583502C11EF01006D5059 /* HomePage */,
@@ -731,6 +767,7 @@
 				0AF583602C11EFF2006D5059 /* BrandProducts.swift in Sources */,
 				0AF583452C11EC98006D5059 /* Support.swift in Sources */,
 				5606E7A72C120C0800B728FD /* CouponCard.swift in Sources */,
+				5627DB2D2C12324100AB6464 /* AddressCell.swift in Sources */,
 				5606E7A22C1207DB00B728FD /* CouponsPage.swift in Sources */,
 				0AF5836A2C11F0D1006D5059 /* CustomAppBar.swift in Sources */,
 				7606FBB12C0F813900E1D3AF /* FirebaseManager.swift in Sources */,
@@ -744,6 +781,7 @@
 				761A5CB32C0EFDC60057BA3C /* ContentView.swift in Sources */,
 				0AF5834D2C11EEA6006D5059 /* AppTabBar.swift in Sources */,
 				7606FB9C2C0F765200E1D3AF /* LoginScreen.swift in Sources */,
+				5627DB292C12311300AB6464 /* ProfileEdit.swift in Sources */,
 				761A5CB12C0EFDC60057BA3C /* SnapShopApp_UserApp.swift in Sources */,
 				0AF583542C11EF58006D5059 /* PopularBrands.swift in Sources */,
 				7606FBC62C11129100E1D3AF /* UserDefaultsManager.swift in Sources */,
@@ -760,10 +798,12 @@
 				7606FBB32C0F81C400E1D3AF /* CustomerModel.swift in Sources */,
 				0AF583702C11F1D3006D5059 /* CategoryView.swift in Sources */,
 				0AF5835A2C11EFAF006D5059 /* HomeSearchBar.swift in Sources */,
+				5627DB272C1229C700AB6464 /* PofileView.swift in Sources */,
 				0AF5835C2C11EFC5006D5059 /* BestSeller.swift in Sources */,
 				7606FBA22C0F77C000E1D3AF /* SignUpViewModel.swift in Sources */,
 				0AF583622C11F032006D5059 /* BrandsModel.swift in Sources */,
 				7606FBA62C0F78B400E1D3AF /* CustomTextField.swift in Sources */,
+				5627DB2B2C12320000AB6464 /* AddAddress.swift in Sources */,
 				5606E7A92C120C5600B728FD /* CouponsViewModel.swift in Sources */,
 				0AF583782C11F271006D5059 /* CategoryProductCell.swift in Sources */,
 				0AF583562C11EF6D006D5059 /* HomeView.swift in Sources */,
