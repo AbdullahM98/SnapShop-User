@@ -121,5 +121,38 @@ class Network :NetworkService{
                }
                .eraseToAnyPublisher()
        }
+    
+    
+    func getProductByID(_ productID: String) -> AnyPublisher<ProductModel, Error> {
+        let urlString = "\(Support.apiKey):\(Support.password)@\(Support.baseUrl)/products/\(productID).json"
+          guard let url = URL(string: urlString) else {
+              return Fail(error: URLError(.badURL)).eraseToAnyPublisher()
+          }
+
+          var request = URLRequest(url: url)
+          request.httpMethod = "GET"
+          request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+      //    request.setValue("Bearer YOUR_API_KEY", forHTTPHeaderField: "Authorization") // Replace with actual API key
+
+          return URLSession.shared.dataTaskPublisher(for: request)
+              .tryMap { data, response -> Data in
+                  guard let httpResponse = response as? HTTPURLResponse,
+                        (200..<300).contains(httpResponse.statusCode) else {
+                      throw URLError(.badServerResponse)
+                  }
+                  return data
+              }
+              .decode(type: ProductModel.self, decoder: JSONDecoder())
+              .mapError { error -> Error in
+                  if let decodingError = error as? DecodingError {
+                      print("Decoding error: \(decodingError)")
+                      return decodingError
+                  } else {
+                      print("Unknown error: \(error)")
+                      return error
+                  }
+              }
+              .eraseToAnyPublisher()
+      }
    }
 
