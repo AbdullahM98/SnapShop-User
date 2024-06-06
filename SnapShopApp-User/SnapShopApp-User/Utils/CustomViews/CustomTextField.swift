@@ -13,9 +13,12 @@ struct CustomTextField: View {
     }
 }
 
-#Preview {
-    CustomTextField()
+struct CustomTextField_Previews: PreviewProvider {
+    static var previews: some View {
+        CustomTextField()
+    }
 }
+
 
 struct AppTextField: View {
     var fieldModel :Binding<FieldModel>

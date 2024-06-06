@@ -46,6 +46,9 @@ struct FilterBar: View {
     }
 }
 
-#Preview {
-    FilterBar(viewModel: HomeViewModel())
+
+struct FilterBar_Previews: PreviewProvider {
+    static var previews: some View {
+        FilterBar(viewModel: HomeViewModel())
+    }
 }

@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0AF583432C11EC67006D5059 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0AF583422C11EC67006D5059 /* GoogleService-Info.plist */; };
 		0AF583452C11EC98006D5059 /* Support.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF583442C11EC98006D5059 /* Support.swift */; };
 		0AF5834D2C11EEA6006D5059 /* AppTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF5834C2C11EEA6006D5059 /* AppTabBar.swift */; };
 		0AF5834F2C11EEC4006D5059 /* TabBarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF5834E2C11EEC4006D5059 /* TabBarButton.swift */; };
@@ -33,6 +32,8 @@
 		0AF5837C2C11F2E1006D5059 /* CustomBackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF5837B2C11F2E1006D5059 /* CustomBackButton.swift */; };
 		0B3574313F08164DFC0B140D /* Pods_SnapShopApp_User.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 904B12A396AEBB26D6B54798 /* Pods_SnapShopApp_User.framework */; };
 		37BE7C555870472A8F830468 /* Pods_SnapShopApp_UserTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D6193F64F34D468ECC12FD7 /* Pods_SnapShopApp_UserTests.framework */; };
+		5606E7A22C1207DB00B728FD /* CouponsPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5606E7A12C1207DB00B728FD /* CouponsPage.swift */; };
+		564B1E752C11FE9E005D515E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 564B1E742C11FE9E005D515E /* GoogleService-Info.plist */; };
 		7606FB982C0F74DB00E1D3AF /* Netwrok.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7606FB972C0F74DB00E1D3AF /* Netwrok.swift */; };
 		7606FB9C2C0F765200E1D3AF /* LoginScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7606FB9B2C0F765200E1D3AF /* LoginScreen.swift */; };
 		7606FB9E2C0F76A100E1D3AF /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7606FB9D2C0F76A100E1D3AF /* LoginViewModel.swift */; };
@@ -79,7 +80,6 @@
 
 /* Begin PBXFileReference section */
 		04553098669505B5F6194535 /* Pods-SnapShopApp-User-SnapShopApp-UserUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SnapShopApp-User-SnapShopApp-UserUITests.debug.xcconfig"; path = "Target Support Files/Pods-SnapShopApp-User-SnapShopApp-UserUITests/Pods-SnapShopApp-User-SnapShopApp-UserUITests.debug.xcconfig"; sourceTree = "<group>"; };
-		0AF583422C11EC67006D5059 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		0AF583442C11EC98006D5059 /* Support.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Support.swift; sourceTree = "<group>"; };
 		0AF5834C2C11EEA6006D5059 /* AppTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTabBar.swift; sourceTree = "<group>"; };
 		0AF5834E2C11EEC4006D5059 /* TabBarButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarButton.swift; sourceTree = "<group>"; };
@@ -104,6 +104,8 @@
 		0AF583792C11F28A006D5059 /* FilterButtomSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterButtomSheet.swift; sourceTree = "<group>"; };
 		0AF5837B2C11F2E1006D5059 /* CustomBackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomBackButton.swift; sourceTree = "<group>"; };
 		1D6193F64F34D468ECC12FD7 /* Pods_SnapShopApp_UserTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SnapShopApp_UserTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5606E7A12C1207DB00B728FD /* CouponsPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouponsPage.swift; sourceTree = "<group>"; };
+		564B1E742C11FE9E005D515E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		7606FB972C0F74DB00E1D3AF /* Netwrok.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Netwrok.swift; sourceTree = "<group>"; };
 		7606FB9B2C0F765200E1D3AF /* LoginScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreen.swift; sourceTree = "<group>"; };
 		7606FB9D2C0F76A100E1D3AF /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
@@ -219,6 +221,30 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		5606E79E2C1207AC00B728FD /* CouponsPage */ = {
+			isa = PBXGroup;
+			children = (
+				5606E7A02C1207CE00B728FD /* ViewModel */,
+				5606E79F2C1207C100B728FD /* View */,
+			);
+			path = CouponsPage;
+			sourceTree = "<group>";
+		};
+		5606E79F2C1207C100B728FD /* View */ = {
+			isa = PBXGroup;
+			children = (
+				5606E7A12C1207DB00B728FD /* CouponsPage.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		5606E7A02C1207CE00B728FD /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		7606FB892C0F721500E1D3AF /* Services */ = {
 			isa = PBXGroup;
 			children = (
@@ -246,6 +272,7 @@
 		7606FB8B2C0F736100E1D3AF /* Features */ = {
 			isa = PBXGroup;
 			children = (
+				5606E79E2C1207AC00B728FD /* CouponsPage */,
 				0AF5836D2C11F165006D5059 /* CategoryPage */,
 				0AF583502C11EF01006D5059 /* HomePage */,
 				7606FB8D2C0F73BD00E1D3AF /* Authentication */,
@@ -381,7 +408,7 @@
 		761A5CAF2C0EFDC60057BA3C /* SnapShopApp-User */ = {
 			isa = PBXGroup;
 			children = (
-				0AF583422C11EC67006D5059 /* GoogleService-Info.plist */,
+				564B1E742C11FE9E005D515E /* GoogleService-Info.plist */,
 				7606FB8C2C0F737F00E1D3AF /* Models */,
 				7606FB8B2C0F736100E1D3AF /* Features */,
 				7606FB8A2C0F733C00E1D3AF /* Utils */,
@@ -553,7 +580,7 @@
 			files = (
 				761A5CB82C0EFDC80057BA3C /* Preview Assets.xcassets in Resources */,
 				761A5CB52C0EFDC80057BA3C /* Assets.xcassets in Resources */,
-				0AF583432C11EC67006D5059 /* GoogleService-Info.plist in Resources */,
+				564B1E752C11FE9E005D515E /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -686,6 +713,7 @@
 				0AF583682C11F094006D5059 /* HomeViewModel.swift in Sources */,
 				0AF583602C11EFF2006D5059 /* BrandProducts.swift in Sources */,
 				0AF583452C11EC98006D5059 /* Support.swift in Sources */,
+				5606E7A22C1207DB00B728FD /* CouponsPage.swift in Sources */,
 				0AF5836A2C11F0D1006D5059 /* CustomAppBar.swift in Sources */,
 				7606FBB12C0F813900E1D3AF /* FirebaseManager.swift in Sources */,
 				0AF583642C11F04E006D5059 /* CouponsModel.swift in Sources */,
