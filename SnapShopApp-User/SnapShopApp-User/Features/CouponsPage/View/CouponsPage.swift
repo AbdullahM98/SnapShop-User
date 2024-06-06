@@ -8,24 +8,27 @@
 import SwiftUI
 
 struct CouponsPage: View {
-    @ObservedObject var viewModel = CouponsViewModel()
-    var couponsBG:[String] = ["Coupon1","Coupon2","Coupon3","Coupon4"]
+    @ObservedObject var viewModel = CouponsViewModel.shared
+    var couponsBG: [String] = ["Coupon1", "Coupon2", "Coupon3", "Coupon4"]
+    
     var body: some View {
-        VStack(spacing: 20){
-            ScrollView{
-                
+        VStack(spacing: 20) {
+            ScrollView {
                 ForEach(viewModel.coupones, id: \.id) { coupon in
-                    let rule: PriceRule? = viewModel.dict[coupon]
-                    CouponCard(imageName: couponsBG.randomElement() ?? "5",discountCode: coupon.code ?? "",discountValue: String(rule?.value?.dropFirst().dropLast(2) ?? ""),discountTitle: rule?.title ?? "")
-                        .navigationBarTitle("Coupons")
-                        .navigationBarBackButtonHidden()
+                    if let rule = viewModel.dict[coupon] {
+                        CouponCard(
+                            imageName: couponsBG.randomElement() ?? "Coupon1",
+                            discountCode: coupon.code ?? "",
+                            discountValue: String(rule.value?.dropFirst().dropLast(2) ?? ""),
+                            discountTitle: rule.title ?? ""
+                        )
+                    }
                 }
             }
         }
+        .navigationTitle("Coupons")
+        .navigationBarBackButtonHidden(true)
         .navigationBarItems(leading: CustomBackButton())
-        .onAppear{
-            viewModel.fetchPriceRules()
-        }
     }
 }
 

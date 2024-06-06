@@ -9,61 +9,61 @@ import SwiftUI
 import Combine
 
 struct CarouselSlider: View {
-    var adsImages: [String] = ["ADS1","ADS2","ADS3","ADS4"]
+    var adsImages: [String] = ["ADS1", "ADS2", "ADS3", "ADS4"]
     @State private var timer: AnyCancellable?
-    
-    // Boolean flag to track navigation
-    @State private var didNavigate = false
-    
-    // Manage selected index
     @State private var selectedImageIndex: Int = 0
-    
+    @State private var navigateToCoupons = false
+
     var body: some View {
-        NavigationLink(destination: CouponsPage(), isActive: $didNavigate) {
-            ZStack{
+        VStack {
+            ZStack {
                 TabView(selection: $selectedImageIndex) {
                     ForEach(0..<adsImages.count, id: \.self) { index in
-                        ZStack(alignment: .topLeading){
-                            Image("\(adsImages[index])")
-                                .resizable()
-                                .tag(index)
-                                .frame(height: 150)
-                        }
+                        Image(adsImages[index])
+                            .resizable()
+                            .padding(.trailing,-3)
+                            .padding(.leading,-2)
+                            .tag(index)
+                            .frame(height: 150)
+                            .onTapGesture {
+                                navigateToCoupons = true
+                            }
                     }
                 }
-                .frame(height: UIScreen.screenHeight/4)
+                .frame(height: UIScreen.main.bounds.height / 4)
                 .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
                 .ignoresSafeArea()
-                
-                // Dots
-                HStack{
-                    ForEach(0..<adsImages.count,id:\.self){index in
+
+                HStack {
+                    ForEach(0..<adsImages.count, id: \.self) { index in
                         Capsule()
                             .fill(Color.black.opacity(selectedImageIndex == index ? 0.7 : 0.2))
-                            .frame(width: 8,height: 8)
+                            .frame(width: 8, height: 8)
                             .onTapGesture {
                                 selectedImageIndex = index
                             }
-                    }.offset(y:90)
+                    }
+                    .offset(y: 90)
                 }
             }
-            .frame(height: 150).padding(.bottom,16)
-            .onDisappear {
-                didNavigate = true // Set the flag to true when the view disappears
-                timer?.cancel() // Cancel the timer when the view disappears
-            }
-        }
-        .onAppear {
-            // Create the timer when the view appears
-            timer = Timer.publish(every: 60, on: .main, in: .common)
-                .autoconnect()
-                .sink(receiveValue: { _ in
-                    if !didNavigate { // Check if navigation has occurred
-                        withAnimation(.default){
-                            selectedImageIndex = (selectedImageIndex+1) % adsImages.count
+            .frame(height: 150)
+            .padding(.bottom, 16)
+            .onAppear {
+                timer = Timer.publish(every: 60, on: .main, in: .common)
+                    .autoconnect()
+                    .sink(receiveValue: { _ in
+                        withAnimation(.default) {
+                            selectedImageIndex = (selectedImageIndex + 1) % adsImages.count
                         }
-                    }
-                })
+                    })
+            }
+            .onDisappear {
+                timer?.cancel()
+            }
+
+            NavigationLink(destination: CouponsPage(), isActive: $navigateToCoupons) {
+                EmptyView()
+            }
         }
     }
 }
