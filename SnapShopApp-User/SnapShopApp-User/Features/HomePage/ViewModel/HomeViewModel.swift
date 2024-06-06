@@ -32,7 +32,7 @@ class HomeViewModel :ObservableObject{
         }
     
     func fetchBrands() {
-        Network.shared.request("\(Support.secondBaseUrl)/smart_collections.json", method: "GET", responseType: BrandsResponse.self) { [weak self] result in
+        Network.shared.request("\(Support.baseUrl)/smart_collections.json", method: "GET", responseType: BrandsResponse.self) { [weak self] result in
             switch result {
             case .success(let response):
                 DispatchQueue.main.async {
@@ -44,7 +44,7 @@ class HomeViewModel :ObservableObject{
         }
     }
     func fetchCoupons(){
-        Network.shared.request("\(Support.secondBaseUrl)/price_rules/1119217582259/discount_codes.json", method: "GET", responseType: DiscountCodesRoot.self) { [weak self] result in
+        Network.shared.request("\(Support.baseUrl)/price_rules/1119217582259/discount_codes.json", method: "GET", responseType: DiscountCodesRoot.self) { [weak self] result in
             switch result {
             case .success(let response):
                 DispatchQueue.main.async {
@@ -57,7 +57,7 @@ class HomeViewModel :ObservableObject{
         }
     }
     func fetchProducts() {
-        Network.shared.request("\(Support.secondBaseUrl)/products.json", method: "GET", responseType: PopularProductsResponse.self) { [weak self] result in
+        Network.shared.request("\(Support.baseUrl)/products.json", method: "GET", responseType: PopularProductsResponse.self) { [weak self] result in
             switch result {
             case .success(let response):
                 DispatchQueue.main.async {
@@ -79,7 +79,7 @@ class HomeViewModel :ObservableObject{
         }
     }
     func fetchProductsInCollection(collectionID:String){
-        Network.shared.request("\(Support.secondBaseUrl)/collections/\(collectionID)/products.json", method: "GET", responseType: PopularProductsResponse.self) { [weak self] result in
+        Network.shared.request("\(Support.baseUrl)/collections/\(collectionID)/products.json", method: "GET", responseType: PopularProductsResponse.self) { [weak self] result in
             switch result {
             case .success(let response):
                 DispatchQueue.main.async {
@@ -92,7 +92,7 @@ class HomeViewModel :ObservableObject{
         }
     }
     func fetchProductsInCollectionSingle(collectionID:String){
-        Network.shared.request("\(Support.secondBaseUrl)/collections/\(collectionID)/products.json", method: "GET", responseType: PopularProductsResponse.self) { [weak self] result in
+        Network.shared.request("\(Support.baseUrl)/collections/\(collectionID)/products.json", method: "GET", responseType: PopularProductsResponse.self) { [weak self] result in
             switch result {
             case .success(let response):
                 DispatchQueue.main.async {
@@ -104,7 +104,7 @@ class HomeViewModel :ObservableObject{
         }
     }
     func fetchProductsByCategory(category: String) {
-        Network.shared.request("\(Support.secondBaseUrl)/products.json?product_type=\(category)", method: "GET", responseType: PopularProductsResponse.self) { [weak self] result in
+        Network.shared.request("\(Support.baseUrl)/products.json?product_type=\(category)", method: "GET", responseType: PopularProductsResponse.self) { [weak self] result in
             switch result {
             case .success(let response):
                 DispatchQueue.main.async {
