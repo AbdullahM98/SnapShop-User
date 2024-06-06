@@ -8,12 +8,31 @@
 import SwiftUI
 
 struct ContentView: View {
-    
+    @State var selectedTab:Tabs = .home
     var body: some View {
-        SignUpScreen(viewModel: SignUpViewModel())
+        NavigationStack{
+            VStack {
+                switch selectedTab{
+                case .home:
+                    HomeView()
+                case .explore:
+                    CategoryView()
+                case .cart:
+                    Text("Cart")
+                case .saved:
+                    Text("Saved")
+                case .profile:
+                    Text("Profile")
+                }
+                Spacer()
+                AppTabBar(selectedTab: $selectedTab)
+            }.ignoresSafeArea(edges: .bottom)
+        }
     }
 }
 
-#Preview {
-    ContentView()
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        ContentView()
+    }
 }

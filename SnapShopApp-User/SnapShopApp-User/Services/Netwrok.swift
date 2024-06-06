@@ -30,6 +30,7 @@ class Network :NetworkService{
                                 completion: @escaping (Result<T, Error>) -> Void) {
         
         guard let url = URL(string: url) else {
+            print("url is \(url)")
             completion(.failure(ApiError.invalidUrl))
             return
         }
