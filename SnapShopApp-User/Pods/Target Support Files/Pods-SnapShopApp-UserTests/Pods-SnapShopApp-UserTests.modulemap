@@ -1,0 +1,6 @@
+framework module Pods_SnapShopApp_UserTests {
+  umbrella header "Pods-SnapShopApp-UserTests-umbrella.h"
+
+  export *
+  module * { export * }
+}
