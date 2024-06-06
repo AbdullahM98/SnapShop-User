@@ -9,7 +9,7 @@ import Foundation
 import Combine
 
 protocol NetworkService {
-    func requestFromApi<T: Decodable>(_ customer: Customer) -> AnyPublisher<T, Error> }
+    func postCustomer(_ customer: Customer) -> AnyPublisher<authResponse, Error> }
 
 enum ApiError: Error {
     case invalidUrl
@@ -61,7 +61,7 @@ class Network :NetworkService{
         task.resume()
     }
     
-    func requestFromApi<T: Decodable>(_ customer: Customer) -> AnyPublisher<T, Error> {
+    func postCustomer(_ customer: Customer) -> AnyPublisher<authResponse, Error> {
         
         
         guard let url = URL(string: "https://mad-ism-ios-1.myshopify.com/admin/api/2024-04/customers.json") else {
@@ -108,7 +108,7 @@ class Network :NetworkService{
                        throw NSError(domain: "Request failed with status code: \(statusCode)", code: -1, userInfo: nil)
                    }
                }
-               .decode(type: T.self, decoder: JSONDecoder())
+               .decode(type: authResponse.self, decoder: JSONDecoder())
                .mapError { error -> Error in
                    if let decodingError = error as? DecodingError {
                        print("Decoding error: \(decodingError)")

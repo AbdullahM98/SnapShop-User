@@ -29,15 +29,19 @@ class LoginViewModel : ObservableObject {
     
     func getUsers(email: String) {
         print("getting Users")
-        Network.shared.request("\(Support.baseUrl)/customers.json", method: "GET", responseType: CustomerList.self) { result in
+        Network.shared.request("\(Support.baseUrl)/customers.json", method: "GET", responseType: SignInResponse.self) { result in
             switch result {
-            case .success(let customersList):
+            case .success(let responsesList):
              
                 DispatchQueue.main.async {
-                         if self.isUserExists(email: email, customers: customersList.customers).0 {
+                    if self.isUserExists(email: email, responses:responsesList.customers).0 {
                                self.isLogIn = true
                              self.setISLoggedIn(isLogged: true)
-                               self.saveUserData(customer: self.isUserExists(email: email, customers: customersList.customers).1 ?? Customer(phone: "", password: "", last_name: "", addresses: [], email: "", first_name: ""))
+                        self.setISLoggedIn(isLogged: true)
+                       
+                        if let customerResponse = self.isUserExists(email: email, responses: responsesList.customers).1 {
+                               self.saveUserId(authResponse: customerResponse)
+                           }
                            }
                        }
             case .failure(let error):
@@ -46,12 +50,12 @@ class LoginViewModel : ObservableObject {
         }
     }
     
-    func isUserExists(email:String , customers : [Customer]) -> (Bool,Customer?){
-        for customer in customers {
-            print("\(customer.email!)")
-            if customer.email! == email {
+    func isUserExists(email:String , responses : [CustomerAuthResponse]) -> (Bool,CustomerAuthResponse?){
+        for customerResponse in responses {
+            print("\(customerResponse.email)")
+            if customerResponse.email == email {
                 print("user found")
-                return (true,customer)
+                return (true,customerResponse)
             }
         }
         
@@ -59,13 +63,19 @@ class LoginViewModel : ObservableObject {
         return (false,nil)
     }
     func isLoggedIn() ->Bool{
-       return UserDefaultsManager.shared.getDynamicValue(key: Support.isLoggedUDKey) ?? isLogIn
+       return UserDefaultsManager.shared.getIsloggedIn(key: Support.isLoggedUDKey) ?? isLogIn
+    }
+    
+    private func saveUserId(authResponse:CustomerAuthResponse){
+        
+        UserDefaultsManager.shared.setUserId(key: Support.userID, value: authResponse.id)
+        print("from ud\(UserDefaultsManager.shared.getUserId(key: Support.userID)?.description ?? "No" )")
     }
     
     func setISLoggedIn(isLogged :Bool) {
-        UserDefaultsManager.shared.setDynamicValue(key: Support.isLoggedUDKey, value: isLogged)
+        UserDefaultsManager.shared.setIsloggedIn(key: Support.isLoggedUDKey, value: isLogged)
     }
-    func fetchCustomers() -> [Customer]{
+    func fetchCustomersLocally() -> [Customer]{
         return AppCoreData.shared.fetchCustomers()
     }
     func saveUserData(customer:Customer){

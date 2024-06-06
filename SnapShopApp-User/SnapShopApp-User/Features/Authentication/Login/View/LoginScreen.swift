@@ -28,9 +28,7 @@ struct LoginScreen: View {
                 Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
                     Text("Forgot Password?").font(.footnote).fontWeight(.medium).underline().foregroundStyle(Color.gray)
                 }).padding(.trailing,10)
-                Button("fetchCust", action: {
-                    let customers = viewModel.fetchCustomers()
-                })
+              
             }.padding(.bottom,180)
             
             

@@ -10,6 +10,7 @@ import SwiftUI
 struct ContentView: View {
     @State var selectedTab:Tabs = .home
     var body: some View {
+
         NavigationStack{
             VStack {
                 switch selectedTab{
@@ -28,6 +29,7 @@ struct ContentView: View {
                 AppTabBar(selectedTab: $selectedTab)
             }.ignoresSafeArea(edges: .bottom)
         }
+
     }
 }
 

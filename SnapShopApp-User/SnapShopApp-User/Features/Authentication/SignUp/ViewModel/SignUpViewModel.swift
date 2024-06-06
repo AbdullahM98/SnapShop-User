@@ -22,11 +22,12 @@ class SignUpViewModel: ObservableObject{
     @Published var isLoggedIn = false
     @Published var errorMessage: String = ""
     @Published var customer :Customer?
+    @Published var signUpResponse:authResponse?
     private var cancellables = Set<AnyCancellable>()
   
 
     func postCustomer(customer:Customer) {
-           Network.shared.requestFromApi(customer)
+           Network.shared.postCustomer(customer)
               .sink(receiveCompletion: { [weak self] completion in
                    switch completion {
                    case.finished:
@@ -37,8 +38,11 @@ class SignUpViewModel: ObservableObject{
                        }
                      
                    }
-               }, receiveValue: { [weak self] customer in
-                   self?.customer = customer
+               }, receiveValue: {  response in
+                   DispatchQueue.main.async {
+                    self.signUpResponse = response
+                       self.saveUserId(signUpResponse: response)
+                    }
                    
                })
               .store(in: &cancellables)
@@ -63,6 +67,12 @@ class SignUpViewModel: ObservableObject{
               }
           }
       }
+    
+    private func saveUserId(signUpResponse:authResponse){
+        
+        UserDefaultsManager.shared.setUserId(key: Support.userID, value: signUpResponse.customer.id)
+        print("from ud\(UserDefaultsManager.shared.getUserId(key: Support.userID)?.description ?? "No" )")
+    }
     
     private func handleError(_ error: Error) {
         if let error = error as? DecodingError {
