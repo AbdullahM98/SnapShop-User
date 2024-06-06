@@ -65,6 +65,7 @@ struct CarouselSlider: View {
                 EmptyView()
             }
         }
+        .padding(.bottom,20)
     }
 }
 
