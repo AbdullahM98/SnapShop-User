@@ -14,8 +14,9 @@ class HomeViewModel :ObservableObject{
     @Published var singleCategoryProducts: [PopularProductItem] = []
     @Published var filteredProducts: [PopularProductItem] = []
 
+    static var shared = HomeViewModel()
     
-    init(){
+    private init(){
         fetchBrands()
         fetchProducts()
         filteredProducts = categoryProducts
@@ -37,6 +38,7 @@ class HomeViewModel :ObservableObject{
                     self?.smartCollections = response.smart_collections ?? []
                 }
             case .failure(let error):
+                print("Error fetching brands")
                 print("Error fetching data: \(error)")
             }
         }
@@ -59,6 +61,7 @@ class HomeViewModel :ObservableObject{
                     self?.filteredProducts = uniqueProducts
                 }
             case .failure(let error):
+                print("Error fetching products")
                 print("Error fetching data: \(error)")
             }
         }
@@ -72,6 +75,7 @@ class HomeViewModel :ObservableObject{
                     self?.filteredProducts = response.products ?? []
                 }
             case .failure(let error):
+                print("Error fetching products in collection")
                 print("Error fetching data: \(error)")
             }
         }
@@ -84,6 +88,7 @@ class HomeViewModel :ObservableObject{
                     self?.singleCategoryProducts = response.products ?? []
                 }
             case .failure(let error):
+                print("Error fetching products in single collection")
                 print("Error fetching data: \(error)")
             }
         }
@@ -97,6 +102,7 @@ class HomeViewModel :ObservableObject{
                     self?.filteredProducts = response.products ?? []
                 }
             case .failure(let error):
+                print("Error fetching products by category")
                 print("Error fetching data: \(error)")
             }
         }

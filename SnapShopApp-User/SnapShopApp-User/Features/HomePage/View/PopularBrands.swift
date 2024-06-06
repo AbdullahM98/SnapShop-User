@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct PopularBrands: View {
-    @ObservedObject var viewModel = HomeViewModel()
+    @ObservedObject var viewModel = HomeViewModel.shared
     var body: some View {
         VStack(alignment: .leading){
             Text("Popular Brands")

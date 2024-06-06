@@ -35,7 +35,7 @@ struct HomeSearchBar: View {
 
 struct HomeSearchBar_Previews: PreviewProvider {
     static var previews: some View {
-        HomeSearchBar(viewModel: HomeViewModel())
+        HomeSearchBar(viewModel: HomeViewModel.shared)
     }
 }
 
