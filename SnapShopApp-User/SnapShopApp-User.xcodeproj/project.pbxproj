@@ -24,7 +24,6 @@
 		7606FBB52C0F824000E1D3AF /* AppBtutton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7606FBB42C0F824000E1D3AF /* AppBtutton.swift */; };
 		7606FBB82C0F82FF00E1D3AF /* FontOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7606FBB72C0F82FF00E1D3AF /* FontOptions.swift */; };
 		7606FBBA2C0F836700E1D3AF /* ScreenBounds.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7606FBB92C0F836700E1D3AF /* ScreenBounds.swift */; };
-		7606FBBF2C10833800E1D3AF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7606FBBE2C10833800E1D3AF /* GoogleService-Info.plist */; };
 		7606FBC12C10AE0B00E1D3AF /* AppCoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7606FBC02C10AE0B00E1D3AF /* AppCoreData.swift */; };
 		7606FBC42C10AF1C00E1D3AF /* AppModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7606FBC22C10AF1C00E1D3AF /* AppModel.xcdatamodeld */; };
 		7606FBC62C11129100E1D3AF /* AppUserDefault.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7606FBC52C11129100E1D3AF /* AppUserDefault.swift */; };
@@ -35,6 +34,7 @@
 		761A5CC22C0EFDC80057BA3C /* SnapShopApp_UserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761A5CC12C0EFDC80057BA3C /* SnapShopApp_UserTests.swift */; };
 		761A5CCC2C0EFDC90057BA3C /* SnapShopApp_UserUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761A5CCB2C0EFDC90057BA3C /* SnapShopApp_UserUITests.swift */; };
 		761A5CCE2C0EFDC90057BA3C /* SnapShopApp_UserUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761A5CCD2C0EFDC90057BA3C /* SnapShopApp_UserUITestsLaunchTests.swift */; };
+		767836182C11E32B001E4BFB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 767836172C11E32B001E4BFB /* GoogleService-Info.plist */; };
 		906BAD87611507B26F870BF5 /* Pods_SnapShopApp_User_SnapShopApp_UserUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE65ACFE98183A05FD1CCDC9 /* Pods_SnapShopApp_User_SnapShopApp_UserUITests.framework */; };
 /* End PBXBuildFile section */
 
@@ -73,7 +73,6 @@
 		7606FBB42C0F824000E1D3AF /* AppBtutton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppBtutton.swift; sourceTree = "<group>"; };
 		7606FBB72C0F82FF00E1D3AF /* FontOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontOptions.swift; sourceTree = "<group>"; };
 		7606FBB92C0F836700E1D3AF /* ScreenBounds.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenBounds.swift; sourceTree = "<group>"; };
-		7606FBBE2C10833800E1D3AF /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Desktop/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		7606FBC02C10AE0B00E1D3AF /* AppCoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoreData.swift; sourceTree = "<group>"; };
 		7606FBC32C10AF1C00E1D3AF /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		7606FBC52C11129100E1D3AF /* AppUserDefault.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppUserDefault.swift; sourceTree = "<group>"; };
@@ -87,6 +86,7 @@
 		761A5CC72C0EFDC90057BA3C /* SnapShopApp-UserUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "SnapShopApp-UserUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		761A5CCB2C0EFDC90057BA3C /* SnapShopApp_UserUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapShopApp_UserUITests.swift; sourceTree = "<group>"; };
 		761A5CCD2C0EFDC90057BA3C /* SnapShopApp_UserUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapShopApp_UserUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		767836172C11E32B001E4BFB /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../Desktop/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		904B12A396AEBB26D6B54798 /* Pods_SnapShopApp_User.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SnapShopApp_User.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		921EB7F323924BAB601F80CD /* Pods-SnapShopApp-UserTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SnapShopApp-UserTests.debug.xcconfig"; path = "Target Support Files/Pods-SnapShopApp-UserTests/Pods-SnapShopApp-UserTests.debug.xcconfig"; sourceTree = "<group>"; };
 		A3C1309534515CE06D2D9C87 /* Pods-SnapShopApp-UserTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SnapShopApp-UserTests.release.xcconfig"; path = "Target Support Files/Pods-SnapShopApp-UserTests/Pods-SnapShopApp-UserTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -291,7 +291,7 @@
 		761A5CAF2C0EFDC60057BA3C /* SnapShopApp-User */ = {
 			isa = PBXGroup;
 			children = (
-				7606FBBE2C10833800E1D3AF /* GoogleService-Info.plist */,
+				767836172C11E32B001E4BFB /* GoogleService-Info.plist */,
 				7606FB8C2C0F737F00E1D3AF /* Models */,
 				7606FB8B2C0F736100E1D3AF /* Features */,
 				7606FB8A2C0F733C00E1D3AF /* Utils */,
@@ -463,7 +463,7 @@
 			files = (
 				761A5CB82C0EFDC80057BA3C /* Preview Assets.xcassets in Resources */,
 				761A5CB52C0EFDC80057BA3C /* Assets.xcassets in Resources */,
-				7606FBBF2C10833800E1D3AF /* GoogleService-Info.plist in Resources */,
+				767836182C11E32B001E4BFB /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -699,7 +699,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -756,7 +756,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
