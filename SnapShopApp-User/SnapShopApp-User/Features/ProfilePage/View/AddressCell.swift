@@ -7,12 +7,13 @@
 
 import SwiftUI
 struct AddressCell: View {
+    var address : AddressResponse
     var body: some View {
         VStack(alignment:.leading,spacing: 16){
             HStack{
                 Text("Address: ")
                     .foregroundColor(.gray)
-                Text("12 ST, Suez Canal University")
+                Text("\(address.address1 ?? "")")
                 Spacer()
                 Image("bag")
             }.padding(.top,20)
@@ -20,13 +21,13 @@ struct AddressCell: View {
             HStack{
                 Text("City: ")
                     .foregroundColor(.gray)
-                Text("Ismailia")
+                Text("\(address.city ?? "")")
             }.padding(.vertical,4)
                 .padding(.horizontal,16)
             HStack{
                 Text("Country: ")
                     .foregroundColor(.gray)
-                Text("Egypt")
+                Text("\(address.country ?? "")")
             }.padding(.vertical,4)
                 .padding(.horizontal,16)
             HStack{
@@ -38,7 +39,7 @@ struct AddressCell: View {
             HStack{
                 Text("Phone Number: ")
                     .foregroundColor(.gray)
-                Text("+201285340330")
+                Text("\(address.phone ?? "")")
             }.padding(.vertical,4)
                 .padding(.horizontal,16)
                 .padding(.bottom,20)
@@ -50,7 +51,6 @@ struct AddressCell: View {
 
 struct AddressCell_Previews: PreviewProvider {
     static var previews: some View {
-        AddressCell()
+        AddressCell(address: AddressResponse(id: 0, customer_id: 0, first_name: "", last_name: "", company: "", address1: "", address2: "", city: "", province: "", country: "", zip: "", phone: "", name: "", province_code: "", country_code: "", country_name: "", default_address: true))
     }
 }
-

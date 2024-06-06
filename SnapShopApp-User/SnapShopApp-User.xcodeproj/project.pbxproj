@@ -40,6 +40,8 @@
 		5627DB292C12311300AB6464 /* ProfileEdit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5627DB282C12311300AB6464 /* ProfileEdit.swift */; };
 		5627DB2B2C12320000AB6464 /* AddAddress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5627DB2A2C12320000AB6464 /* AddAddress.swift */; };
 		5627DB2D2C12324100AB6464 /* AddressCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5627DB2C2C12324100AB6464 /* AddressCell.swift */; };
+		5627DB2F2C123D2500AB6464 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5627DB2E2C123D2500AB6464 /* ProfileViewModel.swift */; };
+		5627DB312C123EB100AB6464 /* UserAddresses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5627DB302C123EB100AB6464 /* UserAddresses.swift */; };
 		564B1E752C11FE9E005D515E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 564B1E742C11FE9E005D515E /* GoogleService-Info.plist */; };
 		7606FB982C0F74DB00E1D3AF /* Netwrok.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7606FB972C0F74DB00E1D3AF /* Netwrok.swift */; };
 		7606FB9C2C0F765200E1D3AF /* LoginScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7606FB9B2C0F765200E1D3AF /* LoginScreen.swift */; };
@@ -119,6 +121,8 @@
 		5627DB282C12311300AB6464 /* ProfileEdit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEdit.swift; sourceTree = "<group>"; };
 		5627DB2A2C12320000AB6464 /* AddAddress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAddress.swift; sourceTree = "<group>"; };
 		5627DB2C2C12324100AB6464 /* AddressCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressCell.swift; sourceTree = "<group>"; };
+		5627DB2E2C123D2500AB6464 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
+		5627DB302C123EB100AB6464 /* UserAddresses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAddresses.swift; sourceTree = "<group>"; };
 		564B1E742C11FE9E005D515E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		7606FB972C0F74DB00E1D3AF /* Netwrok.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Netwrok.swift; sourceTree = "<group>"; };
 		7606FB9B2C0F765200E1D3AF /* LoginScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreen.swift; sourceTree = "<group>"; };
@@ -285,6 +289,7 @@
 				5627DB282C12311300AB6464 /* ProfileEdit.swift */,
 				5627DB2A2C12320000AB6464 /* AddAddress.swift */,
 				5627DB2C2C12324100AB6464 /* AddressCell.swift */,
+				5627DB302C123EB100AB6464 /* UserAddresses.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -292,6 +297,7 @@
 		5627DB252C12299900AB6464 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				5627DB2E2C123D2500AB6464 /* ProfileViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -791,10 +797,12 @@
 				0AF5834F2C11EEC4006D5059 /* TabBarButton.swift in Sources */,
 				7606FB9E2C0F76A100E1D3AF /* LoginViewModel.swift in Sources */,
 				5606E7AD2C120CB900B728FD /* DiscountsModel.swift in Sources */,
+				5627DB2F2C123D2500AB6464 /* ProfileViewModel.swift in Sources */,
 				7606FB982C0F74DB00E1D3AF /* Netwrok.swift in Sources */,
 				0AF583722C11F1F0006D5059 /* FilterBar.swift in Sources */,
 				7606FBBA2C0F836700E1D3AF /* ScreenBounds.swift in Sources */,
 				0AF583662C11F069006D5059 /* BestSellerModel.swift in Sources */,
+				5627DB312C123EB100AB6464 /* UserAddresses.swift in Sources */,
 				7606FBB32C0F81C400E1D3AF /* CustomerModel.swift in Sources */,
 				0AF583702C11F1D3006D5059 /* CategoryView.swift in Sources */,
 				0AF5835A2C11EFAF006D5059 /* HomeSearchBar.swift in Sources */,
