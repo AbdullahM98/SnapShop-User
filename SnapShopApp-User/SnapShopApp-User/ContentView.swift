@@ -23,7 +23,7 @@ struct ContentView: View {
                 case .saved:
                     Text("Saved")
                 case .profile:
-                    Text("Profile")
+                    ProfileView()
                 }
                 Spacer()
                 AppTabBar(selectedTab: $selectedTab)

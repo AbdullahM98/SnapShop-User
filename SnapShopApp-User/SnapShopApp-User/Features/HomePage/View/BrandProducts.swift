@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct BrandProducts: View {
-    @ObservedObject var viewModel = HomeViewModel()
+    @ObservedObject var viewModel = HomeViewModel.shared
     var brand: SmartCollectionsItem
     var products: [PopularProductItem] {
         viewModel.singleCategoryProducts
