@@ -9,16 +9,15 @@ import Foundation
 
 class HomeViewModel :ObservableObject{
     @Published var smartCollections: [SmartCollectionsItem] = []
-    @Published var coupones: [DiscountCodes] = []
     @Published var products: [PopularProductItem] = []
     @Published var categoryProducts: [PopularProductItem] = []
     @Published var singleCategoryProducts: [PopularProductItem] = []
     @Published var filteredProducts: [PopularProductItem] = []
 
+    static var shared = HomeViewModel()
     
-    init(){
+    private init(){
         fetchBrands()
-        fetchCoupons()
         fetchProducts()
         filteredProducts = categoryProducts
     }
@@ -39,19 +38,7 @@ class HomeViewModel :ObservableObject{
                     self?.smartCollections = response.smart_collections ?? []
                 }
             case .failure(let error):
-                print("Error fetching data: \(error)")
-            }
-        }
-    }
-    func fetchCoupons(){
-        Network.shared.request("\(Support.baseUrl)/price_rules/1119217582259/discount_codes.json", method: "GET", responseType: DiscountCodesRoot.self) { [weak self] result in
-            switch result {
-            case .success(let response):
-                DispatchQueue.main.async {
-                    self?.coupones = response.discount_codes ?? []
-                }
-                
-            case .failure(let error):
+                print("Error fetching brands")
                 print("Error fetching data: \(error)")
             }
         }
@@ -74,6 +61,7 @@ class HomeViewModel :ObservableObject{
                     self?.filteredProducts = uniqueProducts
                 }
             case .failure(let error):
+                print("Error fetching products")
                 print("Error fetching data: \(error)")
             }
         }
@@ -87,6 +75,7 @@ class HomeViewModel :ObservableObject{
                     self?.filteredProducts = response.products ?? []
                 }
             case .failure(let error):
+                print("Error fetching products in collection")
                 print("Error fetching data: \(error)")
             }
         }
@@ -99,6 +88,7 @@ class HomeViewModel :ObservableObject{
                     self?.singleCategoryProducts = response.products ?? []
                 }
             case .failure(let error):
+                print("Error fetching products in single collection")
                 print("Error fetching data: \(error)")
             }
         }
@@ -112,6 +102,7 @@ class HomeViewModel :ObservableObject{
                     self?.filteredProducts = response.products ?? []
                 }
             case .failure(let error):
+                print("Error fetching products by category")
                 print("Error fetching data: \(error)")
             }
         }

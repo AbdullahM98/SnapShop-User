@@ -78,6 +78,9 @@ struct SignUpScreen: View {
     }
 }
 
-#Preview {
-    SignUpScreen(viewModel: SignUpViewModel())
+struct SignUpScreen_Previews: PreviewProvider {
+    static var previews: some View {
+        SignUpScreen(viewModel: SignUpViewModel())
+    }
 }
+

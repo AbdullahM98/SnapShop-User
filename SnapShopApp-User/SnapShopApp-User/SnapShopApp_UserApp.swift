@@ -11,7 +11,7 @@ import SwiftUI
 @main
 struct SnapShopApp_UserApp: App {
     init(){
-       FirebaseApp.configure()
+//       FirebaseApp.configure()
     }
     var body: some Scene {
         WindowGroup {
