@@ -26,20 +26,20 @@ struct ProductDetailView: View {
                         switch phase {
                         case .empty:
                             ProgressView()
-                                .frame(width: UIScreen.screenWidth * 0.8, height: UIScreen.screenHeight * 0.4)
+                                .frame(width: UIScreen.screenWidth * 0.8, height: UIScreen.screenHeight * 0.3)
                         case .success(let image):
                             image
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
-                                .frame(width: UIScreen.screenWidth * 0.8, height: UIScreen.screenHeight * 0.4)
+                                .frame(width: UIScreen.screenWidth * 0.8, height: UIScreen.screenHeight * 0.3)
                         case .failure:
                             Image(systemName: "photo")
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
-                                .frame(width: UIScreen.screenWidth * 0.8, height: UIScreen.screenHeight * 0.4)
+                                .frame(width: UIScreen.screenWidth * 0.8, height: UIScreen.screenHeight * 0.3)
                         @unknown default:
                             EmptyView()
-                                .frame(width: UIScreen.screenWidth * 0.8, height: UIScreen.screenHeight * 0.4)
+                                .frame(width: UIScreen.screenWidth * 0.8, height: UIScreen.screenHeight * 0.3)
                         }
                     }
                     .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/)
@@ -137,7 +137,7 @@ struct ProductDetailView: View {
             }.onAppear{
                 viewModel.fetchProductByID(productID)
             }
-        }.ignoresSafeArea(edges: .top)
+        }
     }
 }
 
