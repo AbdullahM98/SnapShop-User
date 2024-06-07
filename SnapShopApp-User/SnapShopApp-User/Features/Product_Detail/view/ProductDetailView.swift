@@ -16,48 +16,69 @@ struct ProductDetailView: View {
     
     var body: some View {
         ScrollView {
-            ZStack {
-                Color.white
-                VStack(alignment: .leading) {
+            VStack {
+              //  Color.white
+                VStack() {
                     
-//                        Image("1")
-//                            .resizable()
-//                            .ignoresSafeArea(edges: .top)
-//                            .frame(height: UIScreen.screenHeight * 0.4)
+//                    CarouselSlider(adsImages: ["1","2"]).padding(.bottom,4).ignoresSafeArea(edges: .top)
+//                        .frame(height: UIScreen.screenHeight * 0.4).background(Color.gray)
+                    AsyncImage(url: URL(string: viewModel.imgUrl ?? "https://cdn.dummyjson.com/products/images/beauty/Eyeshadow%20Palette%20with%20Mirror/thumbnail.png")) { phase in
+                        switch phase {
+                        case .empty:
+                            ProgressView()
+                                .frame(width: UIScreen.screenWidth * 0.8, height: UIScreen.screenHeight * 0.4)
+                        case .success(let image):
+                            image
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: UIScreen.screenWidth * 0.8, height: UIScreen.screenHeight * 0.4)
+                        case .failure:
+                            Image(systemName: "photo")
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: UIScreen.screenWidth * 0.8, height: UIScreen.screenHeight * 0.4)
+                        @unknown default:
+                            EmptyView()
+                                .frame(width: UIScreen.screenWidth * 0.8, height: UIScreen.screenHeight * 0.4)
+                        }
+                    }
+                    .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/)
+                    
                         
                     VStack(alignment: .leading) {
                         HStack {
                             Text($viewModel.vendorTitle.wrappedValue).foregroundColor(.gray).font(.subheadline)
                             HStack() {
                         
-//                                Image(systemName: "star.fill")
-//                                    .resizable()
-//                                    .frame(width: 15, height: 15)
-//                                    .foregroundColor(.yellow)
+                                Image(systemName: "star.fill")
+                                    .resizable()
+                                    .frame(width: 15, height: 15)
+                                    .foregroundColor(.yellow)
                             
                                 Text("(4.5)").font(.subheadline).foregroundStyle(Color.black)
                                 Spacer()
-//                                Image("heart").resizable().frame(width: 25,height: 25)
+                                Image(systemName: "heart").resizable().frame(width: 30,height: 28)
                             }
                                 .foregroundColor(.gray)
                         
-                        }.padding(.bottom,10)
+                        }.padding(.top,-5)
                         HStack {
                             Text($viewModel.productTitle.wrappedValue)
-                                .font(.title3).fontWeight(Font.Weight.medium)
+                                .font(.title3).fontWeight(Font.Weight.medium).multilineTextAlignment(/*@START_MENU_TOKEN@*/.leading/*@END_MENU_TOKEN@*/)
                           
                         }
                         HStack(){
                             Text("\($viewModel.currentCurrency.wrappedValue) \($viewModel.price.wrappedValue)").font(.headline.bold()).foregroundStyle(Color.red)
+                            Spacer()
                             Text("Qty:\($viewModel.availbleQuantity.wrappedValue)").foregroundStyle(Color.gray)
                             
-                        }
+                        }.padding(.top,-5)
                         Text("Description")
                             .font(.title3)
                             .fontWeight(.medium)
-                            .padding(.vertical, 4)
+                            .padding(.top, 15)
                         
-                        Text($viewModel.productDecription.wrappedValue).multilineTextAlignment(.leading).font(.subheadline)
+                        Text($viewModel.productDecription.wrappedValue).multilineTextAlignment(.leading).font(.subheadline).padding(.top,3)
                         
                         HStack(alignment: .top) {
                             VStack(alignment: .leading) {
@@ -90,16 +111,17 @@ struct ProductDetailView: View {
                                     .font(.system(size: 18))
                                     .fontWeight(.semibold)
                                 
-                                HStack {
-                                    // Add your ColorDotView implementation or any other color indicator
-                                    ColorDotView(color: .red)
-                                    ColorDotView(color: .blue)
-                                    ColorDotView(color: .orange)
-                                    ColorDotView(color: .green)
-                                }
+                                   HStack {
+                                       ForEach([Color.red, Color.blue, Color.orange, Color.green], id: \.self) { color in
+                                           CustomColorDot(color: color, isSelected: color == viewModel.selectedColor)
+                                               .onTapGesture {
+                                                   viewModel.selectedColor = color
+                                               }
+                                       }
+                                   }
                             }
                             .frame(maxWidth: .infinity)
-                        }.padding(.vertical)
+                        }.padding(.top,10)
                         
                         
                         AppButton(text: "Add to Cart", width: UIScreen.screenWidth * 0.9, height: UIScreen.screenHeight * 0.06, isFilled: true){
@@ -109,7 +131,7 @@ struct ProductDetailView: View {
                     }
                     .padding()
                     .background(Color.white)
-                    .cornerRadius(20)
+            
                     .offset(y: -30)
                 }
             }.onAppear{

@@ -56,6 +56,7 @@
 		761A5CC22C0EFDC80057BA3C /* SnapShopApp_UserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761A5CC12C0EFDC80057BA3C /* SnapShopApp_UserTests.swift */; };
 		761A5CCC2C0EFDC90057BA3C /* SnapShopApp_UserUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761A5CCB2C0EFDC90057BA3C /* SnapShopApp_UserUITests.swift */; };
 		761A5CCE2C0EFDC90057BA3C /* SnapShopApp_UserUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761A5CCD2C0EFDC90057BA3C /* SnapShopApp_UserUITestsLaunchTests.swift */; };
+		76560C522C13570200B6103A /* CustomColorDot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76560C512C13570200B6103A /* CustomColorDot.swift */; };
 		7678362F2C121327001E4BFB /* ProductDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7678362E2C121327001E4BFB /* ProductDetailView.swift */; };
 		767836312C1214C9001E4BFB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 767836302C1214C9001E4BFB /* GoogleService-Info.plist */; };
 		767836332C121A04001E4BFB /* ProductDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 767836322C121A04001E4BFB /* ProductDetailViewModel.swift */; };
@@ -133,6 +134,7 @@
 		761A5CC72C0EFDC90057BA3C /* SnapShopApp-UserUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "SnapShopApp-UserUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		761A5CCB2C0EFDC90057BA3C /* SnapShopApp_UserUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapShopApp_UserUITests.swift; sourceTree = "<group>"; };
 		761A5CCD2C0EFDC90057BA3C /* SnapShopApp_UserUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapShopApp_UserUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		76560C512C13570200B6103A /* CustomColorDot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomColorDot.swift; sourceTree = "<group>"; };
 		7678362E2C121327001E4BFB /* ProductDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailView.swift; sourceTree = "<group>"; };
 		767836302C1214C9001E4BFB /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../Desktop/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		767836322C121A04001E4BFB /* ProductDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailViewModel.swift; sourceTree = "<group>"; };
@@ -440,6 +442,7 @@
 			isa = PBXGroup;
 			children = (
 				7678362E2C121327001E4BFB /* ProductDetailView.swift */,
+				76560C512C13570200B6103A /* CustomColorDot.swift */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -754,6 +757,7 @@
 				0AF583622C11F032006D5059 /* BrandsModel.swift in Sources */,
 				7606FBA62C0F78B400E1D3AF /* CustomTextField.swift in Sources */,
 				0AF583782C11F271006D5059 /* CategoryProductCell.swift in Sources */,
+				76560C522C13570200B6103A /* CustomColorDot.swift in Sources */,
 				0AF583562C11EF6D006D5059 /* HomeView.swift in Sources */,
 				0AF5836C2C11F10A006D5059 /* CarouselSlider.swift in Sources */,
 				0AF5837C2C11F2E1006D5059 /* CustomBackButton.swift in Sources */,
