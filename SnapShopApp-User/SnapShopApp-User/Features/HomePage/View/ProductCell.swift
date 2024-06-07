@@ -14,6 +14,7 @@ struct ProductCell: View {
         setupPageControlAppearance()
     }
     var body: some View {
+        NavigationLink(destination: ProductDetailView(productID: product.id?.description ?? " ")) {
         VStack{
                 if let images = product.images, !images.isEmpty {
                     TabView {
@@ -62,7 +63,7 @@ struct ProductCell: View {
                             .strikethrough(color: .gray)
                             .font(.system(size: 16, weight: .regular))
                     }
-                    
+                }
                 }
             }
         }.frame(width: 175,height: 280)
