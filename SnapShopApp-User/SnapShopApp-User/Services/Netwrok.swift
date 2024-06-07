@@ -45,10 +45,10 @@ class Network :NetworkService{
                 return
             }
             
-            guard 200..<300 ~= httpResponse.statusCode else {
+        guard 200..<300 ~= httpResponse.statusCode else {
                 completion(.failure(ApiError.invalidResponseCode(httpResponse.statusCode)))
                 return
-            }
+         }
             
             do {
                 let decodedResponse = try JSONDecoder().decode(T.self, from: data)
@@ -62,8 +62,6 @@ class Network :NetworkService{
     }
     
     func postCustomer(_ customer: Customer) -> AnyPublisher<authResponse, Error> {
-        
-        
         guard let url = URL(string: "https://mad-ism-ios-1.myshopify.com/admin/api/2024-04/customers.json") else {
             return Fail(error: NSError(domain: "Invalid Url", code: -1, userInfo: nil)).eraseToAnyPublisher()
             
@@ -121,5 +119,38 @@ class Network :NetworkService{
                }
                .eraseToAnyPublisher()
        }
+    
+    
+    func getItemByID<T: Decodable>(_ itemID: String, type: T.Type, endpoint: String) -> AnyPublisher<T, Error> {
+                let urlString = "\(Support.baseUrl)/\(endpoint)/\(itemID).json"
+        print("url is \(urlString)")
+                guard let url = URL(string: urlString) else {
+                    return Fail(error: URLError(.badURL)).eraseToAnyPublisher()
+                }
+
+                var request = URLRequest(url: url)
+                request.httpMethod = "GET"
+                request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+
+                return URLSession.shared.dataTaskPublisher(for: request)
+                    .tryMap { data, response -> Data in
+                        guard let httpResponse = response as? HTTPURLResponse,
+                              (200..<300).contains(httpResponse.statusCode) else {
+                            throw URLError(.badServerResponse)
+                        }
+                        return data
+                    }
+                    .decode(type: T.self, decoder: JSONDecoder())
+                    .mapError { error -> Error in
+                        if let decodingError = error as? DecodingError {
+                            print("Decoding error: \(decodingError)")
+                            return decodingError
+                        } else {
+                            print("Unknown error: \(error)")
+                            return error
+                        }
+                    }
+                    .eraseToAnyPublisher()
+            }
    }
 
