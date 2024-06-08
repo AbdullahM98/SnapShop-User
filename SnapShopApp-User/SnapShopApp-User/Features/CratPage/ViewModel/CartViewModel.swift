@@ -23,6 +23,7 @@ class CartViewModel :ObservableObject{
                 print("YLAAA YAH AHMED")
                 DispatchQueue.main.async {
                     self?.draft = response.draft_orders
+                    self?.total = 0
                     self?.getSpecificUserCart()
                     print(self?.draft?.count ?? 0)
                 }
@@ -33,18 +34,12 @@ class CartViewModel :ObservableObject{
         }
     }
     func getSpecificUserCart(){
-        DispatchQueue.main.async {
-            self.total = 0
-
-        }
         print("Yla y3mmm")
         let newDraft = draft?.filter({ item in
             item.customer?.id == 7290794967219
         })
-        DispatchQueue.main.async {
-            self.userOrders = newDraft ?? []
-
-        }
+        self.userOrders = newDraft ?? []
+        
         print("Abduullah has ",newDraft?.count ?? 0,"orders")
         for order in self.userOrders {
             total += Double(order.total_price ?? "-200") ?? -100
