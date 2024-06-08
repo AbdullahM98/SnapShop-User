@@ -8,7 +8,9 @@
 import SwiftUI
 
 struct ProfileEdit: View {
-    @State private var text: String = ""
+    var onSaveClick : () -> Void
+    var onCancelClick : () -> Void
+    @ObservedObject var userData:ProfileViewModel = ProfileViewModel.shared
     
     var body: some View {
         VStack(alignment: .leading){
@@ -23,26 +25,26 @@ struct ProfileEdit: View {
             HStack {
                 VStack(alignment: .leading){
                     Text("First Name")
-                    TextField("Example", text: $text)
+                    TextField(userData.user?.first_name ?? "Example", text: $userData.firstNameTextFieldData)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                     
                 }
                 VStack(alignment: .leading){
                     Text("Second Name")
-                    TextField("Example", text: $text)
+                    TextField(userData.user?.last_name ?? "Example", text: $userData.secondNameTextFieldData)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                     
                 }
             }.padding(.horizontal,16)
             VStack(alignment: .leading){
-                Text("Address")
-                TextField("Street No.", text: $text)
+                Text("Email")
+                TextField(userData.user?.email ?? "email@example.com", text: $userData.emailTextFieldData)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                 
             }.padding(.horizontal,16)
             VStack(alignment: .leading){
                 Text("Phone Number")
-                TextField("+20 XXXX XXX XXX", text: $text)
+                TextField(userData.user?.phone ?? "+20 XXXX XXX XXX", text: $userData.phoneTextFieldData)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                 
             }.padding(.horizontal,16)
@@ -50,6 +52,7 @@ struct ProfileEdit: View {
                 ZStack {
                     HStack {
                         Button(action: {
+                            onCancelClick()
                         }) {
                                 Text("Cancel")
                                 .foregroundColor(.black)
@@ -66,6 +69,7 @@ struct ProfileEdit: View {
                 ZStack {
                     HStack {
                         Button(action: {
+                            onSaveClick()
                         }) {
                             Text("Save")
                                 .foregroundColor(.white)
@@ -84,6 +88,6 @@ struct ProfileEdit: View {
 
 struct ProfileEdit_Previews: PreviewProvider {
     static var previews: some View {
-        ProfileEdit()
+        ProfileEdit(onSaveClick: {}, onCancelClick: {})
     }
 }

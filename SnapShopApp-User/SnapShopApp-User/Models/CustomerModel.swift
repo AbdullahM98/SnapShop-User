@@ -23,6 +23,16 @@ struct Customer: Codable {
     let email: String?
     let first_name: String?
 }
+struct CustomerUpdateRequest:Codable{
+    let customer:CustomerUpdateRequestBody?
+}
+
+struct CustomerUpdateRequestBody:Codable{
+    let first_name: String?
+    let last_name: String?
+    let phone: String?
+    let email: String?
+}
 
 
 struct Address: Codable {

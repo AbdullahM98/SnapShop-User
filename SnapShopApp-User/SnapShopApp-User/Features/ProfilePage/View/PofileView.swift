@@ -41,7 +41,12 @@ struct ProfileView: View {
                             Image("e")
                         }
                         .sheet(isPresented: $showingBottomSheet) {
-                            ProfileEdit().presentationDetents([.medium], selection: $settingsDetents)
+                            ProfileEdit(onSaveClick: {
+                                showingBottomSheet.toggle()
+                                viewModel.updateUserData()
+                            }, onCancelClick: {
+                                showingBottomSheet.toggle()
+                            }).presentationDetents([.medium], selection: $settingsDetents)
                         }
                     }
                     Rectangle()

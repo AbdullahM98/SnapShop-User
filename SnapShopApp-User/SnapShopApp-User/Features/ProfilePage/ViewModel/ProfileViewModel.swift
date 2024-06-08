@@ -15,6 +15,10 @@ class ProfileViewModel: ObservableObject {
     @Published var countryTextFieldData: String = ""
     @Published var zipTextFieldData: String = ""
     @Published var phoneTextFieldData: String = ""
+    @Published var firstNameTextFieldData: String = ""
+    @Published var secondNameTextFieldData: String = ""
+    @Published var emailTextFieldData: String = ""
+    
     
     
     static let shared:ProfileViewModel = ProfileViewModel()
@@ -31,6 +35,11 @@ class ProfileViewModel: ObservableObject {
             case .success(let user):
                 DispatchQueue.main.async {
                     self?.user = user.customer
+                    self?.emailTextFieldData = self?.user?.email ?? ""
+                    self?.firstNameTextFieldData = self?.user?.first_name ?? ""
+                    self?.secondNameTextFieldData = self?.user?.last_name ?? ""
+                    self?.phoneTextFieldData = self?.user?.phone ?? ""
+                    
                 }
             case .failure(let error):
                 print("Error fetching user details: \(error)")
@@ -59,6 +68,22 @@ class ProfileViewModel: ObservableObject {
                 DispatchQueue.main.async {
                     print(response.customer_address?.name)
                     self?.fetchUserAddresses()
+                    
+                }
+            case .failure(let error):
+                print("Error fetching data2: \(error)")
+            }
+        }
+    }
+    
+    func updateUserData(customerId:String = "7290794967219"){
+        let user = CustomerUpdateRequest(customer: CustomerUpdateRequestBody(first_name: firstNameTextFieldData, last_name: secondNameTextFieldData, phone: phoneTextFieldData, email: emailTextFieldData))
+        Network.shared.updateData(object: user, to: "https://mad-ism-ios-1.myshopify.com/admin/api/2024-04/customers/\(customerId).json" ){  [weak self] result in
+            switch result {
+            case .success(let response):
+                DispatchQueue.main.async {
+                    print(response.customer?.email)
+                    self?.fetchUserById(id: customerId)
                     
                 }
             case .failure(let error):

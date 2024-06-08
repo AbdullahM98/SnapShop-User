@@ -99,6 +99,44 @@ class Network :NetworkService{
         }
     }
     
+    func updateData<T: Codable>(object: T, to url: String, completion: @escaping (Result<T, Error>) -> Void) {
+        do {
+            let jsonData = try JSONEncoder().encode(object)
+            guard let url = URL(string: url) else {
+                completion(.failure(ApiError.invalidUrl))
+                return
+            }
+            var request = URLRequest(url: url)
+            request.httpMethod = "PUT"
+            request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+            request.setValue("\(Support.password)", forHTTPHeaderField: "\(Support.apiToken)")
+            request.httpBody = jsonData
+            
+            let task = URLSession.shared.dataTask(with: request) { data, response, error in
+                guard let data = data, let httpResponse = response as? HTTPURLResponse, error == nil else {
+                    completion(.failure(error ?? ApiError.unknown))
+                    return
+                }
+                
+                guard 200..<300 ~= httpResponse.statusCode else {
+                    completion(.failure(ApiError.invalidResponseCode(httpResponse.statusCode)))
+                    return
+                }
+                
+                do {
+                    let decodedResponse = try JSONDecoder().decode(T.self, from: data)
+                    completion(.success(decodedResponse))
+                } catch {
+                    completion(.failure(error))
+                }
+            }
+            
+            task.resume()
+        } catch {
+            completion(.failure(error))
+        }
+    }
+    
     func deleteObject(with url: String, completion: @escaping (Error?) -> Void) {
         guard let url = URL(string: url) else {
             return
