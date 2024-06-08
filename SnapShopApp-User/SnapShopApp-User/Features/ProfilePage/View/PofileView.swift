@@ -48,7 +48,7 @@ struct ProfileView: View {
                         .frame(height: 0.3)
                         .padding(.bottom, 8)
                         .foregroundColor(.gray)
-                    Text("Current Address: \(viewModel.user?.addresses?.first?.city ?? ""), \(viewModel.user?.addresses?.first?.country ?? "").")
+                    Text("Current Address: \(viewModel.user?.addresses?.last?.city ?? ""), \(viewModel.user?.addresses?.last?.country ?? "").")
                         .lineLimit(1)
                         .padding(.vertical, 8)
                     Text("Phone Number: \(viewModel.user?.phone ?? "")")

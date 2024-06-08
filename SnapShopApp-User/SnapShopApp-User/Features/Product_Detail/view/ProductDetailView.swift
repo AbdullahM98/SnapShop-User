@@ -136,7 +136,10 @@ struct ProductDetailView: View {
                 }
             }.onAppear{
                 viewModel.fetchProductByID(productID)
-            }
+            }.navigationBarTitle("\(viewModel.vendorTitle)")
+                .navigationBarBackButtonHidden(true)
+                .navigationBarItems(leading: CustomBackButton())
+            
         }
     }
 }
