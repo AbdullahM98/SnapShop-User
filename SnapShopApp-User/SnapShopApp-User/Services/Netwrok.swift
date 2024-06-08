@@ -61,6 +61,70 @@ class Network :NetworkService{
         task.resume()
     }
     
+    func postData<T: Codable>(object: T, to url: String, completion: @escaping (Result<T, Error>) -> Void) {
+        do {
+            let jsonData = try JSONEncoder().encode(object)
+            guard let url = URL(string: url) else {
+                completion(.failure(ApiError.invalidUrl))
+                return
+            }
+            var request = URLRequest(url: url)
+            request.httpMethod = "POST"
+            request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+            request.setValue("\(Support.password)", forHTTPHeaderField: "\(Support.apiToken)")
+            request.httpBody = jsonData
+            
+            let task = URLSession.shared.dataTask(with: request) { data, response, error in
+                guard let data = data, let httpResponse = response as? HTTPURLResponse, error == nil else {
+                    completion(.failure(error ?? ApiError.unknown))
+                    return
+                }
+                
+                guard 200..<300 ~= httpResponse.statusCode else {
+                    completion(.failure(ApiError.invalidResponseCode(httpResponse.statusCode)))
+                    return
+                }
+                
+                do {
+                    let decodedResponse = try JSONDecoder().decode(T.self, from: data)
+                    completion(.success(decodedResponse))
+                } catch {
+                    completion(.failure(error))
+                }
+            }
+            
+            task.resume()
+        } catch {
+            completion(.failure(error))
+        }
+    }
+    
+    func deleteObject(with url: String, completion: @escaping (Error?) -> Void) {
+        guard let url = URL(string: url) else {
+            return
+        }
+        var request = URLRequest(url: url)
+        request.httpMethod = "DELETE"
+
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            if let error = error {
+                completion(error)
+                return
+            }
+
+            guard let httpResponse = response as? HTTPURLResponse, (200...299).contains(httpResponse.statusCode) else {
+                let statusCode = (response as? HTTPURLResponse)?.statusCode ?? -1
+                let error = NSError(domain: "", code: statusCode, userInfo: [NSLocalizedDescriptionKey: "Server error"])
+                completion(error)
+                return
+            }
+
+            completion(nil)
+        }
+
+        task.resume()
+    }
+    
     func postCustomer(_ customer: Customer) -> AnyPublisher<authResponse, Error> {
         guard let url = URL(string: "https://mad-ism-ios-1.myshopify.com/admin/api/2024-04/customers.json") else {
             return Fail(error: NSError(domain: "Invalid Url", code: -1, userInfo: nil)).eraseToAnyPublisher()

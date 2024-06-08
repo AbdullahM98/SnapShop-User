@@ -70,8 +70,12 @@ struct CustomerDetails: Codable {
     let sms_marketing_consent: SMSMarketingConsent?
     let admin_graphql_api_id: String?
     let default_address: AddressResponse?
+    
+    
 }
-
+struct AddressesRequest:Codable{
+    let addresses: [AddressResponse]?
+}
 struct AddressResponse: Codable {
     let id: Int?
     let customer_id: Int?
@@ -89,7 +93,7 @@ struct AddressResponse: Codable {
     let province_code: String?
     let country_code: String?
     let country_name: String?
-    let default_address: Bool?
+    let `default`: Bool?
 }
         
 
@@ -106,3 +110,20 @@ struct SMSMarketingConsent: Codable {
     let consent_collected_from: String?
 }
 
+struct AddressRequestToPost :Codable{
+    let customer_address: CustomerAddressToPost?
+}
+struct CustomerAddressToPost: Codable{
+    let id: Int?
+    let customer_id: Int?
+    let address1: String?
+    let address2: String?
+    let city: String?
+    let zip: String?
+    let phone: String?
+    let name: String?
+    let province_code: String?
+    let country_code: String?
+    let country_name: String?
+    let `default`: Bool?
+}

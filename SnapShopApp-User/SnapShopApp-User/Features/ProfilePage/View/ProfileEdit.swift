@@ -36,7 +36,7 @@ struct ProfileEdit: View {
             }.padding(.horizontal,16)
             VStack(alignment: .leading){
                 Text("Address")
-                TextField("name@example.com", text: $text)
+                TextField("Street No.", text: $text)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                 
             }.padding(.horizontal,16)

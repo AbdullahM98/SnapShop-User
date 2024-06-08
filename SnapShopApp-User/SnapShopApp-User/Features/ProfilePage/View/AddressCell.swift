@@ -8,6 +8,8 @@
 import SwiftUI
 struct AddressCell: View {
     var address : AddressResponse
+    @ObservedObject var viewModel:ProfileViewModel = ProfileViewModel.shared
+
     var body: some View {
         VStack(alignment:.leading,spacing: 16){
             HStack{
@@ -15,7 +17,22 @@ struct AddressCell: View {
                     .foregroundColor(.gray)
                 Text("\(address.address1 ?? "")")
                 Spacer()
-                Image("bag")
+                Button {
+                    if address.default == false {
+                        print("inside if ")
+
+                            viewModel.deleteAddress(addressId: address.id ?? 0)
+                        print(address.default)
+
+                    } else {
+                        print("inside else show alert saying cant delete")
+                        
+                        print(address.default)
+
+                    }
+                } label: {
+                    Image("trash")
+                }
             }.padding(.top,20)
                 .padding(.horizontal,16)
             HStack{
@@ -51,6 +68,6 @@ struct AddressCell: View {
 
 struct AddressCell_Previews: PreviewProvider {
     static var previews: some View {
-        AddressCell(address: AddressResponse(id: 0, customer_id: 0, first_name: "", last_name: "", company: "", address1: "", address2: "", city: "", province: "", country: "", zip: "", phone: "", name: "", province_code: "", country_code: "", country_name: "", default_address: true))
+        AddressCell(address: AddressResponse(id: 0, customer_id: 0, first_name: "", last_name: "", company: "", address1: "", address2: "", city: "", province: "", country: "", zip: "", phone: "", name: "", province_code: "", country_code: "", country_name: "", default: true))
     }
 }

@@ -12,7 +12,7 @@ struct ProfileView: View {
     @State private var selectedCurrency: String?
     @State private var showingBottomSheet = false
     @State private var settingsDetents = PresentationDetent.medium
-    @ObservedObject var viewModel = ProfileViewModel()
+    @ObservedObject var viewModel = ProfileViewModel.shared
     @State var userDetails: CustomerDetails?
     @State private var navigateToUserAddresses = false // Flag to trigger navigation
     
@@ -81,7 +81,7 @@ struct ProfileView: View {
                     .frame(height: 1)
                     .foregroundColor(.gray)
                 
-                NavigationLink(destination: UserAddresses(addresses: viewModel.user?.addresses ?? []), isActive: $navigateToUserAddresses) {
+                NavigationLink(destination: UserAddresses(), isActive: $navigateToUserAddresses) {
                     Button(action: {
                         navigateToUserAddresses = true // Activate navigation
                     }) {

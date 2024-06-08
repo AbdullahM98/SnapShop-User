@@ -8,24 +8,39 @@
 import SwiftUI
 
 struct UserAddresses: View {
-    var addresses: [AddressResponse]
+    @State private var showingBottomSheet = false
+    @State private var settingsDetents = PresentationDetent.medium
+    @ObservedObject var userData:ProfileViewModel = ProfileViewModel.shared
+    
     
     var body: some View {
         VStack{
             ScrollView{
-                ForEach(addresses,id: \.id) { address in
+                ForEach(userData.addresses ?? [],id: \.id) { address in
                     AddressCell(address: address)
                 }
             }
             .navigationBarTitle("Addresses")
             .navigationBarBackButtonHidden(true)
-            .navigationBarItems(leading: CustomBackButton())
+            .navigationBarItems(leading: CustomBackButton(),trailing: Button(action: {
+                showingBottomSheet.toggle()
+            }) {
+                Image(systemName:"plus.circle.fill").foregroundColor(.black)
+            }
+            .sheet(isPresented: $showingBottomSheet) {
+                AddAddress(onSaveClick: {
+                    userData.postUserAddress()
+                    showingBottomSheet.toggle()
+                }, onCancelClick: {
+                    showingBottomSheet.toggle()
+                }).presentationDetents([.medium], selection: $settingsDetents)
+            })
         }
     }
 }
 
 struct UserAddresses_Previews: PreviewProvider {
     static var previews: some View {
-        UserAddresses(addresses: [])
+        UserAddresses()
     }
 }

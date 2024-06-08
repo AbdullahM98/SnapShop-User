@@ -152,6 +152,10 @@ struct ColorDotView: View {
     }
 }
 
-#Preview {
-    ProductDetailView(productID: "")
+struct ProductDetailView_Previews: PreviewProvider {
+    static var previews: some View {
+        
+        ProductDetailView(productID: "")
+    }
 }
+
