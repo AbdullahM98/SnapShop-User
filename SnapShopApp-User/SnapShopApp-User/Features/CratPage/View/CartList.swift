@@ -9,6 +9,8 @@ import SwiftUI
 
 struct CartList: View {
     @ObservedObject var viewModel = CartViewModel.shared
+    @State private var navigateToPayment = false // Flag to trigger navigation
+
     var body: some View {
         VStack{
             Text("Cart")
@@ -24,7 +26,11 @@ struct CartList: View {
                 
                 Text("EGP")
                 Spacer()
-                AppButton(text: "Checkout",width: 140,height: 40, isFilled: true, onClick: {} )
+                NavigationLink(destination: CheckOutPage(), isActive: $navigateToPayment) {
+                    AppButton(text: "Checkout",width: 140,height: 40, isFilled: true, onClick: {
+                        navigateToPayment = true
+                    } )
+                }
                 
             }.padding()
         }.onAppear{

@@ -6,11 +6,12 @@
 //
 
 import Foundation
-struct DraftOrder: Codable {
-    let draft_order: DraftOrderDetails?
-}
+
 struct DraftOrderResponse:Codable{
     let draft_orders:[DraftOrderDetails]?
+}
+struct DraftOrder: Codable {
+    let draft_order: DraftOrderDetails?
 }
 struct DraftOrderDetails: Codable {
     let id: Int?
