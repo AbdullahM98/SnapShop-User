@@ -17,11 +17,11 @@ struct ProductDetailView: View {
     var body: some View {
         ScrollView {
             VStack {
-              //  Color.white
+                //  Color.white
                 VStack() {
                     
-//                    CarouselSlider(adsImages: ["1","2"]).padding(.bottom,4).ignoresSafeArea(edges: .top)
-//                        .frame(height: UIScreen.screenHeight * 0.4).background(Color.gray)
+                    //                    CarouselSlider(adsImages: ["1","2"]).padding(.bottom,4).ignoresSafeArea(edges: .top)
+                    //                        .frame(height: UIScreen.screenHeight * 0.4).background(Color.gray)
                     AsyncImage(url: URL(string: viewModel.imgUrl ?? "https://cdn.dummyjson.com/products/images/beauty/Eyeshadow%20Palette%20with%20Mirror/thumbnail.png")) { phase in
                         switch phase {
                         case .empty:
@@ -44,28 +44,28 @@ struct ProductDetailView: View {
                     }
                     .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/)
                     
-                        
+                    
                     VStack(alignment: .leading) {
                         HStack {
                             Text($viewModel.vendorTitle.wrappedValue).foregroundColor(.gray).font(.subheadline)
                             HStack() {
-                        
+                                
                                 Image(systemName: "star.fill")
                                     .resizable()
                                     .frame(width: 15, height: 15)
                                     .foregroundColor(.yellow)
-                            
+                                
                                 Text("(4.5)").font(.subheadline).foregroundStyle(Color.black)
                                 Spacer()
                                 Image(systemName: "heart").resizable().frame(width: 30,height: 28)
                             }
-                                .foregroundColor(.gray)
-                        
+                            .foregroundColor(.gray)
+                            
                         }.padding(.top,-5)
                         HStack {
                             Text($viewModel.productTitle.wrappedValue)
                                 .font(.title3).fontWeight(Font.Weight.medium).multilineTextAlignment(/*@START_MENU_TOKEN@*/.leading/*@END_MENU_TOKEN@*/)
-                          
+                            
                         }
                         HStack(){
                             Text("\($viewModel.currentCurrency.wrappedValue) \($viewModel.price.wrappedValue)").font(.headline.bold()).foregroundStyle(Color.red)
@@ -111,14 +111,14 @@ struct ProductDetailView: View {
                                     .font(.system(size: 18))
                                     .fontWeight(.semibold)
                                 
-                                   HStack {
-                                       ForEach([Color.red, Color.blue, Color.orange, Color.green], id: \.self) { color in
-                                           CustomColorDot(color: color, isSelected: color == viewModel.selectedColor)
-                                               .onTapGesture {
-                                                   viewModel.selectedColor = color
-                                               }
-                                       }
-                                   }
+                                HStack {
+                                    ForEach([Color.red, Color.blue, Color.orange, Color.green], id: \.self) { color in
+                                        CustomColorDot(color: color, isSelected: color == viewModel.selectedColor)
+                                            .onTapGesture {
+                                                viewModel.selectedColor = color
+                                            }
+                                    }
+                                }
                             }
                             .frame(maxWidth: .infinity)
                         }.padding(.top,10)
@@ -126,12 +126,16 @@ struct ProductDetailView: View {
                         
                         AppButton(text: "Add to Cart", width: UIScreen.screenWidth * 0.9, height: UIScreen.screenHeight * 0.06, isFilled: true){
                             guard let product = $viewModel.product.wrappedValue else{return}
+                            
+                            let draftOrder = DraftOrder(draft_order: DraftOrderDetails(id: nil, note: viewModel.imgUrl, email: nil, taxes_included: nil, currency: nil, invoice_sent_at: nil, created_at: nil, updated_at: nil, tax_exempt: nil, completed_at: nil, name: nil, status: nil, line_items: [LineItem(id: viewModel.product?.variants?[0].product_id, variant_id: viewModel.product?.variants?[0].id, product_id: viewModel.product?.id, title:  viewModel.productTitle
+                                                                                                                                                                                                                                                                                                     , variant_title: nil, sku: nil, vendor: nil, quantity: 1, requires_shipping: nil, taxable: true, gift_card: nil, fulfillment_service: nil, grams: nil, tax_lines: nil, applied_discount: nil, name: nil, properties: nil, custom: nil, price: viewModel.price, admin_graphql_api_id: nil)], shipping_address: nil, billing_address: nil, invoice_url: nil, applied_discount: nil, order_id: nil, shipping_line: nil, tax_lines: nil, tags: nil, note_attributes: nil, total_price: nil, subtotal_price: nil, total_tax: nil, payment_terms: nil, admin_graphql_api_id: nil, customer: CustomerForDraftOrder(id: 7290794967219, email: nil, created_at: nil, updated_at: nil, first_name: nil, last_name: nil, orders_count: nil, state: nil, total_spent: nil, last_order_id: nil, note: nil, verified_email: nil, multipass_identifier: nil, tax_exempt: nil, tags: nil, last_order_name: nil, currency: nil, phone: nil, tax_exemptions: nil, email_marketing_consent: nil, sms_marketing_consent: nil, admin_graphql_api_id: nil, default_address: nil),use_customer_default_address: true))
                             print("here is the product \(product)")
+                            viewModel.postCardDraftOrder(draftOrder: draftOrder)
                         }.padding(.top,30)
                     }
                     .padding()
                     .background(Color.white)
-            
+                    
                     .offset(y: -30)
                 }
             }.onAppear{

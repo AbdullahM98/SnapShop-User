@@ -19,7 +19,7 @@ struct ContentView: View {
                 case .explore:
                     CategoryView()
                 case .cart:
-                    Text("Cart")
+                    CartList()
                 case .saved:
                     Text("Saved")
                 case .profile:

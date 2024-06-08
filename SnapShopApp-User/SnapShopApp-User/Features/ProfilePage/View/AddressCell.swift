@@ -31,7 +31,11 @@ struct AddressCell: View {
 
                     }
                 } label: {
-                    Image("trash")
+                    if address.default == false {
+                        Image("trash")
+                    }else{
+                        Image("")
+                    }
                 }
             }.padding(.top,20)
                 .padding(.horizontal,16)

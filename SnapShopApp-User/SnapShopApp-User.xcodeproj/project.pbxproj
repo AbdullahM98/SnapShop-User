@@ -43,6 +43,10 @@
 		5627DB2F2C123D2500AB6464 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5627DB2E2C123D2500AB6464 /* ProfileViewModel.swift */; };
 		5627DB312C123EB100AB6464 /* UserAddresses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5627DB302C123EB100AB6464 /* UserAddresses.swift */; };
 		564B1E752C11FE9E005D515E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 564B1E742C11FE9E005D515E /* GoogleService-Info.plist */; };
+		56A580052C14604700BBC168 /* CartViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A580042C14604700BBC168 /* CartViewModel.swift */; };
+		56A580072C1460BE00BBC168 /* DrftOrdersModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A580062C1460BE00BBC168 /* DrftOrdersModel.swift */; };
+		56A580092C14657700BBC168 /* CartCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A580082C14657700BBC168 /* CartCard.swift */; };
+		56A5800B2C1465C900BBC168 /* CartList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A5800A2C1465C900BBC168 /* CartList.swift */; };
 		7606FB982C0F74DB00E1D3AF /* Netwrok.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7606FB972C0F74DB00E1D3AF /* Netwrok.swift */; };
 		7606FB9C2C0F765200E1D3AF /* LoginScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7606FB9B2C0F765200E1D3AF /* LoginScreen.swift */; };
 		7606FB9E2C0F76A100E1D3AF /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7606FB9D2C0F76A100E1D3AF /* LoginViewModel.swift */; };
@@ -128,6 +132,10 @@
 		5627DB2E2C123D2500AB6464 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		5627DB302C123EB100AB6464 /* UserAddresses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAddresses.swift; sourceTree = "<group>"; };
 		564B1E742C11FE9E005D515E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		56A580042C14604700BBC168 /* CartViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartViewModel.swift; sourceTree = "<group>"; };
+		56A580062C1460BE00BBC168 /* DrftOrdersModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrftOrdersModel.swift; sourceTree = "<group>"; };
+		56A580082C14657700BBC168 /* CartCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartCard.swift; sourceTree = "<group>"; };
+		56A5800A2C1465C900BBC168 /* CartList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartList.swift; sourceTree = "<group>"; };
 		7606FB972C0F74DB00E1D3AF /* Netwrok.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Netwrok.swift; sourceTree = "<group>"; };
 		7606FB9B2C0F765200E1D3AF /* LoginScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreen.swift; sourceTree = "<group>"; };
 		7606FB9D2C0F76A100E1D3AF /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
@@ -310,6 +318,32 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
+		56A580012C14601C00BBC168 /* CratPage */ = {
+			isa = PBXGroup;
+			children = (
+				56A580032C14603100BBC168 /* ViewModel */,
+				56A580022C14602900BBC168 /* View */,
+			);
+			path = CratPage;
+			sourceTree = "<group>";
+		};
+		56A580022C14602900BBC168 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				56A580082C14657700BBC168 /* CartCard.swift */,
+				56A5800A2C1465C900BBC168 /* CartList.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		56A580032C14603100BBC168 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				56A580042C14604700BBC168 /* CartViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		7606FB892C0F721500E1D3AF /* Services */ = {
 			isa = PBXGroup;
 			children = (
@@ -336,6 +370,7 @@
 		7606FB8B2C0F736100E1D3AF /* Features */ = {
 			isa = PBXGroup;
 			children = (
+				56A580012C14601C00BBC168 /* CratPage */,
 				5627DB232C12297100AB6464 /* ProfilePage */,
 				5606E79E2C1207AC00B728FD /* CouponsPage */,
 				7678362B2C1212F6001E4BFB /* Product_Detail */,
@@ -356,6 +391,7 @@
 				5606E7AA2C120C7B00B728FD /* PriceRuleModel.swift */,
 				5606E7AC2C120CB900B728FD /* DiscountsModel.swift */,
 				767836342C122ADA001E4BFB /* ProductModel.swift */,
+				56A580062C1460BE00BBC168 /* DrftOrdersModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -806,6 +842,8 @@
 				7606FBC12C10AE0B00E1D3AF /* AppCoreData.swift in Sources */,
 				0AF583762C11F252006D5059 /* CategoryProducts.swift in Sources */,
 				0AF583682C11F094006D5059 /* HomeViewModel.swift in Sources */,
+				56A5800B2C1465C900BBC168 /* CartList.swift in Sources */,
+				56A580052C14604700BBC168 /* CartViewModel.swift in Sources */,
 				0AF583602C11EFF2006D5059 /* BrandProducts.swift in Sources */,
 				767836352C122ADA001E4BFB /* ProductModel.swift in Sources */,
 				5606E7A72C120C0800B728FD /* CouponCard.swift in Sources */,
@@ -830,6 +868,7 @@
 				0AF583542C11EF58006D5059 /* PopularBrands.swift in Sources */,
 				7678362F2C121327001E4BFB /* ProductDetailView.swift in Sources */,
 				7606FBC62C11129100E1D3AF /* UserDefaultsManager.swift in Sources */,
+				56A580092C14657700BBC168 /* CartCard.swift in Sources */,
 				0AF5837A2C11F28A006D5059 /* FilterButtomSheet.swift in Sources */,
 				7606FBAB2C0F795F00E1D3AF /* Theme.swift in Sources */,
 				7606FBA42C0F782A00E1D3AF /* SignUpScreen.swift in Sources */,
@@ -850,6 +889,7 @@
 				7606FBA22C0F77C000E1D3AF /* SignUpViewModel.swift in Sources */,
 				0AF583622C11F032006D5059 /* BrandsModel.swift in Sources */,
 				7606FBA62C0F78B400E1D3AF /* CustomTextField.swift in Sources */,
+				56A580072C1460BE00BBC168 /* DrftOrdersModel.swift in Sources */,
 				5627DB2B2C12320000AB6464 /* AddAddress.swift in Sources */,
 				5606E7A92C120C5600B728FD /* CouponsViewModel.swift in Sources */,
 				0AF583782C11F271006D5059 /* CategoryProductCell.swift in Sources */,
