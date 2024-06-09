@@ -328,9 +328,18 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
+		564BE0A22C160A7E000FDA11 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				56A580062C1460BE00BBC168 /* DrftOrdersModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		56A580012C14601C00BBC168 /* CratPage */ = {
 			isa = PBXGroup;
 			children = (
+				564BE0A22C160A7E000FDA11 /* Models */,
 				56A580032C14603100BBC168 /* ViewModel */,
 				56A580022C14602900BBC168 /* View */,
 			);
@@ -419,7 +428,6 @@
 				0AF583612C11F032006D5059 /* BrandsModel.swift */,
 				0AF583652C11F069006D5059 /* BestSellerModel.swift */,
 				767836342C122ADA001E4BFB /* ProductModel.swift */,
-				56A580062C1460BE00BBC168 /* DrftOrdersModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";

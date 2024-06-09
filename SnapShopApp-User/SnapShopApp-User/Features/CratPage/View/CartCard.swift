@@ -10,7 +10,7 @@ import SwiftUI
 
 struct CartCard: View {
     @State var qty: Int = 1
-    var  order: DraftOrderResponse2
+    var  order: DraftOrderItemDetails
     @ObservedObject var viewModel:CartViewModel = CartViewModel.shared
     
     var body: some View {
@@ -80,6 +80,6 @@ struct CartCard: View {
 
 struct CartCard_Previews: PreviewProvider {
     static var previews: some View {
-        CartCard(order: DraftOrderResponse2(id: 0, note: "", email: "", taxes_included: false, currency: "EGB", invoice_sent_at: "", created_at: "", updated_at: "", tax_exempt: nil, completed_at: "", name: "", status: "", line_items: nil, shipping_address: nil, billing_address: nil, invoice_url: nil, applied_discount: "", order_id: "", shipping_line: "", tax_lines: nil, tags: "", note_attributes: nil, total_price: "", subtotal_price: "", total_tax: "", payment_terms: "", admin_graphql_api_id: "", customer: nil))
+        CartCard(order: DraftOrderItemDetails(id: nil, note: nil, email: nil, taxes_included: nil, currency: nil, invoice_sent_at: nil, created_at: nil, updated_at: nil, tax_exempt: nil, completed_at: nil, name: nil, status: nil, line_items: nil, shipping_address: nil, billing_address: nil, invoice_url: nil, applied_discount: nil, order_id: nil, shipping_line: nil, tax_lines: nil, tags: nil, note_attributes: nil, total_price: nil, subtotal_price: nil, total_tax: nil, payment_terms: nil, presentment_currency: nil, total_line_items_price_set: nil, total_price_set: nil, subtotal_price_set: nil, total_tax_set: nil, total_discounts_set: nil, total_shipping_price_set: nil, total_additional_fees_set: nil, total_duties_set: nil, admin_graphql_api_id: nil, customer: nil, use_customer_default_address: nil))
     }
 }

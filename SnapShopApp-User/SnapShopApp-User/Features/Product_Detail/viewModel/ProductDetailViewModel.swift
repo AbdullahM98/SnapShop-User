@@ -9,7 +9,7 @@ import Foundation
 import Combine
 import SwiftUI
 class ProductDetailViewModel :ObservableObject{
-    @Published var myOrder:DraftOrderDetails?
+    @Published var myOrder:DraftOrderItemDetails?
     @Published var vendorTitle:String = "Nike"
     @Published var currentCurrency:String = "USD"
     @Published var price:String = "300.00"
@@ -52,7 +52,7 @@ class ProductDetailViewModel :ObservableObject{
     
     
     
-    func postCardDraftOrder(draftOrder:DraftOrder){
+    func postCardDraftOrder(draftOrder:DraftOrderItem){
         Network.shared.postData(object: draftOrder, to: "https://mad-ism-ios-1.myshopify.com/admin/api/2024-04/draft_orders.json" ){  [weak self] result in
             switch result {
             case .success(let response):

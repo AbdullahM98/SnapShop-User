@@ -8,8 +8,8 @@
 import Foundation
 import SwiftUI
 class CartViewModel :ObservableObject{
-    @Published private (set) var draft:[DraftOrderResponse2]?
-    @Published private (set) var userOrders:[DraftOrderResponse2] = []
+    @Published private (set) var draft:[DraftOrderItemDetails]?
+    @Published private (set) var userOrders:[DraftOrderItemDetails] = []
     
     @Published var total: Double = 0.0
     static let shared = CartViewModel()
@@ -17,7 +17,7 @@ class CartViewModel :ObservableObject{
         self.getCardDraftOrder()
     }
     func getCardDraftOrder(){
-        Network.shared.request("\(Support.baseUrl)/draft_orders.json", method: "GET", responseType: Resp.self) { [weak self] result in
+        Network.shared.request("\(Support.baseUrl)/draft_orders.json", method: "GET", responseType: ListOfDraftOrders.self) { [weak self] result in
             switch result {
             case .success(let response):
                 print("YLAAA YAH AHMED")
@@ -42,7 +42,7 @@ class CartViewModel :ObservableObject{
         
         print("Abduullah has ",newDraft?.count ?? 0,"orders")
         for order in self.userOrders {
-            total += Double(order.total_price ?? "-200") ?? -100
+            total += Double(order.subtotal_price ?? "-200") ?? -100
         }
         print(userOrders.first?.total_price)
         

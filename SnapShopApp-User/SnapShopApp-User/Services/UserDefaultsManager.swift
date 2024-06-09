@@ -31,4 +31,19 @@ class UserDefaultsManager {
     func getUserId(key: String) -> Int? {
         return UserDefaults.standard.integer(forKey: key)
     }
+    
+    func setUserHasDraftOrders(key: String, value:Bool){
+        UserDefaults.standard.set(value, forKey: key)
+    }
+    
+    func getUserHasDraftOrders(key: String)->Bool? {
+        return UserDefaults.standard.bool(forKey: key)
+    }
+    func setUserDraftOrderId(key: String, value:Int){
+        UserDefaults.standard.set(value, forKey: key)
+    }
+    
+    func getUserDraftOrderId(key: String)->Int? {
+        return UserDefaults.standard.integer(forKey: key)
+    }
 }
