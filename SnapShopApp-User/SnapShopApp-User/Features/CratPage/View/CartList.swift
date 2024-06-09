@@ -15,8 +15,8 @@ struct CartList: View {
         VStack{
             Text("Cart")
             ScrollView{
-                ForEach(viewModel.userOrders ?? [] ,id: \.id) { order in
-                    CartCard(order: order)
+                ForEach(viewModel.lineItems ,id: \.id) { item in
+                    CartCard(item: item)
                 }
             }
             

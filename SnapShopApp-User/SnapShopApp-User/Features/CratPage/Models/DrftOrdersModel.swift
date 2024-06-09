@@ -30,7 +30,7 @@ struct DraftOrderItemDetails: Codable {
     let completed_at: String?
     let name: String?
     let status: String?
-    let line_items: [DraftOrderLineItem]?
+    var line_items: [DraftOrderLineItem]?
     let shipping_address: DraftOrderAddress?
     let billing_address: DraftOrderAddress?
     let invoice_url: String?
@@ -45,14 +45,14 @@ struct DraftOrderItemDetails: Codable {
     let total_tax: String?
     let payment_terms: String?
     let presentment_currency: String?
-    let total_line_items_price_set: DraftOrderPriceSet?
-    let total_price_set: DraftOrderPriceSet?
-    let subtotal_price_set: DraftOrderPriceSet?
-    let total_tax_set: DraftOrderPriceSet?
-    let total_discounts_set: DraftOrderPriceSet?
-    let total_shipping_price_set: DraftOrderPriceSet?
-    let total_additional_fees_set: DraftOrderPriceSet?
-    let total_duties_set: DraftOrderPriceSet?
+//    let total_line_items_price_set: DraftOrderPriceSet?
+//    let total_price_set: DraftOrderPriceSet?
+//    let subtotal_price_set: DraftOrderPriceSet?
+//    let total_tax_set: DraftOrderPriceSet?
+//    let total_discounts_set: DraftOrderPriceSet?
+//    let total_shipping_price_set: DraftOrderPriceSet?
+//    let total_additional_fees_set: DraftOrderPriceSet?
+//    let total_duties_set: DraftOrderPriceSet?
     let admin_graphql_api_id: String?
     let customer: DraftOrderCustomer?
     let use_customer_default_address:Bool?
@@ -75,10 +75,15 @@ struct DraftOrderLineItem: Codable {
     let tax_lines: [DraftOrderTaxLine]?
     let applied_discount: String?
     let name: String?
-    let properties: [String]?
+    let properties: [DraftOrderProperties]?
     let custom: Bool?
     let price: String?
     let admin_graphql_api_id: String?
+}
+
+struct DraftOrderProperties: Codable{
+    let name: String?
+    let value: String?
 }
 
 struct DraftOrderAddress: Codable {
@@ -106,17 +111,17 @@ struct DraftOrderDiscount: Codable {
     let amount: String
     let value_type: String
 }
-
-struct DraftOrderPriceSet: Codable {
-    let shop_money: DraftOrderMoney
-    let presentment_money: DraftOrderMoney
-}
-//done
-
-struct DraftOrderMoney: Codable {
-    let amount: String
-    let currency_code: String
-}
+//
+//struct DraftOrderPriceSet: Codable {
+//    let shop_money: DraftOrderMoney
+//    let presentment_money: DraftOrderMoney
+//}
+////done
+//
+//struct DraftOrderMoney: Codable {
+//    let amount: String
+//    let currency_code: String
+//}
 
 struct DraftOrderCustomer: Codable {
     let id: Int?

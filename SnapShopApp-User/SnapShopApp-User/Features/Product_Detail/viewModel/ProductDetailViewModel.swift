@@ -10,6 +10,7 @@ import Combine
 import SwiftUI
 class ProductDetailViewModel :ObservableObject{
     @Published var myOrder:DraftOrderItemDetails?
+    @Published var oldOrder:DraftOrderItemDetails?
     @Published var vendorTitle:String = "Nike"
     @Published var currentCurrency:String = "USD"
     @Published var price:String = "300.00"
@@ -58,11 +59,53 @@ class ProductDetailViewModel :ObservableObject{
             case .success(let response):
                 DispatchQueue.main.async {
                     self?.myOrder = response.draft_order
+                    
+                    UserDefaultsManager.shared.setUserHasDraftOrders(key: "HasDraft", value: true)
+                    UserDefaultsManager.shared.setUserDraftOrderId(key: "DraftId", value: self?.myOrder?.id ?? 0)
                     print("HemaMar3i is Here",self?.myOrder?.name)
                 }
                 print("HElllllo")
             case .failure(let error):
-                print("Error fetching data2: \(error)")
+                print("Error posting user order: \(error)")
+                print("Error posting user order: \(error.localizedDescription)")
+            }
+        }
+    }
+    
+    func getDraftOrderById(lineItem:DraftOrderLineItem){
+        let orderID = UserDefaultsManager.shared.getUserDraftOrderId(key: "DraftId")
+        print(orderID ?? 0)
+        Network.shared.request("https://mad-ism-ios-1.myshopify.com/admin/api/2024-04/draft_orders/\(orderID ?? 0).json", method: "GET", responseType: DraftOrderItem.self) { [weak self] result in
+            switch result{
+            case .success(let order):
+                DispatchQueue.main.async {
+                    self?.oldOrder = order.draft_order
+                    print(self?.oldOrder)
+                    self?.updateUserData(lineItem: lineItem)
+                }
+            case .failure(let err):
+                print("Error get the user order : \(err)")
+                
+                
+            }
+        }
+    }
+    
+    func updateUserData(lineItem:DraftOrderLineItem){
+        print(self.oldOrder?.line_items?.count ?? 0)
+        self.oldOrder?.line_items?.append(lineItem)
+        print(self.oldOrder?.line_items?.count ?? 0)
+        let orderID = UserDefaultsManager.shared.getUserDraftOrderId(key: "DraftId")
+        let updatedOrder = DraftOrderItem(draft_order: self.oldOrder)
+        Network.shared.updateData(object: updatedOrder, to: "https://mad-ism-ios-1.myshopify.com/admin/api/2024-04/draft_orders/\(orderID ?? 0).json" ){  [weak self] result in
+            switch result {
+            case .success(let response):
+                DispatchQueue.main.async {
+                    print(response.draft_order?.line_items?.count ?? 0)
+                }
+            case .failure(let error):
+                print(error.localizedDescription)
+                print("Error updating user draft order: \(error)")
             }
         }
     }

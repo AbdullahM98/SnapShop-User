@@ -10,13 +10,13 @@ import SwiftUI
 
 struct CartCard: View {
     @State var qty: Int = 1
-    var  order: DraftOrderItemDetails
+    var  item: DraftOrderLineItem
     @ObservedObject var viewModel:CartViewModel = CartViewModel.shared
     
     var body: some View {
         VStack{
             HStack{
-                AsyncImage(url: URL(string: order.note ?? "https://cdn.dummyjson.com/products/images/beauty/Eyeshadow%20Palette%20with%20Mirror/thumbnail.png")) { phase in
+                AsyncImage(url: URL(string: item.properties?.first?.value ?? "https://cdn.dummyjson.com/products/images/beauty/Eyeshadow%20Palette%20with%20Mirror/thumbnail.png")) { phase in
                     switch phase {
                     case .empty:
                         ProgressView()
@@ -39,18 +39,17 @@ struct CartCard: View {
                     }
                 }
                 VStack(alignment: .leading,spacing: 2){
-                    Text(order.line_items?[0].title ?? "")
+                    Text(item.title ?? "")
                         .lineLimit(1)
                         .frame(width: 220)
-                    Text(order.line_items?[0].vendor ?? "").foregroundColor(Color.gray)
-                    Text(order.line_items?[0].price ?? "")
+                    Text(item.vendor ?? "").foregroundColor(Color.gray)
+                    Text(item.price ?? "")
                         .bold()
                 }
                 VStack(alignment: .trailing,spacing: 20){
                     Button {
                         print("delete item")
-                        viewModel.deleteCardDraftOrder(id: order.id ?? 0)
-                        
+                        viewModel.getDraftOrderById(lineItem: item)
                     } label: {
                         Image("trash")
                         
@@ -80,6 +79,6 @@ struct CartCard: View {
 
 struct CartCard_Previews: PreviewProvider {
     static var previews: some View {
-        CartCard(order: DraftOrderItemDetails(id: nil, note: nil, email: nil, taxes_included: nil, currency: nil, invoice_sent_at: nil, created_at: nil, updated_at: nil, tax_exempt: nil, completed_at: nil, name: nil, status: nil, line_items: nil, shipping_address: nil, billing_address: nil, invoice_url: nil, applied_discount: nil, order_id: nil, shipping_line: nil, tax_lines: nil, tags: nil, note_attributes: nil, total_price: nil, subtotal_price: nil, total_tax: nil, payment_terms: nil, presentment_currency: nil, total_line_items_price_set: nil, total_price_set: nil, subtotal_price_set: nil, total_tax_set: nil, total_discounts_set: nil, total_shipping_price_set: nil, total_additional_fees_set: nil, total_duties_set: nil, admin_graphql_api_id: nil, customer: nil, use_customer_default_address: nil))
+        CartCard(item: DraftOrderLineItem(id: nil, variant_id: nil, product_id: nil, title: nil, variant_title: nil, sku: nil, vendor: nil, quantity: nil, requires_shipping: nil, taxable: nil, gift_card: nil, fulfillment_service: nil, grams: nil, tax_lines: nil, applied_discount: nil, name: nil, properties: nil, custom: nil, price: nil, admin_graphql_api_id: nil))
     }
 }
