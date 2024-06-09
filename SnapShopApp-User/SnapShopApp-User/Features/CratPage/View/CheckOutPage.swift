@@ -11,7 +11,8 @@ struct CheckOutPage: View {
     @State private var discountCode: String = ""
     @State private var showingBottomSheet = false
     @State private var settingsDetents = PresentationDetent.medium
-
+    @State private var navigateToCoupons = false // Flag to trigger navigation
+    
     var body: some View {
         ScrollView{
             VStack(alignment: .leading){
@@ -25,15 +26,19 @@ struct CheckOutPage: View {
                     }
                     Spacer()
                 }.padding(.bottom,16)
-                HStack{
-                    TextField("Enter Discount code here", text: $discountCode)
-                        .textFieldStyle(RoundedBorderTextFieldStyle())
-                    Spacer()
-                    AppButton(text: "Get Code", width: 90, height: 34, isFilled: true) {
-                        print("apply code")
-                    }
-                    
-                }.padding()
+                
+                NavigationLink(destination: CouponsPage(), isActive: $navigateToCoupons) {
+                    HStack{
+                        TextField("Enter Discount code here", text: $discountCode)
+                            .textFieldStyle(RoundedBorderTextFieldStyle())
+                        Spacer()
+                        AppButton(text: "Get Code", width: 90, height: 34, isFilled: true) {
+                            print("apply code")
+                            navigateToCoupons = true
+                            
+                        }
+                    }.padding()
+                }
                 HStack{
                     Text("Total Price :").bold()
                     Text("20391.49 EGP")
