@@ -50,6 +50,7 @@
 		56D46E912C14FCC00019EA1B /* CheckOutPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D46E902C14FCC00019EA1B /* CheckOutPage.swift */; };
 		56D5B6052C1505C2006EF83B /* PaymentPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D5B6042C1505C2006EF83B /* PaymentPage.swift */; };
 		56D5B6072C150606006EF83B /* ButtonWithImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D5B6062C150606006EF83B /* ButtonWithImage.swift */; };
+		56DC253F2C15B65200008690 /* ProfileModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56DC253E2C15B65200008690 /* ProfileModels.swift */; };
 		7606FB982C0F74DB00E1D3AF /* Netwrok.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7606FB972C0F74DB00E1D3AF /* Netwrok.swift */; };
 		7606FB9C2C0F765200E1D3AF /* LoginScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7606FB9B2C0F765200E1D3AF /* LoginScreen.swift */; };
 		7606FB9E2C0F76A100E1D3AF /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7606FB9D2C0F76A100E1D3AF /* LoginViewModel.swift */; };
@@ -142,6 +143,7 @@
 		56D46E902C14FCC00019EA1B /* CheckOutPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckOutPage.swift; sourceTree = "<group>"; };
 		56D5B6042C1505C2006EF83B /* PaymentPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentPage.swift; sourceTree = "<group>"; };
 		56D5B6062C150606006EF83B /* ButtonWithImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonWithImage.swift; sourceTree = "<group>"; };
+		56DC253E2C15B65200008690 /* ProfileModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileModels.swift; sourceTree = "<group>"; };
 		7606FB972C0F74DB00E1D3AF /* Netwrok.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Netwrok.swift; sourceTree = "<group>"; };
 		7606FB9B2C0F765200E1D3AF /* LoginScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreen.swift; sourceTree = "<group>"; };
 		7606FB9D2C0F76A100E1D3AF /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
@@ -264,6 +266,7 @@
 		5606E79E2C1207AC00B728FD /* CouponsPage */ = {
 			isa = PBXGroup;
 			children = (
+				56DC253A2C15B51100008690 /* Model */,
 				5606E7A02C1207CE00B728FD /* ViewModel */,
 				5606E79F2C1207C100B728FD /* View */,
 			);
@@ -298,6 +301,7 @@
 		5627DB232C12297100AB6464 /* ProfilePage */ = {
 			isa = PBXGroup;
 			children = (
+				56DC253D2C15B59800008690 /* Models */,
 				5627DB252C12299900AB6464 /* ViewModel */,
 				5627DB242C12299200AB6464 /* View */,
 			);
@@ -352,6 +356,23 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
+		56DC253A2C15B51100008690 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				5606E7AC2C120CB900B728FD /* DiscountsModel.swift */,
+				5606E7AA2C120C7B00B728FD /* PriceRuleModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		56DC253D2C15B59800008690 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				56DC253E2C15B65200008690 /* ProfileModels.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		7606FB892C0F721500E1D3AF /* Services */ = {
 			isa = PBXGroup;
 			children = (
@@ -397,8 +418,6 @@
 				7606FBB22C0F81C400E1D3AF /* CustomerModel.swift */,
 				0AF583612C11F032006D5059 /* BrandsModel.swift */,
 				0AF583652C11F069006D5059 /* BestSellerModel.swift */,
-				5606E7AA2C120C7B00B728FD /* PriceRuleModel.swift */,
-				5606E7AC2C120CB900B728FD /* DiscountsModel.swift */,
 				767836342C122ADA001E4BFB /* ProductModel.swift */,
 				56A580062C1460BE00BBC168 /* DrftOrdersModel.swift */,
 			);
@@ -883,6 +902,7 @@
 				0AF5837A2C11F28A006D5059 /* FilterButtomSheet.swift in Sources */,
 				7606FBAB2C0F795F00E1D3AF /* Theme.swift in Sources */,
 				7606FBA42C0F782A00E1D3AF /* SignUpScreen.swift in Sources */,
+				56DC253F2C15B65200008690 /* ProfileModels.swift in Sources */,
 				0AF5834F2C11EEC4006D5059 /* TabBarButton.swift in Sources */,
 				56D46E912C14FCC00019EA1B /* CheckOutPage.swift in Sources */,
 				7606FB9E2C0F76A100E1D3AF /* LoginViewModel.swift in Sources */,

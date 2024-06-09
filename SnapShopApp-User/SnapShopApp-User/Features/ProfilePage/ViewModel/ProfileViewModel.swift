@@ -8,8 +8,8 @@
 import Foundation
 
 class ProfileViewModel: ObservableObject {
-    @Published var user: CustomerDetails?
-    @Published var addresses: [AddressResponse]?
+    @Published var user: CustomerProfileDetails?
+    @Published var addresses: [AddressProfileDetails]?
     @Published var addressTextFieldData: String = ""
     @Published var cityTextFieldData: String = ""
     @Published var countryTextFieldData: String = ""
@@ -30,7 +30,7 @@ class ProfileViewModel: ObservableObject {
     
     func fetchUserById(id: String) {
         let url = "\(Support.baseUrl)/customers/\(id).json"
-        Network.shared.request(url, method: "GET", responseType: CustomerResponse.self) { [weak self] result in
+        Network.shared.request(url, method: "GET", responseType: CustomerProfileRoot.self) { [weak self] result in
             switch result {
             case .success(let user):
                 DispatchQueue.main.async {
@@ -48,7 +48,7 @@ class ProfileViewModel: ObservableObject {
     }
     func fetchUserAddresses(customerId:String = "7290794967219"){
         let url = "\(Support.baseUrl)/customers/\(customerId)/addresses.json"
-        Network.shared.request(url, method: "GET", responseType: AddressesRequest.self) { [weak self] result in
+        Network.shared.request(url, method: "GET", responseType: AddressProfileRoot.self) { [weak self] result in
             switch result {
             case .success(let address):
                 DispatchQueue.main.async {
@@ -61,7 +61,7 @@ class ProfileViewModel: ObservableObject {
         
     }
     func postUserAddress(customerId:String = "7290794967219"){
-        let address = AddressRequestToPost(customer_address: CustomerAddressToPost(id: nil, customer_id: Int(customerId), address1: addressTextFieldData, address2: nil, city: cityTextFieldData, zip: zipTextFieldData, phone: phoneTextFieldData, name: nil, province_code: nil, country_code: "EG", country_name: countryTextFieldData, default: false))
+        let address = NewAddressRoot(customer_address: NewAddressDetails(id: nil, customer_id: Int(customerId), address1: addressTextFieldData, address2: nil, city: cityTextFieldData, zip: zipTextFieldData, phone: phoneTextFieldData, name: nil, province_code: nil, country_code: "EG", country_name: countryTextFieldData, default: false))
         Network.shared.postData(object: address, to: "https://mad-ism-ios-1.myshopify.com/admin/api/2024-04/customers/\(customerId)/addresses.json" ){  [weak self] result in
             switch result {
             case .success(let response):

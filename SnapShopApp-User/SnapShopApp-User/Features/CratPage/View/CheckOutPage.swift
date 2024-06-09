@@ -19,7 +19,7 @@ struct CheckOutPage: View {
             VStack(alignment: .leading){
                 Text("Delivery Address")
                     .bold()
-                AddressCell(address: AddressResponse(id: 0, customer_id: 0, first_name: "", last_name: "", company: "", address1: "", address2: "", city: "", province: "", country: "", zip: "", phone: "", name: "", province_code: "", country_code: "", country_name: "", default: true))
+                AddressCell(address: AddressProfileDetails(id: 0, customer_id: 0, first_name: "", last_name: "", company: "", address1: "", address2: "", city: "", province: "", country: "", zip: "", phone: "", name: "", province_code: "", country_code: "", country_name: "", default: true))
                 
                 NavigationLink(destination: UserAddresses(), isActive: $navigateToAddresses) {
                     

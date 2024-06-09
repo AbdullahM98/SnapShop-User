@@ -13,7 +13,7 @@ struct ProfileView: View {
     @State private var showingBottomSheet = false
     @State private var settingsDetents = PresentationDetent.medium
     @ObservedObject var viewModel = ProfileViewModel.shared
-    @State var userDetails: CustomerDetails?
+    @State var userDetails: CustomerProfileDetails?
     @State private var navigateToUserAddresses = false // Flag to trigger navigation
     
     var body: some View {
