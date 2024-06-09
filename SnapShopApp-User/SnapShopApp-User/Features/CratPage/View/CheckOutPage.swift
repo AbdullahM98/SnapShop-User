@@ -12,6 +12,7 @@ struct CheckOutPage: View {
     @State private var showingBottomSheet = false
     @State private var settingsDetents = PresentationDetent.medium
     @State private var navigateToCoupons = false // Flag to trigger navigation
+    @State private var navigateToAddresses = false // Flag to trigger navigation
     
     var body: some View {
         ScrollView{
@@ -19,13 +20,18 @@ struct CheckOutPage: View {
                 Text("Delivery Address")
                     .bold()
                 AddressCell(address: AddressResponse(id: 0, customer_id: 0, first_name: "", last_name: "", company: "", address1: "", address2: "", city: "", province: "", country: "", zip: "", phone: "", name: "", province_code: "", country_code: "", country_name: "", default: true))
-                HStack{
-                    Spacer()
-                    AppButton(text: "Address", width: 80, height: 50, isFilled: true) {
-                        print("addAddress")
-                    }
-                    Spacer()
-                }.padding(.bottom,16)
+                
+                NavigationLink(destination: UserAddresses(), isActive: $navigateToAddresses) {
+                    
+                    HStack{
+                        Spacer()
+                        AppButton(text: "Address", width: 80, height: 50, isFilled: true) {
+                            print("addAddress")
+                            navigateToAddresses = true
+                        }
+                        Spacer()
+                    }.padding(.bottom,16)
+                }
                 
                 NavigationLink(destination: CouponsPage(), isActive: $navigateToCoupons) {
                     HStack{
