@@ -71,6 +71,6 @@ struct FilterBottomSheet: View {
 
 struct FilterBottomSheet_Previews: PreviewProvider {
     static var previews: some View {
-        FilterBottomSheet(viewModel: HomeViewModel.shared)
+        FilterBottomSheet(viewModel: HomeViewModel())
     }
 }

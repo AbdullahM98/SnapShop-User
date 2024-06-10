@@ -8,17 +8,19 @@
 import SwiftUI
 
 struct HomeView: View {
+    @ObservedObject var viewModel : HomeViewModel
+
     var body: some View {
         CustomAppBar()
         CarouselSlider()
         ScrollView{
-            PopularBrands()
-            BestSeller()
+            PopularBrands(viewModel: viewModel)
+            BestSeller(viewModel: viewModel)
         }
     }
 }
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
-        HomeView()
+        HomeView(viewModel: HomeViewModel())
     }
 }

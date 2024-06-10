@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct CouponsPage: View {
-    @ObservedObject var viewModel = CouponsViewModel.shared
+    @ObservedObject var viewModel = CouponsViewModel()
     var couponsBG: [String] = ["Coupon1", "Coupon2", "Coupon3", "Coupon4"]
     
     var body: some View {

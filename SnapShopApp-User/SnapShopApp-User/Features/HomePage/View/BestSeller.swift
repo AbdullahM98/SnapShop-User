@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct BestSeller: View {
-    @ObservedObject var viewModel = HomeViewModel.shared
+    @ObservedObject var viewModel : HomeViewModel
     private let
     adaptiveColumns = [
         GridItem(.adaptive (minimum: 170))
@@ -31,6 +31,6 @@ struct BestSeller: View {
 
 struct BestSeller_Previews: PreviewProvider {
     static var previews: some View {
-        BestSeller()
+        BestSeller(viewModel: HomeViewModel())
     }
 }

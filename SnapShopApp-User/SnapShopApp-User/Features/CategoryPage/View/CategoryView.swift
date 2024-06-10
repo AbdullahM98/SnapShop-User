@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct CategoryView: View {
-    @ObservedObject var viewModel = HomeViewModel.shared
+    @ObservedObject var viewModel : HomeViewModel
     @State var isPresented : Bool = false
     @State var settingsDetents = PresentationDetent.medium
     @AppStorage("selectedOption") private var selectedOption: String = "ALL"
@@ -39,7 +39,7 @@ struct CategoryView: View {
 
 struct CategoryView_Previews: PreviewProvider {
     static var previews: some View {
-        CategoryView()
+        CategoryView(viewModel: HomeViewModel())
         
     }
 }

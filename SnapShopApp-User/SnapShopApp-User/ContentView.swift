@@ -9,15 +9,16 @@ import SwiftUI
 
 struct ContentView: View {
     @State var selectedTab:Tabs = .home
+    @ObservedObject var viewModel = HomeViewModel()
     var body: some View {
 
         NavigationStack{
             VStack {
                 switch selectedTab{
                 case .home:
-                    HomeView()
+                    HomeView(viewModel: viewModel)
                 case .explore:
-                    CategoryView()
+                    CategoryView(viewModel: viewModel)
                 case .cart:
                     CartList()
                 case .saved:

@@ -17,9 +17,9 @@ class HomeViewModel :ObservableObject{
     @Published private (set) var userOrders:[DraftOrderItemDetails] = []
 
 
-    static var shared = HomeViewModel()
     
-    private init(){
+    init(){
+        print("HVM INIT")
         fetchBrands()
         fetchProducts()
         getCardDraftOrder()

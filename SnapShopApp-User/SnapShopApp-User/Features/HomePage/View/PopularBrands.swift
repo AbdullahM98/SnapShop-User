@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct PopularBrands: View {
-    @ObservedObject var viewModel = HomeViewModel.shared
+    @ObservedObject var viewModel : HomeViewModel
     var body: some View {
         VStack(alignment: .leading){
             Text("Popular Brands")
@@ -16,7 +16,7 @@ struct PopularBrands: View {
             ScrollView(.horizontal){
                 HStack{
                     ForEach(viewModel.smartCollections, id: \.id) { brand in
-                        BrandCell(brand: brand)
+                        BrandCell(viewModel:viewModel,brand: brand)
                     }
                 }
             }.scrollIndicators(.hidden)
@@ -30,6 +30,6 @@ struct PopularBrands: View {
 
 struct BrandsView_Previews: PreviewProvider {
     static var previews: some View {
-        PopularBrands()
+        PopularBrands(viewModel: HomeViewModel())
     }
 }

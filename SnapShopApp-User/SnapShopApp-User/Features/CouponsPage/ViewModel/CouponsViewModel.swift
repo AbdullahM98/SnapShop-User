@@ -15,11 +15,13 @@ class CouponsViewModel: ObservableObject {
     @Published var singleRule: PriceRule?
     @Published var dict: [DiscountCodes: PriceRule] = [:]
     
-    static let shared = CouponsViewModel()
     
-    private init() {
+    init() {
         fetchPriceRules()
         print("INIT CouponsVM")
+    }
+    deinit{
+        print("DEINIT CouponsVM")
     }
     
     func fetchCoupons() {

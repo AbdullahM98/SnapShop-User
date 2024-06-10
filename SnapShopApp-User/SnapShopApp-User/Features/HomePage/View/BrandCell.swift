@@ -8,10 +8,11 @@
 import SwiftUI
 
 struct BrandCell: View {
+    @ObservedObject var viewModel : HomeViewModel
     var brand: SmartCollectionsItem
 
     var body: some View {
-        NavigationLink(destination: BrandProducts(brand: brand)) {
+        NavigationLink(destination: BrandProducts(viewModel: viewModel,brand: brand)) {
             VStack{
                 Spacer()
                 ZStack{
@@ -60,6 +61,6 @@ struct BrandCell: View {
 
 struct BrandCell_Previews: PreviewProvider {
     static var previews: some View {
-        BrandCell(brand: SmartCollectionsItem(image: BrandImage(src: nil, alt: nil, width: nil, createdAt: nil, height: nil), bodyHtml: nil, handle: nil, rules: nil, title: "Sample Brand", publishedScope: nil, templateSuffix: nil, updatedAt: nil, disjunctive: nil, adminGraphqlApiId: nil, id: 1, publishedAt: nil, sortOrder: nil))
+        BrandCell(viewModel: HomeViewModel(),brand: SmartCollectionsItem(image: BrandImage(src: nil, alt: nil, width: nil, createdAt: nil, height: nil), bodyHtml: nil, handle: nil, rules: nil, title: "Sample Brand", publishedScope: nil, templateSuffix: nil, updatedAt: nil, disjunctive: nil, adminGraphqlApiId: nil, id: 1, publishedAt: nil, sortOrder: nil))
     }
 }
