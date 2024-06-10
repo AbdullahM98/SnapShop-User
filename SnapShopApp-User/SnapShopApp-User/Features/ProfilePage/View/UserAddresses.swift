@@ -11,13 +11,23 @@ struct UserAddresses: View {
     @State private var showingBottomSheet = false
     @State private var settingsDetents = PresentationDetent.medium
     @ObservedObject var userData:ProfileViewModel = ProfileViewModel.shared
-    
+    var fromCart: Bool
+    @Environment(\.presentationMode) var presentationMode
+    var didSelectAddress: ((AddressProfileDetails) -> Void)? // Closure to be called when an address is selected
+
     
     var body: some View {
         VStack{
             ScrollView{
                 ForEach(userData.addresses ?? [],id: \.id) { address in
-                    AddressCell(address: address)
+                    AddressCell(address: address,insideCard: false).onTapGesture {
+                        if fromCart == true {
+                            print(address)
+                            didSelectAddress?(address)
+                            presentationMode.wrappedValue.dismiss() // Dismiss the second view
+
+                        }
+                    }
                 }
             }
             .navigationBarTitle("Addresses")
@@ -41,6 +51,6 @@ struct UserAddresses: View {
 
 struct UserAddresses_Previews: PreviewProvider {
     static var previews: some View {
-        UserAddresses()
+        UserAddresses(fromCart: false)
     }
 }

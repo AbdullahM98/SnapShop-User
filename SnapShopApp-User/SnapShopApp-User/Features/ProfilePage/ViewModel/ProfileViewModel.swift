@@ -15,6 +15,7 @@ class ProfileViewModel: ObservableObject {
     @Published var countryTextFieldData: String = ""
     @Published var zipTextFieldData: String = ""
     @Published var phoneTextFieldData: String = ""
+    @Published var phoneAddressTextFieldData: String = ""
     @Published var firstNameTextFieldData: String = ""
     @Published var secondNameTextFieldData: String = ""
     @Published var emailTextFieldData: String = ""

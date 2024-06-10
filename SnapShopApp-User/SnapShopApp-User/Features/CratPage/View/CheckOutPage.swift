@@ -13,15 +13,18 @@ struct CheckOutPage: View {
     @State private var settingsDetents = PresentationDetent.medium
     @State private var navigateToCoupons = false // Flag to trigger navigation
     @State private var navigateToAddresses = false // Flag to trigger navigation
-    
+    @State private var selectedAddress: AddressProfileDetails? // Track the selected address
+
     var body: some View {
         ScrollView{
             VStack(alignment: .leading){
                 Text("Delivery Address")
                     .bold()
-                AddressCell(address: AddressProfileDetails(id: 0, customer_id: 0, first_name: "", last_name: "", company: "", address1: "", address2: "", city: "", province: "", country: "", zip: "", phone: "", name: "", province_code: "", country_code: "", country_name: "", default: true))
+                AddressCell(address: selectedAddress ?? AddressProfileDetails(id: 0, customer_id: 0, first_name: "", last_name: "", company: "", address1: "", address2: "", city: "", province: "", country: "", zip: "", phone: "", name: "", province_code: "", country_code: "", country_name: "", default: true), insideCard: true)
                 
-                NavigationLink(destination: UserAddresses(), isActive: $navigateToAddresses) {
+                NavigationLink(destination: UserAddresses(fromCart: true,didSelectAddress: { address in
+                    selectedAddress = address
+                }),isActive: $navigateToAddresses) {
                     
                     HStack{
                         Spacer()
@@ -33,18 +36,18 @@ struct CheckOutPage: View {
                     }.padding(.bottom,16)
                 }
                 
-                NavigationLink(destination: CouponsPage(), isActive: $navigateToCoupons) {
                     HStack{
                         TextField("Enter Discount code here", text: $discountCode)
                             .textFieldStyle(RoundedBorderTextFieldStyle())
                         Spacer()
+                        NavigationLink(destination: CouponsPage(), isActive: $navigateToCoupons) {
                         AppButton(text: "Get Code", width: 90, height: 34, isFilled: true) {
                             print("apply code")
                             navigateToCoupons = true
                             
                         }
-                    }.padding()
-                }
+                    }
+                }.padding()
                 HStack{
                     Text("Total Price :").bold()
                     Text("20391.49 EGP")

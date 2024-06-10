@@ -9,7 +9,7 @@ import SwiftUI
 struct AddressCell: View {
     var address : AddressProfileDetails
     @ObservedObject var viewModel:ProfileViewModel = ProfileViewModel.shared
-
+    var insideCard: Bool
     var body: some View {
         VStack(alignment:.leading,spacing: 16){
             HStack{
@@ -17,26 +17,29 @@ struct AddressCell: View {
                     .foregroundColor(.gray)
                 Text("\(address.address1 ?? "")")
                 Spacer()
-                Button {
-                    if address.default == false {
-                        print("inside if ")
+                if insideCard == false {
+                    Button {
+                        if address.default == false {
+                            print("inside if ")
 
-                            viewModel.deleteAddress(addressId: address.id ?? 0)
-                        print(address.default)
+                                viewModel.deleteAddress(addressId: address.id ?? 0)
+                            print(address.default)
 
-                    } else {
-                        print("inside else show alert saying cant delete")
-                        
-                        print(address.default)
+                        } else {
+                            print("inside else show alert saying cant delete")
+                            
+                            print(address.default)
 
-                    }
-                } label: {
-                    if address.default == false {
-                        Image("trash")
-                    }else{
-                        Image("")
+                        }
+                    } label: {
+                        if address.default == false {
+                            Image("trash")
+                        }else{
+                            Image("")
+                        }
                     }
                 }
+                
             }.padding(.top,20)
                 .padding(.horizontal,16)
             HStack{
@@ -72,6 +75,6 @@ struct AddressCell: View {
 
 struct AddressCell_Previews: PreviewProvider {
     static var previews: some View {
-        AddressCell(address: AddressProfileDetails(id: 0, customer_id: 0, first_name: "", last_name: "", company: "", address1: "", address2: "", city: "", province: "", country: "", zip: "", phone: "", name: "", province_code: "", country_code: "", country_name: "", default: true))
+        AddressCell(address: AddressProfileDetails(id: 0, customer_id: 0, first_name: "", last_name: "", company: "", address1: "", address2: "", city: "", province: "", country: "", zip: "", phone: "", name: "", province_code: "", country_code: "", country_name: "", default: true), insideCard: false)
     }
 }

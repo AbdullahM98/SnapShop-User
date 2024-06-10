@@ -162,3 +162,114 @@ struct DraftOrderTaxLine: Codable {
     let title: String?
     let price: String?
 }
+
+
+struct Order: Codable {
+    let id: Int?
+    let admin_graphql_api_id: String?
+    let app_id: Int?
+    let browser_ip: String?
+    let buyer_accepts_marketing: Bool?
+    let cancel_reason: String?
+    let cancelled_at: String?
+    let cart_token: String?
+    let checkout_id: String?
+    let checkout_token: String?
+    let client_details: String?
+    let closed_at: String?
+    let company: String?
+    let confirmation_number: String?
+    let confirmed: Bool?
+    let contact_email: String?
+    let created_at: String?
+    let currency: String?
+    let current_subtotal_price: String?
+    let current_subtotal_price_set: PriceSet?
+    let current_total_additional_fees_set: PriceSet?
+    let current_total_discounts: String?
+    let current_total_discounts_set: PriceSet?
+    let current_total_duties_set: PriceSet?
+    let current_total_price: String?
+    let current_total_price_set: PriceSet?
+    let current_total_tax: String?
+    let current_total_tax_set: PriceSet?
+    let customer_locale: String?
+    let device_id: String?
+    let discount_codes: [DraftOrderDiscount]?
+    let email: String?
+    let estimated_taxes: Bool?
+    let financial_status: String?
+    let fulfillment_status: String?
+    let landing_site: String?
+    let landing_site_ref: String?
+    let location_id: String?
+    let merchant_of_record_app_id: String?
+    let name: String
+    let note: String?
+    let note_attributes: [String]?
+    let number: Int?
+    let order_number: Int?
+    let order_status_url: String?
+    let original_total_additional_fees_set: PriceSet?
+    let original_total_duties_set: PriceSet?
+    let payment_gateway_names: [String]?
+    let phone: String?
+    let po_number: String?
+    let presentment_currency: String?
+    let processed_at: String?
+    let reference: String?
+    let referring_site: String?
+    let source_identifier: String?
+    let source_name: String
+    let source_url: String?
+    let subtotal_price: String?
+    let subtotal_price_set: PriceSet?
+    let tags: String?
+    let tax_exempt: Bool?
+    let tax_lines: [TaxLine]?
+    let taxes_included: Bool?
+    let test: Bool?
+    let token: String?
+    let total_discounts: String?
+    let total_discounts_set: PriceSet?
+    let total_line_items_price: String?
+    let total_line_items_price_set: PriceSet?
+    let total_outstanding: String?
+    let total_price: String?
+    let total_price_set: PriceSet?
+    let total_shipping_price_set: PriceSet?
+    let total_tax: String?
+    let total_tax_set: PriceSet?
+    let total_tip_received: String?
+    let total_weight: Int?
+    let updated_at: String?
+    let user_id: String?
+    let billing_address: String?
+    let customer: String?
+    let discount_applications: [String]?
+    let fulfillments: [String]?
+    let line_items: [DraftOrderLineItem]?
+    let payment_terms: String?
+    let refunds: [String]?
+    let shipping_address: String?
+    let shipping_lines: [String]?
+}
+
+struct PriceSet: Codable {
+    let shop_money: Money
+    let presentment_money: Money
+}
+
+struct Money: Codable {
+    let amount: String
+    let currency_code: String
+}
+
+
+struct TaxLine: Codable {
+    let price: String
+    let rate: Double
+    let title: String
+    let price_set: PriceSet
+    let channel_liable: Bool
+}

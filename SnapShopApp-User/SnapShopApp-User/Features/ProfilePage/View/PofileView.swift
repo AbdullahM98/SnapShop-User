@@ -86,7 +86,7 @@ struct ProfileView: View {
                     .frame(height: 1)
                     .foregroundColor(.gray)
                 
-                NavigationLink(destination: UserAddresses(), isActive: $navigateToUserAddresses) {
+                NavigationLink(destination: UserAddresses(fromCart: false), isActive: $navigateToUserAddresses) {
                     Button(action: {
                         navigateToUserAddresses = true // Activate navigation
                     }) {

@@ -43,7 +43,7 @@ struct AddAddress: View {
             }.padding(.horizontal,16)
             VStack(alignment: .leading){
                 Text("Phone Number")
-                TextField("+20 XXXX XXX XXX", text: $userData.phoneTextFieldData)
+                TextField("+20 XXXX XXX XXX", text: $userData.phoneAddressTextFieldData)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                   
                 
