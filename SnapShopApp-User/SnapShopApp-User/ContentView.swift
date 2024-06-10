@@ -10,6 +10,7 @@ import SwiftUI
 struct ContentView: View {
     @State var selectedTab:Tabs = .home
     @ObservedObject var viewModel = HomeViewModel()
+    @ObservedObject var profileViewModel = ProfileViewModel()
     var body: some View {
 
         NavigationStack{
@@ -20,11 +21,11 @@ struct ContentView: View {
                 case .explore:
                     CategoryView(viewModel: viewModel)
                 case .cart:
-                    CartList()
+                    CartList(userData: profileViewModel)
                 case .saved:
                     Text("Saved")
                 case .profile:
-                    ProfileView()
+                    ProfileView(viewModel: profileViewModel)
                 }
                 Spacer()
                 AppTabBar(selectedTab: $selectedTab)

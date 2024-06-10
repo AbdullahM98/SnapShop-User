@@ -68,6 +68,9 @@ class Network :NetworkService{
                 completion(.failure(ApiError.invalidUrl))
                 return
             }
+            if let jsonString = String(data: jsonData, encoding: .utf8) {
+                    print("order string is ",jsonString)
+                }
             var request = URLRequest(url: url)
             request.httpMethod = "POST"
             request.setValue("application/json", forHTTPHeaderField: "Content-Type")

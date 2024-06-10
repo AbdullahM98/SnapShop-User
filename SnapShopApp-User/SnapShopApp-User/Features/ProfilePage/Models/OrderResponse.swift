@@ -11,6 +11,9 @@ import Foundation
 struct OrderResponse: Codable {
     let orders: [Order]?
 }
+struct PostOrderResponse: Codable {
+    let orders: Order?
+}
 
 // Individual Order model
 struct Order: Codable, Identifiable {
@@ -361,3 +364,54 @@ struct OrderShippingLine: Codable {
     let tracking_url: String?
     let tracking_urls: [String]?
 }
+
+
+//struct PostOrderRequest: Codable {
+//    let order: PostOrderDetails
+//}
+//
+//struct PostOrderDetails: Codable {
+//    let customer_id: String
+//    let line_items: [PostLineItem]
+//    let total_price: String?
+//    let shipping_address: PostAddress?
+//    let billing_address: PostAddress?
+//    let payment_method: String?
+//}
+//
+//struct PostLineItem: Codable {
+//    let product_id: String
+//    let quantity: Int
+//    let price: String?
+//}
+//
+//struct PostAddress: Codable {
+//    let address1: String
+//    let city: String
+//    let country: String
+//    let zip: String
+//}
+//
+//struct PoostOrderRequest: Codable {
+//    let order: PoostOrderDetails
+//}
+//
+//// Order details model
+//struct PoostOrderDetails: Codable {
+//    let customer: PoostCustomer
+//    let line_items: [PoostLineItem]
+//    let price: Double
+//}
+//
+//// Customer model
+//struct PoostCustomer: Codable {
+//    let id: Int
+//}
+//
+//// Line item model
+//struct PoostLineItem: Codable {
+//    let variant_id: Int
+//    let product_id: Int
+//    let title: String
+//    let quantity: Int
+//}

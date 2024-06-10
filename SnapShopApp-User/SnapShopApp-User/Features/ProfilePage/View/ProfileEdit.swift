@@ -10,7 +10,7 @@ import SwiftUI
 struct ProfileEdit: View {
     var onSaveClick : () -> Void
     var onCancelClick : () -> Void
-    @ObservedObject var userData:ProfileViewModel = ProfileViewModel.shared
+    @ObservedObject var userData:ProfileViewModel
     
     var body: some View {
         VStack(alignment: .leading){
@@ -88,6 +88,6 @@ struct ProfileEdit: View {
 
 struct ProfileEdit_Previews: PreviewProvider {
     static var previews: some View {
-        ProfileEdit(onSaveClick: {}, onCancelClick: {})
+        ProfileEdit(onSaveClick: {}, onCancelClick: {},userData: ProfileViewModel())
     }
 }

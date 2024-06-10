@@ -14,8 +14,8 @@ class CartViewModel :ObservableObject{
     @Published private (set) var lineItems:[DraftOrderLineItem] = []
     
     @Published var total: Double = 0.0
-    static let shared = CartViewModel()
-    private init(){
+    init(){
+        print("CVM INIT")
         self.getCardDraftOrder()
     }
     func getCardDraftOrder(){

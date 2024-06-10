@@ -10,7 +10,7 @@ import SwiftUI
 struct UserAddresses: View {
     @State private var showingBottomSheet = false
     @State private var settingsDetents = PresentationDetent.medium
-    @ObservedObject var userData:ProfileViewModel = ProfileViewModel.shared
+    @ObservedObject var userData:ProfileViewModel
     var fromCart: Bool
     @Environment(\.presentationMode) var presentationMode
     var didSelectAddress: ((AddressProfileDetails) -> Void)? // Closure to be called when an address is selected
@@ -20,7 +20,7 @@ struct UserAddresses: View {
         VStack{
             ScrollView{
                 ForEach(userData.addresses ?? [],id: \.id) { address in
-                    AddressCell(address: address,insideCard: false).onTapGesture {
+                    AddressCell(address: address,viewModel: userData,insideCard: false).onTapGesture {
                         if fromCart == true {
                             print(address)
                             didSelectAddress?(address)
@@ -38,7 +38,7 @@ struct UserAddresses: View {
                 Image(systemName:"plus.circle.fill").foregroundColor(.black)
             }
             .sheet(isPresented: $showingBottomSheet) {
-                AddAddress(onSaveClick: {
+                AddAddress(userData: userData,onSaveClick: {
                     userData.postUserAddress()
                     showingBottomSheet.toggle()
                 }, onCancelClick: {
@@ -51,6 +51,6 @@ struct UserAddresses: View {
 
 struct UserAddresses_Previews: PreviewProvider {
     static var previews: some View {
-        UserAddresses(fromCart: false)
+        UserAddresses(userData:ProfileViewModel(),fromCart: false)
     }
 }

@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct AddAddress: View {
-    @ObservedObject var userData:ProfileViewModel = ProfileViewModel.shared
+    @ObservedObject var userData:ProfileViewModel
     var onSaveClick : () -> Void
     var onCancelClick : () -> Void
     var body: some View {
@@ -95,6 +95,6 @@ struct AddAddress: View {
 
 struct AddAddress_Previews: PreviewProvider {
     static var previews: some View {
-        AddAddress(onSaveClick: {}, onCancelClick: {})
+        AddAddress(userData: ProfileViewModel(),onSaveClick: {}, onCancelClick: {})
     }
 }

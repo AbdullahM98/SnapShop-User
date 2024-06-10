@@ -11,7 +11,7 @@ import SwiftUI
 struct CartCard: View {
     @State var qty: Int = 1
     var  item: DraftOrderLineItem
-    @ObservedObject var viewModel:CartViewModel = CartViewModel.shared
+    @ObservedObject var viewModel:CartViewModel
     
     var body: some View {
         VStack{
@@ -79,6 +79,6 @@ struct CartCard: View {
 
 struct CartCard_Previews: PreviewProvider {
     static var previews: some View {
-        CartCard(item: DraftOrderLineItem(id: nil, variant_id: nil, product_id: nil, title: nil, variant_title: nil, sku: nil, vendor: nil, quantity: nil, requires_shipping: nil, taxable: nil, gift_card: nil, fulfillment_service: nil, grams: nil, tax_lines: nil, applied_discount: nil, name: nil, properties: nil, custom: nil, price: nil, admin_graphql_api_id: nil))
+        CartCard(item: DraftOrderLineItem(id: nil, variant_id: nil, product_id: nil, title: nil, variant_title: nil, sku: nil, vendor: nil, quantity: nil, requires_shipping: nil, taxable: nil, gift_card: nil, fulfillment_service: nil, grams: nil, tax_lines: nil, applied_discount: nil, name: nil, properties: nil, custom: nil, price: nil, admin_graphql_api_id: nil),viewModel: CartViewModel())
     }
 }

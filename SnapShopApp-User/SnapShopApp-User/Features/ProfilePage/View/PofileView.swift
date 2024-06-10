@@ -12,7 +12,7 @@ struct ProfileView: View {
     @State private var selectedCurrency: String?
     @State private var showingBottomSheet = false
     @State private var settingsDetents = PresentationDetent.medium
-    @ObservedObject var viewModel = ProfileViewModel.shared
+    @ObservedObject var viewModel : ProfileViewModel
     @State var userDetails: CustomerProfileDetails?
     @State private var navigateToUserAddresses = false // Flag to trigger navigation
     
@@ -46,7 +46,7 @@ struct ProfileView: View {
                                 viewModel.updateUserData()
                             }, onCancelClick: {
                                 showingBottomSheet.toggle()
-                            }).presentationDetents([.medium], selection: $settingsDetents)
+                            },userData: viewModel).presentationDetents([.medium], selection: $settingsDetents)
                         }
                     }
                     Rectangle()
@@ -87,7 +87,7 @@ struct ProfileView: View {
                     .frame(height: 1)
                     .foregroundColor(.gray)
                 
-                NavigationLink(destination: UserAddresses(fromCart: false), isActive: $navigateToUserAddresses) {
+                NavigationLink(destination: UserAddresses(userData:viewModel,fromCart: false), isActive: $navigateToUserAddresses) {
                     Button(action: {
                         navigateToUserAddresses = true // Activate navigation
                     }) {
@@ -120,6 +120,6 @@ struct ProfileView: View {
 
 struct ProfileView_Previews: PreviewProvider {
     static var previews: some View {
-        ProfileView()
+        ProfileView(viewModel: ProfileViewModel())
     }
 }
