@@ -14,6 +14,7 @@ struct CheckOutPage: View {
     @State private var navigateToCoupons = false // Flag to trigger navigation
     @State private var navigateToAddresses = false // Flag to trigger navigation
     @State private var selectedAddress: AddressProfileDetails? // Track the selected address
+    @ObservedObject var addressViewModel = AddressesViewModel()
 
     var body: some View {
         ScrollView{
@@ -22,7 +23,7 @@ struct CheckOutPage: View {
                     .bold()
                 AddressCell(address: selectedAddress ?? AddressProfileDetails(id: 0, customer_id: 0, first_name: "", last_name: "", company: "", address1: "", address2: "", city: "", province: "", country: "", zip: "", phone: "", name: "", province_code: "", country_code: "", country_name: "", default: true), insideCard: true, onDeleteClick: {})
                 
-                NavigationLink(destination: UserAddresses(fromCart: true, didSelectAddress: { address in
+                NavigationLink(destination: UserAddresses(viewModel: addressViewModel,fromCart: true, didSelectAddress: { address in
                     selectedAddress = address
                 }),isActive: $navigateToAddresses) {
                     

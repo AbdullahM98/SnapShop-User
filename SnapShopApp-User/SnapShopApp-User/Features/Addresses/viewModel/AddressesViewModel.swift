@@ -9,6 +9,7 @@ import Foundation
 
 class AddressesViewModel:ObservableObject{
     @Published var addresses: [AddressProfileDetails]?
+    @Published var isLoading = false
     init(){
         print("AddressesViewModel INIT")
         fetchUserAddresses()
@@ -23,7 +24,9 @@ class AddressesViewModel:ObservableObject{
             switch result {
             case .success(let address):
                 DispatchQueue.main.async {
-                    self?.addresses = address.addresses
+                    self?.addresses = address.addresses     
+                    self?.isLoading = false
+
                 }
             case .failure(let error):
                 print("Error fetching user details: \(error)")

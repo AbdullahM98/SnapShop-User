@@ -9,7 +9,7 @@ import SwiftUI
 
 struct FilterBar: View {
     @State private var selectedButton: String = "All"
-    @ObservedObject var viewModel: HomeViewModel
+    @ObservedObject var viewModel: CategoryViewModel
     
     var body: some View {
         ScrollView(.horizontal) {
@@ -49,6 +49,6 @@ struct FilterBar: View {
 
 struct FilterBar_Previews: PreviewProvider {
     static var previews: some View {
-        FilterBar(viewModel: HomeViewModel())
+        FilterBar(viewModel: CategoryViewModel())
     }
 }

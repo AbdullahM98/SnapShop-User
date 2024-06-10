@@ -55,20 +55,29 @@ struct AddressCell: View {
             }.padding(.vertical,4)
                 .padding(.horizontal,16)
             if let zip = address.zip {
-                HStack{
-                    Text("Zip Code: ")
-                        .foregroundColor(.gray)
-                    Text("\(zip)")
-                }.padding(.vertical,4)
-                    .padding(.horizontal,16)
+                if !zip.isEmpty{
+                    HStack{
+                        Text("Zip Code: ")
+                            .foregroundColor(.gray)
+                        Text("\(zip)")
+                    }.padding(.vertical,4)
+                        .padding(.horizontal,16)
+                }
+                
             }
-            HStack{
-                Text("Phone Number: ")
-                    .foregroundColor(.gray)
-                Text("\(address.phone ?? "")")
-            }.padding(.vertical,4)
-                .padding(.horizontal,16)
-                .padding(.bottom,20)
+            if let phone = address.phone {
+                if !phone.isEmpty{
+                    HStack{
+                        Text("Phone Number: ")
+                            .foregroundColor(.gray)
+                        Text("\(address.phone ?? "")")
+                    }.padding(.vertical,4)
+                        .padding(.horizontal,16)
+                        .padding(.bottom,20)
+                }
+                
+            }
+            
         }.border(Color.gray,width: 1)
             .padding(16)
         

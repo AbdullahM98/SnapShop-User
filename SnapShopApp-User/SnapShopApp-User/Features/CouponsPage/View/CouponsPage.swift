@@ -12,23 +12,38 @@ struct CouponsPage: View {
     var couponsBG: [String] = ["Coupon1", "Coupon2", "Coupon3", "Coupon4"]
     
     var body: some View {
-        VStack(spacing: 20) {
-            ScrollView {
-                ForEach(viewModel.coupones, id: \.id) { coupon in
-                    if let rule = viewModel.dict[coupon] {
-                        CouponCard(
-                            imageName: couponsBG.randomElement() ?? "Coupon1",
-                            discountCode: coupon.code ?? "",
-                            discountValue: String(rule.value?.dropFirst().dropLast(2) ?? ""),
-                            discountTitle: rule.title ?? ""
-                        )
+        VStack{
+            if viewModel.isLoading{
+                Spacer()
+                CustomCircularProgress()
+                    .navigationTitle("Coupons")
+                    .navigationBarBackButtonHidden(true)
+                    .navigationBarItems(leading: CustomBackButton())
+                Spacer()
+            }else{
+                VStack(spacing: 20) {
+                    ScrollView {
+                        ForEach(viewModel.coupones, id: \.id) { coupon in
+                            if let rule = viewModel.dict[coupon] {
+                                CouponCard(
+                                    imageName: couponsBG.randomElement() ?? "Coupon1",
+                                    discountCode: coupon.code ?? "",
+                                    discountValue: String(rule.value?.dropFirst().dropLast(2) ?? ""),
+                                    discountTitle: rule.title ?? ""
+                                )
+                            }
+                        }
                     }
                 }
+                .navigationTitle("Coupons")
+                .navigationBarBackButtonHidden(true)
+                .navigationBarItems(leading: CustomBackButton())
             }
         }
-        .navigationTitle("Coupons")
-        .navigationBarBackButtonHidden(true)
-        .navigationBarItems(leading: CustomBackButton())
+        .onAppear{
+            viewModel.fetchPriceRules()
+        }
+        
     }
 }
 

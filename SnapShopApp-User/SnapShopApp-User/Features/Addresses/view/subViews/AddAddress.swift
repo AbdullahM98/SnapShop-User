@@ -1,5 +1,5 @@
 //
-//  ProfileEdit.swift
+//  AddAddress.swift
 //  SnapShopApp-User
 //
 //  Created by husayn on 06/06/2024.
@@ -7,49 +7,60 @@
 
 import SwiftUI
 
-struct ProfileEdit: View {
-    var onSaveClick : (CustomerUpdateRequest) -> Void
+struct AddAddress: View {
+    @State var addresses: [AddressProfileDetails]?
+    @State var addressTextFieldData: String = ""
+    @State var cityTextFieldData: String = ""
+    @State var countryTextFieldData: String = ""
+    @State var zipTextFieldData: String = ""
+    @State var phoneAddressTextFieldData: String = ""
+    var onSaveClick : (_ address:NewAddressRoot) -> Void
     var onCancelClick : () -> Void
-    var user: CustomerProfileDetails?
-    @State var phoneTextFieldData: String = ""
-    @State var firstNameTextFieldData: String = ""
-    @State var secondNameTextFieldData: String = ""
-    @State var emailTextFieldData: String = ""
-    
+
     var body: some View {
         VStack(alignment: .leading){
             HStack{
                 Spacer()
-                Text("Edit Profile")
+                Text("Add New Address")
                     .font(.title2)
                 Spacer()
-            }
-                .padding(.vertical,32)
+            }.padding(.vertical,4)
             
-            HStack {
-                VStack(alignment: .leading){
-                    Text("First Name")
-                    TextField(user?.first_name ?? "First Name", text: $firstNameTextFieldData)
-                        .textFieldStyle(RoundedBorderTextFieldStyle())
-                    
-                }
-                VStack(alignment: .leading){
-                    Text("Second Name")
-                    TextField(user?.last_name ?? "Last Name", text: $secondNameTextFieldData)
-                        .textFieldStyle(RoundedBorderTextFieldStyle())
-                    
-                }
-            }.padding(.horizontal,16)
             VStack(alignment: .leading){
-                Text("Email")
-                TextField(user?.email ?? "email@example.com", text: $emailTextFieldData)
+                Text("Address")
+                    .padding(.top,32)
+                TextField("Street No.", text: $addressTextFieldData)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                 
             }.padding(.horizontal,16)
+            HStack {
+                VStack(alignment: .leading){
+                    Text("Country")
+                    TextField("Example", text: $countryTextFieldData)
+                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                }
+                VStack(alignment: .leading){
+                    Text("City")
+                    TextField("Example", text: $cityTextFieldData)
+                        .textFieldStyle(RoundedBorderTextFieldStyle())
+             
+                    
+                }
+            }.padding(.horizontal,16)
             VStack(alignment: .leading){
                 Text("Phone Number")
-                TextField(user?.phone ?? "+20 XXXX XXX XXX", text: $phoneTextFieldData)
+                TextField("+20 XXXX XXX XXX", text: $phoneAddressTextFieldData)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .keyboardType(.phonePad)
+                  
+                
+            }.padding(.horizontal,16)
+            VStack(alignment: .leading){
+                Text("Zip Code")
+                TextField("6789", text: $zipTextFieldData)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .keyboardType(.numberPad)
+                   
                 
             }.padding(.horizontal,16)
             HStack{
@@ -73,8 +84,7 @@ struct ProfileEdit: View {
                 ZStack {
                     HStack {
                         Button(action: {
-                            onSaveClick(CustomerUpdateRequest(customer: CustomerUpdateRequestBody(first_name: firstNameTextFieldData, last_name: secondNameTextFieldData, phone: phoneTextFieldData, email: emailTextFieldData))
-                                )
+                            onSaveClick(NewAddressRoot(customer_address: NewAddressDetails(id: nil, customer_id: Int("7290794967219"), address1: addressTextFieldData, address2: nil, city: cityTextFieldData, zip: zipTextFieldData, phone: phoneAddressTextFieldData, name: nil, province_code: nil, country_code: "EG", country_name: countryTextFieldData, default: false)))
                         }) {
                             Text("Save")
                                 .foregroundColor(.white)
@@ -86,13 +96,13 @@ struct ProfileEdit: View {
                 }
             }.padding(.horizontal)
                 .padding(.vertical)
-                .padding(.bottom,16)
+                .padding(.bottom,32)
         }
     }
 }
 
-struct ProfileEdit_Previews: PreviewProvider {
+struct AddAddress_Previews: PreviewProvider {
     static var previews: some View {
-        ProfileEdit(onSaveClick: {_ in }, onCancelClick: {})
+        AddAddress(onSaveClick: {address in }, onCancelClick: {})
     }
 }

@@ -15,24 +15,17 @@ class HomeViewModel :ObservableObject{
     @Published var filteredProducts: [PopularProductItem] = []
     @Published private (set) var draft:[DraftOrderItemDetails]?
     @Published private (set) var userOrders:[DraftOrderItemDetails] = []
-
+    @Published var isLoading = true
 
     
     init(){
         print("HVM INIT")
-        fetchBrands()
-        fetchProducts()
-        getCardDraftOrder()
-        filteredProducts = categoryProducts
+    }
+    deinit {
+        print("HVM DEINIT")
     }
     
-    func filterProducts(by searchText: String) {
-            if searchText.isEmpty {
-                filteredProducts = categoryProducts
-            } else {
-                filteredProducts = categoryProducts.filter { $0.title?.localizedCaseInsensitiveContains(searchText) ?? false }
-            }
-        }
+    
     
     func fetchBrands() {
         Network.shared.request("\(Support.baseUrl)/smart_collections.json", method: "GET", responseType: BrandsResponse.self) { [weak self] result in
@@ -60,6 +53,7 @@ class HomeViewModel :ObservableObject{
                             uniqueProducts.append(product)
                         }
                     }
+                    self?.isLoading = false
                     self?.products = uniqueProducts
                     self?.categoryProducts = uniqueProducts
                     self?.filteredProducts = uniqueProducts
@@ -70,20 +64,7 @@ class HomeViewModel :ObservableObject{
             }
         }
     }
-    func fetchProductsInCollection(collectionID:String){
-        Network.shared.request("\(Support.baseUrl)/collections/\(collectionID)/products.json", method: "GET", responseType: PopularProductsResponse.self) { [weak self] result in
-            switch result {
-            case .success(let response):
-                DispatchQueue.main.async {
-                    self?.categoryProducts = response.products ?? []
-                    self?.filteredProducts = response.products ?? []
-                }
-            case .failure(let error):
-                print("Error fetching products in collection")
-                print("Error fetching data: \(error)")
-            }
-        }
-    }
+    
     func fetchProductsInCollectionSingle(collectionID:String){
         Network.shared.request("\(Support.baseUrl)/collections/\(collectionID)/products.json", method: "GET", responseType: PopularProductsResponse.self) { [weak self] result in
             switch result {
@@ -97,20 +78,7 @@ class HomeViewModel :ObservableObject{
             }
         }
     }
-    func fetchProductsByCategory(category: String) {
-        Network.shared.request("\(Support.baseUrl)/products.json?product_type=\(category)", method: "GET", responseType: PopularProductsResponse.self) { [weak self] result in
-            switch result {
-            case .success(let response):
-                DispatchQueue.main.async {
-                    self?.categoryProducts = response.products ?? []
-                    self?.filteredProducts = response.products ?? []
-                }
-            case .failure(let error):
-                print("Error fetching products by category")
-                print("Error fetching data: \(error)")
-            }
-        }
-    }
+    
     
     func getCardDraftOrder(){
         Network.shared.request("\(Support.baseUrl)/draft_orders.json", method: "GET", responseType: ListOfDraftOrders.self) { [weak self] result in
@@ -143,4 +111,5 @@ class HomeViewModel :ObservableObject{
         }
     }
 
+    
 }

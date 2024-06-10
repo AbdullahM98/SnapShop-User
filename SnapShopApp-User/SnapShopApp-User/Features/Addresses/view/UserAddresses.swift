@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct UserAddresses: View {
-    @State private var viewModel = AddressesViewModel()
+    @ObservedObject var viewModel : AddressesViewModel
     @State private var showingBottomSheet = false
     @State private var settingsDetents = PresentationDetent.medium
     var fromCart: Bool
@@ -16,6 +16,23 @@ struct UserAddresses: View {
     var didSelectAddress: ((AddressProfileDetails) -> Void)? // Closure to be called when an address is selected
     
     var body: some View {
+        VStack{
+            if viewModel.isLoading {
+                Spacer()
+                CustomCircularProgress()
+                    .navigationBarTitle("Addresses")
+                    .navigationBarBackButtonHidden(true)
+                    .navigationBarItems(leading: CustomBackButton())
+                Spacer()
+            }else{
+                contentView
+            }
+        }.onAppear{
+            viewModel.fetchUserAddresses()
+        }
+        
+    }
+    private var contentView: some View{
         VStack{
             ScrollView{
                 ForEach(viewModel.addresses ?? [],id: \.id) { address in
@@ -44,7 +61,7 @@ struct UserAddresses: View {
                         showingBottomSheet.toggle()
                     }, onCancelClick: {
                         showingBottomSheet.toggle()
-                    }).presentationDetents([.medium], selection: $settingsDetents)
+                    }).presentationDetents([.height(UIScreen.screenHeight*0.5 + 100)], selection: $settingsDetents)
                 })
         }
     }
@@ -52,6 +69,6 @@ struct UserAddresses: View {
 
 struct UserAddresses_Previews: PreviewProvider {
     static var previews: some View {
-        UserAddresses(fromCart: false)
+        UserAddresses(viewModel: AddressesViewModel(),fromCart: false)
     }
 }

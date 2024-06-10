@@ -14,10 +14,10 @@ class CouponsViewModel: ObservableObject {
     @Published var priceRules: [PriceRule] = []
     @Published var singleRule: PriceRule?
     @Published var dict: [DiscountCodes: PriceRule] = [:]
+    @Published var isLoading = true
     
     
     init() {
-        fetchPriceRules()
         print("INIT CouponsVM")
     }
     deinit{
@@ -49,6 +49,7 @@ class CouponsViewModel: ObservableObject {
         
         dispatchGroup.notify(queue: .main) {
             self.setUpDict()
+            self.isLoading = false
         }
     }
     

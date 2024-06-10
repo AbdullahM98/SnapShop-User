@@ -31,6 +31,8 @@
 		0AFF597F2C171401002DEAFC /* UserOrders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AFF597E2C171401002DEAFC /* UserOrders.swift */; };
 		0AFF59812C17152A002DEAFC /* OrderResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AFF59802C17152A002DEAFC /* OrderResponse.swift */; };
 		0AFF59832C1718A5002DEAFC /* OrderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AFF59822C1718A4002DEAFC /* OrderCell.swift */; };
+		0AFF598C2C1773FC002DEAFC /* CategoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AFF598B2C1773FC002DEAFC /* CategoryViewModel.swift */; };
+		0AFF598E2C177AF1002DEAFC /* OrdersViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AFF598D2C177AF1002DEAFC /* OrdersViewModel.swift */; };
 		0B3574313F08164DFC0B140D /* Pods_SnapShopApp_User.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 904B12A396AEBB26D6B54798 /* Pods_SnapShopApp_User.framework */; };
 		37BE7C555870472A8F830468 /* Pods_SnapShopApp_UserTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D6193F64F34D468ECC12FD7 /* Pods_SnapShopApp_UserTests.framework */; };
 		5606E7A22C1207DB00B728FD /* CouponsPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5606E7A12C1207DB00B728FD /* CouponsPage.swift */; };
@@ -131,6 +133,8 @@
 		0AFF597E2C171401002DEAFC /* UserOrders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserOrders.swift; sourceTree = "<group>"; };
 		0AFF59802C17152A002DEAFC /* OrderResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderResponse.swift; sourceTree = "<group>"; };
 		0AFF59822C1718A4002DEAFC /* OrderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderCell.swift; sourceTree = "<group>"; };
+		0AFF598B2C1773FC002DEAFC /* CategoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewModel.swift; sourceTree = "<group>"; };
+		0AFF598D2C177AF1002DEAFC /* OrdersViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrdersViewModel.swift; sourceTree = "<group>"; };
 		1D6193F64F34D468ECC12FD7 /* Pods_SnapShopApp_UserTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SnapShopApp_UserTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5606E7A12C1207DB00B728FD /* CouponsPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouponsPage.swift; sourceTree = "<group>"; };
 		5606E7A62C120C0800B728FD /* CouponCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouponCard.swift; sourceTree = "<group>"; };
@@ -258,6 +262,7 @@
 		0AF5836D2C11F165006D5059 /* CategoryPage */ = {
 			isa = PBXGroup;
 			children = (
+				0AFF598A2C1773E2002DEAFC /* ViewModel */,
 				0AF5836E2C11F188006D5059 /* View */,
 			);
 			path = CategoryPage;
@@ -273,6 +278,65 @@
 				0AF583792C11F28A006D5059 /* FilterButtomSheet.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		0AFF59842C176A34002DEAFC /* Orders */ = {
+			isa = PBXGroup;
+			children = (
+				0AFF59872C176A52002DEAFC /* Model */,
+				0AFF59862C176A49002DEAFC /* ViewModel */,
+				0AFF59852C176A3D002DEAFC /* View */,
+			);
+			path = Orders;
+			sourceTree = "<group>";
+		};
+		0AFF59852C176A3D002DEAFC /* View */ = {
+			isa = PBXGroup;
+			children = (
+				0AFF597E2C171401002DEAFC /* UserOrders.swift */,
+				0AFF59822C1718A4002DEAFC /* OrderCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		0AFF59862C176A49002DEAFC /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				0AFF598D2C177AF1002DEAFC /* OrdersViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		0AFF59872C176A52002DEAFC /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		0AFF59882C176A7E002DEAFC /* subViews */ = {
+			isa = PBXGroup;
+			children = (
+				5627DB2A2C12320000AB6464 /* AddAddress.swift */,
+				5627DB2C2C12324100AB6464 /* AddressCell.swift */,
+			);
+			path = subViews;
+			sourceTree = "<group>";
+		};
+		0AFF59892C17726E002DEAFC /* subViews */ = {
+			isa = PBXGroup;
+			children = (
+				5627DB282C12311300AB6464 /* ProfileEdit.swift */,
+			);
+			path = subViews;
+			sourceTree = "<group>";
+		};
+		0AFF598A2C1773E2002DEAFC /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				0AFF598B2C1773FC002DEAFC /* CategoryViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		5606E79E2C1207AC00B728FD /* CouponsPage */ = {
@@ -323,10 +387,8 @@
 		5627DB242C12299200AB6464 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				0AFF59892C17726E002DEAFC /* subViews */,
 				5627DB262C1229C700AB6464 /* PofileView.swift */,
-				5627DB282C12311300AB6464 /* ProfileEdit.swift */,
-				0AFF597E2C171401002DEAFC /* UserOrders.swift */,
-				0AFF59822C1718A4002DEAFC /* OrderCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -407,8 +469,7 @@
 		56FC06482C174A7B0015886D /* view */ = {
 			isa = PBXGroup;
 			children = (
-				5627DB2C2C12324100AB6464 /* AddressCell.swift */,
-				5627DB2A2C12320000AB6464 /* AddAddress.swift */,
+				0AFF59882C176A7E002DEAFC /* subViews */,
 				5627DB302C123EB100AB6464 /* UserAddresses.swift */,
 			);
 			path = view;
@@ -458,6 +519,7 @@
 		7606FB8B2C0F736100E1D3AF /* Features */ = {
 			isa = PBXGroup;
 			children = (
+				0AFF59842C176A34002DEAFC /* Orders */,
 				56FC06472C174A6B0015886D /* Addresses */,
 				56A580012C14601C00BBC168 /* CratPage */,
 				5627DB232C12297100AB6464 /* ProfilePage */,
@@ -968,6 +1030,7 @@
 				0AF5834F2C11EEC4006D5059 /* TabBarButton.swift in Sources */,
 				56D46E912C14FCC00019EA1B /* CheckOutPage.swift in Sources */,
 				7606FB9E2C0F76A100E1D3AF /* LoginViewModel.swift in Sources */,
+				0AFF598E2C177AF1002DEAFC /* OrdersViewModel.swift in Sources */,
 				5606E7AD2C120CB900B728FD /* DiscountsModel.swift in Sources */,
 				5627DB2F2C123D2500AB6464 /* ProfileViewModel.swift in Sources */,
 				7606FB982C0F74DB00E1D3AF /* Netwrok.swift in Sources */,
@@ -976,6 +1039,7 @@
 				0AF583662C11F069006D5059 /* BestSellerModel.swift in Sources */,
 				5627DB312C123EB100AB6464 /* UserAddresses.swift in Sources */,
 				7606FBB32C0F81C400E1D3AF /* CustomerModel.swift in Sources */,
+				0AFF598C2C1773FC002DEAFC /* CategoryViewModel.swift in Sources */,
 				56FC064C2C174AE60015886D /* AddressesModels.swift in Sources */,
 				0AF583702C11F1D3006D5059 /* CategoryView.swift in Sources */,
 				0AF5835A2C11EFAF006D5059 /* HomeSearchBar.swift in Sources */,

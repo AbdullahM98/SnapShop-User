@@ -9,7 +9,7 @@ import SwiftUI
 
 struct HomeSearchBar: View {
     @State private var searchText: String = ""
-    @ObservedObject var viewModel: HomeViewModel
+    @ObservedObject var viewModel: CategoryViewModel
 
     var body: some View {
            HStack {
@@ -35,7 +35,7 @@ struct HomeSearchBar: View {
 
 struct HomeSearchBar_Previews: PreviewProvider {
     static var previews: some View {
-        HomeSearchBar(viewModel: HomeViewModel())
+        HomeSearchBar(viewModel: CategoryViewModel())
     }
 }
 

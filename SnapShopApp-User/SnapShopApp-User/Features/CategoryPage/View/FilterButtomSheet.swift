@@ -16,7 +16,7 @@ import SwiftUI
 
 struct FilterBottomSheet: View {
     @AppStorage("selectedOption") private var selectedOption: String = "ALL"
-    @ObservedObject var viewModel: HomeViewModel
+    @ObservedObject var viewModel: CategoryViewModel
     @Environment(\.dismiss) var dismiss
     
     var body: some View {
@@ -71,6 +71,6 @@ struct FilterBottomSheet: View {
 
 struct FilterBottomSheet_Previews: PreviewProvider {
     static var previews: some View {
-        FilterBottomSheet(viewModel: HomeViewModel())
+        FilterBottomSheet(viewModel: CategoryViewModel())
     }
 }
