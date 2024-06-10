@@ -73,14 +73,15 @@ struct ProfileView: View {
                     .fontWeight(.bold)
                     .padding(.all, 16)
                 
-                Button(action: {
-                    // Handle My Orders
-                }) {
-                    Image("bag")
-                    Text("My Orders")
-                        .foregroundColor(.black)
+                NavigationLink(destination: UserOrders(orderList: viewModel.orderList)) {
+                    HStack {
+                        Image("bag")
+                        Text("My Orders")
+                            .foregroundColor(.black)
+                    }
+                    .padding(.all, 16)
                 }
-                .padding(.all, 16)
+
                 
                 Rectangle()
                     .frame(height: 1)

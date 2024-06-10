@@ -19,6 +19,7 @@ class ProfileViewModel: ObservableObject {
     @Published var firstNameTextFieldData: String = ""
     @Published var secondNameTextFieldData: String = ""
     @Published var emailTextFieldData: String = ""
+    @Published var orderList : [Order] = []
     
     
     
@@ -26,7 +27,7 @@ class ProfileViewModel: ObservableObject {
     private init() {
         fetchUserById(id: "7290794967219")
         fetchUserAddresses()
-        
+        fetchCompletedOrders(customerId: "7290794967219")
     }
     
     func fetchUserById(id: String) {
@@ -105,5 +106,22 @@ class ProfileViewModel: ObservableObject {
             print(result?.localizedDescription)
         }
     }
+    
+    func fetchCompletedOrders(customerId: String) {
+        let url = "\(Support.baseUrl)/orders.json?customer_id=\(customerId)"
+        
+        Network.shared.request(url, method: "GET", responseType: OrderResponse.self) { [weak self] result in
+            switch result {
+            case .success(let orderResponse):
+                DispatchQueue.main.async {
+                    self?.orderList = orderResponse.orders ?? []
+                    print("completed orders are ",orderResponse.orders?.count)
+                }
+            case .failure(let error):
+                print("Error fetching orders: \(error)")
+            }
+        }
+    }
+
     
 }
