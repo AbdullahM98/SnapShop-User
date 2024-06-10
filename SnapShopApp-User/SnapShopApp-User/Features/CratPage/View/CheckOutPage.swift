@@ -14,16 +14,15 @@ struct CheckOutPage: View {
     @State private var navigateToCoupons = false // Flag to trigger navigation
     @State private var navigateToAddresses = false // Flag to trigger navigation
     @State private var selectedAddress: AddressProfileDetails? // Track the selected address
-    @ObservedObject var userData:ProfileViewModel
 
     var body: some View {
         ScrollView{
             VStack(alignment: .leading){
                 Text("Delivery Address")
                     .bold()
-                AddressCell(address: selectedAddress ?? AddressProfileDetails(id: 0, customer_id: 0, first_name: "", last_name: "", company: "", address1: "", address2: "", city: "", province: "", country: "", zip: "", phone: "", name: "", province_code: "", country_code: "", country_name: "", default: true),viewModel: userData, insideCard: true)
+                AddressCell(address: selectedAddress ?? AddressProfileDetails(id: 0, customer_id: 0, first_name: "", last_name: "", company: "", address1: "", address2: "", city: "", province: "", country: "", zip: "", phone: "", name: "", province_code: "", country_code: "", country_name: "", default: true), insideCard: true, onDeleteClick: {})
                 
-                NavigationLink(destination: UserAddresses(userData: userData,fromCart: true, didSelectAddress: { address in
+                NavigationLink(destination: UserAddresses(fromCart: true, didSelectAddress: { address in
                     selectedAddress = address
                 }),isActive: $navigateToAddresses) {
                     
@@ -85,7 +84,7 @@ struct CheckOutPage: View {
 
 struct CheckOutPage_Previews: PreviewProvider {
     static var previews: some View {
-        CheckOutPage(userData: ProfileViewModel())
+        CheckOutPage()
         
     }
 }

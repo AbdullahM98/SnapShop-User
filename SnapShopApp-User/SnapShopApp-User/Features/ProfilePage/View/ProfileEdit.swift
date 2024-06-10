@@ -8,9 +8,13 @@
 import SwiftUI
 
 struct ProfileEdit: View {
-    var onSaveClick : () -> Void
+    var onSaveClick : (CustomerUpdateRequest) -> Void
     var onCancelClick : () -> Void
-    @ObservedObject var userData:ProfileViewModel
+    var user: CustomerProfileDetails?
+    @State var phoneTextFieldData: String = ""
+    @State var firstNameTextFieldData: String = ""
+    @State var secondNameTextFieldData: String = ""
+    @State var emailTextFieldData: String = ""
     
     var body: some View {
         VStack(alignment: .leading){
@@ -25,26 +29,26 @@ struct ProfileEdit: View {
             HStack {
                 VStack(alignment: .leading){
                     Text("First Name")
-                    TextField(userData.user?.first_name ?? "Example", text: $userData.firstNameTextFieldData)
+                    TextField(user?.first_name ?? "First Name", text: $firstNameTextFieldData)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                     
                 }
                 VStack(alignment: .leading){
                     Text("Second Name")
-                    TextField(userData.user?.last_name ?? "Example", text: $userData.secondNameTextFieldData)
+                    TextField(user?.last_name ?? "Last Name", text: $secondNameTextFieldData)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                     
                 }
             }.padding(.horizontal,16)
             VStack(alignment: .leading){
                 Text("Email")
-                TextField(userData.user?.email ?? "email@example.com", text: $userData.emailTextFieldData)
+                TextField(user?.email ?? "email@example.com", text: $emailTextFieldData)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                 
             }.padding(.horizontal,16)
             VStack(alignment: .leading){
                 Text("Phone Number")
-                TextField(userData.user?.phone ?? "+20 XXXX XXX XXX", text: $userData.phoneTextFieldData)
+                TextField(user?.phone ?? "+20 XXXX XXX XXX", text: $phoneTextFieldData)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                 
             }.padding(.horizontal,16)
@@ -69,7 +73,8 @@ struct ProfileEdit: View {
                 ZStack {
                     HStack {
                         Button(action: {
-                            onSaveClick()
+                            onSaveClick(CustomerUpdateRequest(customer: CustomerUpdateRequestBody(first_name: firstNameTextFieldData, last_name: secondNameTextFieldData, phone: phoneTextFieldData, email: emailTextFieldData))
+                                )
                         }) {
                             Text("Save")
                                 .foregroundColor(.white)
@@ -88,6 +93,6 @@ struct ProfileEdit: View {
 
 struct ProfileEdit_Previews: PreviewProvider {
     static var previews: some View {
-        ProfileEdit(onSaveClick: {}, onCancelClick: {},userData: ProfileViewModel())
+        ProfileEdit(onSaveClick: {_ in }, onCancelClick: {})
     }
 }

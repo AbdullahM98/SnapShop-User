@@ -12,10 +12,12 @@ struct ProfileView: View {
     @State private var selectedCurrency: String?
     @State private var showingBottomSheet = false
     @State private var settingsDetents = PresentationDetent.medium
-    @ObservedObject var viewModel : ProfileViewModel
+    @ObservedObject var viewModel : ProfileViewModel = ProfileViewModel()
     @State var userDetails: CustomerProfileDetails?
     @State private var navigateToUserAddresses = false // Flag to trigger navigation
     
+    
+
     var body: some View {
         VStack(alignment: .leading) {
             VStack(alignment: .leading) {
@@ -41,12 +43,12 @@ struct ProfileView: View {
                             Image("e")
                         }
                         .sheet(isPresented: $showingBottomSheet) {
-                            ProfileEdit(onSaveClick: {
+                            ProfileEdit(onSaveClick: { customer in
                                 showingBottomSheet.toggle()
-                                viewModel.updateUserData()
+                                viewModel.updateUserData(user: customer)
                             }, onCancelClick: {
                                 showingBottomSheet.toggle()
-                            },userData: viewModel).presentationDetents([.medium], selection: $settingsDetents)
+                            },user: viewModel.user).presentationDetents([.medium], selection: $settingsDetents)
                         }
                     }
                     Rectangle()
@@ -81,13 +83,13 @@ struct ProfileView: View {
                     }
                     .padding(.all, 16)
                 }
-
+                
                 
                 Rectangle()
                     .frame(height: 1)
                     .foregroundColor(.gray)
                 
-                NavigationLink(destination: UserAddresses(userData:viewModel,fromCart: false), isActive: $navigateToUserAddresses) {
+                NavigationLink(destination: UserAddresses(fromCart: false), isActive: $navigateToUserAddresses) {
                     Button(action: {
                         navigateToUserAddresses = true // Activate navigation
                     }) {
@@ -115,11 +117,12 @@ struct ProfileView: View {
             
             Spacer()
         }
+        
     }
 }
 
 struct ProfileView_Previews: PreviewProvider {
     static var previews: some View {
-        ProfileView(viewModel: ProfileViewModel())
+        ProfileView()
     }
 }

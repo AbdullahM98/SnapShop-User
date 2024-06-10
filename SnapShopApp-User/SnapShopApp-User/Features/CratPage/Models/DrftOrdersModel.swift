@@ -34,7 +34,7 @@ struct DraftOrderItemDetails: Codable {
     let shipping_address: DraftOrderAddress?
     let billing_address: DraftOrderAddress?
     let invoice_url: String?
-    let applied_discount: String?
+    let applied_discount: AppliedDiscount?
     let order_id: Int?
     let shipping_line: String?
     let tax_lines: [DraftOrderTaxLine]?
@@ -73,14 +73,20 @@ struct DraftOrderLineItem: Codable {
     let fulfillment_service: String?
     let grams: Int?
     let tax_lines: [DraftOrderTaxLine]?
-    let applied_discount: String?
+    let applied_discount: AppliedDiscount?
     let name: String?
     let properties: [DraftOrderProperties]?
     let custom: Bool?
     let price: String?
     let admin_graphql_api_id: String?
 }
-
+struct AppliedDiscount:Codable{
+    let description: String?
+    let value_type: String?
+    let value: String?
+    let amount: String?
+    let title: String?
+}
 struct DraftOrderProperties: Codable{
     let name: String?
     let value: String?

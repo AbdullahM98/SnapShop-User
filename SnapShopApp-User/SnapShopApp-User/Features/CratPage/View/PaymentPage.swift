@@ -28,7 +28,7 @@ struct PaymentPage: View {
                     .font(.title2)
                 ButtonWithImage(text: "Check out With", imageName: "payment", textColor: .black, buttonColor: .clear, borderColor: .black, buttonWidth: 353,imageExist: true, onClick: onApplePayClick)
                 
-                ButtonWithImage(text: "Cash On Delivery ", imageName: "bsag", textColor: .white, buttonColor: .black, borderColor: .black, buttonWidth: 353,imageExist: false, onClick: onCashOnDeliveryClick)
+                ButtonWithImage(text: "Cash On Delivery ", imageName: "bag", textColor: .white, buttonColor: .black, borderColor: .black, buttonWidth: 353,imageExist: false, onClick: onCashOnDeliveryClick)
             }.padding(.horizontal,8)
         }.padding(.horizontal,8)
     }

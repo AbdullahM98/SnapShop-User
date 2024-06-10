@@ -64,7 +64,7 @@ class CouponsViewModel: ObservableObject {
                 print("before fetching coupons")
                 
             case .failure(let error):
-                print("Error fetching data2: \(error)")
+                print("Error fetching price rules: \(error)")
             }
         }
     }
@@ -81,7 +81,7 @@ class CouponsViewModel: ObservableObject {
                 print("before fetching coupons")
                 
             case .failure(let error):
-                print("Error fetching data2: \(error)")
+                print("Error fetching price rule by id: \(error)")
             }
         }
     }

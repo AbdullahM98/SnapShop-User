@@ -8,8 +8,9 @@
 import SwiftUI
 struct AddressCell: View {
     var address : AddressProfileDetails
-    @ObservedObject var viewModel:ProfileViewModel
     var insideCard: Bool
+    var onDeleteClick : () -> Void?
+    
     var body: some View {
         VStack(alignment:.leading,spacing: 16){
             HStack{
@@ -21,15 +22,14 @@ struct AddressCell: View {
                     Button {
                         if address.default == false {
                             print("inside if ")
-
-                                viewModel.deleteAddress(addressId: address.id ?? 0)
+                            onDeleteClick()
                             print(address.default)
-
+                            
                         } else {
                             print("inside else show alert saying cant delete")
                             
                             print(address.default)
-
+                            
                         }
                     } label: {
                         if address.default == false {
@@ -54,12 +54,14 @@ struct AddressCell: View {
                 Text("\(address.country ?? "")")
             }.padding(.vertical,4)
                 .padding(.horizontal,16)
-            HStack{
-                Text("Zip Code: ")
-                    .foregroundColor(.gray)
-                Text("77750")
-            }.padding(.vertical,4)
-                .padding(.horizontal,16)
+            if let zip = address.zip {
+                HStack{
+                    Text("Zip Code: ")
+                        .foregroundColor(.gray)
+                    Text("\(zip)")
+                }.padding(.vertical,4)
+                    .padding(.horizontal,16)
+            }
             HStack{
                 Text("Phone Number: ")
                     .foregroundColor(.gray)
@@ -69,12 +71,12 @@ struct AddressCell: View {
                 .padding(.bottom,20)
         }.border(Color.gray,width: 1)
             .padding(16)
-            
+        
     }
 }
 
 struct AddressCell_Previews: PreviewProvider {
     static var previews: some View {
-        AddressCell(address: AddressProfileDetails(id: 0, customer_id: 0, first_name: "", last_name: "", company: "", address1: "", address2: "", city: "", province: "", country: "", zip: "", phone: "", name: "", province_code: "", country_code: "", country_name: "", default: true),viewModel: ProfileViewModel(), insideCard: false)
+        AddressCell(address: AddressProfileDetails(id: 0, customer_id: 0, first_name: "", last_name: "", company: "", address1: "", address2: "", city: "", province: "", country: "", zip: "", phone: "", name: "", province_code: "", country_code: "", country_name: "", default: true), insideCard: false, onDeleteClick: {})
     }
 }

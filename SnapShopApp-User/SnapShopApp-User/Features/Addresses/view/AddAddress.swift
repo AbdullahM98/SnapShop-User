@@ -8,9 +8,15 @@
 import SwiftUI
 
 struct AddAddress: View {
-    @ObservedObject var userData:ProfileViewModel
-    var onSaveClick : () -> Void
+    @State var addresses: [AddressProfileDetails]?
+    @State var addressTextFieldData: String = ""
+    @State var cityTextFieldData: String = ""
+    @State var countryTextFieldData: String = ""
+    @State var zipTextFieldData: String = ""
+    @State var phoneAddressTextFieldData: String = ""
+    var onSaveClick : (_ address:NewAddressRoot) -> Void
     var onCancelClick : () -> Void
+
     var body: some View {
         VStack(alignment: .leading){
             HStack{
@@ -23,19 +29,19 @@ struct AddAddress: View {
             VStack(alignment: .leading){
                 Text("Address")
                     .padding(.top,32)
-                TextField("Street No.", text: $userData.addressTextFieldData)
+                TextField("Street No.", text: $addressTextFieldData)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                 
             }.padding(.horizontal,16)
             HStack {
                 VStack(alignment: .leading){
                     Text("Country")
-                    TextField("Example", text: $userData.countryTextFieldData)
+                    TextField("Example", text: $countryTextFieldData)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                 }
                 VStack(alignment: .leading){
                     Text("City")
-                    TextField("Example", text: $userData.cityTextFieldData)
+                    TextField("Example", text: $cityTextFieldData)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
              
                     
@@ -43,14 +49,14 @@ struct AddAddress: View {
             }.padding(.horizontal,16)
             VStack(alignment: .leading){
                 Text("Phone Number")
-                TextField("+20 XXXX XXX XXX", text: $userData.phoneAddressTextFieldData)
+                TextField("+20 XXXX XXX XXX", text: $phoneAddressTextFieldData)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                   
                 
             }.padding(.horizontal,16)
             VStack(alignment: .leading){
                 Text("Zip Code")
-                TextField("6789", text: $userData.zipTextFieldData)
+                TextField("6789", text: $zipTextFieldData)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                    
                 
@@ -76,7 +82,7 @@ struct AddAddress: View {
                 ZStack {
                     HStack {
                         Button(action: {
-                            onSaveClick()
+                            onSaveClick(NewAddressRoot(customer_address: NewAddressDetails(id: nil, customer_id: Int("7290794967219"), address1: addressTextFieldData, address2: nil, city: cityTextFieldData, zip: zipTextFieldData, phone: phoneAddressTextFieldData, name: nil, province_code: nil, country_code: "EG", country_name: countryTextFieldData, default: false)))
                         }) {
                             Text("Save")
                                 .foregroundColor(.white)
@@ -95,6 +101,6 @@ struct AddAddress: View {
 
 struct AddAddress_Previews: PreviewProvider {
     static var previews: some View {
-        AddAddress(userData: ProfileViewModel(),onSaveClick: {}, onCancelClick: {})
+        AddAddress(onSaveClick: {address in }, onCancelClick: {})
     }
 }

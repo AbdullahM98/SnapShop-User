@@ -31,7 +31,7 @@ class CartViewModel :ObservableObject{
                 }
                 print("3ash YA AHMED")
             case .failure(let error):
-                print("Error fetching data2: \(error)")
+                print("Error fetching card draft order: \(error)")
             }
         }
     }
