@@ -83,6 +83,9 @@
 		761A5CC22C0EFDC80057BA3C /* SnapShopApp_UserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761A5CC12C0EFDC80057BA3C /* SnapShopApp_UserTests.swift */; };
 		761A5CCC2C0EFDC90057BA3C /* SnapShopApp_UserUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761A5CCB2C0EFDC90057BA3C /* SnapShopApp_UserUITests.swift */; };
 		761A5CCE2C0EFDC90057BA3C /* SnapShopApp_UserUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761A5CCD2C0EFDC90057BA3C /* SnapShopApp_UserUITestsLaunchTests.swift */; };
+		76257A3E2C177900001C4006 /* FirestoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76257A3D2C177900001C4006 /* FirestoreManager.swift */; };
+		76257A432C17DDDE001C4006 /* FavoriteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76257A422C17DDDE001C4006 /* FavoriteView.swift */; };
+		76257A452C17DDF2001C4006 /* FavoriteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76257A442C17DDF2001C4006 /* FavoriteViewModel.swift */; };
 		76560C522C13570200B6103A /* CustomColorDot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76560C512C13570200B6103A /* CustomColorDot.swift */; };
 		7678362F2C121327001E4BFB /* ProductDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7678362E2C121327001E4BFB /* ProductDetailView.swift */; };
 		767836332C121A04001E4BFB /* ProductDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 767836322C121A04001E4BFB /* ProductDetailViewModel.swift */; };
@@ -187,6 +190,9 @@
 		761A5CC72C0EFDC90057BA3C /* SnapShopApp-UserUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "SnapShopApp-UserUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		761A5CCB2C0EFDC90057BA3C /* SnapShopApp_UserUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapShopApp_UserUITests.swift; sourceTree = "<group>"; };
 		761A5CCD2C0EFDC90057BA3C /* SnapShopApp_UserUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapShopApp_UserUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		76257A3D2C177900001C4006 /* FirestoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreManager.swift; sourceTree = "<group>"; };
+		76257A422C17DDDE001C4006 /* FavoriteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteView.swift; sourceTree = "<group>"; };
+		76257A442C17DDF2001C4006 /* FavoriteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteViewModel.swift; sourceTree = "<group>"; };
 		76560C512C13570200B6103A /* CustomColorDot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomColorDot.swift; sourceTree = "<group>"; };
 		7678362E2C121327001E4BFB /* ProductDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailView.swift; sourceTree = "<group>"; };
 		767836322C121A04001E4BFB /* ProductDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailViewModel.swift; sourceTree = "<group>"; };
@@ -499,6 +505,7 @@
 				7606FBC02C10AE0B00E1D3AF /* AppCoreData.swift */,
 				7606FBC22C10AF1C00E1D3AF /* AppModel.xcdatamodeld */,
 				7606FBC52C11129100E1D3AF /* UserDefaultsManager.swift */,
+				76257A3D2C177900001C4006 /* FirestoreManager.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -522,6 +529,7 @@
 				0AFF59842C176A34002DEAFC /* Orders */,
 				56FC06472C174A6B0015886D /* Addresses */,
 				56A580012C14601C00BBC168 /* CratPage */,
+				76257A3F2C17DDB1001C4006 /* Favorites */,
 				5627DB232C12297100AB6464 /* ProfilePage */,
 				5606E79E2C1207AC00B728FD /* CouponsPage */,
 				7678362B2C1212F6001E4BFB /* Product_Detail */,
@@ -697,6 +705,31 @@
 				761A5CCD2C0EFDC90057BA3C /* SnapShopApp_UserUITestsLaunchTests.swift */,
 			);
 			path = "SnapShopApp-UserUITests";
+			sourceTree = "<group>";
+		};
+		76257A3F2C17DDB1001C4006 /* Favorites */ = {
+			isa = PBXGroup;
+			children = (
+				76257A412C17DDC2001C4006 /* viewModel */,
+				76257A402C17DDBA001C4006 /* view */,
+			);
+			path = Favorites;
+			sourceTree = "<group>";
+		};
+		76257A402C17DDBA001C4006 /* view */ = {
+			isa = PBXGroup;
+			children = (
+				76257A422C17DDDE001C4006 /* FavoriteView.swift */,
+			);
+			path = view;
+			sourceTree = "<group>";
+		};
+		76257A412C17DDC2001C4006 /* viewModel */ = {
+			isa = PBXGroup;
+			children = (
+				76257A442C17DDF2001C4006 /* FavoriteViewModel.swift */,
+			);
+			path = viewModel;
 			sourceTree = "<group>";
 		};
 		7678362B2C1212F6001E4BFB /* Product_Detail */ = {
@@ -1004,6 +1037,7 @@
 				5627DB2D2C12324100AB6464 /* AddressCell.swift in Sources */,
 				5606E7A22C1207DB00B728FD /* CouponsPage.swift in Sources */,
 				0AF5836A2C11F0D1006D5059 /* CustomAppBar.swift in Sources */,
+				76257A452C17DDF2001C4006 /* FavoriteViewModel.swift in Sources */,
 				767836332C121A04001E4BFB /* ProductDetailViewModel.swift in Sources */,
 				7606FBB12C0F813900E1D3AF /* FirebaseManager.swift in Sources */,
 				0AF583742C11F227006D5059 /* FilterButton.swift in Sources */,
@@ -1048,12 +1082,14 @@
 				7606FBA22C0F77C000E1D3AF /* SignUpViewModel.swift in Sources */,
 				0AF583622C11F032006D5059 /* BrandsModel.swift in Sources */,
 				0AFF59832C1718A5002DEAFC /* OrderCell.swift in Sources */,
+				76257A3E2C177900001C4006 /* FirestoreManager.swift in Sources */,
 				7606FBA62C0F78B400E1D3AF /* CustomTextField.swift in Sources */,
 				56A580072C1460BE00BBC168 /* DrftOrdersModel.swift in Sources */,
 				5627DB2B2C12320000AB6464 /* AddAddress.swift in Sources */,
 				5606E7A92C120C5600B728FD /* CouponsViewModel.swift in Sources */,
 				0AF583782C11F271006D5059 /* CategoryProductCell.swift in Sources */,
 				76560C522C13570200B6103A /* CustomColorDot.swift in Sources */,
+				76257A432C17DDDE001C4006 /* FavoriteView.swift in Sources */,
 				0AF583562C11EF6D006D5059 /* HomeView.swift in Sources */,
 				0AF5836C2C11F10A006D5059 /* CarouselSlider.swift in Sources */,
 				0AF5837C2C11F2E1006D5059 /* CustomBackButton.swift in Sources */,

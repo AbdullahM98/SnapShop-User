@@ -12,9 +12,11 @@ import FirebaseFirestore
 class FirebaseManager {
     
     static let shared = FirebaseManager()
- 
+
     
-    private init(){}
+    private init(){
+        //collectionRef = db.collection("Favorite_Products")
+    }
     
     func registerUser(email:String, password:String , compeltionHandler:@escaping (Bool,String?,Error?)->Void){
         var userId = ""
@@ -50,4 +52,7 @@ class FirebaseManager {
            print("Logged out successfully")
            // Handle post-logout logic here, such as navigating back to the login view
        }
+   
+
+
 }

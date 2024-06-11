@@ -18,11 +18,14 @@ class ProductDetailViewModel :ObservableObject{
     @Published var productTitle  = "T-shirt with long sleeves and pocket an sth else "
     @Published var productDecription  = "Experience ultimate comfort and effortless style with our Oversized T-Shirt. Made from high-quality, breathable cotton, this T-shirt is designed to provide a relaxed fit that drapes beautifully over any body type. Whether you're lounging at home, running errands, or meeting friends, this versatile piece is perfect for any casual occasion."
     @Published var selectedColor: Color? = nil
-    @Published var product: ProductModel?
+    @Published var isFavorite :Bool = false
+    @Published var product: ProductEntity?
     @Published var errorMessage: String?
     @Published var imgUrl :String?
     private var cancellables = Set<AnyCancellable>()
+    
     func fetchProductByID(_ productID: String) {
+
         Network.shared.getItemByID(productID, type: ProductResponse.self, endpoint: "products")
             .sink(receiveCompletion: { completion in
                 switch completion {
@@ -33,7 +36,7 @@ class ProductDetailViewModel :ObservableObject{
                 }
             }, receiveValue: { [weak self] productResponse in
                 DispatchQueue.main.async {
-                    self?.product = productResponse.product
+                //    self?.product = productResponse.product
                     self?.setUpUI(product: productResponse.product!)
                     print(productResponse.product?.product_type ?? "No product type")
                 }
@@ -108,5 +111,38 @@ class ProductDetailViewModel :ObservableObject{
                 print("Error updating user draft order: \(error)")
             }
         }
+
+           
+        }
+
+        func setUpUI(product: ProductEntity) {
+            print("Setting up UI with product ID: \(product.id ?? "0")")
+            self.vendorTitle = product.vendor ?? "Unknown"
+            self.productDecription = product.body_html ?? "No Description"
+            self.productTitle = product.title ?? "NO title"
+            self.price = product.price ?? "30"
+            self.imgUrl = product.images?.first
+        }
+    
+    func convertToEntity(from model: ProductModel) -> ProductEntity {
+        let imageSources = model.images?.compactMap { $0.src } ?? []
+
+        let entity = ProductEntity(
+            userId: nil,
+            id: model.id?.description,
+            variant_Id: model.variants?.first?.id?.description,
+            title: model.title,
+            body_html: model.body_html,
+            vendor: model.vendor,
+            product_type: model.product_type,
+            inventory_quantity: model.variants?.first?.inventory_quantity?.description,
+            tags: model.tags,
+            price: model.variants?.first?.price,
+            images: imageSources,
+            isFav: false
+        )
+
+        return entity
+
     }
 }

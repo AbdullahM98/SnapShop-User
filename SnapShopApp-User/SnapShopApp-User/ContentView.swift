@@ -21,7 +21,7 @@ struct ContentView: View {
                 case .cart:
                     CartList()
                 case .saved:
-                    Text("Saved")
+                    FavoriteView()
                 case .profile:
                     ProfileView()
                 }
