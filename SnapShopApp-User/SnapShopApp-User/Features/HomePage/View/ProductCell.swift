@@ -46,22 +46,22 @@ struct ProductCell: View {
                     Text(product.product_type ?? "sho").font(.system(size: 12, weight: .regular))
                 }
                 HStack{
-                    Text(product.title ?? "Adidas shoes").lineLimit(1).font(.system(size: 12, weight: .regular))
+                    Text(product.title ?? "Adidas shoes").lineLimit(1).font(.system(size: 12, weight: .regular)).foregroundColor(.black)
                 }
                 HStack{
-                    Text("\(product.variants?[0].price ?? "100") USD").foregroundColor(.red).font(.system(size: 16, weight: .regular))
+                    Text("\(String(format: "%.0f",(Double(product.variants?[0].price ?? "1.0" ) ?? 1 ) * (Double(UserDefaultsManager.shared.selectedCurrencyValue ?? "1") ?? 1))) \(UserDefaultsManager.shared.selectedCurrencyCode ?? "USD")").foregroundColor(.red).font(.system(size: 14, weight: .regular))
                     Spacer()
                     if let priceString = product.variants?.first?.price,
                        let price = Double(priceString) {
-                        Text(String(format: "%.2f USD", price + 20))
+                        Text("\(String(format: "%.0f",((Double(product.variants?[0].price ?? "1.0" ) ?? 1 )  * (Double(UserDefaultsManager.shared.selectedCurrencyValue ?? "1") ?? 1)) * 1.1)) \(UserDefaultsManager.shared.selectedCurrencyCode ?? "USD")")
                             .foregroundColor(.gray)
                             .strikethrough(color: .gray)
-                            .font(.system(size: 16, weight: .regular))
+                            .font(.system(size: 14, weight: .regular))
                     } else {
-                        Text("N/A USD")
+                        Text("N/A")
                             .foregroundColor(.gray)
                             .strikethrough(color: .gray)
-                            .font(.system(size: 16, weight: .regular))
+                            .font(.system(size: 14, weight: .regular))
                     }
                 }
                 }

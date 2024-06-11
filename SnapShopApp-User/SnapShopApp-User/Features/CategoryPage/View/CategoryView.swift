@@ -35,7 +35,12 @@ struct CategoryView: View {
                     })
                 }
                 Divider().background(Color.black)
-                FilterBar(viewModel: viewModel)
+                // Show FilterBar only if selectedOption is not "ALL"
+                if selectedOption == "ALL" {
+                    FilterBar(viewModel: viewModel)
+                }else{
+                    
+                }
                 CategoryProducts(products: viewModel.filteredProducts)
                     .onDisappear {
                         selectedOption = "ALL"

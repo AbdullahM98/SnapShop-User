@@ -54,7 +54,7 @@ class CategoryViewModel:ObservableObject{
         }
     }
     func fetchProductsInCollection(collectionID:String){
-        Network.shared.request("\(Support.baseUrl)/collections/\(collectionID)/products.json", method: "GET", responseType: PopularProductsResponse.self) { [weak self] result in
+        Network.shared.request("\(Support.baseUrl)/products.json?collection_id=\(collectionID)", method: "GET", responseType: PopularProductsResponse.self) { [weak self] result in
             switch result {
             case .success(let response):
                 DispatchQueue.main.async {

@@ -12,11 +12,13 @@ struct ProfileView: View {
     @State private var selectedCurrency: String?
     @State private var showingBottomSheet = false
     @State private var settingsDetents = PresentationDetent.medium
-    @ObservedObject var viewModel: ProfileViewModel = ProfileViewModel()
-    @ObservedObject var addressViewModel: AddressesViewModel = AddressesViewModel()
-    @ObservedObject var orderViewModel: OrdersViewModel = OrdersViewModel()
+    @ObservedObject var viewModel : ProfileViewModel = ProfileViewModel()
+    @ObservedObject var addressViewModel : AddressesViewModel = AddressesViewModel()
+    @ObservedObject var orderViewModel : OrdersViewModel = OrdersViewModel()
+    @ObservedObject var currenciesViewModel : CurrencyViewModel = CurrencyViewModel()
     @State var userDetails: CustomerProfileDetails?
     @State private var navigateToUserAddresses = false // Flag to trigger navigation
+    @State private var navigateToCurrencyView = false
     @State private var navigateToLogin = false
     
     
@@ -77,8 +79,32 @@ struct ProfileView: View {
                     .padding(.all, 12)
                     
                     VStack(alignment: .leading) {
-                        Text("Currency Code")
-                            .padding(.leading, 8)
+                        HStack {
+                            Text("Currency Code -> \(currenciesViewModel.selectedCurrencyCode ?? "USD") ->  \(currenciesViewModel.selectedCurrencyValue ?? "1")")
+                                .padding(.leading, 8)
+                            Spacer()
+                            NavigationLink(
+                                destination: CurrencyView(viewModel: currenciesViewModel),
+                                isActive: $navigateToCurrencyView,
+                                label: {
+                                    EmptyView()
+                                }
+                            )
+                            Button(action: {
+                                navigateToCurrencyView = true
+                            }) {
+                                Image(systemName: "chevron.right")
+                                    .foregroundColor(.black)
+                            }
+                            .buttonStyle(PlainButtonStyle()) // Ensure the button style doesn't interfere with the action
+                        }
+                        .contentShape(Rectangle()) // Make the entire row tappable
+                        .padding()
+                        .background(Color(UIColor.systemGroupedBackground)) // Optional styling
+                        .cornerRadius(10)
+                        .shadow(radius: 1)
+                        .padding(.horizontal)
+                        
                         
                         Text("More Tools")
                             .font(.title3)

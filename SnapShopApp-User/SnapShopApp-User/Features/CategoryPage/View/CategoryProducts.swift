@@ -19,7 +19,7 @@ struct CategoryProducts: View {
             ScrollView {
                 LazyVGrid(columns: [GridItem(.adaptive(minimum: UIScreen.screenWidth/2-35,maximum: UIScreen.screenWidth/2-5))]) {
                     ForEach(products, id: \.id) { product in
-                        CategoryProductCell(product: product)
+                        ProductCell(product: product)
                     }
                 }
             }

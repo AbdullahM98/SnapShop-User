@@ -46,4 +46,10 @@ class UserDefaultsManager {
     func getUserDraftOrderId(key: String)->Int? {
         return UserDefaults.standard.integer(forKey: key)
     }
+    var selectedCurrencyCode: String? {
+        return UserDefaults.standard.string(forKey: "selectedCurrency")
+    }
+    var selectedCurrencyValue: String? {
+        return UserDefaults.standard.string(forKey: "currencyValue")
+    }
 }
