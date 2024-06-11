@@ -16,6 +16,7 @@ class HomeViewModel :ObservableObject{
     @Published private (set) var draft:[DraftOrderItemDetails]?
     @Published private (set) var userOrders:[DraftOrderItemDetails] = []
     @Published var isLoading = true
+    @Published var isLoadingBrandProducts = true
     
     init(){
         print("HVM INIT")
@@ -69,6 +70,7 @@ class HomeViewModel :ObservableObject{
             switch result {
             case .success(let response):
                 DispatchQueue.main.async {
+                    self?.isLoadingBrandProducts = false
                     self?.singleCategoryProducts = response.products ?? []
                 }
             case .failure(let error):

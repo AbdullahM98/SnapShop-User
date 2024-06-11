@@ -15,13 +15,21 @@ struct BrandProducts: View {
     }
     var body: some View {
         VStack{
-            CategoryProducts(products: viewModel.singleCategoryProducts)
-                .navigationBarTitle("\(String(describing: brand.title ?? "")) Products")
-                .navigationBarBackButtonHidden()
+            if viewModel.isLoadingBrandProducts {
+                Spacer()
+                CustomCircularProgress()
+                Spacer()
+            }else{
+                CategoryProducts(products: viewModel.singleCategoryProducts)
+                    .navigationBarTitle("\(String(describing: brand.title ?? "")) Products")
+                    .navigationBarBackButtonHidden()
+            }
         }
         .navigationBarItems(leading: CustomBackButton())
         .onAppear(){
+            viewModel.isLoadingBrandProducts = true
             viewModel.fetchProductsInCollectionSingle(collectionID: "\(String(describing: brand.id ?? 0))")
+            
         }
     }
 }
