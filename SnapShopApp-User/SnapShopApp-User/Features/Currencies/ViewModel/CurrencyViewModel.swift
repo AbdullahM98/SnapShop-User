@@ -9,11 +9,30 @@ import Foundation
 
 class CurrencyViewModel:ObservableObject{
     @Published var currenciesList :ExchangeRatesResponse?
+    @Published var searchText: String = ""
     var selectedCurrencyCode: String? {
         return UserDefaults.standard.string(forKey: "selectedCurrency")
     }
     var selectedCurrencyValue: String? {
         return UserDefaults.standard.string(forKey: "currencyValue")
+    }
+    
+    var filteredCurrencies: [(String, Double)] {
+        guard let conversionRates = currenciesList?.conversion_rates else {
+            return []
+        }
+        
+        if searchText.isEmpty {
+            return conversionRates.sorted(by: { $0.key < $1.key })
+        } else {
+            return conversionRates.filter { (currencyCode, _) in
+                let lowercasedSearchText = searchText.lowercased()
+                let currencyFullName = currencyFullNames[currencyCode]?.lowercased() ?? ""
+                
+                return currencyCode.lowercased().contains(lowercasedSearchText) || currencyFullName.contains(lowercasedSearchText)
+            }
+            .sorted(by: { $0.key < $1.key })
+        }
     }
     
     init() {
@@ -32,6 +51,8 @@ class CurrencyViewModel:ObservableObject{
             }
         }
     }
+    
+    
     
     let currencyFullNames: [String: String] = [
         "USD": "United States Dollar",

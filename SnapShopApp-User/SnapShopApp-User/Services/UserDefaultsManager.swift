@@ -47,9 +47,19 @@ class UserDefaultsManager {
         return UserDefaults.standard.integer(forKey: key)
     }
     var selectedCurrencyCode: String? {
-        return UserDefaults.standard.string(forKey: "selectedCurrency")
+        get{
+            return UserDefaults.standard.string(forKey: "selectedCurrency")
+        }
+        set{
+            UserDefaults.standard.set(newValue, forKey: "selectedCurrency")
+        }
     }
     var selectedCurrencyValue: String? {
-        return UserDefaults.standard.string(forKey: "currencyValue")
+        get{
+            return UserDefaults.standard.string(forKey: "currencyValue")
+        }
+        set{
+            UserDefaults.standard.set(newValue, forKey: "currencyValue")
+        }
     }
 }
