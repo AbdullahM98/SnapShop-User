@@ -9,17 +9,19 @@ import SwiftUI
 
 struct CategoryView: View {
     @ObservedObject var viewModel = CategoryViewModel()
-    @State var isPresented : Bool = false
+    @State var isPresented: Bool = false
     @State var settingsDetents = PresentationDetent.medium
     @AppStorage("selectedOption") private var selectedOption: String = "ALL"
+    @AppStorage("selectedCollection") private var selectedCollection: String = "ALL"
+
     var body: some View {
-        VStack{
-            if viewModel.isLoading{
+        VStack {
+            if viewModel.isLoading {
                 Spacer()
                 CustomCircularProgress()
                 Spacer()
-            }else{
-                HStack{
+            } else {
+                HStack {
                     HomeSearchBar(viewModel: viewModel)
                     Button(action: {
                         isPresented.toggle()
@@ -27,28 +29,24 @@ struct CategoryView: View {
                         Image(systemName: "line.horizontal.3.decrease")
                             .font(.system(size: 24, weight: .semibold))
                             .padding(.horizontal)
-                            .padding(.vertical,1)
+                            .padding(.vertical, 1)
                             .foregroundColor(.black)
                     })
                     .sheet(isPresented: $isPresented, content: {
-                        FilterBottomSheet(viewModel: viewModel).presentationDetents([.medium], selection: $settingsDetents)
+                        FilterBottomSheet(viewModel: viewModel)
+                            .presentationDetents([.medium], selection: $settingsDetents)
                     })
                 }
                 Divider().background(Color.black)
-                // Show FilterBar only if selectedOption is not "ALL"
-                if selectedOption == "ALL" {
-                    FilterBar(viewModel: viewModel)
-                }else{
-                    
-                }
+                FilterBar(viewModel: viewModel)
                 CategoryProducts(products: viewModel.filteredProducts)
-                    .onDisappear {
-                        selectedOption = "ALL"
-                    }
             }
-            
-        }.onAppear{
+        }
+        .onAppear {
             viewModel.fetchProducts()
+        }.onDisappear{
+            selectedOption = "ALL"
+            selectedCollection = "ALL"
         }
     }
 }
@@ -56,7 +54,7 @@ struct CategoryView: View {
 struct CategoryView_Previews: PreviewProvider {
     static var previews: some View {
         CategoryView()
-        
     }
 }
+
 

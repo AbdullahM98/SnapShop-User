@@ -10,6 +10,8 @@ import SwiftUI
 struct HomeSearchBar: View {
     @State private var searchText: String = ""
     @ObservedObject var viewModel: CategoryViewModel
+    @AppStorage("selectedOption") private var selectedOption: String = "ALL"
+    @AppStorage("selectedCollection") private var selectedCollection: String = "ALL"
 
     var body: some View {
            HStack {
@@ -21,7 +23,8 @@ struct HomeSearchBar: View {
                    .cornerRadius(8)
                    .frame(height: 44)
                    .onChange(of: searchText) { newValue in
-                       viewModel.filterProducts(by: newValue)
+                       viewModel.searchText = newValue
+                       viewModel.filterProducts(selectedCategory: selectedOption, selectedCollection: selectedCollection, searchText: newValue)
                    }
            }
            .frame(height: 30).frame(width: 260)

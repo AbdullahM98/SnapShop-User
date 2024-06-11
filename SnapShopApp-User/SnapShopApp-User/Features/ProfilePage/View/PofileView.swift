@@ -93,8 +93,8 @@ struct ProfileView: View {
                             Button(action: {
                                 navigateToCurrencyView = true
                             }) {
-                                Image(systemName: "chevron.right")
-                                    .foregroundColor(.black)
+                                Image(systemName: "arrow.right.circle")
+                                    .foregroundColor(.red)
                             }
                             .buttonStyle(PlainButtonStyle()) // Ensure the button style doesn't interfere with the action
                         }

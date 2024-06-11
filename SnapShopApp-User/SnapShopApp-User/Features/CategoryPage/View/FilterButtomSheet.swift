@@ -5,17 +5,11 @@
 //  Created by Mostfa Sobaih on 02/06/2024.
 //
 
-//
-//  FilterBottomSheet.swift
-//  SnapShop
-//
-//  Created by Mostfa Sobaih on 02/06/2024.
-//
-
 import SwiftUI
 
 struct FilterBottomSheet: View {
     @AppStorage("selectedOption") private var selectedOption: String = "ALL"
+    @AppStorage("selectedCollection") private var selectedCollection: String = "ALL"
     @ObservedObject var viewModel: CategoryViewModel
     @Environment(\.dismiss) var dismiss
     
@@ -30,6 +24,7 @@ struct FilterBottomSheet: View {
             .onTapGesture {
                 selectedOption = "ALL"
                 viewModel.fetchProducts()
+                viewModel.filterProducts(selectedCategory: selectedOption, selectedCollection: selectedCollection)
                 dismiss()
             }
             
@@ -40,7 +35,7 @@ struct FilterBottomSheet: View {
             }.padding()
             .onTapGesture {
                 selectedOption = "T-SHIRTS"
-                viewModel.fetchProductsByCategory(category: selectedOption)
+                viewModel.filterProducts(selectedCategory: selectedOption, selectedCollection: selectedCollection)
                 dismiss()
             }
             
@@ -51,7 +46,7 @@ struct FilterBottomSheet: View {
             }.padding()
             .onTapGesture {
                 selectedOption = "ACCESSORIES"
-                viewModel.fetchProductsByCategory(category: selectedOption)
+                viewModel.filterProducts(selectedCategory: selectedOption, selectedCollection: selectedCollection)
                 dismiss()
             }
             
@@ -62,7 +57,7 @@ struct FilterBottomSheet: View {
             }.padding()
             .onTapGesture {
                 selectedOption = "SHOES"
-                viewModel.fetchProductsByCategory(category: selectedOption)
+                viewModel.filterProducts(selectedCategory: selectedOption, selectedCollection: selectedCollection)
                 dismiss()
             }
         }

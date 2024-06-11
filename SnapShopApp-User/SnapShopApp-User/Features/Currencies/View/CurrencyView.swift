@@ -14,10 +14,21 @@ struct CurrencyView: View {
     @Environment(\.presentationMode) var presentationMode
     
     var filteredCurrencies: [(String, Double)] {
+        guard let conversionRates = viewModel.currenciesList?.conversion_rates else {
+            return []
+        }
+        
         if searchText.isEmpty {
-            return viewModel.currenciesList?.conversion_rates.sorted(by: { $0.key < $1.key }) ?? []
+            return conversionRates.sorted(by: { $0.key < $1.key })
         } else {
-            return viewModel.currenciesList?.conversion_rates.filter { $0.key.lowercased().contains(searchText.lowercased()) }.sorted(by: { $0.key < $1.key }) ?? []
+            // Filter based on currency code or full name
+            return conversionRates.filter { (currencyCode, _) in
+                let lowercasedSearchText = searchText.lowercased()
+                let currencyFullName = viewModel.currencyFullNames[currencyCode]?.lowercased() ?? ""
+                
+                return currencyCode.lowercased().contains(lowercasedSearchText) || currencyFullName.contains(lowercasedSearchText)
+            }
+            .sorted(by: { $0.key < $1.key })
         }
     }
     

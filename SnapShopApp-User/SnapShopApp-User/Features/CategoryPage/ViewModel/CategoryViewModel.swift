@@ -7,79 +7,62 @@
 
 import Foundation
 
-class CategoryViewModel:ObservableObject{
+class CategoryViewModel: ObservableObject {
+    @Published var allProducts: [PopularProductItem] = []
+    @Published var collectionProducts: [PopularProductItem] = []
     @Published var filteredProducts: [PopularProductItem] = []
-    @Published var categoryProducts: [PopularProductItem] = []
-    @Published var products: [PopularProductItem] = []
     @Published var isLoading = true
-    
-    init() {
-        print("CategoryVM INIT")
-    }
-    deinit {
-        print("CategoryVM DEINIT")
-    }
-    
-    func filterProducts(by searchText: String) {
-            if searchText.isEmpty {
-                filteredProducts = categoryProducts
-            } else {
-                filteredProducts = categoryProducts.filter { $0.title?.localizedCaseInsensitiveContains(searchText) ?? false }
-            }
-    }
-    
+    @Published var searchText: String = ""
     
     func fetchProducts() {
         Network.shared.request("\(Support.baseUrl)/products.json", method: "GET", responseType: PopularProductsResponse.self) { [weak self] result in
             switch result {
             case .success(let response):
                 DispatchQueue.main.async {
-                    var uniqueProductIDs: Set<String> = Set()
-                    var uniqueProducts: [PopularProductItem] = []
-                    for product in response.products ?? [] {
-                        if !uniqueProductIDs.contains(product.title ?? "0") && product.image != nil {
-                            uniqueProductIDs.insert(product.title ?? "0")
-                            uniqueProducts.append(product)
-                        }
-                    }
                     self?.isLoading = false
-                    self?.products = uniqueProducts
-                    self?.categoryProducts = uniqueProducts
-                    self?.filteredProducts = uniqueProducts
+                    self?.allProducts = response.products ?? []
+                    self?.filterProducts(selectedCategory: "ALL", selectedCollection: "ALL", searchText: self?.searchText ?? "")
                 }
             case .failure(let error):
-                print("Error fetching products")
-                print("Error fetching data: \(error)")
-            }
-        }
-    }
-    func fetchProductsInCollection(collectionID:String){
-        Network.shared.request("\(Support.baseUrl)/products.json?collection_id=\(collectionID)", method: "GET", responseType: PopularProductsResponse.self) { [weak self] result in
-            switch result {
-            case .success(let response):
-                DispatchQueue.main.async {
-                    self?.categoryProducts = response.products ?? []
-                    self?.filteredProducts = response.products ?? []
-                }
-            case .failure(let error):
-                print("Error fetching products in collection")
-                print("Error fetching data: \(error)")
+                print("Error fetching products: \(error)")
             }
         }
     }
     
-    func fetchProductsByCategory(category: String) {
-        Network.shared.request("\(Support.baseUrl)/products.json?product_type=\(category)", method: "GET", responseType: PopularProductsResponse.self) { [weak self] result in
+    func fetchProductsInCollection(collectionID: String, completion: @escaping () -> Void) {
+        Network.shared.request("\(Support.baseUrl)/products.json?collection_id=\(collectionID)", method: "GET", responseType: PopularProductsResponse.self) { [weak self] result in
             switch result {
             case .success(let response):
                 DispatchQueue.main.async {
-                    self?.categoryProducts = response.products ?? []
-                    self?.filteredProducts = response.products ?? []
+                    self?.collectionProducts = response.products ?? []
+                    completion()
                 }
             case .failure(let error):
-                print("Error fetching products by category")
-                print("Error fetching data: \(error)")
+                print("Error fetching products in collection: \(error)")
             }
         }
+    }
+    
+    func filterProducts(selectedCategory: String, selectedCollection: String, searchText: String = "") {
+        let baseProducts = selectedCollection == "ALL" ? allProducts : collectionProducts
+        
+        var filtered = baseProducts
+        
+        if selectedCategory != "ALL" {
+            filtered = filtered.filter { product in
+                return product.product_type == selectedCategory
+            }
+        }
+        
+        if !searchText.isEmpty {
+            filtered = filtered.filter { product in
+                if let title = product.title?.lowercased() {
+                    return title.contains(searchText.lowercased())
+                }
+                return false
+            }
+        }
+        
+        filteredProducts = filtered
     }
 }
