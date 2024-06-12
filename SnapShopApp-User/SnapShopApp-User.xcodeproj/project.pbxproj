@@ -358,7 +358,6 @@
 		0AFF598F2C188737002DEAFC /* Currencies */ = {
 			isa = PBXGroup;
 			children = (
-				0AFF59962C188D08002DEAFC /* Model */,
 				0AFF59932C188C91002DEAFC /* ViewModel */,
 				0AFF59902C18876E002DEAFC /* View */,
 			);
@@ -379,14 +378,6 @@
 				0AFF59942C188CA4002DEAFC /* CurrencyViewModel.swift */,
 			);
 			path = ViewModel;
-			sourceTree = "<group>";
-		};
-		0AFF59962C188D08002DEAFC /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				0AFF59972C188D1B002DEAFC /* CurrencyModel.swift */,
-			);
-			path = Model;
 			sourceTree = "<group>";
 		};
 		5606E79E2C1207AC00B728FD /* CouponsPage */ = {
@@ -460,14 +451,14 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
-		56A580012C14601C00BBC168 /* CratPage */ = {
+		56A580012C14601C00BBC168 /* CartPage */ = {
 			isa = PBXGroup;
 			children = (
 				564BE0A22C160A7E000FDA11 /* Models */,
 				56A580032C14603100BBC168 /* ViewModel */,
 				56A580022C14602900BBC168 /* View */,
 			);
-			path = CratPage;
+			path = CartPage;
 			sourceTree = "<group>";
 		};
 		56A580022C14602900BBC168 /* View */ = {
@@ -574,11 +565,11 @@
 				0AFF598F2C188737002DEAFC /* Currencies */,
 				0AFF59842C176A34002DEAFC /* Orders */,
 				56FC06472C174A6B0015886D /* Addresses */,
-				56A580012C14601C00BBC168 /* CratPage */,
+				56A580012C14601C00BBC168 /* CartPage */,
 				76257A3F2C17DDB1001C4006 /* Favorites */,
 				5627DB232C12297100AB6464 /* ProfilePage */,
 				5606E79E2C1207AC00B728FD /* CouponsPage */,
-				7678362B2C1212F6001E4BFB /* Product_Detail */,
+				7678362B2C1212F6001E4BFB /* ProductDetails */,
 				0AF5836D2C11F165006D5059 /* CategoryPage */,
 				0AF583502C11EF01006D5059 /* HomePage */,
 				7606FB8D2C0F73BD00E1D3AF /* Authentication */,
@@ -594,6 +585,7 @@
 				0AF583612C11F032006D5059 /* BrandsModel.swift */,
 				0AF583652C11F069006D5059 /* BestSellerModel.swift */,
 				767836342C122ADA001E4BFB /* ProductModel.swift */,
+				0AFF59972C188D1B002DEAFC /* CurrencyModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -779,13 +771,13 @@
 			path = viewModel;
 			sourceTree = "<group>";
 		};
-		7678362B2C1212F6001E4BFB /* Product_Detail */ = {
+		7678362B2C1212F6001E4BFB /* ProductDetails */ = {
 			isa = PBXGroup;
 			children = (
 				7678362D2C12130C001E4BFB /* viewModel */,
 				7678362C2C121305001E4BFB /* view */,
 			);
-			path = Product_Detail;
+			path = ProductDetails;
 			sourceTree = "<group>";
 		};
 		7678362C2C121305001E4BFB /* view */ = {
