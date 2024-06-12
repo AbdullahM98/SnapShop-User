@@ -14,13 +14,13 @@ struct FavoriteView: View {
         if $viewModel.viewState.wrappedValue == .userActive {
             Text("Cart").padding(.vertical,30).font(.title3)
             ScrollView{
-              
+                
             }
             
-         
             
-                
-           
+            
+            
+            
             
         }else if $viewModel.viewState.wrappedValue == .loading {
             VStack {
@@ -28,27 +28,29 @@ struct FavoriteView: View {
                 CustomCircularProgress()
                 Spacer()
             }
-
+            
         }else{
-            // show no fav image 
+            // show no fav image
             VStack(alignment:.center){
                 Image("empty_box").resizable().padding(.vertical,150)
             }
         }
-    
-
+        
+        
     }
     
-
-struct FavItemView : View {
-    var product : ProductEntity
-    init(product: ProductEntity , onDeleteClick: ( _ product:ProductEntity) -> Void) {
-        self.product = product
-    }
-    var body : some View{
+    
+    struct FavItemView : View {
+        var onDeleteClick:  (_ product:ProductEntity) -> Void
+        var product : ProductEntity?
+        init(product: ProductEntity , onDeleteClick: @escaping ( _ product:ProductEntity) -> Void) {
+            self.product = product
+            self.onDeleteClick = onDeleteClick
+        }
+        var body : some View{
             VStack{
                 HStack{
-                    AsyncImage(url: URL(string: product.images[0] ?? "https://cdn.dummyjson.com/products/images/beauty/Eyeshadow%20Palette%20with%20Mirror/thumbnail.png")) { phase in
+                    AsyncImage(url: URL(string: product?.images![0] ?? "https://cdn.dummyjson.com/products/images/beauty/Eyeshadow%20Palette%20with%20Mirror/thumbnail.png")) { phase in
                         switch phase {
                         case .empty:
                             ProgressView()
@@ -56,41 +58,42 @@ struct FavItemView : View {
                         case .success(let image):
                             image
                                 .resizable()
-                                    .frame(width: 64,height: 64)
-                                    .cornerRadius(10)
-                                    .aspectRatio(contentMode: .fit)
+                                .frame(width: 64,height: 64)
+                                .cornerRadius(10)
+                                .aspectRatio(contentMode: .fit)
                         case .failure:
                             Image(systemName: "photo")
                                 .resizable()
-                                    .frame(width: 64,height: 64)
-                                    .cornerRadius(10)
-                                    .aspectRatio(contentMode: .fit)
+                                .frame(width: 64,height: 64)
+                                .cornerRadius(10)
+                                .aspectRatio(contentMode: .fit)
                         @unknown default:
                             EmptyView()
                                 .frame(width: UIScreen.screenWidth * 0.2, height: UIScreen.screenHeight * 0.2)
                         }
                     }
                     VStack(alignment: .leading,spacing: 2){
-                        Text(product.title ?? "")
+                        Text(product?.title ?? "")
                             .lineLimit(1)
                             .frame(width: 220)
-                        Text(product.vendor ?? "").foregroundColor(Color.gray)
-                        Text(product.price ?? "")
+                        Text(product?.vendor ?? "").foregroundColor(Color.gray)
+                        Text(product?.price ?? "")
                             .bold()
                     }
                     VStack(alignment: .trailing,spacing: 20){
                         Button {
                             print("delete item")
-                            onDeleteClick(product)
+                            onDeleteClick(product!)
                         } label: {
                             Image("trash")
                             
                         }.padding(.trailing,8)
-                       
+                        
                     }
                 }
             }.padding(.all,8)
         }
+    }
 }
 #Preview {
     FavoriteView(viewModel: FavoriteViewModel())
