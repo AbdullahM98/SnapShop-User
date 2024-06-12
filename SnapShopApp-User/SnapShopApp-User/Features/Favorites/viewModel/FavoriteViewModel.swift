@@ -13,7 +13,15 @@ class FavoriteViewModel : ObservableObject{
     @Published var products: [ProductEntity] = []
        private var cancellables = Set<AnyCancellable>()
        private var firestoreService = FirestoreManager()
+    @Published var viewState : FavViewState
     
+    init(){
+        if UserDefaults.standard.bool(forKey: Support.isLoggedUDKey) {
+            viewState = .userActive
+        }else{
+            viewState = .userInActive
+        }
+    }
   
        func fetchFavProducts(userId: String) {
            firestoreService.getAllFavProducts(userId: userId)
@@ -22,12 +30,14 @@ class FavoriteViewModel : ObservableObject{
                    switch completion {
                    case .failure(let error):
                        print("Failed to fetch products: \(error)")
+                       self.viewState = .userInActive
                    case .finished:
                        break
                    }
                }, receiveValue: { [weak self] products in
                    DispatchQueue.main.async {
                        self?.products = products
+                       self?.viewState = .userActive
                        print(" fetch products: \(products.count)")
 
                    }
@@ -75,4 +85,10 @@ class FavoriteViewModel : ObservableObject{
                })
                .store(in: &cancellables)
        }
+}
+
+enum FavViewState {
+    case userInActive
+    case userActive
+    case loading
 }

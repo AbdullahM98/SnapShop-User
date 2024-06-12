@@ -13,31 +13,44 @@ struct CartList: View {
     
     var body: some View {
         VStack{
-            Text("Cart")
-            ScrollView{
-                ForEach(viewModel.lineItems ,id: \.id) { item in
-                    CartCard(item: item,onDeleteClick: { product in
-                        viewModel.getDraftOrderById(lineItem: product)
-                    })
-                }
-            }
-            
-            HStack(alignment: .center){
-                Text("Total: ")
-                Text(String(format: "%.2f",viewModel.total))
-                    .bold()
+            if $viewModel.viewState.wrappedValue == .userActive {
                 
-                Text("EGP")
-                Spacer()
-                NavigationLink(destination: CheckOutPage(), isActive: $navigateToPayment) {
-                    AppButton(text: "Checkout",width: 140,height: 40, isFilled: true, onClick: {
-                        navigateToPayment = true
-                    } )
+                Text("Cart").padding(.vertical,30).font(.title3)
+                ScrollView{
+                    ForEach(viewModel.lineItems ,id: \.id) { item in
+                        CartCard(item: item,onDeleteClick: { product in
+                            viewModel.getDraftOrderById(lineItem: product)
+                        })
+                    }
                 }
                 
-            }.padding()
+                HStack(alignment: .center){
+                    Text("Total: ")
+                    Text(String(format: "%.2f",viewModel.total))
+                        .bold()
+                    
+                    Text("EGP")
+                    Spacer()
+                    NavigationLink(destination: CheckOutPage(), isActive: $navigateToPayment) {
+                        AppButton(text: "Checkout",width: 140,height: 40, isFilled: true, onClick: {
+                            navigateToPayment = true
+                        } )
+                    }
+                    
+                }.padding()
+            }else if $viewModel.viewState.wrappedValue == .loading{
+                VStack {
+                    Spacer()
+                    CustomCircularProgress()
+                    Spacer()
+                }
+
+            }else {
+                VStack(alignment:.center){
+                    Image("empty_box").resizable().padding(.vertical,150)
+                }            }
         }.onAppear{
-            viewModel.getCardDraftOrder()
+            //viewModel.getCardDraftOrder()
         }
     }
 }
