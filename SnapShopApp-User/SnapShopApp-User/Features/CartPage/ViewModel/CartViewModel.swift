@@ -14,6 +14,7 @@ class CartViewModel :ObservableObject{
     @Published private (set) var lineItems:[DraftOrderLineItem] = []
     @Published var total: Double = 0.0
     @Published var viewState:CartViewState
+    @Published var shippingAddress:DraftOrderAddress?
     init(){
         print("CVM INIT")
         if UserDefaults.standard.bool(forKey: Support.isLoggedUDKey) {
@@ -33,6 +34,7 @@ class CartViewModel :ObservableObject{
                     self?.viewState = .userActive
                     self?.draft = response.draft_orders
                     self?.total = 0
+                    self?.shippingAddress = self?.oldOrder?.shipping_address
                     self?.getSpecificUserCart()
                     print("app have orders ",self?.draft?.count ?? 0,"ssssss")
                 }
@@ -49,6 +51,7 @@ class CartViewModel :ObservableObject{
             item.customer?.id == (UserDefaultsManager.shared.getUserId(key: Support.userID) ?? 0)
         })
         self.userOrders = newDraft ?? []
+        self.shippingAddress = self.userOrders.first?.shipping_address
         self.lineItems = self.userOrders.first?.line_items ?? []
         print("Abduullah has ",newDraft?.count ?? 0,"orders")
         print("Line Items is \(self.lineItems.count) count")
@@ -58,7 +61,9 @@ class CartViewModel :ObservableObject{
         print(userOrders.first?.total_price ?? 0)
         
     }
-    
+    func updateLineItemQty(){
+        self.lineItems
+    }
     func getDraftOrderById(lineItem:DraftOrderLineItem){
         let orderID = UserDefaultsManager.shared.getUserDraftOrderId(key: "DraftId")
         print(orderID ?? 0)

@@ -43,7 +43,7 @@ struct CartCard: View {
                         .lineLimit(1)
                         .frame(width: 220)
                     Text(item.vendor ?? "").foregroundColor(Color.gray)
-                    Text(item.price ?? "")
+                    Text("\(formatPrice(price: item.price, quantity: item.quantity))")
                         .bold()
                 }
                 VStack(alignment: .trailing,spacing: 20){
@@ -54,27 +54,38 @@ struct CartCard: View {
                         Image("trash")
                         
                     }.padding(.trailing,8)
-                    HStack{
-                        Button{
-                            //minus quantity
-                            self.qty -= 1
-                        } label: {
-                            Image(systemName: "minus")
-                        }.foregroundColor(qty == 1 ? .gray : .black)
-                            .disabled(self.qty == 1)
-                        Text("\(self.qty)")
-                            .padding(.horizontal,3)
-                        Button{
-                            //plus quantity
-                            self.qty += 1
-                        } label: {
-                            Image(systemName: "plus")
-                        }.foregroundColor(Color.black)
-                    }
+//                    HStack{
+////                        Button{
+////                            //minus quantity
+////                            self.qty -= 1
+////                        } label: {
+////                            Image(systemName: "minus")
+////                        }.foregroundColor(qty == 1 ? .gray : .black)
+////                            .disabled(item.quantity == 1)
+//                        Text("\(item.quantity ?? 0)")
+//                            .padding(.horizontal,3)
+////                        Button{
+////                            //plus quantity
+////                            item.quantity! += 1
+////                        } label: {
+////                            Image(systemName: "plus")
+////                        }.foregroundColor(Color.black)
+//                    }
+                    Text("Qty: \(item.quantity ?? 0)")
                 }
             }
         }.padding(.all,8)
     }
+    func calculateTotalPrice(price: String?, quantity: Int?) -> Double {
+        let priceDouble = Double(price ?? "0.0") ?? 0.0
+        let quantityDouble = Double(quantity ?? 0)
+        return priceDouble * quantityDouble
+    }
+    func formatPrice(price: String?, quantity: Int?) -> String {
+           let totalPrice = calculateTotalPrice(price: price, quantity: quantity)
+           return String(format: "%.2f", totalPrice)
+       }
+
 }
 
 struct CartCard_Previews: PreviewProvider {

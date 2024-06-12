@@ -117,7 +117,17 @@ class ProductDetailViewModel :ObservableObject{
     
     func updateUserData(lineItem:DraftOrderLineItem){
         print("old order line items before update ",self.orderToUpdate?.line_items?.count ?? 0)
-        self.orderToUpdate?.line_items?.append(lineItem)
+            if let existingIndex = self.orderToUpdate?.line_items?.firstIndex(where: { $0.product_id == lineItem.product_id }) {
+                // If it exists, update its quantity
+                if let existingQuantity = self.orderToUpdate?.line_items?[existingIndex].quantity {
+                    self.orderToUpdate?.line_items?[existingIndex].quantity = existingQuantity + (lineItem.quantity ?? 0)
+                    print("Updated existing line item quantity to \(self.orderToUpdate?.line_items?[existingIndex].quantity ?? 0)")
+                }
+            } else {
+                // If it does not exist, add the new line item
+                self.orderToUpdate?.line_items?.append(lineItem)
+                print("Added new line item")
+            }
         print("old order line item afteer update ",self.orderToUpdate?.line_items?.count ?? 0)
         
         guard let orderID = UserDefaultsManager.shared.getUserDraftOrderId(key: "DraftId") else { return }

@@ -31,7 +31,7 @@ struct CartList: View {
                     
                     Text("EGP")
                     Spacer()
-                    NavigationLink(destination: CheckOutPage(), isActive: $navigateToPayment) {
+                    NavigationLink(destination: CheckOutPage(address: viewModel.shippingAddress ?? DraftOrderAddress(first_name: "", address1: "", phone: "", city: "", zip: "", province: "", country: "", last_name: "", address2: "", company: "", latitude: 0.0, longitude: 0.0, name: "", country_code: "", province_code: ""), subTotalPrice: viewModel.userOrders.first?.subtotal_price ?? "0.0",totalTaxes: viewModel.userOrders.first?.total_tax ?? "0.0",totalPrice: viewModel.userOrders.first?.total_price ?? "0.0"), isActive: $navigateToPayment) {
                         AppButton(text: "Checkout",width: 140,height: 40, isFilled: true, onClick: {
                             navigateToPayment = true
                         } )
@@ -61,4 +61,3 @@ struct CartList_Previews: PreviewProvider {
         CartList()
     }
 }
-

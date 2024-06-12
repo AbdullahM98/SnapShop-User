@@ -10,6 +10,7 @@ import Foundation
 class AddressesViewModel:ObservableObject{
     @Published var addresses: [AddressProfileDetails]?
     @Published var isLoading = false
+    var userId: String = String(UserDefaultsManager.shared.getUserId(key: Support.userID) ?? 0)
     init(){
         print("AddressesViewModel INIT")
         fetchUserAddresses()
@@ -19,7 +20,7 @@ class AddressesViewModel:ObservableObject{
     }
     //get user address to UserAddresses page
     func fetchUserAddresses(customerId:String = "7290794967219"){
-        let url = "\(Support.baseUrl)/customers/\(customerId)/addresses.json"
+        let url = "\(Support.baseUrl)/customers/\(userId)/addresses.json"
         Network.shared.request(url, method: "GET", responseType: AddressProfileRoot.self) { [weak self] result in
             switch result {
             case .success(let address):
@@ -36,7 +37,7 @@ class AddressesViewModel:ObservableObject{
     }
     //post address
     func postUserAddress(address: NewAddressRoot){
-        Network.shared.postData(object: address, to: "https://mad-ism-ios-1.myshopify.com/admin/api/2024-04/customers/\(address.customer_address?.customer_id ?? 0)/addresses.json" ){  [weak self] result in
+        Network.shared.postData(object: address, to: "https://mad-ism-ios-1.myshopify.com/admin/api/2024-04/customers/\(userId)/addresses.json" ){  [weak self] result in
             switch result {
             case .success(let response):
                 DispatchQueue.main.async {
@@ -51,7 +52,7 @@ class AddressesViewModel:ObservableObject{
     }
     //delete user address
     func deleteAddress(customerId:String = "7290794967219",addressId:Int){
-        Network.shared.deleteObject(with: "\(Support.baseUrl)/customers/\(customerId)/addresses/\(addressId).json") { [weak self] result in
+        Network.shared.deleteObject(with: "\(Support.baseUrl)/customers/\(userId)/addresses/\(addressId).json") { [weak self] result in
             self?.fetchUserAddresses()
             switch result{
             case .none:
@@ -65,7 +66,7 @@ class AddressesViewModel:ObservableObject{
     }
     //update user address
     func updateAddress(updatedAddress:AddressForUpdate,customerId: String = "7290794967219",addressId:Int){
-        Network.shared.updateData(object: updatedAddress, to: "\(Support.baseUrl)/customers/\(customerId)/addresses/\(addressId).json") { [weak self] result in
+        Network.shared.updateData(object: updatedAddress, to: "\(Support.baseUrl)/customers/\(userId)/addresses/\(addressId).json") { [weak self] result in
             switch result{
             case .success(let response):
                 DispatchQueue.main.async {

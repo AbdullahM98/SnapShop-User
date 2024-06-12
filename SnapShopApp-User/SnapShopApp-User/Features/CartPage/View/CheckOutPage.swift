@@ -15,13 +15,16 @@ struct CheckOutPage: View {
     @State private var navigateToAddresses = false // Flag to trigger navigation
     @State private var selectedAddress: AddressProfileDetails? // Track the selected address
     @ObservedObject var addressViewModel = AddressesViewModel()
-
+    var address:DraftOrderAddress
+    var subTotalPrice: String
+    var totalTaxes: String
+    var totalPrice: String
     var body: some View {
         ScrollView{
             VStack(alignment: .leading){
                 Text("Delivery Address")
                     .bold()
-                AddressCell(address: selectedAddress ?? AddressProfileDetails(id: 0, customer_id: 0, first_name: "", last_name: "", company: "", address1: "", address2: "", city: "", province: "", country: "", zip: "", phone: "", name: "", province_code: "", country_code: "", country_name: "", default: true), insideCard: true, onDeleteClick: {}, onUpdateClick: {_ in})
+                AddressCell(address: selectedAddress ?? AddressProfileDetails(id: 0, customer_id: 0, first_name: address.first_name, last_name: address.last_name, company: address.company, address1: address.address1, address2: address.address2, city: address.city, province: "", country: address.country, zip: address.zip, phone: address.phone, name: "", province_code: "", country_code: "", country_name: "", default: true), insideCard: true, onDeleteClick: {}, onUpdateClick: {_ in})
                 
                 NavigationLink(destination: UserAddresses(viewModel: addressViewModel,fromCart: true, didSelectAddress: { address in
                     selectedAddress = address
@@ -50,8 +53,20 @@ struct CheckOutPage: View {
                     }
                 }.padding()
                 HStack{
+                    Text("Sub-Total Price :").bold()
+                    Text("\(subTotalPrice) EGP")
+                        .foregroundColor(.gray)
+                }
+                .padding(.bottom,16)
+                HStack{
+                    Text("Total Taxes :").bold()
+                    Text("\(totalTaxes) EGP")
+                        .foregroundColor(.gray)
+                }
+                .padding(.bottom,16)
+                HStack{
                     Text("Total Price :").bold()
-                    Text("20391.49 EGP")
+                    Text("\(totalPrice) EGP")
                         .foregroundColor(.gray)
                 }
                 .padding(.bottom,16)
@@ -80,12 +95,5 @@ struct CheckOutPage: View {
         .navigationBarTitle("Checkout")
         .navigationBarBackButtonHidden(true)
         .navigationBarItems(leading: CustomBackButton())
-    }
-}
-
-struct CheckOutPage_Previews: PreviewProvider {
-    static var previews: some View {
-        CheckOutPage()
-        
     }
 }
