@@ -12,11 +12,18 @@ class CartViewModel :ObservableObject{
     @Published private (set) var draft:[DraftOrderItemDetails]?
     @Published private (set) var userOrders:[DraftOrderItemDetails] = []
     @Published private (set) var lineItems:[DraftOrderLineItem] = []
-    
     @Published var total: Double = 0.0
+    @Published var viewState:CartViewState
     init(){
         print("CVM INIT")
-        self.getCardDraftOrder()
+        if UserDefaults.standard.bool(forKey: Support.isLoggedUDKey) {
+            viewState = .userActive
+            self.getCardDraftOrder()
+        }else{
+            viewState = .userInActive
+        }
+        
+        
     }
     func getCardDraftOrder(){
         Network.shared.request("\(Support.baseUrl)/draft_orders.json", method: "GET", responseType: ListOfDraftOrders.self) { [weak self] result in
@@ -24,6 +31,7 @@ class CartViewModel :ObservableObject{
             case .success(let response):
                 print("YLAAA YAH AHMED")
                 DispatchQueue.main.async {
+                    self?.viewState = .userActive
                     self?.draft = response.draft_orders
                     self?.total = 0
                     self?.getSpecificUserCart()
@@ -32,13 +40,15 @@ class CartViewModel :ObservableObject{
                 print("3ash YA AHMED")
             case .failure(let error):
                 print("Error fetching card draft order: \(error)")
+                self?.viewState = .userInActive
+
             }
         }
     }
     func getSpecificUserCart(){
         print("Yla y3mmm")
         let newDraft = draft?.filter({ item in
-            item.customer?.id == 7290794967219
+            item.customer?.id == UserDefaults.standard.integer(forKey: Support.userID)
         })
         self.userOrders = newDraft ?? []
         self.lineItems = self.userOrders.first?.line_items ?? []
@@ -106,4 +116,9 @@ class CartViewModel :ObservableObject{
        }
     
     
+}
+enum CartViewState {
+    case userInActive
+    case userActive
+    case loading
 }

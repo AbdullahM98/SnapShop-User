@@ -11,8 +11,13 @@ class LoginViewModel : ObservableObject {
     @Published var emailField : FieldModel = FieldModel(value: "",  fieldType: .email)
     @Published var passwordField : FieldModel = FieldModel(value: "",  fieldType: .password)
     @Published var isLogIn = false
-    
+    @Published var viewState : LoginViewState?
+    var userId : Int?
     @Published var errorMessage: String = ""
+    
+    init(){
+        viewState = .loginView
+    }
     
     func login(email: String, password: String) {
         print("logging in ")
@@ -22,6 +27,7 @@ class LoginViewModel : ObservableObject {
                     self.errorMessage = error.localizedDescription
                 }
             } else {
+
                 self.getUsers(email: email.lowercased())
             }
         }
@@ -37,7 +43,7 @@ class LoginViewModel : ObservableObject {
                     if self.isUserExists(email: email, responses:responsesList.customers).0 {
                                self.isLogIn = true
                              self.setISLoggedIn(isLogged: true)
-                        self.setISLoggedIn(isLogged: true)
+                      //  self.setISLoggedIn(isLogged: true)
                        
                         if let customerResponse = self.isUserExists(email: email, responses: responsesList.customers).1 {
                                self.saveUserId(authResponse: customerResponse)
@@ -62,13 +68,16 @@ class LoginViewModel : ObservableObject {
         print("user not found")
         return (false,nil)
     }
+   
+    
     func isLoggedIn() ->Bool{
        return UserDefaultsManager.shared.getIsloggedIn(key: Support.isLoggedUDKey) ?? isLogIn
     }
     
     private func saveUserId(authResponse:CustomerAuthResponse){
-        
+        self.userId = authResponse.id
         UserDefaultsManager.shared.setUserId(key: Support.userID, value: authResponse.id)
+        
         print("from ud\(UserDefaultsManager.shared.getUserId(key: Support.userID)?.description ?? "No" )")
     }
     
@@ -82,4 +91,10 @@ class LoginViewModel : ObservableObject {
         AppCoreData.shared.insertCustomer(customer: customer)
         
     }
+}
+
+enum LoginViewState {
+    
+    case loginView
+    case loading
 }
