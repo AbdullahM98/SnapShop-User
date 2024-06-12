@@ -44,25 +44,27 @@ class CategoryViewModel: ObservableObject {
     }
     
     func filterProducts(selectedCategory: String, selectedCollection: String, searchText: String = "") {
-        let baseProducts = selectedCollection == "ALL" ? allProducts : collectionProducts
-        
-        var filtered = baseProducts
-        
-        if selectedCategory != "ALL" {
-            filtered = filtered.filter { product in
-                return product.product_type == selectedCategory
-            }
-        }
-        
-        if !searchText.isEmpty {
-            filtered = filtered.filter { product in
-                if let title = product.title?.lowercased() {
-                    return title.contains(searchText.lowercased())
+            let baseProducts = selectedCollection == "ALL" ? allProducts : collectionProducts
+            
+            var filtered = baseProducts
+            
+            if selectedCategory != "ALL" {
+                filtered = filtered.filter { product in
+                    return product.product_type == selectedCategory
                 }
-                return false
             }
+            
+            let trimmedSearchText = searchText.trimmingCharacters(in: .whitespacesAndNewlines)
+            
+            if !trimmedSearchText.isEmpty {
+                filtered = filtered.filter { product in
+                    if let title = product.title?.lowercased() {
+                        return title.contains(trimmedSearchText.lowercased())
+                    }
+                    return false
+                }
+            }
+            
+            filteredProducts = filtered
         }
-        
-        filteredProducts = filtered
-    }
 }
