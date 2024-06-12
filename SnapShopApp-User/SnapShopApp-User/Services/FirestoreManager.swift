@@ -2,6 +2,7 @@ import Foundation
 import FirebaseFirestore
 import Combine
 
+
 class FirestoreManager {
     let db: Firestore
     var collectionRef: CollectionReference?
@@ -11,7 +12,7 @@ class FirestoreManager {
         collectionRef = db.collection("Favorite_Products")
     }
     
-    func getAllFavProducts(userId: String) -> AnyPublisher<[ProductEntity], Error> {
+    func getAllFavProductsRemote(userId: String) -> AnyPublisher<[ProductEntity], Error> {
         return Future { promise in
             self.collectionRef?.whereField("userId", isEqualTo: userId).getDocuments { snapShot, error in
                 if let error = error {
@@ -20,7 +21,7 @@ class FirestoreManager {
                     let products = snapShot.documents.compactMap { document -> ProductEntity? in
                         return ProductEntity(
                             userId: document["userId"] as? String,
-                            id: document["id"] as? String,
+                            product_id: document["id"] as? String,
                             variant_Id: document["variant_id"] as? String,
                             title: document["title"] as? String,
                             body_html: document["description"] as? String,
@@ -40,11 +41,11 @@ class FirestoreManager {
         .eraseToAnyPublisher()
     }
     
-    func addProductToFav(product: ProductEntity) -> AnyPublisher<Void, Error> {
+    func addProductToFavRemote(product: ProductEntity) -> AnyPublisher<Void, Error> {
         return Future { promise in
             let data: [String: Any] = [
                 "userId": product.userId ?? "",
-                "id": product.id ?? "",
+                "id": product.product_id ?? "",
                 "variant_id": product.variant_Id ?? "",
                 "title": product.title ?? "",
                 "description": product.body_html ?? "",
@@ -68,7 +69,7 @@ class FirestoreManager {
         .eraseToAnyPublisher()
     }
     
-    func removeProductFromFav(productId: String) -> AnyPublisher<Void, Error> {
+    func removeProductFromFavRemote(productId: String) -> AnyPublisher<Void, Error> {
         return Future { promise in
             self.collectionRef?.whereField("id", isEqualTo: productId).getDocuments { querySnapshot, error in
                 if let error = error {
@@ -90,4 +91,5 @@ class FirestoreManager {
         }
         .eraseToAnyPublisher()
     }
+    
 }

@@ -23,48 +23,73 @@ class FavoriteViewModel : ObservableObject{
         }
     }
   
-       func fetchFavProducts(userId: String) {
-           firestoreService.getAllFavProducts(userId: userId)
-               .receive(on: DispatchQueue.main)
-               .sink(receiveCompletion: { completion in
-                   switch completion {
-                   case .failure(let error):
-                       print("Failed to fetch products: \(error)")
-                       self.viewState = .userInActive
-                   case .finished:
-                       break
-                   }
-               }, receiveValue: { [weak self] products in
-                   DispatchQueue.main.async {
-                       self?.products = products
-                       self?.viewState = .userActive
-                       print(" fetch products: \(products.count)")
-
-                   }
-               })
-               .store(in: &cancellables)
+    func getUserFav(){
+        // online or offline
+        self.products = getAllLocalFav()
+        
+    }
+    
+    func saveProduct(product:ProductEntity){
+        // online or offline
+        self.saveProduct(product: product)
+    }
+    
+    func deleteProduct(id:String){
+        // online or offline
+        self.removeFromFavLocal(id: id)
+    }
+    
+       func fetchFavProducts() {
+           if viewState == .userActive{
+               guard  let userId = UserDefaults.standard.string(forKey: Support.fireBaseUserID) else{
+                   return
+               }
+               firestoreService.getAllFavProductsRemote(userId: userId)
+                   .receive(on: DispatchQueue.main)
+                   .sink(receiveCompletion: { completion in
+                       switch completion {
+                       case .failure(let error):
+                           print("Failed to fetch products: \(error)")
+                           self.viewState = .userInActive
+                       case .finished:
+                           break
+                       }
+                   }, receiveValue: { [weak self] products in
+                       DispatchQueue.main.async {
+                           self?.products = products
+                           self?.viewState = .userActive
+                           print(" fetch products: \(products.count)")
+                           
+                       }
+                   })
+                   .store(in: &cancellables)
+           }else{
+              print("NotLoggedIn")
+           }
        }
        
-       func addProductToFavorites(product: ProductEntity) {
-           firestoreService.addProductToFav(product: product)
-               .receive(on: DispatchQueue.main)
-               .sink(receiveCompletion: { completion in
-                   switch completion {
-                   case .failure(let error):
-                       print("Failed to add product: \(error)")
-                   case .finished:
-                       break
-                   }
-               }, receiveValue: { [weak self] in
-                   DispatchQueue.main.async {
-                       self?.fetchFavProducts(userId: product.userId ?? "")
-                   }
-               })
-               .store(in: &cancellables)
+    func addProductToFavorites(product: ProductEntity) {
+        if viewState == .userActive{
+            firestoreService.addProductToFavRemote(product: product)
+            .receive(on: DispatchQueue.main)
+            .sink(receiveCompletion: { completion in
+                switch completion {
+                case .failure(let error):
+                    print("Failed to add product: \(error)")
+                case .finished:
+                    break
+                }
+            }, receiveValue: { [weak self] in
+                DispatchQueue.main.async {
+                    self?.fetchFavProducts()
+                }
+            })
+            .store(in: &cancellables)
+          }
        }
        
        func removeProductFromFavorites(productId: Int) {
-           firestoreService.removeProductFromFav(productId: productId)
+           firestoreService.removeProductFromFavRemote(productId: productId.description)
                .receive(on: DispatchQueue.main)
                .sink(receiveCompletion: { completion in
                    switch completion {
@@ -75,7 +100,7 @@ class FavoriteViewModel : ObservableObject{
                    }
                }, receiveValue: { [weak self] in
                    DispatchQueue.main.async{
-                       if let index = self?.products.firstIndex(where: { $0.id == productId.description }) {
+                       if let index = self?.products.firstIndex(where: { $0.product_id == productId.description }) {
                            self?.products.remove(at: index)
                            print("Item removed successfully")
                        } else {
@@ -85,6 +110,17 @@ class FavoriteViewModel : ObservableObject{
                })
                .store(in: &cancellables)
        }
+    
+    func getAllLocalFav() ->[ProductEntity]{
+        let userId = UserDefaults.standard.string(forKey: Support.fireBaseUserID)
+       return  AppCoreData.shared.getAllProducts(by: userId ?? "")
+    }
+    func addLocalFavProduct(product:ProductEntity){
+        AppCoreData.shared.addFavProduct(favProduct: product)
+    }
+    func removeFromFavLocal(id:String){
+        AppCoreData.shared.deleteProductById(id: id)
+    }
 }
 
 enum FavViewState {

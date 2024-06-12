@@ -62,7 +62,7 @@ struct product_Image: Codable {
 
 struct ProductEntity {
     let userId:String?
-    let id: String?
+    let product_id: String?
     let variant_Id :String?
     let title: String?
     let body_html: String?

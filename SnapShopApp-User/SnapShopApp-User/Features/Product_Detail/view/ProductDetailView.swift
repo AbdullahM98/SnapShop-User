@@ -60,12 +60,14 @@ struct ProductDetailView: View {
                                 Button{
                                     if $viewModel.isFavorite.wrappedValue {
                                         viewModel.isFavorite = false
+                                        viewModel.addLocalFavProduct(product: viewModel.product!)
                                     }else{
                                         viewModel.isFavorite = true
+                                        viewModel.removeFromFavLocal(id: (viewModel.product?.product_id)!)
                                     }
                                 }label: {
                                     Image(systemName: viewModel.isFavorite ? "heart.fill" : "heart").resizable().frame(width: 30,height: 28)
-
+                                    
                                 }
                             }
                             .foregroundColor(.gray)
@@ -137,21 +139,21 @@ struct ProductDetailView: View {
                             guard let product = $viewModel.product.wrappedValue else{return}
                             let draftOrder = DraftOrderItem(draft_order: DraftOrderItemDetails(id: nil, note: nil, email: nil, taxes_included: nil, currency: nil, invoice_sent_at: nil, created_at: nil, updated_at: nil, tax_exempt: nil, completed_at: nil, name: nil, status: nil, line_items: [], shipping_address: nil, billing_address: nil, invoice_url: "", applied_discount: nil, order_id: 0, shipping_line: nil, tax_lines: nil, tags: "", note_attributes: [], total_price: "", subtotal_price: "", total_tax: "", payment_terms: "", presentment_currency: "", admin_graphql_api_id: "", customer: nil, use_customer_default_address: false))
                             
-//                            let draftOrder = DraftOrderItem(draft_order: DraftOrderItemDetails(id: nil, note: nil, email: nil, taxes_included: nil, currency: nil, invoice_sent_at: nil, created_at: nil, updated_at: nil, tax_exempt: nil, completed_at: nil, name: nil, status: nil, line_items: [DraftOrderLineItem(id: viewModel.product?.variants?[0].product_id, variant_id: viewModel.product?.variants?[0].id, product_id: viewModel.product?.id, title:  viewModel.productTitle, variant_title: nil, sku: "", vendor: viewModel.product?.vendor, quantity: 1, requires_shipping: nil, taxable: true, gift_card: nil, fulfillment_service: nil, grams: nil, tax_lines: nil, applied_discount: nil, name: nil, properties: [
-//                            DraftOrderProperties(name: viewModel.imgUrl ?? "https://cdn.dummyjson.com/products/images/beauty/Eyeshadow%20Palette%20with%20Mirror/thumbnail.png", value: viewModel.imgUrl ?? "https://cdn.dummyjson.com/products/images/beauty/Eyeshadow%20Palette%20with%20Mirror/thumbnail.png")], custom: nil, price: viewModel.price, admin_graphql_api_id: nil)], shipping_address: nil, billing_address: nil, invoice_url: nil, applied_discount: nil, order_id: nil, shipping_line: nil, tax_lines: nil, tags: nil, note_attributes: nil, total_price: nil, subtotal_price: nil, total_tax: nil, payment_terms: nil,presentment_currency: nil,admin_graphql_api_id: nil, customer: DraftOrderCustomer(id: 7290794967219, email: nil, created_at: nil, updated_at: nil, first_name: nil, last_name: nil, orders_count: nil, state: nil, total_spent: nil, last_order_id: nil, note: nil, verified_email: nil, multipass_identifier: nil, tax_exempt: nil, tags: nil, last_order_name: nil, currency: nil, phone: nil, tax_exemptions: nil, email_marketing_consent: nil, sms_marketing_consent: nil, admin_graphql_api_id: nil, default_address: nil),use_customer_default_address: true))
+                            //                            let draftOrder = DraftOrderItem(draft_order: DraftOrderItemDetails(id: nil, note: nil, email: nil, taxes_included: nil, currency: nil, invoice_sent_at: nil, created_at: nil, updated_at: nil, tax_exempt: nil, completed_at: nil, name: nil, status: nil, line_items: [DraftOrderLineItem(id: viewModel.product?.variants?[0].product_id, variant_id: viewModel.product?.variants?[0].id, product_id: viewModel.product?.id, title:  viewModel.productTitle, variant_title: nil, sku: "", vendor: viewModel.product?.vendor, quantity: 1, requires_shipping: nil, taxable: true, gift_card: nil, fulfillment_service: nil, grams: nil, tax_lines: nil, applied_discount: nil, name: nil, properties: [
+                            //                            DraftOrderProperties(name: viewModel.imgUrl ?? "https://cdn.dummyjson.com/products/images/beauty/Eyeshadow%20Palette%20with%20Mirror/thumbnail.png", value: viewModel.imgUrl ?? "https://cdn.dummyjson.com/products/images/beauty/Eyeshadow%20Palette%20with%20Mirror/thumbnail.png")], custom: nil, price: viewModel.price, admin_graphql_api_id: nil)], shipping_address: nil, billing_address: nil, invoice_url: nil, applied_discount: nil, order_id: nil, shipping_line: nil, tax_lines: nil, tags: nil, note_attributes: nil, total_price: nil, subtotal_price: nil, total_tax: nil, payment_terms: nil,presentment_currency: nil,admin_graphql_api_id: nil, customer: DraftOrderCustomer(id: 7290794967219, email: nil, created_at: nil, updated_at: nil, first_name: nil, last_name: nil, orders_count: nil, state: nil, total_spent: nil, last_order_id: nil, note: nil, verified_email: nil, multipass_identifier: nil, tax_exempt: nil, tags: nil, last_order_name: nil, currency: nil, phone: nil, tax_exemptions: nil, email_marketing_consent: nil, sms_marketing_consent: nil, admin_graphql_api_id: nil, default_address: nil),use_customer_default_address: true))
                             print("here is the product \(product)")
                             
-                            if UserDefaultsManager.shared.getUserHasDraftOrders(key: "HasDraft") ?? false {
-                                print("we will update the draft order whose id \(UserDefaultsManager.shared.getUserHasDraftOrders(key: "HasDraft") ?? false)")
+                            if UserDefaultsManager.shared.getUserHasDraftOrders(key: Support.hasDraft) ?? false {
+                                print("we will update the draft order whose id \(UserDefaultsManager.shared.getUserHasDraftOrders(key: Support.hasDraft) ?? false)")
                                 guard let item = draftOrder.draft_order?.line_items?.first else{
                                     return
                                 }
                                 print(item.vendor)
-                              //  viewModel.getDraftOrderById(lineItem: item)
-
+                                //  viewModel.getDraftOrderById(lineItem: item)
+                                
                             } else {
-                                print("we will post a new draft order here because id of draft is \(UserDefaultsManager.shared.getUserHasDraftOrders(key: "HasDraft") ?? false)")
-                               // viewModel.postCardDraftOrder(draftOrder: draftOrder)
+                                print("we will post a new draft order here because id of draft is \(UserDefaultsManager.shared.getUserHasDraftOrders(key: Support.hasDraft) ?? false)")
+                                // viewModel.postCardDraftOrder(draftOrder: draftOrder)
                             }
                         }.padding(.top,30)
                     }
@@ -168,23 +170,25 @@ struct ProductDetailView: View {
             
         }
     }
-}
-
-// Ensure you have ColorDotView implemented somewhere in your project
-struct ColorDotView: View {
-    var color: Color
     
-    var body: some View {
-        color
-            .frame(width: 24, height: 24)
-            .clipShape(Circle())
+    
+    // Ensure you have ColorDotView implemented somewhere in your project
+    struct ColorDotView: View {
+        var color: Color
+        
+        var body: some View {
+            color
+                .frame(width: 24, height: 24)
+                .clipShape(Circle())
+        }
     }
 }
 
-struct ProductDetailView_Previews: PreviewProvider {
-    static var previews: some View {
-        
-        ProductDetailView(productID: "")
+    struct ProductDetailView_Previews: PreviewProvider {
+        static var previews: some View {
+            
+            ProductDetailView(productID: "")
+        }
     }
-}
+    
 

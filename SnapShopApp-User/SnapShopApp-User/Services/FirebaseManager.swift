@@ -30,6 +30,8 @@ class FirebaseManager {
                      if let user = Auth.auth().currentUser {
                          let uid = user.uid
                        userId = uid
+                         UserDefaults.standard.set(uid, forKey: Support.fireBaseUserID)
+
                      }
                      compeltionHandler(true,userId, nil)
                  }
@@ -37,12 +39,17 @@ class FirebaseManager {
     }
     
     func login(email: String, password: String, completion: @escaping (Bool, Error?) -> Void) {
+       
         Auth.auth().signIn(withEmail: email, password: password) { authResult, error in
             if let error = error {
                 print("Error signing in: \(error.localizedDescription)")
                 completion(false, error)
             } else {
                 print("Logged in successfully")
+                if let user = Auth.auth().currentUser {
+                    let uid = user.uid
+                    UserDefaults.standard.set(uid, forKey: Support.fireBaseUserID)
+                }
                 completion(true, nil)
             }
         }

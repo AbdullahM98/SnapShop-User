@@ -27,7 +27,7 @@ class LoginViewModel : ObservableObject {
                     self.errorMessage = error.localizedDescription
                 }
             } else {
-
+                
                 self.getUsers(email: email.lowercased())
             }
         }
@@ -84,13 +84,7 @@ class LoginViewModel : ObservableObject {
     func setISLoggedIn(isLogged :Bool) {
         UserDefaultsManager.shared.setIsloggedIn(key: Support.isLoggedUDKey, value: isLogged)
     }
-    func fetchCustomersLocally() -> [Customer]{
-        return AppCoreData.shared.fetchCustomers()
-    }
-    func saveUserData(customer:Customer){
-        AppCoreData.shared.insertCustomer(customer: customer)
-        
-    }
+
 }
 
 enum LoginViewState {

@@ -27,6 +27,7 @@
         <attribute name="tags" optional="YES" attributeType="String"/>
         <attribute name="title" optional="YES" attributeType="String"/>
         <attribute name="userId" optional="YES" attributeType="String"/>
+        <attribute name="variant_id" optional="YES" attributeType="String"/>
         <attribute name="vendor" optional="YES" attributeType="String"/>
     </entity>
 </model>

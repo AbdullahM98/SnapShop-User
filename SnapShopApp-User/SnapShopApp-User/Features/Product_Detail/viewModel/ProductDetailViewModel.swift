@@ -53,6 +53,12 @@ class ProductDetailViewModel :ObservableObject{
         self.imgUrl = product.image?.src
     }
     
+    func addLocalFavProduct(product:ProductEntity){
+        AppCoreData.shared.addFavProduct(favProduct: product)
+    }
+    func removeFromFavLocal(id:String){
+        AppCoreData.shared.deleteProductById(id: id)
+    }
     
     
     
@@ -116,7 +122,7 @@ class ProductDetailViewModel :ObservableObject{
         }
 
         func setUpUI(product: ProductEntity) {
-            print("Setting up UI with product ID: \(product.id ?? "0")")
+            print("Setting up UI with product ID: \(product.product_id ?? "0")")
             self.vendorTitle = product.vendor ?? "Unknown"
             self.productDecription = product.body_html ?? "No Description"
             self.productTitle = product.title ?? "NO title"
@@ -129,7 +135,7 @@ class ProductDetailViewModel :ObservableObject{
 
         let entity = ProductEntity(
             userId: nil,
-            id: model.id?.description,
+            product_id: model.id?.description,
             variant_Id: model.variants?.first?.id?.description,
             title: model.title,
             body_html: model.body_html,
