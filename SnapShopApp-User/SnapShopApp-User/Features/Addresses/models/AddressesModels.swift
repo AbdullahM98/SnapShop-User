@@ -9,6 +9,9 @@ import Foundation
 struct AddressProfileRoot:Codable{
     let addresses: [AddressProfileDetails]?
 }
+struct AddressForUpdate: Codable{
+    let customer_address: AddressProfileDetails?
+}
 struct AddressProfileDetails: Codable {
     let id: Int?
     let customer_id: Int?

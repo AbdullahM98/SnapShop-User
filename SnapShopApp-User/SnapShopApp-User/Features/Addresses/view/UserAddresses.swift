@@ -10,7 +10,7 @@ import SwiftUI
 struct UserAddresses: View {
     @ObservedObject var viewModel : AddressesViewModel
     @State private var showingBottomSheet = false
-    @State private var settingsDetents = PresentationDetent.medium
+    @State private var settingsDetents = PresentationDetent.height(UIScreen.screenHeight*0.5 + 100)
     var fromCart: Bool
     @Environment(\.presentationMode) var presentationMode
     var didSelectAddress: ((AddressProfileDetails) -> Void)? // Closure to be called when an address is selected
@@ -38,6 +38,8 @@ struct UserAddresses: View {
                 ForEach(viewModel.addresses ?? [],id: \.id) { address in
                     AddressCell(address: address, insideCard: false, onDeleteClick: {
                         viewModel.deleteAddress(addressId: address.id ?? 0)
+                    }, onUpdateClick: { updatedAddress in
+                        viewModel.updateAddress(updatedAddress: updatedAddress, addressId: updatedAddress.customer_address?.id ?? 0)
                     }).onTapGesture {
                         if fromCart == true {
                             print(address)

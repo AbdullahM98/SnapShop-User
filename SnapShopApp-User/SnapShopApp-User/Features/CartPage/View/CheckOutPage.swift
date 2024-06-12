@@ -21,7 +21,7 @@ struct CheckOutPage: View {
             VStack(alignment: .leading){
                 Text("Delivery Address")
                     .bold()
-                AddressCell(address: selectedAddress ?? AddressProfileDetails(id: 0, customer_id: 0, first_name: "", last_name: "", company: "", address1: "", address2: "", city: "", province: "", country: "", zip: "", phone: "", name: "", province_code: "", country_code: "", country_name: "", default: true), insideCard: true, onDeleteClick: {})
+                AddressCell(address: selectedAddress ?? AddressProfileDetails(id: 0, customer_id: 0, first_name: "", last_name: "", company: "", address1: "", address2: "", city: "", province: "", country: "", zip: "", phone: "", name: "", province_code: "", country_code: "", country_name: "", default: true), insideCard: true, onDeleteClick: {}, onUpdateClick: {_ in})
                 
                 NavigationLink(destination: UserAddresses(viewModel: addressViewModel,fromCart: true, didSelectAddress: { address in
                     selectedAddress = address

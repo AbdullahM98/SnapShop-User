@@ -1,21 +1,21 @@
 //
-//  AddAddress.swift
+//  EditAddress.swift
 //  SnapShopApp-User
 //
-//  Created by husayn on 06/06/2024.
+//  Created by husayn on 11/06/2024.
 //
 
 import SwiftUI
 
-struct AddAddress: View {
-    @State var addresses: [AddressProfileDetails]?
-    @State var addressTextFieldData: String = ""
-    @State var cityTextFieldData: String = ""
-    @State var countryTextFieldData: String = ""
-    @State var zipTextFieldData: String = ""
-    @State var phoneAddressTextFieldData: String = ""
-    var onSaveClick : (_ address:NewAddressRoot) -> Void
+struct EditAddress: View {
+    var onSaveClick : (AddressForUpdate) -> Void
     var onCancelClick : () -> Void
+    var customerAddress: AddressProfileDetails?
+    @State var addressEdit: String = ""
+    @State var cityEdit: String = ""
+    @State var countryEdit: String = ""
+    @State var zipEdit: String = ""
+    @State var phoneAddressEdit: String = ""
     @State private var validationMessages: [FieldType: String] = [:]
     @State private var isFieldValid: [FieldType: Bool] = [
         .address: true,
@@ -23,27 +23,26 @@ struct AddAddress: View {
         .country: true,
         .phone: true
     ]
+
     var body: some View {
         VStack(alignment: .leading,spacing: 8){
             HStack{
                 Spacer()
-                Text("Add New Address")
+                Text("Edit Address")
                     .font(.title2)
                 Spacer()
             }
             VStack(alignment: .leading){
                 Text("Address")
                     .padding(.top,4)
-                TextField("Street No.", text: $addressTextFieldData,onEditingChanged: { (isEditing) in
+                TextField( customerAddress?.address1 ?? "Street No.", text: $addressEdit,onEditingChanged: { (isEditing) in
                     if !isEditing {
-                        validateField(fieldType: .address, value: $addressTextFieldData.wrappedValue)
+                        validateField(fieldType: .address, value: $addressEdit.wrappedValue)
                     }
-                })
-                    .padding(.all,8).overlay(
-                        RoundedRectangle(cornerRadius: 8)
-                            .stroke(isFieldValid[.address]! ? Color.gray : Color.red, lineWidth: 1)
-                    )
-                
+                }).padding(.all,8).overlay(
+                    RoundedRectangle(cornerRadius: 8)
+                        .stroke(isFieldValid[.address]! ? Color.gray : Color.red, lineWidth: 1)
+                )
                 if let message = validationMessages[.address], !message.isEmpty {
                     Text(message)
                         .foregroundColor(.red)
@@ -53,16 +52,15 @@ struct AddAddress: View {
             HStack {
                 VStack(alignment: .leading){
                     Text("City")
-                    TextField("Town", text: $cityTextFieldData,onEditingChanged: { (isEditing) in
+                    TextField(customerAddress?.city ?? "Example", text: $cityEdit,onEditingChanged: { (isEditing) in
                         if !isEditing {
-                            validateField(fieldType: .city, value: $cityTextFieldData.wrappedValue)
+                            validateField(fieldType: .city, value: $cityEdit.wrappedValue)
                         }
                     })
                         .padding(.all,8).overlay(
                             RoundedRectangle(cornerRadius: 8)
                                 .stroke(isFieldValid[.city]! ? Color.gray : Color.red, lineWidth: 1)
                         )
-                    
                     if let message = validationMessages[.city], !message.isEmpty {
                         Text(message)
                             .foregroundColor(.red)
@@ -71,16 +69,15 @@ struct AddAddress: View {
                 }
                 VStack(alignment: .leading){
                     Text("Country")
-                    TextField("Egypt", text: $countryTextFieldData,onEditingChanged: { (isEditing) in
+                    TextField(customerAddress?.country ?? "Example", text: $countryEdit,onEditingChanged: { (isEditing) in
                         if !isEditing {
-                            validateField(fieldType: .country, value: $countryTextFieldData.wrappedValue)
+                            validateField(fieldType: .country, value: $countryEdit.wrappedValue)
                         }
                     })
                         .padding(.all,8).overlay(
                             RoundedRectangle(cornerRadius: 8)
                                 .stroke(isFieldValid[.country]! ? Color.gray : Color.red, lineWidth: 1)
                         )
-                    
                     if let message = validationMessages[.country], !message.isEmpty {
                         Text(message)
                             .foregroundColor(.red)
@@ -90,16 +87,15 @@ struct AddAddress: View {
             }.padding(.horizontal,16)
             VStack(alignment: .leading){
                 Text("Phone Number")
-                TextField("+20 XXXX XXX XXX", text: $phoneAddressTextFieldData,onEditingChanged: { (isEditing) in
+                TextField(customerAddress?.phone ?? "+20 XXXX XXX XXX", text: $phoneAddressEdit,onEditingChanged: { (isEditing) in
                     if !isEditing {
-                        validateField(fieldType: .phone, value: $phoneAddressTextFieldData.wrappedValue)
+                        validateField(fieldType: .phone, value: $phoneAddressEdit.wrappedValue)
                     }
                 })
                     .padding(.all,8).overlay(
                         RoundedRectangle(cornerRadius: 8)
                             .stroke(isFieldValid[.phone]! ? Color.gray : Color.red, lineWidth: 1)
                     ).keyboardType(.phonePad)
-                
                 if let message = validationMessages[.phone], !message.isEmpty {
                     Text(message)
                         .foregroundColor(.red)
@@ -108,9 +104,11 @@ struct AddAddress: View {
             }.padding(.horizontal,16)
             VStack(alignment: .leading){
                 Text("Zip Code")
-                TextField("6789", text: $zipTextFieldData)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .keyboardType(.numberPad)
+                TextField(customerAddress?.zip ?? "6789", text: $zipEdit)
+                    .padding(.all,8).overlay(
+                        RoundedRectangle(cornerRadius: 8)
+                            .stroke(Color.gray , lineWidth: 1)
+                    )                    .keyboardType(.numberPad)
             }.padding(.horizontal,16)
             HStack{
                 Button(action: {
@@ -130,7 +128,7 @@ struct AddAddress: View {
                 Button(action: {
                     if validateAllFields() {
                         
-                        onSaveClick(NewAddressRoot(customer_address: NewAddressDetails(id: nil, customer_id: Int("7290794967219"), address1: addressTextFieldData, address2: nil, city: cityTextFieldData, zip: zipTextFieldData, phone: phoneAddressTextFieldData, name: nil, province_code: nil, country_code: "EG", country_name: countryTextFieldData, default: false)))
+                        onSaveClick(AddressForUpdate(customer_address: AddressProfileDetails(id: customerAddress?.id, customer_id: customerAddress?.customer_id, first_name: customerAddress?.first_name, last_name: customerAddress?.last_name, company: customerAddress?.company, address1: addressEdit, address2: customerAddress?.address2, city: cityEdit, province: customerAddress?.province, country: countryEdit, zip: zipEdit, phone: phoneAddressEdit, name: customerAddress?.name, province_code: customerAddress?.province_code, country_code: customerAddress?.country_code, country_name: customerAddress?.country_name, default: false)))
                     }
                 }) {
                     Text("Save")
@@ -142,6 +140,12 @@ struct AddAddress: View {
             }.padding(.horizontal)
                 .padding(.vertical,4)
                 .padding(.bottom,16)
+        }.onAppear{
+            self.addressEdit = customerAddress?.address1 ?? ""
+            self.cityEdit = customerAddress?.city ?? ""
+            self.countryEdit = customerAddress?.country ?? ""
+            self.phoneAddressEdit = customerAddress?.phone ?? ""
+            self.zipEdit = customerAddress?.zip ?? ""
         }
     }
     func validateField(fieldType: FieldType, value: String) {
@@ -193,11 +197,12 @@ struct AddAddress: View {
         let phonePred = NSPredicate(format: "SELF MATCHES %@", phoneRegEx)
         return phonePred.evaluate(with: phone)
     }
-    
+
+
 }
 
-struct AddAddress_Previews: PreviewProvider {
+struct EditAddress_Previews: PreviewProvider {
     static var previews: some View {
-        AddAddress(onSaveClick: {address in }, onCancelClick: {})
+        EditAddress(onSaveClick: {_ in }, onCancelClick: {})
     }
 }

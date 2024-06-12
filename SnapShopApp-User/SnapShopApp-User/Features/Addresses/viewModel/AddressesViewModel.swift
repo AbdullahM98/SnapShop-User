@@ -24,7 +24,7 @@ class AddressesViewModel:ObservableObject{
             switch result {
             case .success(let address):
                 DispatchQueue.main.async {
-                    self?.addresses = address.addresses     
+                    self?.addresses = address.addresses
                     self?.isLoading = false
 
                 }
@@ -49,7 +49,7 @@ class AddressesViewModel:ObservableObject{
             }
         }
     }
-    //delete address
+    //delete user address
     func deleteAddress(customerId:String = "7290794967219",addressId:Int){
         Network.shared.deleteObject(with: "\(Support.baseUrl)/customers/\(customerId)/addresses/\(addressId).json") { [weak self] result in
             self?.fetchUserAddresses()
@@ -61,6 +61,20 @@ class AddressesViewModel:ObservableObject{
             
             }
             print(result?.localizedDescription)
+        }
+    }
+    //update user address
+    func updateAddress(updatedAddress:AddressForUpdate,customerId: String = "7290794967219",addressId:Int){
+        Network.shared.updateData(object: updatedAddress, to: "\(Support.baseUrl)/customers/\(customerId)/addresses/\(addressId).json") { [weak self] result in
+            switch result{
+            case .success(let response):
+                DispatchQueue.main.async {
+                    print("\(response.customer_address?.country_name ?? "")")
+                    self?.fetchUserAddresses()
+                }
+            case .failure(let err):
+                print("error updating user address: \(err)")
+            }
         }
     }
     
