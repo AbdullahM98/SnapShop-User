@@ -86,6 +86,8 @@
 		76257A3E2C177900001C4006 /* FirestoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76257A3D2C177900001C4006 /* FirestoreManager.swift */; };
 		76257A432C17DDDE001C4006 /* FavoriteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76257A422C17DDDE001C4006 /* FavoriteView.swift */; };
 		76257A452C17DDF2001C4006 /* FavoriteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76257A442C17DDF2001C4006 /* FavoriteViewModel.swift */; };
+		76257A4D2C188897001C4006 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76257A4C2C188897001C4006 /* SettingsViewModel.swift */; };
+		76257A4F2C1896EF001C4006 /* customBottomSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76257A4E2C1896EF001C4006 /* customBottomSheet.swift */; };
 		76560C522C13570200B6103A /* CustomColorDot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76560C512C13570200B6103A /* CustomColorDot.swift */; };
 		7678362F2C121327001E4BFB /* ProductDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7678362E2C121327001E4BFB /* ProductDetailView.swift */; };
 		767836332C121A04001E4BFB /* ProductDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 767836322C121A04001E4BFB /* ProductDetailViewModel.swift */; };
@@ -193,6 +195,8 @@
 		76257A3D2C177900001C4006 /* FirestoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreManager.swift; sourceTree = "<group>"; };
 		76257A422C17DDDE001C4006 /* FavoriteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteView.swift; sourceTree = "<group>"; };
 		76257A442C17DDF2001C4006 /* FavoriteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteViewModel.swift; sourceTree = "<group>"; };
+		76257A4C2C188897001C4006 /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
+		76257A4E2C1896EF001C4006 /* customBottomSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = customBottomSheet.swift; sourceTree = "<group>"; };
 		76560C512C13570200B6103A /* CustomColorDot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomColorDot.swift; sourceTree = "<group>"; };
 		7678362E2C121327001E4BFB /* ProductDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailView.swift; sourceTree = "<group>"; };
 		767836322C121A04001E4BFB /* ProductDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailViewModel.swift; sourceTree = "<group>"; };
@@ -403,6 +407,7 @@
 			isa = PBXGroup;
 			children = (
 				5627DB2E2C123D2500AB6464 /* ProfileViewModel.swift */,
+				76257A4C2C188897001C4006 /* SettingsViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -623,6 +628,7 @@
 				0AF583732C11F227006D5059 /* FilterButton.swift */,
 				0AF5837B2C11F2E1006D5059 /* CustomBackButton.swift */,
 				561695092C17421D0018F9C6 /* CustomCircularProgress.swift */,
+				76257A4E2C1896EF001C4006 /* customBottomSheet.swift */,
 			);
 			path = CustomViews;
 			sourceTree = "<group>";
@@ -1038,6 +1044,7 @@
 				5606E7A22C1207DB00B728FD /* CouponsPage.swift in Sources */,
 				0AF5836A2C11F0D1006D5059 /* CustomAppBar.swift in Sources */,
 				76257A452C17DDF2001C4006 /* FavoriteViewModel.swift in Sources */,
+				76257A4F2C1896EF001C4006 /* customBottomSheet.swift in Sources */,
 				767836332C121A04001E4BFB /* ProductDetailViewModel.swift in Sources */,
 				7606FBB12C0F813900E1D3AF /* FirebaseManager.swift in Sources */,
 				0AF583742C11F227006D5059 /* FilterButton.swift in Sources */,
@@ -1063,6 +1070,7 @@
 				56DC253F2C15B65200008690 /* ProfileModels.swift in Sources */,
 				0AF5834F2C11EEC4006D5059 /* TabBarButton.swift in Sources */,
 				56D46E912C14FCC00019EA1B /* CheckOutPage.swift in Sources */,
+				76257A4D2C188897001C4006 /* SettingsViewModel.swift in Sources */,
 				7606FB9E2C0F76A100E1D3AF /* LoginViewModel.swift in Sources */,
 				0AFF598E2C177AF1002DEAFC /* OrdersViewModel.swift in Sources */,
 				5606E7AD2C120CB900B728FD /* DiscountsModel.swift in Sources */,

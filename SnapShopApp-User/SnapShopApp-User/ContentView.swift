@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     @State var selectedTab:Tabs = .home
+    
     var body: some View {
 
         NavigationStack{
@@ -27,7 +28,7 @@ struct ContentView: View {
                 }
                 Spacer()
                 AppTabBar(selectedTab: $selectedTab)
-            }.ignoresSafeArea(edges: .bottom)
+            }.navigationBarBackButtonHidden(true).ignoresSafeArea(edges: .bottom)
         }
 
     }
