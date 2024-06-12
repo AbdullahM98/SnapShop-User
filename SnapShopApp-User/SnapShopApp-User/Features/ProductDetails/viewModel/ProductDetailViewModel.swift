@@ -9,8 +9,8 @@ import Foundation
 import Combine
 import SwiftUI
 class ProductDetailViewModel :ObservableObject{
-    @Published var myOrder:DraftOrderItemDetails?
-    @Published var oldOrder:DraftOrderItemDetails?
+    @Published var orderToPost:DraftOrderItemDetails?
+    @Published var orderToUpdate:DraftOrderItemDetails?
     @Published var vendorTitle:String = "Nike"
     @Published var currentCurrency:String = "USD"
     @Published var price:String = "300.00"
@@ -20,6 +20,7 @@ class ProductDetailViewModel :ObservableObject{
     @Published var selectedColor: Color? = nil
     @Published var isFavorite :Bool = false
     @Published var product: ProductEntity?
+    @Published var productModel: ProductModel?
     @Published var errorMessage: String?
     @Published var imgUrl :String?
     private var cancellables = Set<AnyCancellable>()
@@ -38,6 +39,7 @@ class ProductDetailViewModel :ObservableObject{
                 DispatchQueue.main.async {
                 //    self?.product = productResponse.product
                     self?.setUpUI(product: productResponse.product!)
+                    self?.productModel = productResponse.product!
                     print(productResponse.product?.product_type ?? "No product type")
                 }
             })
@@ -51,6 +53,7 @@ class ProductDetailViewModel :ObservableObject{
         self.productTitle = product.title ?? "NO title"
         self.price = product.variants?[0].price ?? "30"
         self.imgUrl = product.image?.src
+        self.availbleQuantity = "\(product.variants?.first?.inventory_quantity ?? 0)"
     }
     
     func addLocalFavProduct(product:ProductEntity){
@@ -60,20 +63,31 @@ class ProductDetailViewModel :ObservableObject{
         AppCoreData.shared.deleteProductById(id: id)
     }
     
-    
+    func prepareDraftOrderToPost(){
+        guard let productToPost = productModel else { return }
+        guard let customerID = UserDefaultsManager.shared.getUserId(key: Support.userID) else { return }
+        
+        let userOrder = DraftOrderItem(draft_order: DraftOrderItemDetails(id: nil, note: nil, email: nil, taxes_included: nil, currency: "USD", invoice_sent_at: nil, created_at: nil, updated_at: nil, tax_exempt: nil, completed_at: nil, name: nil, status: nil, line_items: [DraftOrderLineItem(id: nil, variant_id: productToPost.variants?.first?.id, product_id: productToPost.id, title: productTitle, variant_title: nil, sku: nil, vendor: vendorTitle, quantity: 1, requires_shipping: nil, taxable: true, gift_card: nil, fulfillment_service: nil, grams: nil, tax_lines: nil, applied_discount: nil, name: nil, properties: [DraftOrderProperties(name: "productImage", value: imgUrl ?? "")], custom: nil, price: price, admin_graphql_api_id: nil)], shipping_address: nil, billing_address: nil, invoice_url: nil, applied_discount: nil, order_id: nil, shipping_line: nil, tax_lines: nil, tags: nil, note_attributes: nil, total_price: nil, subtotal_price: nil, total_tax: nil, payment_terms: nil, presentment_currency: nil, admin_graphql_api_id: nil, customer: DraftOrderCustomer(id: customerID , email: nil, created_at: nil, updated_at: nil, first_name: nil, last_name: nil, orders_count: nil, state: nil, total_spent: nil, last_order_id: nil, note: nil, verified_email: nil, multipass_identifier: nil, tax_exempt: nil, tags: nil, last_order_name: nil, currency: nil, phone: nil, tax_exemptions: nil, email_marketing_consent: nil, sms_marketing_consent: nil, admin_graphql_api_id: nil, default_address: nil), use_customer_default_address: true))
+        if !(UserDefaultsManager.shared.getUserHasDraftOrders(key: "HasDraft") ?? false) {
+            print("User Does not have any draft orders \(UserDefaultsManager.shared.getUserHasDraftOrders(key: "HasDraft"))")
+            postCardDraftOrder(draftOrder: userOrder)
+        }else{
+            print("user cant post because User have draft order because  \(UserDefaultsManager.shared.getUserHasDraftOrders(key: "HasDraft")) and his draft Order id is \(UserDefaultsManager.shared.getUserDraftOrderId(key: "DraftId"))")
+            guard let itemToUpdate = userOrder.draft_order?.line_items?.first else { return }
+            getDraftOrderById(lineItem: itemToUpdate)
+        }
+    }
     
     func postCardDraftOrder(draftOrder:DraftOrderItem){
         Network.shared.postData(object: draftOrder, to: "https://mad-ism-ios-1.myshopify.com/admin/api/2024-04/draft_orders.json" ){  [weak self] result in
             switch result {
             case .success(let response):
                 DispatchQueue.main.async {
-                    self?.myOrder = response.draft_order
-                    
+                    self?.orderToPost = response.draft_order
                     UserDefaultsManager.shared.setUserHasDraftOrders(key: "HasDraft", value: true)
-                    UserDefaultsManager.shared.setUserDraftOrderId(key: "DraftId", value: self?.myOrder?.id ?? 0)
-                    print("HemaMar3i is Here",self?.myOrder?.name)
+                    UserDefaultsManager.shared.setUserDraftOrderId(key: "DraftId", value: self?.orderToPost?.id ?? 0)
+                    print("Posting order with name : ",self?.orderToPost?.name ?? "-1")
                 }
-                print("HElllllo")
             case .failure(let error):
                 print("Error posting user order: \(error)")
                 print("Error posting user order: \(error.localizedDescription)")
@@ -82,14 +96,15 @@ class ProductDetailViewModel :ObservableObject{
     }
     
     func getDraftOrderById(lineItem:DraftOrderLineItem){
-        let orderID = UserDefaultsManager.shared.getUserDraftOrderId(key: "DraftId")
-        print(orderID ?? 0)
-        Network.shared.request("https://mad-ism-ios-1.myshopify.com/admin/api/2024-04/draft_orders/\(orderID ?? 0).json", method: "GET", responseType: DraftOrderItem.self) { [weak self] result in
+        guard let orderID = UserDefaultsManager.shared.getUserDraftOrderId(key: "DraftId") else { return }
+        print("User Have DraftOrder and its ID is : \(orderID)")
+        
+        Network.shared.request("https://mad-ism-ios-1.myshopify.com/admin/api/2024-04/draft_orders/\(orderID).json", method: "GET", responseType: DraftOrderItem.self) { [weak self] result in
             switch result{
             case .success(let order):
                 DispatchQueue.main.async {
-                    self?.oldOrder = order.draft_order
-                    print(self?.oldOrder)
+                    guard let draftOrder = order.draft_order else {return}
+                    self?.orderToUpdate = draftOrder
                     self?.updateUserData(lineItem: lineItem)
                 }
             case .failure(let err):
@@ -101,16 +116,18 @@ class ProductDetailViewModel :ObservableObject{
     }
     
     func updateUserData(lineItem:DraftOrderLineItem){
-        print(self.oldOrder?.line_items?.count ?? 0)
-        self.oldOrder?.line_items?.append(lineItem)
-        print(self.oldOrder?.line_items?.count ?? 0)
-        let orderID = UserDefaultsManager.shared.getUserDraftOrderId(key: "DraftId")
-        let updatedOrder = DraftOrderItem(draft_order: self.oldOrder)
-        Network.shared.updateData(object: updatedOrder, to: "https://mad-ism-ios-1.myshopify.com/admin/api/2024-04/draft_orders/\(orderID ?? 0).json" ){  [weak self] result in
+        print("old order line items before update ",self.orderToUpdate?.line_items?.count ?? 0)
+        self.orderToUpdate?.line_items?.append(lineItem)
+        print("old order line item afteer update ",self.orderToUpdate?.line_items?.count ?? 0)
+        
+        guard let orderID = UserDefaultsManager.shared.getUserDraftOrderId(key: "DraftId") else { return }
+        let updatedOrder = DraftOrderItem(draft_order: self.orderToUpdate)
+        Network.shared.updateData(object: updatedOrder, to: "https://mad-ism-ios-1.myshopify.com/admin/api/2024-04/draft_orders/\(orderID).json" ){result in
             switch result {
             case .success(let response):
                 DispatchQueue.main.async {
-                    print(response.draft_order?.line_items?.count ?? 0)
+                    print("Draft Updated Successfully")
+                    print("User have ",response.draft_order?.line_items?.count ?? 0," line items")
                 }
             case .failure(let error):
                 print(error.localizedDescription)
@@ -130,25 +147,5 @@ class ProductDetailViewModel :ObservableObject{
             self.imgUrl = product.images?.first
         }
     
-    func convertToEntity(from model: ProductModel) -> ProductEntity {
-        let imageSources = model.images?.compactMap { $0.src } ?? []
-
-        let entity = ProductEntity(
-            userId: nil,
-            product_id: model.id?.description,
-            variant_Id: model.variants?.first?.id?.description,
-            title: model.title,
-            body_html: model.body_html,
-            vendor: model.vendor,
-            product_type: model.product_type,
-            inventory_quantity: model.variants?.first?.inventory_quantity?.description,
-            tags: model.tags,
-            price: model.variants?.first?.price,
-            images: imageSources,
-            isFav: false
-        )
-
-        return entity
-
-    }
+  
 }

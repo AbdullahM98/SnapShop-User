@@ -29,15 +29,13 @@ class CartViewModel :ObservableObject{
         Network.shared.request("\(Support.baseUrl)/draft_orders.json", method: "GET", responseType: ListOfDraftOrders.self) { [weak self] result in
             switch result {
             case .success(let response):
-                print("YLAAA YAH AHMED")
                 DispatchQueue.main.async {
                     self?.viewState = .userActive
                     self?.draft = response.draft_orders
                     self?.total = 0
                     self?.getSpecificUserCart()
-                    print(self?.draft?.count ?? 0)
+                    print("app have orders ",self?.draft?.count ?? 0,"ssssss")
                 }
-                print("3ash YA AHMED")
             case .failure(let error):
                 print("Error fetching card draft order: \(error)")
                 self?.viewState = .userInActive
@@ -48,11 +46,12 @@ class CartViewModel :ObservableObject{
     func getSpecificUserCart(){
         print("Yla y3mmm")
         let newDraft = draft?.filter({ item in
-            item.customer?.id == UserDefaults.standard.integer(forKey: Support.userID)
+            item.customer?.id == (UserDefaultsManager.shared.getUserId(key: Support.userID) ?? 0)
         })
         self.userOrders = newDraft ?? []
         self.lineItems = self.userOrders.first?.line_items ?? []
         print("Abduullah has ",newDraft?.count ?? 0,"orders")
+        print("Line Items is \(self.lineItems.count) count")
         for order in self.userOrders {
             total += Double(order.subtotal_price ?? "-200") ?? -100
         }

@@ -80,18 +80,16 @@ class HomeViewModel :ObservableObject{
         }
     }
     
-    
-    func getCardDraftOrder(){
+    func fetchAllDraftOrdersOfApplication(){
         Network.shared.request("\(Support.baseUrl)/draft_orders.json", method: "GET", responseType: ListOfDraftOrders.self) { [weak self] result in
             switch result {
             case .success(let response):
-                print("YLAAA YAH AHMED")
+                print("getting App draft orders")
                 DispatchQueue.main.async {
                     self?.draft = response.draft_orders
-                    print(self?.draft?.count ?? 0)
+                    print("app have ",self?.draft?.count ?? 0," draft orders")
                     self?.getUserDraftOrders()
                 }
-                print("3ash YA AHMED")
             case .failure(let error):
                 print("Error fetching DraftOrders: \(error)")
             }
@@ -99,18 +97,16 @@ class HomeViewModel :ObservableObject{
     }
     
     func getUserDraftOrders(){
-        let newDraft = draft?.filter({ item in
-            item.customer?.id == 7290794967219
+        let userDraftOrder = draft?.filter({ item in
+            item.customer?.id == (UserDefaultsManager.shared.getUserId(key: Support.userID) ?? 0)
         })
-        print(newDraft?.count)
-        self.userOrders = newDraft ?? []
-        
-        if self.userOrders.count >= 1 {
+        print("usser have ",userDraftOrder?.count ?? 0," draft order")
+        self.userOrders = userDraftOrder ?? []
+        print("User Have No Draft Orders -> ",self.userOrders.count)
+        if !self.userOrders.isEmpty {
             print(" user has orders")
             UserDefaultsManager.shared.setUserHasDraftOrders(key: "HasDraft", value: true)
             UserDefaultsManager.shared.setUserDraftOrderId(key: "DraftId", value: self.userOrders.first?.id ?? 0)
         }
     }
-
-    
 }

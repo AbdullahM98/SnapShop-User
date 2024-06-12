@@ -152,7 +152,7 @@ struct DraftOrderCustomer: Codable {
     let email_marketing_consent: DraftOrderMarketingConsent?
     let sms_marketing_consent: DraftOrderMarketingConsent?
     let admin_graphql_api_id: String?
-    let default_address: DraftOrderAddress?
+    let default_address: Address?
 }
 
 struct DraftOrderMarketingConsent: Codable {

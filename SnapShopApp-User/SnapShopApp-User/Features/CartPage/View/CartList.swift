@@ -50,7 +50,7 @@ struct CartList: View {
                     Image("empty_box").resizable().padding(.vertical,150)
                 }            }
         }.onAppear{
-            //viewModel.getCardDraftOrder()
+            viewModel.getCardDraftOrder()
         }
     }
 }

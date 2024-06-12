@@ -27,7 +27,7 @@ struct HomeView: View {
         }.onAppear{
             viewModel.fetchBrands()
             viewModel.fetchProducts()
-            viewModel.getCardDraftOrder()
+            viewModel.fetchAllDraftOrdersOfApplication()
         }
         
     }

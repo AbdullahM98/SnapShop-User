@@ -95,6 +95,3 @@ struct FavoriteView: View {
         }
     }
 }
-#Preview {
-    FavoriteView(viewModel: FavoriteViewModel())
-}
