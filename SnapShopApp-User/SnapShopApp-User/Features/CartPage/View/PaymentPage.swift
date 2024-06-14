@@ -38,11 +38,11 @@ struct PaymentPage: View {
 
 
 
-struct PaymentPage_Previews: PreviewProvider {
-    static var previews: some View {
-        PaymentPage(onApplePayClick: {}, onCashOnDeliveryClick: {})
-    }
-}
+//struct PaymentPage_Previews: PreviewProvider {
+//    static var previews: some View {
+//        PaymentPage(onApplePayClick: {}, onCashOnDeliveryClick: {}, userOrders: <#[DraftOrderItemDetails]#>)
+//    }
+//}
 struct ApplePayButton: UIViewRepresentable {
     var userOrders:[DraftOrderItemDetails]
 

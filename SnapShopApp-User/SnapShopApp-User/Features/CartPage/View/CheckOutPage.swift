@@ -16,6 +16,7 @@ struct CheckOutPage: View {
     @State private var navigateToAddresses = false // Flag to trigger navigation
     @State private var selectedAddress: AddressProfileDetails? // Track the selected address
     @ObservedObject var addressViewModel = AddressesViewModel()
+    @ObservedObject var cartViewModel = CartViewModel()
     var address:DraftOrderAddress
     var subTotalPrice: String
     var totalTaxes: String
@@ -88,7 +89,7 @@ struct CheckOutPage: View {
                         }, onCashOnDeliveryClick: {
                             showingBottomSheet.toggle()
                             //post order with onCashDelivery
-                        }).presentationDetents([.medium], selection: $settingsDetents)
+                        }, userOrders: cartViewModel.userOrders).presentationDetents([.medium], selection: $settingsDetents)
                     }
                     Spacer()
                 }
