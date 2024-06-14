@@ -27,9 +27,9 @@ class ApplePayStrategy: NSObject,PKPaymentAuthorizationControllerDelegate {
         var paymentController: PKPaymentAuthorizationController?
         var paymentSummaryItems = [PKPaymentSummaryItem]()
         lineItems.forEach { lineItem in
-            let item = PKPaymentSummaryItem(label: lineItem.name ?? "", amount: NSDecimalNumber(string: "\(lineItem.price ?? "0.00")"), type: .final)
+            let item = PKPaymentSummaryItem(label: lineItem.name ?? "", amount: NSDecimalNumber(string: "\(lineItem.price ?? "")"), type: .final)
         }
-        let total = PKPaymentSummaryItem(label: "Total", amount: NSDecimalNumber(string: "\(userOrders.first?.total_price ?? "0.00")"), type: .final)
+        let total = PKPaymentSummaryItem(label: "Total", amount: NSDecimalNumber(string: "\(userOrders.first?.total_price ?? "0.0")"), type: .final)
         paymentSummaryItems.append(total)
         
         var paymentRequest = PKPaymentRequest()
@@ -42,6 +42,15 @@ class ApplePayStrategy: NSObject,PKPaymentAuthorizationControllerDelegate {
         paymentRequest.merchantIdentifier = "merchant.SnapShopApp-User"
         paymentRequest.merchantCapabilities = .capability3DS
         paymentRequest.shippingMethods = shippingMethodCalculator()
+        //from here
+        let contact = PKContact()
+        var name = PersonNameComponents()
+        name.givenName = userOrders.first?.customer?.first_name
+        name.familyName = userOrders.first?.customer?.last_name
+        contact.name = name
+        contact.phoneNumber = CNPhoneNumber(stringValue: userOrders.first?.customer?.phone ?? "")
+        paymentRequest.shippingContact = contact
+        //to here
         paymentRequest.requiredShippingContactFields = [.name,.phoneNumber]
         paymentController = PKPaymentAuthorizationController(paymentRequest: paymentRequest)
         paymentController?.delegate = self
