@@ -8,9 +8,13 @@
 import Foundation
 import SwiftUI
 class CartViewModel :ObservableObject{
+    //order to append new line item
     @Published var oldOrder:DraftOrderItemDetails?
+    //all drafts
     @Published private (set) var draft:[DraftOrderItemDetails]?
+    //user draft order
     @Published private (set) var userOrders:[DraftOrderItemDetails] = []
+    //user lineitems
     @Published private (set) var lineItems:[DraftOrderLineItem] = []
     @Published var total: Double = 0.0
     @Published var viewState:CartViewState
@@ -26,6 +30,7 @@ class CartViewModel :ObservableObject{
         
         
     }
+    //get all draft orders
     func getCardDraftOrder(){
         Network.shared.request("\(Support.baseUrl)/draft_orders.json", method: "GET", responseType: ListOfDraftOrders.self) { [weak self] result in
             switch result {
@@ -45,6 +50,7 @@ class CartViewModel :ObservableObject{
             }
         }
     }
+    //get user draft order
     func getSpecificUserCart(){
         print("Yla y3mmm")
         let newDraft = draft?.filter({ item in
@@ -61,9 +67,7 @@ class CartViewModel :ObservableObject{
         print(userOrders.first?.total_price ?? 0)
         
     }
-    func updateLineItemQty(){
-        self.lineItems
-    }
+    
     func getDraftOrderById(lineItem:DraftOrderLineItem){
         let orderID = UserDefaultsManager.shared.getUserDraftOrderId(key: "DraftId")
         print(orderID ?? 0)
@@ -81,10 +85,11 @@ class CartViewModel :ObservableObject{
             }
         }
     }
+    //delete item from drafts
     func deleteLineItemFromDraftOrder(lineItem:DraftOrderLineItem){
         
-        
         if oldOrder?.line_items?.count == 1 {
+            //delete draft itself
             deleteCardDraftOrder()
         }else{
             print(self.oldOrder?.line_items?.count ?? 0)
@@ -109,6 +114,7 @@ class CartViewModel :ObservableObject{
         }
         
     }
+    //delete draft itself
     func deleteCardDraftOrder(){
         let orderID = UserDefaultsManager.shared.getUserDraftOrderId(key: "DraftId")
         Network.shared.deleteObject(with: "\(Support.baseUrl)/draft_orders/\(orderID ?? 0).json") { [weak self] result in

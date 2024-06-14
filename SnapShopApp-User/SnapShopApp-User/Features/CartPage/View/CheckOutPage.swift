@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import PassKit
 
 struct CheckOutPage: View {
     @State private var discountCode: String = ""
@@ -83,8 +84,10 @@ struct CheckOutPage: View {
                     }).sheet(isPresented: $showingBottomSheet) {
                         PaymentPage(onApplePayClick: {
                             showingBottomSheet.toggle()
+                            
                         }, onCashOnDeliveryClick: {
                             showingBottomSheet.toggle()
+                            //post order with onCashDelivery
                         }).presentationDetents([.medium], selection: $settingsDetents)
                     }
                     Spacer()
