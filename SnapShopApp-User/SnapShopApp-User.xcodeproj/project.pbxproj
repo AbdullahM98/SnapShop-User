@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0A44F0BA2C1C7CF70031E649 /* TwoButtonAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A44F0B92C1C7CF70031E649 /* TwoButtonAlert.swift */; };
+		0A44F0BD2C1C815A0031E649 /* Color + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A44F0BC2C1C815A0031E649 /* Color + Extension.swift */; };
+		0A44F0BF2C1C82ED0031E649 /* OneButtonAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A44F0BE2C1C82ED0031E649 /* OneButtonAlert.swift */; };
+		0A44F0C12C1C84F30031E649 /* ImageButtonAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A44F0C02C1C84F30031E649 /* ImageButtonAlert.swift */; };
+		0A44F0C32C1C86B10031E649 /* AutoDismissAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A44F0C22C1C86B10031E649 /* AutoDismissAlert.swift */; };
 		0AF5834D2C11EEA6006D5059 /* AppTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF5834C2C11EEA6006D5059 /* AppTabBar.swift */; };
 		0AF5834F2C11EEC4006D5059 /* TabBarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF5834E2C11EEC4006D5059 /* TabBarButton.swift */; };
 		0AF583542C11EF58006D5059 /* PopularBrands.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF583532C11EF58006D5059 /* PopularBrands.swift */; };
@@ -119,6 +124,11 @@
 
 /* Begin PBXFileReference section */
 		04553098669505B5F6194535 /* Pods-SnapShopApp-User-SnapShopApp-UserUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SnapShopApp-User-SnapShopApp-UserUITests.debug.xcconfig"; path = "Target Support Files/Pods-SnapShopApp-User-SnapShopApp-UserUITests/Pods-SnapShopApp-User-SnapShopApp-UserUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		0A44F0B92C1C7CF70031E649 /* TwoButtonAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwoButtonAlert.swift; sourceTree = "<group>"; };
+		0A44F0BC2C1C815A0031E649 /* Color + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color + Extension.swift"; sourceTree = "<group>"; };
+		0A44F0BE2C1C82ED0031E649 /* OneButtonAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneButtonAlert.swift; sourceTree = "<group>"; };
+		0A44F0C02C1C84F30031E649 /* ImageButtonAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageButtonAlert.swift; sourceTree = "<group>"; };
+		0A44F0C22C1C86B10031E649 /* AutoDismissAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoDismissAlert.swift; sourceTree = "<group>"; };
 		0AF5834C2C11EEA6006D5059 /* AppTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTabBar.swift; sourceTree = "<group>"; };
 		0AF5834E2C11EEC4006D5059 /* TabBarButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarButton.swift; sourceTree = "<group>"; };
 		0AF583532C11EF58006D5059 /* PopularBrands.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularBrands.swift; sourceTree = "<group>"; };
@@ -248,6 +258,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0A44F0B82C1C7CC00031E649 /* CustomAlerts */ = {
+			isa = PBXGroup;
+			children = (
+				0A44F0B92C1C7CF70031E649 /* TwoButtonAlert.swift */,
+				0A44F0BE2C1C82ED0031E649 /* OneButtonAlert.swift */,
+				0A44F0C02C1C84F30031E649 /* ImageButtonAlert.swift */,
+				0A44F0C22C1C86B10031E649 /* AutoDismissAlert.swift */,
+			);
+			path = CustomAlerts;
+			sourceTree = "<group>";
+		};
+		0A44F0BB2C1C813D0031E649 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				0A44F0BC2C1C815A0031E649 /* Color + Extension.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
 		0AF583502C11EF01006D5059 /* HomePage */ = {
 			isa = PBXGroup;
 			children = (
@@ -555,6 +584,7 @@
 		7606FB8A2C0F733C00E1D3AF /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				0A44F0BB2C1C813D0031E649 /* Extension */,
 				7606FBA92C0F794300E1D3AF /* Theme */,
 				7606FB992C0F760B00E1D3AF /* CustomViews */,
 				7606FBA72C0F78CC00E1D3AF /* TextFieldValidator.swift */,
@@ -658,6 +688,7 @@
 		7606FB992C0F760B00E1D3AF /* CustomViews */ = {
 			isa = PBXGroup;
 			children = (
+				0A44F0B82C1C7CC00031E649 /* CustomAlerts */,
 				7606FBA52C0F78B400E1D3AF /* CustomTextField.swift */,
 				7606FBB42C0F824000E1D3AF /* AppBtutton.swift */,
 				0AF5834C2C11EEA6006D5059 /* AppTabBar.swift */,
@@ -1066,6 +1097,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7606FBC12C10AE0B00E1D3AF /* AppCoreData.swift in Sources */,
+				0A44F0BF2C1C82ED0031E649 /* OneButtonAlert.swift in Sources */,
 				56D5B6072C150606006EF83B /* ButtonWithImage.swift in Sources */,
 				56D5B6052C1505C2006EF83B /* PaymentPage.swift in Sources */,
 				0AF583762C11F252006D5059 /* CategoryProducts.swift in Sources */,
@@ -1094,6 +1126,7 @@
 				7606FBA82C0F78CC00E1D3AF /* TextFieldValidator.swift in Sources */,
 				56ACA7592C19EDD000AD48AC /* FieldValidation.swift in Sources */,
 				7606FBB52C0F824000E1D3AF /* AppBtutton.swift in Sources */,
+				0A44F0BD2C1C815A0031E649 /* Color + Extension.swift in Sources */,
 				0AF5835E2C11EFDE006D5059 /* ProductCell.swift in Sources */,
 				0AF583582C11EF8E006D5059 /* BrandCell.swift in Sources */,
 				7606FBAE2C0F7A6D00E1D3AF /* AuthModel.swift in Sources */,
@@ -1111,6 +1144,7 @@
 				7606FBAB2C0F795F00E1D3AF /* Theme.swift in Sources */,
 				7606FBA42C0F782A00E1D3AF /* SignUpScreen.swift in Sources */,
 				56DC253F2C15B65200008690 /* ProfileModels.swift in Sources */,
+				0A44F0C32C1C86B10031E649 /* AutoDismissAlert.swift in Sources */,
 				0AF5834F2C11EEC4006D5059 /* TabBarButton.swift in Sources */,
 				56D46E912C14FCC00019EA1B /* CheckOutPage.swift in Sources */,
 				56ACA7572C19ED6B00AD48AC /* EditAddress.swift in Sources */,
@@ -1135,6 +1169,7 @@
 				0AF583622C11F032006D5059 /* BrandsModel.swift in Sources */,
 				0AFF59832C1718A5002DEAFC /* OrderCell.swift in Sources */,
 				76257A3E2C177900001C4006 /* FirestoreManager.swift in Sources */,
+				0A44F0BA2C1C7CF70031E649 /* TwoButtonAlert.swift in Sources */,
 				7606FBA62C0F78B400E1D3AF /* CustomTextField.swift in Sources */,
 				56A580072C1460BE00BBC168 /* DrftOrdersModel.swift in Sources */,
 				5627DB2B2C12320000AB6464 /* AddAddress.swift in Sources */,
@@ -1142,6 +1177,7 @@
 				0AF583782C11F271006D5059 /* CategoryProductCell.swift in Sources */,
 				76560C522C13570200B6103A /* CustomColorDot.swift in Sources */,
 				76257A432C17DDDE001C4006 /* FavoriteView.swift in Sources */,
+				0A44F0C12C1C84F30031E649 /* ImageButtonAlert.swift in Sources */,
 				0AF583562C11EF6D006D5059 /* HomeView.swift in Sources */,
 				0AF5836C2C11F10A006D5059 /* CarouselSlider.swift in Sources */,
 				0AF5837C2C11F2E1006D5059 /* CustomBackButton.swift in Sources */,
