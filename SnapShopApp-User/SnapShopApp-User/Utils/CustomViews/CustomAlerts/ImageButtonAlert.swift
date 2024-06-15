@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct ImageButtonAlert: View {
+    @Binding var isPresented: Bool
+
     var title: String
     var message: String
     var image: Image
@@ -47,11 +49,13 @@ struct ImageButtonAlert: View {
         .cornerRadius(16)
         .shadow(radius: 10)
         .padding(.horizontal, 40)
+        .animation(.spring(), value: isPresented)
+
     }
 }
 
 struct ImageButtonAlert_Previews: PreviewProvider {
     static var previews: some View {
-        ImageButtonAlert(title: "Congratulations", message: "Your order is under preparation", image: Image("congratulations"), buttonText: "Home", onAction: {})
+        ImageButtonAlert(isPresented: .constant(true), title: "Congratulations", message: "Your order is under preparation", image: Image("congratulations"), buttonText: "Home", onAction: {})
     }
 }
