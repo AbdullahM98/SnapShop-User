@@ -144,7 +144,23 @@ class CartViewModel :ObservableObject{
            }
        }
     
-    
+    func postAsCompleted(){
+        guard let orderID = UserDefaultsManager.shared.getUserDraftOrderId(key: "DraftId") else { return }
+        let updatedOrder = userOrders.first
+        Network.shared.updateData(object: updatedOrder, to: "https://mad-ism-ios-1.myshopify.com/admin/api/2024-04/draft_orders/\(orderID)/complete.json" ){result in
+            switch result {
+            case .success(let response):
+                DispatchQueue.main.async {
+                    print("Completed  Successfully")
+                    self.deleteCardDraftOrder()
+                }
+            case .failure(let error):
+                print(error.localizedDescription)
+                print("Error completing: \(error)")
+            }
+        }
+    }
+
     
 }
 enum CartViewState {
