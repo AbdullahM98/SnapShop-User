@@ -26,7 +26,7 @@ class ProductDetailViewModel :ObservableObject{
     private var cancellables = Set<AnyCancellable>()
     
     func fetchProductByID(_ productID: String) {
-
+        
         Network.shared.getItemByID(productID, type: ProductResponse.self, endpoint: "products")
             .sink(receiveCompletion: { completion in
                 switch completion {
@@ -37,7 +37,7 @@ class ProductDetailViewModel :ObservableObject{
                 }
             }, receiveValue: { [weak self] productResponse in
                 DispatchQueue.main.async {
-                //    self?.product = productResponse.product
+                    //    self?.product = productResponse.product
                     self?.setUpUI(product: productResponse.product!)
                     self?.productModel = productResponse.product!
                     print(productResponse.product?.product_type ?? "No product type")
@@ -117,17 +117,17 @@ class ProductDetailViewModel :ObservableObject{
     
     func updateUserData(lineItem:DraftOrderLineItem){
         print("old order line items before update ",self.orderToUpdate?.line_items?.count ?? 0)
-            if let existingIndex = self.orderToUpdate?.line_items?.firstIndex(where: { $0.product_id == lineItem.product_id }) {
-                // If it exists, update its quantity
-                if let existingQuantity = self.orderToUpdate?.line_items?[existingIndex].quantity {
-                    self.orderToUpdate?.line_items?[existingIndex].quantity = existingQuantity + (lineItem.quantity ?? 0)
-                    print("Updated existing line item quantity to \(self.orderToUpdate?.line_items?[existingIndex].quantity ?? 0)")
-                }
-            } else {
-                // If it does not exist, add the new line item
-                self.orderToUpdate?.line_items?.append(lineItem)
-                print("Added new line item")
+        if let existingIndex = self.orderToUpdate?.line_items?.firstIndex(where: { $0.product_id == lineItem.product_id }) {
+            // If it exists, update its quantity
+            if let existingQuantity = self.orderToUpdate?.line_items?[existingIndex].quantity {
+                self.orderToUpdate?.line_items?[existingIndex].quantity = existingQuantity + (lineItem.quantity ?? 0)
+                print("Updated existing line item quantity to \(self.orderToUpdate?.line_items?[existingIndex].quantity ?? 0)")
             }
+        } else {
+            // If it does not exist, add the new line item
+            self.orderToUpdate?.line_items?.append(lineItem)
+            print("Added new line item")
+        }
         print("old order line item afteer update ",self.orderToUpdate?.line_items?.count ?? 0)
         
         guard let orderID = UserDefaultsManager.shared.getUserDraftOrderId(key: "DraftId") else { return }
@@ -144,18 +144,18 @@ class ProductDetailViewModel :ObservableObject{
                 print("Error updating user draft order: \(error)")
             }
         }
-
-           
-        }
-
-        func setUpUI(product: ProductEntity) {
-            print("Setting up UI with product ID: \(product.product_id ?? "0")")
-            self.vendorTitle = product.vendor ?? "Unknown"
-            self.productDecription = product.body_html ?? "No Description"
-            self.productTitle = product.title ?? "NO title"
-            self.price = product.price ?? "30"
-            self.imgUrl = product.images?.first
-        }
+        
+        
+    }
     
-  
+    func setUpUI(product: ProductEntity) {
+        print("Setting up UI with product ID: \(product.product_id ?? "0")")
+        self.vendorTitle = product.vendor ?? "Unknown"
+        self.productDecription = product.body_html ?? "No Description"
+        self.productTitle = product.title ?? "NO title"
+        self.price = product.price ?? "30"
+        self.imgUrl = product.images?.first
+    }
+    
+    
 }
