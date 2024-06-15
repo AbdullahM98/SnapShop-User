@@ -8,6 +8,9 @@
 import SwiftUI
 import PassKit
 
+import SwiftUI
+import PassKit
+
 struct CheckOutPage: View {
     @State private var discountCode: String = ""
     @State private var showingBottomSheet = false
@@ -18,12 +21,10 @@ struct CheckOutPage: View {
     @State private var showAlert = false
     @State private var navigateToHome = false
     @ObservedObject var addressViewModel = AddressesViewModel()
-    @ObservedObject var cartViewModel : CartViewModel
-
+    @StateObject var cartViewModel: CartViewModel
+    @StateObject var newViewModel = CouponsViewModel()
     var address: DraftOrderAddress
-    var subTotalPrice: String
-    var totalTaxes: String
-    var totalPrice: String
+    
 
     var body: some View {
         ScrollView {
@@ -70,8 +71,8 @@ struct CheckOutPage: View {
                 }
                 
                 HStack {
-                    TextField("Enter Discount code here", text: $discountCode)
-                        .disabled(true)
+                    TextField("Enter Discount code here", text: $newViewModel.discountCode) // Directly bind to the discountCode property
+                                            .disabled(true)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                     Spacer()
                     NavigationLink(destination: CouponsPage(fromCart: true), isActive: $navigateToCoupons) {
@@ -85,28 +86,28 @@ struct CheckOutPage: View {
                 
                 HStack {
                     Text("Sub-Total Price:").bold()
-                    Text("\(subTotalPrice) EGP")
+                    Text("\(cartViewModel.userOrder?.subtotal_price ?? "0.0") EGP")
                         .foregroundColor(.gray)
                 }
                 .padding(.bottom, 16)
                 
                 HStack {
                     Text("Total Taxes:").bold()
-                    Text("\(totalTaxes) EGP")
+                    Text("\(cartViewModel.userOrder?.total_tax ?? "0.0") EGP")
                         .foregroundColor(.gray)
                 }
                 .padding(.bottom, 16)
                 
                 HStack {
                     Text("Total Price:").bold()
-                    Text("\(totalPrice) EGP")
+                    Text("\(cartViewModel.userOrder?.total_price ?? "0.0") EGP")
                         .foregroundColor(.gray)
                 }
                 .padding(.bottom, 16)
                 
                 HStack {
                     Text("Price After Discounts:").bold()
-                    Text("20391.49 EGP") // Update with your logic for discounted price
+                    Text("\(cartViewModel.userOrder?.total_price ?? "0.0") EGP") // Update with your logic for discounted price
                         .foregroundColor(.gray)
                 }
                 .padding(.bottom, 16)
@@ -121,14 +122,16 @@ struct CheckOutPage: View {
                             navigateToHome: $navigateToHome,
                             onApplePayClick: {
                                 showingBottomSheet.toggle()
+                                print("apple Payment")
+                                cartViewModel.postAsCompleted()
                             },
                             onCashOnDeliveryClick: {
                                 showingBottomSheet.toggle()
-                                print("Clicked")
+                                print("CashOnDelivery")
                                 cartViewModel.postAsCompleted()
                                 // Handle order posting with cash on delivery
                             },
-                            userOrders: cartViewModel.userOrders
+                            userOrders: cartViewModel.userOrder ?? DraftOrderItemDetails(id: 0, note: "", email: "", taxes_included: false, currency: "", invoice_sent_at: "", created_at: "", updated_at: "", tax_exempt: false, completed_at: "", name: "", status: "", billing_address: nil, invoice_url: "", order_id: 0, shipping_line: "", tax_lines: nil, tags: "", note_attributes: nil, total_price: "", subtotal_price: "", total_tax: "", payment_terms: "", presentment_currency: "", admin_graphql_api_id: "", customer: nil, use_customer_default_address: true)
                         ).presentationDetents([.medium], selection: $settingsDetents)
                     }
                     Spacer()
@@ -140,11 +143,10 @@ struct CheckOutPage: View {
         .navigationBarBackButtonHidden(true)
         .navigationBarItems(leading: CustomBackButton())
         .onAppear {
+            // Fetch the data here
             addressViewModel.getDraftOrderById()
-            cartViewModel.getSpecificUserCart()
-            cartViewModel.reloadView()
-            discountCode =  cartViewModel.discountCodeKey ?? ""
-            print("ON APPEAR")
+            cartViewModel.getDraftOrderById()
+            newViewModel.getDraftOrderById()
         }
         .overlay(
             showAlert ? AnyView(

@@ -61,7 +61,7 @@ struct CarouselSlider: View {
                 timer?.cancel()
             }
 
-            NavigationLink(destination: CouponsPage(fromCart: false), isActive: $navigateToCoupons) {
+            NavigationLink(destination: CouponsPage(fromCart:  false), isActive: $navigateToCoupons) {
                 EmptyView()
             }
         }

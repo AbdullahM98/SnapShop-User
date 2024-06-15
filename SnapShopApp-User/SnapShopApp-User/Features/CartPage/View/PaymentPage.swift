@@ -12,7 +12,7 @@ struct PaymentPage: View {
     @Binding var navigateToHome: Bool
     var onApplePayClick: () -> Void
     var onCashOnDeliveryClick: () -> Void
-    var userOrders: [DraftOrderItemDetails]
+    var userOrders: DraftOrderItemDetails
 
     var body: some View {
         VStack(alignment: .leading) {
@@ -57,7 +57,7 @@ struct ApplePayButton: UIViewRepresentable {
     @Binding var navigateToHome: Bool
     var onApplePayClick: () -> Void
 
-    var userOrders: [DraftOrderItemDetails]
+    var userOrders: DraftOrderItemDetails
 
     func makeCoordinator() -> ApplePayStrategy {
         ApplePayStrategy(userOrder: userOrders, onApplePayClick: onApplePayClick, showAlertWithImage: { title, message, image, buttonText, onAction in

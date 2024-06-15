@@ -9,26 +9,26 @@ import Foundation
 import PassKit
 import SwiftUI
 class ApplePayStrategy: NSObject, PKPaymentAuthorizationControllerDelegate {
-    var userOrders: [DraftOrderItemDetails]
+    var userOrders: DraftOrderItemDetails
     var onApplePayClick: () -> Void
     var showAlertWithImage: ((String, String, Image, String, @escaping () -> Void) -> Void)?
     var button = PKPaymentButton(paymentButtonType: .buy, paymentButtonStyle: .automatic)
     var lineItems: [DraftOrderLineItem] = []
 
-    init(userOrder: [DraftOrderItemDetails],onApplePayClick: @escaping () -> Void,showAlertWithImage: @escaping (String, String, Image, String, @escaping () -> Void) -> Void) {
+    init(userOrder: DraftOrderItemDetails,onApplePayClick: @escaping () -> Void,showAlertWithImage: @escaping (String, String, Image, String, @escaping () -> Void) -> Void) {
         self.userOrders = userOrder
         self.showAlertWithImage = showAlertWithImage
         self.onApplePayClick = onApplePayClick
         super.init()
         button.addTarget(self, action: #selector(callBack(_:)), for: .touchUpInside)
-        lineItems = self.userOrders.first?.line_items ?? []
+        lineItems = self.userOrders.line_items ?? []
     }
     
     @objc func callBack(_ sender: Any) {
         startPayment(userOrders: userOrders)
     }
     
-    func startPayment(userOrders: [DraftOrderItemDetails]) {
+    func startPayment(userOrders: DraftOrderItemDetails) {
         var paymentController: PKPaymentAuthorizationController?
         var paymentSummaryItems = [PKPaymentSummaryItem]()
         
@@ -37,7 +37,7 @@ class ApplePayStrategy: NSObject, PKPaymentAuthorizationControllerDelegate {
             paymentSummaryItems.append(item)
         }
         
-        let total = PKPaymentSummaryItem(label: "Total", amount: NSDecimalNumber(string: "\(userOrders.first?.total_price ?? "0.0")"), type: .final)
+        let total = PKPaymentSummaryItem(label: "Total", amount: NSDecimalNumber(string: "\(userOrders.total_price ?? "0.0")"), type: .final)
         paymentSummaryItems.append(total)
         
         var paymentRequest = PKPaymentRequest()
@@ -53,10 +53,10 @@ class ApplePayStrategy: NSObject, PKPaymentAuthorizationControllerDelegate {
         
         let contact = PKContact()
         var name = PersonNameComponents()
-        name.givenName = userOrders.first?.customer?.first_name
-        name.familyName = userOrders.first?.customer?.last_name
+        name.givenName = userOrders.customer?.first_name
+        name.familyName = userOrders.customer?.last_name
         contact.name = name
-        contact.phoneNumber = CNPhoneNumber(stringValue: userOrders.first?.customer?.phone ?? "")
+        contact.phoneNumber = CNPhoneNumber(stringValue: userOrders.customer?.phone ?? "")
         paymentRequest.shippingContact = contact
         
         paymentRequest.requiredShippingContactFields = [.name, .phoneNumber]
@@ -95,11 +95,12 @@ class ApplePayStrategy: NSObject, PKPaymentAuthorizationControllerDelegate {
         ) {
             // Perform any actions needed when the button in the alert is pressed
         }
-        
+        print("NotHere To PostOrder")
         return .init(status: .success, errors: nil)
     }
     
     func paymentAuthorizationControllerDidFinish(_ controller: PKPaymentAuthorizationController) {
+        print("Here to post order")
         controller.dismiss()
         onApplePayClick()
     }

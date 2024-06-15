@@ -35,7 +35,7 @@ struct CouponsPage: View {
                                     discountTitle: rule.title ?? "", fromCart: fromCart,
                                     priceId: rule.id ?? 0) { priceRuleId in
                                         print("BeforeFetching Coupons \(priceRuleId)")
-                                        viewModel.fetchPriceRulesByIdForApplyingCoupons(id: priceRuleId)
+                                        viewModel.fetchPriceRulesByIdForApplyingCoupons(id: priceRuleId, code: coupon.code ?? "" )
                                         presentationMode.wrappedValue.dismiss() // Dismiss the second view
 
                                     }

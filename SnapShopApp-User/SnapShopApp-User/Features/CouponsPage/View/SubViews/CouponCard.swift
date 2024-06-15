@@ -50,6 +50,7 @@ struct CouponCard: View {
                             .onTapGesture {
                                 print("pressing....")
                                 onSelectCoupon(priceId)
+                                UserDefaultsManager.shared.selectedCouponeName = discountCode
                             }
                     }
                 }

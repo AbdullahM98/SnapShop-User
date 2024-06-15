@@ -82,8 +82,7 @@ class AddressesViewModel:ObservableObject{
     }
     func getDraftOrderById(){
         guard let orderID = UserDefaultsManager.shared.getUserDraftOrderId(key: "DraftId") else { return }
-        print("User Have DraftOrder and its ID is : \(orderID)")
-        
+        print("User Have DraftOrder and its ID3 is : \(orderID)")
         Network.shared.request("https://mad-ism-ios-1.myshopify.com/admin/api/2024-04/draft_orders/\(orderID).json", method: "GET", responseType: DraftOrderItem.self) { [weak self] result in
             switch result{
             case .success(let order):
