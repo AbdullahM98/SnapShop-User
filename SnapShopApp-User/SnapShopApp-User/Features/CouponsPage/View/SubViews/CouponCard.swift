@@ -12,7 +12,9 @@ struct CouponCard: View {
     var discountCode:String
     var discountValue:String
     var discountTitle:String
-    
+    var fromCart: Bool
+    var priceId:Int
+    var onSelectCoupon: (_ priceRuleId:Int)->Void
     var body: some View {
             ZStack(alignment: .center) {
                 Image(imageName)
@@ -38,25 +40,21 @@ struct CouponCard: View {
                         .fontWeight(.medium)
                         .frame(maxWidth: .infinity, alignment: .leading).padding(.leading,30)
                     Spacer()
-                    Text("Redeem Now") .padding(10)
-                        .background(Color.white)
-                        .foregroundColor(Color.black)
-                        .cornerRadius(10)
-                        .shadow(radius: 5)
-                        .padding(.leading,10)
-                       
-                        .onTapGesture {
-                            print("pressing....")
-                        }
+                    if fromCart {
+                        Text("Redeem Now") .padding(10)
+                            .background(Color.white)
+                            .foregroundColor(Color.black)
+                            .cornerRadius(10)
+                            .shadow(radius: 5)
+                            .padding(.leading,10)
+                            .onTapGesture {
+                                print("pressing....")
+                                onSelectCoupon(priceId)
+                            }
+                    }
                 }
                 .padding()
             }.frame(height: 200)
             .padding(.vertical,16)
-    }
-}
-
-struct CouponCard_Previews: PreviewProvider {
-    static var previews: some View {
-        CouponCard(imageName: "Coupon1", discountCode: "Hadir2001",discountValue: "10",discountTitle: "Discount on everything")
     }
 }
