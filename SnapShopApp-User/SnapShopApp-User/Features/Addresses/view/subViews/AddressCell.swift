@@ -8,9 +8,10 @@
 import SwiftUI
 struct AddressCell: View {
     var address : AddressProfileDetails
-    var insideCard: Bool
+    var fromCard: Bool
     var onDeleteClick : () -> Void?
     var onUpdateClick : (AddressForUpdate) -> Void?
+    var onSelectClick : (AddressProfileDetails) -> Void?
     @State private var showingBottomSheet = false
     @State private var settingsDetents = PresentationDetent.height(UIScreen.screenHeight*0.5 + 20)
     
@@ -24,42 +25,74 @@ struct AddressCell: View {
                             .foregroundColor(.gray)
                         Text("\(address.address1 ?? "")")
                         Spacer()
-                        if insideCard == false && !(address.default ?? false) {
-                            HStack{
-                                Button {
-                                    onDeleteClick()
-                                } label: {
-                                    Image(systemName:"minus.circle.fill").resizable().aspectRatio(contentMode: .fit)
-                                        .frame(width: 24, height: 24) .foregroundColor(.black)
-                                }.padding(.trailing,6)
+                        if !(address.default ?? false) {
+                            if fromCard == false{
                                 
-                                Button {
-                                    print("Edit")
-                                    showingBottomSheet.toggle()
+                                HStack{
+                                    Button {
+                                        onDeleteClick()
+                                    } label: {
+                                        Image(systemName:"minus.circle.fill").resizable().aspectRatio(contentMode: .fit)
+                                            .frame(width: 24, height: 24) .foregroundColor(.black)
+                                    }.padding(.trailing,6)
                                     
-                                } label: {
-                                    Image(systemName: "pencil.circle.fill").resizable().aspectRatio(contentMode: .fit)
-                                        .frame(width: 24, height: 24) .foregroundColor(.black)
-                                }.sheet(isPresented: $showingBottomSheet) {
-                                    EditAddress(onSaveClick: { updatedAddress in
-                                        onUpdateClick(updatedAddress)
-                                        showingBottomSheet.toggle()
-                                    }, onCancelClick: {
+                                    Button {
+                                        print("Edit")
                                         showingBottomSheet.toggle()
                                         
-                                    },customerAddress: address)
-                                    .presentationDetents([.height(UIScreen.screenHeight*0.5 + 20)], selection: $settingsDetents)
+                                    } label: {
+                                        Image(systemName: "pencil.circle.fill").resizable().aspectRatio(contentMode: .fit)
+                                            .frame(width: 24, height: 24) .foregroundColor(.black)
+                                    }.sheet(isPresented: $showingBottomSheet) {
+                                        EditAddress(onSaveClick: { updatedAddress in
+                                            onUpdateClick(updatedAddress)
+                                            showingBottomSheet.toggle()
+                                        }, onCancelClick: {
+                                            showingBottomSheet.toggle()
+                                            
+                                        },customerAddress: address)
+                                        .presentationDetents([.height(UIScreen.screenHeight*0.5 + 20)], selection: $settingsDetents)
+                                    }
+                                    
                                 }
+                            }else{
+                                    Button {
+                                        //update draft and put this in shipping
+                                        onSelectClick(address)
+                                    } label: {
+                                        Text("Select")
+                                            .foregroundColor(.white)
+                                            .padding(.horizontal,8)
+                                            .padding(.vertical,2)
+                                            .background(Color.black)
+                                            .cornerRadius(8)
+                                    }.padding(.trailing,6)
                                 
                             }
                         } else {
-                            Text("default")
-                                .font(.system(size:16))
-                                .foregroundColor(.white)
-                                .padding(.horizontal,8)
-                                .padding(.vertical,2)
-                                .background(Color.black)
-                                .cornerRadius(8)
+                            if fromCard == false {
+                                
+                                Text("default")
+                                    .font(.system(size:16))
+                                    .foregroundColor(.white)
+                                    .padding(.horizontal,8)
+                                    .padding(.vertical,2)
+                                    .background(Color.black)
+                                    .cornerRadius(8)
+                            }else{
+                                Button {
+                                    //update draft and put this in shipping
+                                    onSelectClick(address)
+                                } label: {
+                                    Text("Select")
+                                        .foregroundColor(.white)
+                                        .padding(.horizontal,8)
+                                        .padding(.vertical,2)
+                                        .background(Color.black)
+                                        .cornerRadius(8)
+                                }.padding(.trailing,6)
+
+                            }
                         }
                         
                     }.padding(.horizontal,16)
@@ -117,6 +150,6 @@ struct AddressCell: View {
 
 struct AddressCell_Previews: PreviewProvider {
     static var previews: some View {
-        AddressCell(address: AddressProfileDetails(id: 0, customer_id: 0, first_name: "husayn", last_name: "abdulaziz", company: "iti", address1: "elamar sory", address2: "elzohor", city: "portsaid", province: "", country: "Egypt", zip: "45475", phone: "+201285340330", name: "husayn", province_code: "4545", country_code: "+20", country_name: "Egypt", default: true), insideCard: false, onDeleteClick: {}, onUpdateClick: {_ in})
+        AddressCell(address: AddressProfileDetails(id: 0, customer_id: 0, first_name: "husayn", last_name: "abdulaziz", company: "iti", address1: "elamar sory", address2: "elzohor", city: "portsaid", province: "", country: "Egypt", zip: "45475", phone: "+201285340330", name: "husayn", province_code: "4545", country_code: "+20", country_name: "Egypt", default: true), fromCard: false, onDeleteClick: {}, onUpdateClick: {_ in}, onSelectClick: {_ in})
     }
 }
