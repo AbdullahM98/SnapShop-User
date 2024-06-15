@@ -36,15 +36,20 @@ struct UserAddresses: View {
         VStack{
             ScrollView{
                 ForEach(viewModel.addresses ?? [],id: \.id) { address in
-                    AddressCell(address: address, insideCard: false, onDeleteClick: {
+                    AddressCell(address: address, fromCard: fromCart, onDeleteClick: {
                         viewModel.deleteAddress(addressId: address.id ?? 0)
                     }, onUpdateClick: { updatedAddress in
                         viewModel.updateAddress(updatedAddress: updatedAddress, addressId: updatedAddress.customer_address?.id ?? 0)
+                    }, onSelectClick: { selectedAddress in
+                        print("SelectedAddress")
+                        viewModel.updateUserShippingAddress(shippingAddress: selectedAddress)
+                        didSelectAddress?(address)
+
+                        presentationMode.wrappedValue.dismiss() // Dismiss the second view
+
                     }).onTapGesture {
                         if fromCart == true {
                             print(address)
-                            didSelectAddress?(address)
-                            presentationMode.wrappedValue.dismiss() // Dismiss the second view
                             
                         }
                     }
@@ -65,6 +70,10 @@ struct UserAddresses: View {
                         showingBottomSheet.toggle()
                     }).presentationDetents([.height(UIScreen.screenHeight*0.5 + 100)], selection: $settingsDetents)
                 })
+        }.onAppear{
+            if fromCart == true {
+                viewModel.getDraftOrderById()
+            }
         }
     }
 }
