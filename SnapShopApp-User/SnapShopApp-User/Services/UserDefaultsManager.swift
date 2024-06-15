@@ -62,4 +62,12 @@ class UserDefaultsManager {
             UserDefaults.standard.set(newValue, forKey: "currencyValue")
         }
     }
+    var selectedCouponeName: String? {
+        get{
+            return UserDefaults.standard.string(forKey: "discountName")
+        }
+        set{
+            UserDefaults.standard.set(newValue, forKey: "discountName")
+        }
+    }
 }
