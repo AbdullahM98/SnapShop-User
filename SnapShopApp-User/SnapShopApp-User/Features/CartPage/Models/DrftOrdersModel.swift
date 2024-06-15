@@ -31,10 +31,10 @@ struct DraftOrderItemDetails: Codable {
     let name: String?
     let status: String?
     var line_items: [DraftOrderLineItem]?
-    let shipping_address: DraftOrderAddress?
+    var shipping_address: DraftOrderAddress?
     let billing_address: DraftOrderAddress?
     let invoice_url: String?
-    let applied_discount: AppliedDiscount?
+    var applied_discount: AppliedDiscount?
     let order_id: Int?
     let shipping_line: String?
     let tax_lines: [DraftOrderTaxLine]?

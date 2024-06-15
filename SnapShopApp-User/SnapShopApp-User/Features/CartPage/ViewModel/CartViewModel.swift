@@ -19,6 +19,7 @@ class CartViewModel :ObservableObject{
     @Published var total: Double = 0.0
     @Published var viewState:CartViewState
     @Published var shippingAddress:DraftOrderAddress?
+    @Published var discountCodeKey: String?
     init(){
         print("CVM INIT")
         if UserDefaults.standard.bool(forKey: Support.isLoggedUDKey) {
@@ -64,6 +65,7 @@ class CartViewModel :ObservableObject{
         for order in self.userOrders {
             total += Double(order.subtotal_price ?? "-200") ?? -100
         }
+        discountCodeKey = self.userOrders.first?.applied_discount?.description
         print(userOrders.first?.total_price ?? 0)
         
     }
@@ -77,6 +79,23 @@ class CartViewModel :ObservableObject{
                 DispatchQueue.main.async {
                     self?.oldOrder = order.draft_order
                     self?.deleteLineItemFromDraftOrder(lineItem: lineItem)
+                }
+            case .failure(let err):
+                print("Error get the user order : \(err)")
+                
+                
+            }
+        }
+    }
+    func reloadView(){
+        let orderID = UserDefaultsManager.shared.getUserDraftOrderId(key: "DraftId")
+        print(orderID ?? 0)
+        Network.shared.request("https://mad-ism-ios-1.myshopify.com/admin/api/2024-04/draft_orders/\(orderID ?? 0).json", method: "GET", responseType: DraftOrderItem.self) { [weak self] result in
+            switch result{
+            case .success(let order):
+                DispatchQueue.main.async {
+//                    self?.oldOrder = order.draft_order
+                    self?.discountCodeKey = order.draft_order?.applied_discount?.description
                 }
             case .failure(let err):
                 print("Error get the user order : \(err)")
@@ -124,6 +143,7 @@ class CartViewModel :ObservableObject{
                self?.getCardDraftOrder()
            }
        }
+    
     
     
 }

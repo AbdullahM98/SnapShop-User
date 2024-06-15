@@ -25,7 +25,7 @@ struct Order: Codable, Identifiable {
     let cancel_reason: String?
     let cancelled_at: String?
     let cart_token: String?
-    let checkout_id: String?
+    let checkout_id: Int?
     let checkout_token: String?
     let client_details: OrderClientDetails?
     let closed_at: String?
@@ -236,7 +236,7 @@ struct OrderLineItem: Codable, Identifiable {
     let price_set: OrderPriceSet?
     let product_exists: Bool?
     let product_id: Int?
-    let properties: [String]?
+    let properties: [DraftOrderProperties]?
     let quantity: Int?
     let requires_shipping: Bool?
     let sku: String?
