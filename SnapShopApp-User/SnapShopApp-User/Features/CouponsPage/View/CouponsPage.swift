@@ -12,7 +12,6 @@ struct CouponsPage: View {
     var couponsBG: [String] = ["Coupon1", "Coupon2", "Coupon3", "Coupon4"]
     var fromCart: Bool
     @Environment(\.presentationMode) var presentationMode
-    var didSelectCoupon: ((AddressProfileDetails) -> Void)?
     
     var body: some View {
         VStack{
@@ -32,12 +31,11 @@ struct CouponsPage: View {
                                     imageName: couponsBG.randomElement() ?? "Coupon1",
                                     discountCode: coupon.code ?? "",
                                     discountValue: String(rule.value?.dropFirst().dropLast(2) ?? ""),
-                                    discountTitle: rule.title ?? "", fromCart: fromCart,
-                                    priceId: rule.id ?? 0) { priceRuleId in
-                                        print("BeforeFetching Coupons \(priceRuleId)")
-                                        viewModel.fetchPriceRulesByIdForApplyingCoupons(id: priceRuleId, code: coupon.code ?? "" )
+                                    discountTitle: rule.title ?? "", fromCart: fromCart) {
+                                        UserDefaultsManager.shared.selectedCouponCodeValue = coupon.code ?? ""
+                                        UserDefaultsManager.shared.priceRuleIdForCoupon = rule.id 
                                         presentationMode.wrappedValue.dismiss() // Dismiss the second view
-
+                                        
                                     }
                             }
                         }
@@ -49,7 +47,6 @@ struct CouponsPage: View {
             }
         }
         .onAppear{
-            viewModel.getDraftOrderById()
             viewModel.fetchPriceRules()
         }
         

@@ -16,16 +16,6 @@ class CouponsViewModel: ObservableObject {
     @Published var dict: [DiscountCodes: PriceRule] = [:]
     @Published var orderToUpdate:DraftOrderItemDetails?
     @Published var isLoading = true
-    @Published var userOrder:DraftOrderItemDetails?
-    @Published var discountCode: String = "" {
-            didSet {
-                // Update UserDefaults whenever discountCode changes
-                UserDefaultsManager.shared.selectedCouponeName = discountCode
-            }
-        }
-
-    
-    
     init() {
         print("INIT CouponsVM")
     }
@@ -78,24 +68,7 @@ class CouponsViewModel: ObservableObject {
             }
         }
     }
-    
-    func fetchPriceRulesById(id: Int) {
-        Network.shared.request("\(Support.baseUrl)/price_rules/\(String(describing: id)).json", method: "GET", responseType: PriceRulesRoot.self) { [weak self] result in
-            switch result {
-            case .success(let response):
-                print("im in switch price rules")
-                DispatchQueue.main.async {
-                    self?.singleRule = response.price_rule
-                    self?.fetchCoupons()
-                }
-                print("before fetching coupons")
-                
-            case .failure(let error):
-                print("Error fetching price rule by id: \(error)")
-            }
-        }
-    }
-    
+
     func setUpDict() {
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
@@ -108,84 +81,5 @@ class CouponsViewModel: ObservableObject {
             }
         }
     }
-    func getDraftOrderById(){
-        guard let orderID = UserDefaultsManager.shared.getUserDraftOrderId(key: "DraftId") else { return }
-        print("User Have DraftOrder and its ID2 is : \(orderID)")
-        
-        Network.shared.request("https://mad-ism-ios-1.myshopify.com/admin/api/2024-04/draft_orders/\(orderID).json", method: "GET", responseType: DraftOrderItem.self) { [weak self] result in
-            switch result{
-            case .success(let order):
-                DispatchQueue.main.async {
-                    guard let draftOrder = order.draft_order else {return}
-                    self?.orderToUpdate = draftOrder
-                    self?.userOrder = draftOrder
-                    self?.discountCode = draftOrder.applied_discount?.description ?? ""
 
-                }
-            case .failure(let err):
-                print("Error get the user order : \(err)")
-                
-                
-            }
-        }
-    }
-    
-    
-    func fetchPriceRulesByIdForApplyingCoupons(id: Int,code:String) {
-        Network.shared.request("\(Support.baseUrl)/price_rules/\(String(describing: id)).json", method: "GET", responseType: PriceRulesRoot.self) { [weak self] result in
-            switch result {
-            case .success(let response):
-                print("BeforeCoupons")
-                DispatchQueue.main.async {[weak self] in
-                    print("here is the preice rule response,",response.price_rule?.value,"Value", response.price_rule?.id)
-                    self?.prepareAppliedDiscount(priceRuleData: response.price_rule ?? PriceRule(id: 0, value_type: "", value: "", customer_selection: "", title: ""),code: code)
-                    
-                }
-                print("AfterCoupons")
-                
-            case .failure(let error):
-                print("Error fetching price rule by id: \(error)")
-            }
-        }
-    }
-    func prepareAppliedDiscount(priceRuleData:PriceRule,code: String) {
-        let newValue = abs(Double(priceRuleData.value ?? "0.0") ?? 0.0)
-        print(newValue)
-        var foundKey: String?
-        for (key, value) in dict {
-            if value.id == priceRuleData.id && code == key.code {
-                foundKey = key.code
-                break // Exit loop once the key is found
-            }
-        }
-        let couponsToApply = AppliedDiscount(description: foundKey ?? "SUMMER", value_type: priceRuleData.value_type, value: String(newValue), amount: priceRuleData.value, title: priceRuleData.title)
-        print(couponsToApply,"IS THIS NIL")
-        
-        self.applyCouponOnDraftOrder(couponToApply: couponsToApply)
-    }
-    
-    func applyCouponOnDraftOrder(couponToApply: AppliedDiscount){
-        print(" before Applying The Coupons \(String(describing: self.orderToUpdate?.applied_discount))")
-        self.orderToUpdate?.applied_discount = couponToApply
-        print(" after Applying The Coupons \(String(describing: self.orderToUpdate?.applied_discount))")
-        
-        guard let orderID = UserDefaultsManager.shared.getUserDraftOrderId(key: "DraftId") else { return }
-        print("The Id Of The Order is ->>>> \(orderID)")
-        let updatedOrder = DraftOrderItem(draft_order: self.orderToUpdate)
-        Network.shared.updateData(object: updatedOrder, to: "https://mad-ism-ios-1.myshopify.com/admin/api/2024-04/draft_orders/\(orderID).json" ){result in
-            switch result {
-            case .success(_):
-                DispatchQueue.main.async {
-                    print("Draft Applying Couons Updated Successfully")
-                    self.getDraftOrderById()
-                    self.discountCode = self.orderToUpdate?.applied_discount?.description ?? ""
-
-
-                }
-            case .failure(let error):
-                print(error.localizedDescription)
-                print("Error updating user Coupons On draft order: \(error)")
-            }
-        }
-    }
 }

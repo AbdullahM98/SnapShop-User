@@ -62,12 +62,20 @@ class UserDefaultsManager {
             UserDefaults.standard.set(newValue, forKey: "currencyValue")
         }
     }
-    var selectedCouponeName: String? {
+    var selectedCouponCodeValue: String? {
         get{
-            return UserDefaults.standard.string(forKey: "discountName")
+            return UserDefaults.standard.string(forKey: "couponCode")
         }
         set{
-            UserDefaults.standard.set(newValue, forKey: "discountName")
+            UserDefaults.standard.set(newValue, forKey: "couponCode")
+        }
+    }
+    var priceRuleIdForCoupon: Int? {
+        get{
+            return UserDefaults.standard.integer(forKey: "priceRuleId")
+        }
+        set{
+            UserDefaults.standard.set(newValue, forKey: "priceRuleId")
         }
     }
 }

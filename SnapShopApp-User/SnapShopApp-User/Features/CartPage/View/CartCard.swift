@@ -10,7 +10,7 @@ import SwiftUI
 struct CartCard: View {
     var item: DraftOrderLineItem
     var onDeleteClick: (_ item: DraftOrderLineItem) -> Void
-
+    
     var body: some View {
         VStack {
             HStack {
@@ -36,17 +36,20 @@ struct CartCard: View {
                             .frame(width: UIScreen.screenWidth * 0.2, height: UIScreen.screenHeight * 0.2)
                     }
                 }
-
+                
                 VStack(alignment: .leading, spacing: 2) {
                     Text(item.title ?? "")
                         .lineLimit(1)
                         .frame(width: 220)
                     Text(item.vendor ?? "")
                         .foregroundColor(Color.gray)
-                    Text("\(formatPrice(price: item.price, quantity: item.quantity))")
+                    
+                    Text("\(String(format: "%.0f",(Double(formatPrice(price: item.price, quantity: item.quantity)) ?? 1 ) * (Double(UserDefaultsManager.shared.selectedCurrencyValue ?? "1") ?? 1))) \(UserDefaultsManager.shared.selectedCurrencyCode ?? "USD")")
+                        .bold()
+//                    Text("\(formatPrice(price: item.price, quantity: item.quantity))")
                         .bold()
                 }
-
+                
                 VStack(alignment: .trailing, spacing: 20) {
                     Button {
                         onDeleteClick(item)
@@ -54,20 +57,20 @@ struct CartCard: View {
                         Image("trash")
                     }
                     .padding(.trailing, 8)
-
+                    
                     Text("Qty: \(item.quantity ?? 0)")
                 }
             }
         }
         .padding(.all, 8)
     }
-
+    
     func calculateTotalPrice(price: String?, quantity: Int?) -> Double {
         let priceDouble = Double(price ?? "0.0") ?? 0.0
         let quantityDouble = Double(quantity ?? 0)
         return priceDouble * quantityDouble
     }
-
+    
     func formatPrice(price: String?, quantity: Int?) -> String {
         let totalPrice = calculateTotalPrice(price: price, quantity: quantity)
         return String(format: "%.2f", totalPrice)

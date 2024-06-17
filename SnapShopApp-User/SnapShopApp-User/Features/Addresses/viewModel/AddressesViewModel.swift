@@ -15,13 +15,12 @@ class AddressesViewModel:ObservableObject{
     var userId: String = String(UserDefaultsManager.shared.getUserId(key: Support.userID) ?? 0)
     init(){
         print("AddressesViewModel INIT")
-        fetchUserAddresses()
     }
     deinit{
         print("DEINIT Addresses viewModel")
     }
     //get user address to UserAddresses page
-    func fetchUserAddresses(customerId:String = "7290794967219"){
+    func fetchUserAddresses(){
         let url = "\(Support.baseUrl)/customers/\(userId)/addresses.json"
         Network.shared.request(url, method: "GET", responseType: AddressProfileRoot.self) { [weak self] result in
             switch result {
@@ -53,7 +52,7 @@ class AddressesViewModel:ObservableObject{
         }
     }
     //delete user address
-    func deleteAddress(customerId:String = "7290794967219",addressId:Int){
+    func deleteAddress(addressId:Int){
         Network.shared.deleteObject(with: "\(Support.baseUrl)/customers/\(userId)/addresses/\(addressId).json") { [weak self] result in
             self?.fetchUserAddresses()
             switch result{
@@ -67,7 +66,7 @@ class AddressesViewModel:ObservableObject{
         }
     }
     //update user address
-    func updateAddress(updatedAddress:AddressForUpdate,customerId: String = "7290794967219",addressId:Int){
+    func updateAddress(updatedAddress:AddressForUpdate,addressId:Int){
         Network.shared.updateData(object: updatedAddress, to: "\(Support.baseUrl)/customers/\(userId)/addresses/\(addressId).json") { [weak self] result in
             switch result{
             case .success(let response):
@@ -80,6 +79,7 @@ class AddressesViewModel:ObservableObject{
             }
         }
     }
+    
     func getDraftOrderById(){
         guard let orderID = UserDefaultsManager.shared.getUserDraftOrderId(key: "DraftId") else { return }
         print("User Have DraftOrder and its ID3 is : \(orderID)")
@@ -110,6 +110,7 @@ class AddressesViewModel:ObservableObject{
         print(" before updated shipping address \(String(describing: self.orderToUpdate?.shipping_address))")
         print(shippingAddress ,"Thats coming from para")
         self.orderToUpdate?.shipping_address = selectShippingAddress(shippingAddress: shippingAddress)
+        self.orderToUpdate?.billing_address = selectShippingAddress(shippingAddress: shippingAddress)
         print(" after updated shipping address \(String(describing: self.orderToUpdate?.shipping_address))")
         
         guard let orderID = UserDefaultsManager.shared.getUserDraftOrderId(key: "DraftId") else { return }

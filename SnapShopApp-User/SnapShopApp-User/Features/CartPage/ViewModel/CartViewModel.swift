@@ -14,8 +14,8 @@ class CartViewModel :ObservableObject{
     @Published private (set) var lineItems:[DraftOrderLineItem]?
     @Published var viewState:CartViewState
     @Published var shippingAddress:DraftOrderAddress?
-    @Published var discountCodeKey: String?
     @Published var isLoading = true
+    @Published var isCheckOutLoading = true
     init(){
         print("CVM INIT")
         if UserDefaults.standard.bool(forKey: Support.isLoggedUDKey) {
@@ -24,46 +24,7 @@ class CartViewModel :ObservableObject{
         }else{
             viewState = .userInActive
         }
-        
-        
     }
-//    //get all draft orders
-//    func getCardDraftOrder(){
-//        Network.shared.request("\(Support.baseUrl)/draft_orders.json", method: "GET", responseType: ListOfDraftOrders.self) { [weak self] result in
-//            switch result {
-//            case .success(let response):
-//                DispatchQueue.main.async {
-//                    self?.viewState = .userActive
-//                    self?.draft = response.draft_orders
-//                    self?.total = 0
-//                    self?.getSpecificUserCart()
-//                    print("app have orders ",self?.draft?.count ?? 0,"ssssss")
-//                }
-//            case .failure(let error):
-//                print("Error fetching card draft order: \(error)")
-//                self?.viewState = .userInActive
-//
-//            }
-//        }
-//    }
-//    //get user draft order
-//    func getSpecificUserCart(){
-//        let newDraft = draft?.filter({ item in
-//            item.customer?.id == (UserDefaultsManager.shared.getUserId(key: Support.userID) ?? 0)
-//        })
-//        self.userOrders = newDraft ?? []
-//        self.shippingAddress = self.userOrders.first?.shipping_address
-//        self.lineItems = self.userOrders.first?.line_items ?? []
-//        print("Abduullah has ",newDraft?.count ?? 0,"orders")
-//        print("Line Items is \(self.lineItems.count) count")
-//        for order in self.userOrders {
-//            total += Double(order.subtotal_price ?? "-200") ?? -100
-//        }
-//        discountCodeKey = self.userOrders.first?.applied_discount?.description
-//        isLoading = false
-//        print(userOrders.first?.total_price ?? 0)
-//
-//    }
     //method to delete
     func getDraftOrderById(){
         guard let orderID = UserDefaultsManager.shared.getUserDraftOrderId(key: "DraftId") else { return }
@@ -82,6 +43,7 @@ class CartViewModel :ObservableObject{
                         print("Coupon is \(self?.userOrder?.applied_discount?.description ?? "NONO")")
                         self?.lineItems = items
                         self?.isLoading = false
+                        self?.isCheckOutLoading = false
                     }
                 case .failure(let err):
                     print("Error get the user order : \(err)")
@@ -97,6 +59,7 @@ class CartViewModel :ObservableObject{
     
     //delete item from drafts
     func deleteLineItemFromDraftOrder(lineItem:DraftOrderLineItem){
+        isLoading = true
         //if this is the only item -> delete the  all draft order
         if userOrder?.line_items?.count == 1 {
             //delete draft itself
@@ -137,6 +100,7 @@ class CartViewModel :ObservableObject{
        }
     
     func postAsCompleted(){
+        isCheckOutLoading = true
         guard let orderID = UserDefaultsManager.shared.getUserDraftOrderId(key: "DraftId") else { return }
         let updatedOrder = userOrder
         Network.shared.updateData(object: updatedOrder, to: "https://mad-ism-ios-1.myshopify.com/admin/api/2024-04/draft_orders/\(orderID)/complete.json" ){result in
@@ -145,6 +109,7 @@ class CartViewModel :ObservableObject{
                 DispatchQueue.main.async {
                     print("Completed  Successfully")
                     self.deleteCardDraftOrder()
+                    self.isCheckOutLoading = false
                 }
             case .failure(let error):
                 print(error.localizedDescription)
@@ -152,6 +117,56 @@ class CartViewModel :ObservableObject{
             }
         }
     }
+    
+    
+func fetchPriceRulesByIdForApplyingCoupons(id: Int) {
+    isCheckOutLoading = true
+    Network.shared.request("\(Support.baseUrl)/price_rules/\(String(describing: id)).json", method: "GET", responseType: PriceRulesRoot.self) { [weak self] result in
+        switch result {
+        case .success(let response):
+            print("BeforeCoupons")
+            DispatchQueue.main.async {[weak self] in
+                print("here is the preice rule response,",response.price_rule?.value,"Value", response.price_rule?.id)
+                self?.prepareAppliedDiscount(priceRuleData: response.price_rule ?? PriceRule(id: 0, value_type: "", value: "", customer_selection: "", title: ""))
+            }
+            print("AfterCoupons")
+
+        case .failure(let error):
+            print("Error fetching price rule by id: \(error)")
+        }
+    }
+}
+
+func prepareAppliedDiscount(priceRuleData:PriceRule) {
+    let newValue = abs(Double(priceRuleData.value ?? "0.0") ?? 0.0)
+    
+    let couponsToApply = AppliedDiscount(description: "CouponDescription", value_type: priceRuleData.value_type, value: String(newValue), amount: priceRuleData.value, title: priceRuleData.title)
+    print(couponsToApply,"IS THIS NIL??????")
+
+    self.applyCouponOnDraftOrder(couponToApply: couponsToApply)
+}
+
+func applyCouponOnDraftOrder(couponToApply: AppliedDiscount){
+    isCheckOutLoading = true
+    print(" before Applying The Coupons \(String(describing: self.userOrder?.applied_discount))")
+    self.userOrder?.applied_discount = couponToApply
+    print(" after Applying The Coupons \(String(describing: self.userOrder?.applied_discount))")
+    guard let orderID = UserDefaultsManager.shared.getUserDraftOrderId(key: "DraftId") else { return }
+    print("The Id Of The Order is ->>>> \(orderID)")
+    let updatedOrder = DraftOrderItem(draft_order: self.userOrder)
+    Network.shared.updateData(object: updatedOrder, to: "https://mad-ism-ios-1.myshopify.com/admin/api/2024-04/draft_orders/\(orderID).json" ){result in
+        switch result {
+        case .success(_):
+            DispatchQueue.main.async {
+                print("Draft Applying Couons Updated Successfully")
+                self.getDraftOrderById()
+            }
+        case .failure(let error):
+            print(error.localizedDescription)
+            print("Error updating user Coupons On draft order: \(error)")
+        }
+    }
+}
 
     
 }

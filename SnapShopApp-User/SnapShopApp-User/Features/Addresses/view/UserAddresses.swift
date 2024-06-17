@@ -8,12 +8,12 @@
 import SwiftUI
 
 struct UserAddresses: View {
-    @ObservedObject var viewModel : AddressesViewModel
+    @ObservedObject var viewModel: AddressesViewModel = AddressesViewModel()
     @State private var showingBottomSheet = false
     @State private var settingsDetents = PresentationDetent.height(UIScreen.screenHeight*0.5 + 100)
     var fromCart: Bool
     @Environment(\.presentationMode) var presentationMode
-    var didSelectAddress: ((AddressProfileDetails) -> Void)? // Closure to be called when an address is selected
+    var didSelectAddress: (AddressProfileDetails) -> Void? // Closure to be called when an address is selected
     
     var body: some View {
         VStack{
@@ -36,23 +36,19 @@ struct UserAddresses: View {
         VStack{
             ScrollView{
                 ForEach(viewModel.addresses ?? [],id: \.id) { address in
-                    AddressCell(address: address, fromCard: fromCart, onDeleteClick: {
+                    AddressCell(address: address, fromCard: fromCart,
+                                onDeleteClick: {
                         viewModel.deleteAddress(addressId: address.id ?? 0)
                     }, onUpdateClick: { updatedAddress in
                         viewModel.updateAddress(updatedAddress: updatedAddress, addressId: updatedAddress.customer_address?.id ?? 0)
                     }, onSelectClick: { selectedAddress in
                         print("SelectedAddress")
                         viewModel.updateUserShippingAddress(shippingAddress: selectedAddress)
-                        didSelectAddress?(address)
-
+                        didSelectAddress(selectedAddress)
                         presentationMode.wrappedValue.dismiss() // Dismiss the second view
+                        return nil
 
-                    }).onTapGesture {
-                        if fromCart == true {
-                            print(address)
-                            
-                        }
-                    }
+                    })
                 }
             }
             .navigationBarTitle("Addresses")
@@ -71,6 +67,7 @@ struct UserAddresses: View {
                     }).presentationDetents([.height(UIScreen.screenHeight*0.5 + 100)], selection: $settingsDetents)
                 })
         }.onAppear{
+            viewModel.fetchUserAddresses()
             if fromCart == true {
                 viewModel.getDraftOrderById()
             }
@@ -80,6 +77,6 @@ struct UserAddresses: View {
 
 struct UserAddresses_Previews: PreviewProvider {
     static var previews: some View {
-        UserAddresses(viewModel: AddressesViewModel(),fromCart: false)
+        UserAddresses(fromCart: false, didSelectAddress: {_ in})
     }
 }

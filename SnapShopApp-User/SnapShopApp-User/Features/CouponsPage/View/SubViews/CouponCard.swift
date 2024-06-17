@@ -13,8 +13,7 @@ struct CouponCard: View {
     var discountValue:String
     var discountTitle:String
     var fromCart: Bool
-    var priceId:Int
-    var onSelectCoupon: (_ priceRuleId:Int)->Void
+    var onSelectCoupon: ()->Void
     var body: some View {
             ZStack(alignment: .center) {
                 Image(imageName)
@@ -49,8 +48,7 @@ struct CouponCard: View {
                             .padding(.leading,10)
                             .onTapGesture {
                                 print("pressing....")
-                                onSelectCoupon(priceId)
-                                UserDefaultsManager.shared.selectedCouponeName = discountCode
+                                onSelectCoupon()
                             }
                     }
                 }
