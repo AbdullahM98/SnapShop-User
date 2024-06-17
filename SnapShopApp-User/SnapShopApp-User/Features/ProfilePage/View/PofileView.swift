@@ -13,10 +13,9 @@ struct ProfileView: View {
     @State private var showingBottomSheet = false
     @State private var settingsDetents = PresentationDetent.medium
     @ObservedObject var viewModel : ProfileViewModel = ProfileViewModel()
-    @ObservedObject var addressViewModel : AddressesViewModel = AddressesViewModel()
     @ObservedObject var orderViewModel : OrdersViewModel = OrdersViewModel()
     @ObservedObject var currenciesViewModel : CurrencyViewModel = CurrencyViewModel()
-    @State var userDetails: CustomerProfileDetails?
+//    @State var userDetails: CustomerProfileDetails?
     @State private var navigateToUserAddresses = false // Flag to trigger navigation
     @State private var navigateToCurrencyView = false
     @State private var navigateToLogin = false
@@ -125,7 +124,7 @@ struct ProfileView: View {
                             .frame(height: 1)
                             .foregroundColor(.gray)
                         
-                        NavigationLink(destination: UserAddresses(viewModel: addressViewModel, fromCart: false), isActive: $navigateToUserAddresses) {
+                        NavigationLink(destination: UserAddresses(fromCart: false, didSelectAddress: {_ in}), isActive: $navigateToUserAddresses) {
                             Button(action: {
                                 navigateToUserAddresses = true // Activate navigation
                             }) {

@@ -10,6 +10,8 @@ import SwiftUI
 struct CouponsPage: View {
     @ObservedObject var viewModel = CouponsViewModel()
     var couponsBG: [String] = ["Coupon1", "Coupon2", "Coupon3", "Coupon4"]
+    var fromCart: Bool
+    @Environment(\.presentationMode) var presentationMode
     
     var body: some View {
         VStack{
@@ -29,8 +31,12 @@ struct CouponsPage: View {
                                     imageName: couponsBG.randomElement() ?? "Coupon1",
                                     discountCode: coupon.code ?? "",
                                     discountValue: String(rule.value?.dropFirst().dropLast(2) ?? ""),
-                                    discountTitle: rule.title ?? ""
-                                )
+                                    discountTitle: rule.title ?? "", fromCart: fromCart) {
+                                        UserDefaultsManager.shared.selectedCouponCodeValue = coupon.code ?? ""
+                                        UserDefaultsManager.shared.priceRuleIdForCoupon = rule.id 
+                                        presentationMode.wrappedValue.dismiss() // Dismiss the second view
+                                        
+                                    }
                             }
                         }
                     }
@@ -49,6 +55,6 @@ struct CouponsPage: View {
 
 struct CouponsPage_Previews: PreviewProvider {
     static var previews: some View {
-        CouponsPage()
+        CouponsPage(fromCart: false)
     }
 }

@@ -6,86 +6,224 @@
 //
 
 import SwiftUI
+import PassKit
+
+import SwiftUI
+import PassKit
 
 struct CheckOutPage: View {
-    @State private var discountCode: String = ""
+    var address: DraftOrderAddress
     @State private var showingBottomSheet = false
     @State private var settingsDetents = PresentationDetent.medium
-    @State private var navigateToCoupons = false // Flag to trigger navigation
-    @State private var navigateToAddresses = false // Flag to trigger navigation
-    @State private var selectedAddress: AddressProfileDetails? // Track the selected address
-    @ObservedObject var addressViewModel = AddressesViewModel()
-
+    @State private var navigateToCoupons = false
+    @State private var navigateToAddresses = false
+    @State private var selectedAddress: AddressProfileDetails?
+    @State private var showAlert = false
+    @State private var navigateToHome = false
+    @ObservedObject var cartViewModel = CartViewModel()
+    @State private var discountCode: String = "" // Use a state variable to hold the discount code
     var body: some View {
-        ScrollView{
-            VStack(alignment: .leading){
-                Text("Delivery Address")
-                    .bold()
-                AddressCell(address: selectedAddress ?? AddressProfileDetails(id: 0, customer_id: 0, first_name: "", last_name: "", company: "", address1: "", address2: "", city: "", province: "", country: "", zip: "", phone: "", name: "", province_code: "", country_code: "", country_name: "", default: true), insideCard: true, onDeleteClick: {}, onUpdateClick: {_ in})
-                
-                NavigationLink(destination: UserAddresses(viewModel: addressViewModel,fromCart: true, didSelectAddress: { address in
-                    selectedAddress = address
-                }),isActive: $navigateToAddresses) {
-                    
-                    HStack{
-                        Spacer()
-                        AppButton(text: "Address", width: 80, height: 50, isFilled: true) {
-                            print("addAddress")
-                            navigateToAddresses = true
+        VStack{
+            if cartViewModel.isCheckOutLoading {
+                Spacer()
+                CustomCircularProgress()
+                Spacer()
+            } else {
+                ScrollView {
+                    VStack(alignment: .leading) {
+                        Text("Delivery Address")
+                            .bold()
+                        
+                        OrderAddressCell(address: selectedAddress ?? AddressProfileDetails(
+                            id: 0,
+                            customer_id: 0,
+                            first_name: address.first_name,
+                            last_name: address.last_name,
+                            company: address.company,
+                            address1: address.address1,
+                            address2: address.address2,
+                            city: address.city,
+                            province: "",
+                            country: address.country,
+                            zip: address.zip,
+                            phone: address.phone,
+                            name: "",
+                            province_code: "",
+                            country_code: "",
+                            country_name: "",
+                            default: true
+                        ))
+                        
+                        NavigationLink(destination: UserAddresses(
+                            fromCart: true, didSelectAddress: { address in
+                                selectedAddress = address
+                            }
+                        ), isActive: $navigateToAddresses) {
+                            HStack {
+                                Spacer()
+                                AppButton(text: "Address", width: 80, height: 50, isFilled: true) {
+                                    print("addAddress")
+                                    navigateToAddresses = true
+                                }
+                                Spacer()
+                            }
+                            .padding(.bottom, 16)
                         }
-                        Spacer()
-                    }.padding(.bottom,16)
-                }
-                
-                    HStack{
-                        TextField("Enter Discount code here", text: $discountCode)
-                            .textFieldStyle(RoundedBorderTextFieldStyle())
-                        Spacer()
-                        NavigationLink(destination: CouponsPage(), isActive: $navigateToCoupons) {
-                        AppButton(text: "Get Code", width: 90, height: 34, isFilled: true) {
-                            print("apply code")
-                            navigateToCoupons = true
+                        
+                        HStack {
+                            TextField("Enter Discount code here", text: $discountCode) // Directly bind to the discountCode property
+                                .disabled(true)
+                                .textFieldStyle(RoundedBorderTextFieldStyle())
+                            Spacer()
+                            NavigationLink(destination: CouponsPage(fromCart: true), isActive: $navigateToCoupons) {
+                                AppButton(text: discountCode != "" ? "ApplyCode":"Get Code", width: 90, height: 34, isFilled: true) {
+                                    if discountCode != "" {
+                                        print("Update Draft Order")
+                                        if let priceRuleId = UserDefaultsManager.shared.priceRuleIdForCoupon{
+                                            cartViewModel.fetchPriceRulesByIdForApplyingCoupons(id: priceRuleId)
+                                        }
+                                    } else {
+                                        print("navigate")
+                                        navigateToCoupons = true
+                                    }
+                                }
+                            }
+                        }
+                        .padding()
+                        
+                        HStack {
+                            Text("Sub-Total Price:").bold()
+                            if let subtotalPrice = cartViewModel.userOrder?.subtotal_price,
+                               let discountValue = cartViewModel.userOrder?.applied_discount?.value {
+                                let originalPrice = calculateOriginalPrice(afterDiscount: Double(subtotalPrice) ?? 0.0, discountRate: Double(discountValue) ?? 0.0)
+                                
+                                Text("\(String(format: "%.2f",originalPrice * (Double(UserDefaultsManager.shared.selectedCurrencyValue ?? "1") ?? 1))) \(UserDefaultsManager.shared.selectedCurrencyCode ?? "USD")")
+                                    .foregroundColor(.gray)
+                                //                        Text("\(String(format: "%.2f", originalPrice)) EGP")                        .foregroundColor(.gray)
+                                
+                            } else {
+                                
+                                Text("\(String(format: "%.2f",(Double(cartViewModel.userOrder?.subtotal_price ?? "1.0" ) ?? 1 ) * (Double(UserDefaultsManager.shared.selectedCurrencyValue ?? "1") ?? 1))) \(UserDefaultsManager.shared.selectedCurrencyCode ?? "USD")")
+                                    .foregroundColor(.gray)
+                            }
+                        }
+                        .padding(.bottom, 16)
+                        
+                        HStack {
+                            Text("Total Taxes:").bold()
+                            if let totalTax = cartViewModel.userOrder?.total_tax,
+                               let discountValue = cartViewModel.userOrder?.applied_discount?.value {
+                                let originalPrice = calculateOriginalPrice(afterDiscount: Double(totalTax) ?? 0.0, discountRate: Double(discountValue) ?? 0.0)
+                                //                        Text("\(String(format: "%.2f", originalPrice)) EGP")
+                                Text("\(String(format: "%.2f", originalPrice  * (Double(UserDefaultsManager.shared.selectedCurrencyValue ?? "1") ?? 1))) \(UserDefaultsManager.shared.selectedCurrencyCode ?? "USD")")
+                                    .foregroundColor(.gray)
+                                
+                            } else {
+                                
+                                Text("\(String(format: "%.2f",(Double(cartViewModel.userOrder?.total_tax ?? "1.0" ) ?? 1 ) * (Double(UserDefaultsManager.shared.selectedCurrencyValue ?? "1") ?? 1))) \(UserDefaultsManager.shared.selectedCurrencyCode ?? "USD")")
+                                    .foregroundColor(.gray)
+                                //                        Text("\(cartViewModel.userOrder?.total_tax ?? "0.0")  \(UserDefaultsManager.shared.selectedCurrencyCode ?? "USD")")
+                                    .foregroundColor(.gray)
+                            }
+                        }
+                        .padding(.bottom, 16)
+                        
+                        HStack {
+                            Text("Total Price:").bold()
+                            if let totalPrice = cartViewModel.userOrder?.total_price,
+                               let discountValue = cartViewModel.userOrder?.applied_discount?.value {
+                                let originalPrice = calculateOriginalPrice(afterDiscount: Double(totalPrice) ?? 0.0, discountRate: Double(discountValue) ?? 0.0)
+                                Text("\(String(format: "%.2f",originalPrice  * (Double(UserDefaultsManager.shared.selectedCurrencyValue ?? "1") ?? 1))) \(UserDefaultsManager.shared.selectedCurrencyCode ?? "USD")")
+                                    .foregroundColor(.gray)
+                                //                        Text("\(String(format: "%.2f", originalPrice)) EGP")                        .foregroundColor(.gray)
+                                
+                            } else {
+                                
+                                Text("\(String(format: "%.2f",(Double(cartViewModel.userOrder?.total_price ?? "1.0" ) ?? 1 ) * (Double(UserDefaultsManager.shared.selectedCurrencyValue ?? "1") ?? 1))) \(UserDefaultsManager.shared.selectedCurrencyCode ?? "USD")")
+                                    .foregroundColor(.gray)
+                                //                        Text("\(cartViewModel.userOrder?.total_price ?? "0.0")  \(UserDefaultsManager.shared.selectedCurrencyCode ?? "USD")")
+                                //                            .foregroundColor(.gray)
+                            }
+                        }
+                        .padding(.bottom, 16)
+                        
+                        HStack {
+                            Text("Price After Discounts:").bold()
                             
+                            Text("\(String(format: "%.2f",(Double(cartViewModel.userOrder?.total_price ?? "1.0" ) ?? 1 ) * (Double(UserDefaultsManager.shared.selectedCurrencyValue ?? "1") ?? 1))) \(UserDefaultsManager.shared.selectedCurrencyCode ?? "USD")")
+                                .foregroundColor(.green)
+                            //                    Text("\(cartViewModel.userOrder?.total_price ?? "0.0") EGP").foregroundColor(.green) // Update with your logic for discounted price
+                                .foregroundColor(.gray)
+                        }
+                        .padding(.bottom, 16)
+                        
+                        HStack {
+                            Spacer()
+                            AppButton(text: "Go To Payment", width: 120, height: 40, isFilled: true, onClick: {
+                                showingBottomSheet.toggle()
+                            }).sheet(isPresented: $showingBottomSheet) {
+                                PaymentPage(
+                                    showAlert: $showAlert,
+                                    navigateToHome: $navigateToHome,
+                                    onApplePayClick: {
+                                        showingBottomSheet.toggle()
+                                        print("apple Payment")
+                                    },
+                                    onCashOnDeliveryClick: {
+                                        showingBottomSheet.toggle()
+                                        print("CashOnDelivery")
+                                        cartViewModel.postAsCompleted()
+                                        // Handle order posting with cash on delivery
+                                    },
+                                    userOrders: cartViewModel.userOrder ?? DraftOrderItemDetails(id: 0, note: "", email: "", taxes_included: false, currency: "", invoice_sent_at: "", created_at: "", updated_at: "", tax_exempt: false, completed_at: "", name: "", status: "", billing_address: nil, invoice_url: "", order_id: 0, shipping_line: "", tax_lines: nil, tags: "", note_attributes: nil, total_price: "", subtotal_price: "", total_tax: "", payment_terms: "", presentment_currency: "", admin_graphql_api_id: "", customer: nil, use_customer_default_address: true)
+                                ).presentationDetents([.medium], selection: $settingsDetents)
+                            }
+                            Spacer()
                         }
                     }
-                }.padding()
-                HStack{
-                    Text("Total Price :").bold()
-                    Text("20391.49 EGP")
-                        .foregroundColor(.gray)
-                }
-                .padding(.bottom,16)
-                HStack{
-                    Text("Price After Discounts :").bold()
-                    Text("20391.49 EGP")
-                        .foregroundColor(.gray)
-                }
-                .padding(.bottom,16)
-                HStack{
-                    Spacer()
-                    AppButton(text: "Go To Payment", width: 120, height: 40, isFilled: true, onClick: {
-                        showingBottomSheet.toggle()
-                    }).sheet(isPresented: $showingBottomSheet) {
-                        PaymentPage(onApplePayClick: {
-                            showingBottomSheet.toggle()
-                        }, onCashOnDeliveryClick: {
-                            showingBottomSheet.toggle()
-                        }).presentationDetents([.medium], selection: $settingsDetents)
-                    }
-                    Spacer()
+                    .padding()
                 }
             }
-            .padding()
+            
         }
         .navigationBarTitle("Checkout")
         .navigationBarBackButtonHidden(true)
         .navigationBarItems(leading: CustomBackButton())
+        .onAppear {
+            // Fetch the data here
+            print("Appear again")
+            cartViewModel.getDraftOrderById()
+            // Fetch discount code from UserDefaults
+            if let savedDiscountCode = UserDefaultsManager.shared.selectedCouponCodeValue {
+                self.discountCode = savedDiscountCode
+            }
+        }
+        .overlay(
+            showAlert ? AnyView(
+                ImageButtonAlert(
+                    isPresented: $showAlert,
+                    title: "Congratulations",
+                    message: "Your order is under preparation",
+                    image: Image("congratulations"),
+                    buttonText: "Continue Shopping",
+                    onAction: {
+                        cartViewModel.postAsCompleted()
+                        showAlert = false
+                        navigateToHome = true
+                    }
+                )
+            ) : AnyView(EmptyView())
+        )
+        .background(
+            NavigationLink(
+                destination: ContentView(), // Replace with your actual home view
+                isActive: $navigateToHome,
+                label: { EmptyView() }
+            )
+        )
     }
-}
-
-struct CheckOutPage_Previews: PreviewProvider {
-    static var previews: some View {
-        CheckOutPage()
-        
+    func calculateOriginalPrice(afterDiscount priceAfterDiscount: Double, discountRate: Double) -> Double {
+        return priceAfterDiscount / (1 - discountRate/100)
     }
+    
 }

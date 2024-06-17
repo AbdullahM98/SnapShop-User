@@ -14,9 +14,8 @@ class CouponsViewModel: ObservableObject {
     @Published var priceRules: [PriceRule] = []
     @Published var singleRule: PriceRule?
     @Published var dict: [DiscountCodes: PriceRule] = [:]
+    @Published var orderToUpdate:DraftOrderItemDetails?
     @Published var isLoading = true
-    
-    
     init() {
         print("INIT CouponsVM")
     }
@@ -69,24 +68,7 @@ class CouponsViewModel: ObservableObject {
             }
         }
     }
-    
-    func fetchPriceRulesById(id: Int) {
-        Network.shared.request("\(Support.baseUrl)/price_rules/\(String(describing: id)).json", method: "GET", responseType: PriceRulesRoot.self) { [weak self] result in
-            switch result {
-            case .success(let response):
-                print("im in switch price rules")
-                DispatchQueue.main.async {
-                    self?.singleRule = response.price_rule
-                    self?.fetchCoupons()
-                }
-                print("before fetching coupons")
-                
-            case .failure(let error):
-                print("Error fetching price rule by id: \(error)")
-            }
-        }
-    }
-    
+
     func setUpDict() {
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
@@ -99,4 +81,5 @@ class CouponsViewModel: ObservableObject {
             }
         }
     }
+
 }

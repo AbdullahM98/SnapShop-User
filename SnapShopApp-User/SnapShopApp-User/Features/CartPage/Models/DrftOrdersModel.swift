@@ -31,10 +31,10 @@ struct DraftOrderItemDetails: Codable {
     let name: String?
     let status: String?
     var line_items: [DraftOrderLineItem]?
-    let shipping_address: DraftOrderAddress?
-    let billing_address: DraftOrderAddress?
+    var shipping_address: DraftOrderAddress?
+    var billing_address: DraftOrderAddress?
     let invoice_url: String?
-    let applied_discount: AppliedDiscount?
+    var applied_discount: AppliedDiscount?
     let order_id: Int?
     let shipping_line: String?
     let tax_lines: [DraftOrderTaxLine]?
@@ -66,7 +66,7 @@ struct DraftOrderLineItem: Codable {
     let variant_title: String?
     let sku: String?
     let vendor: String?
-    let quantity: Int?
+    var quantity: Int?
     let requires_shipping: Bool?
     let taxable: Bool?
     let gift_card: Bool?
@@ -279,5 +279,3 @@ struct TaxLine: Codable {
     let price_set: PriceSet
     let channel_liable: Bool
 }
-
-

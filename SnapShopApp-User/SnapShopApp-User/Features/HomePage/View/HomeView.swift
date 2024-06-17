@@ -27,7 +27,11 @@ struct HomeView: View {
         }.onAppear{
             viewModel.fetchBrands()
             viewModel.fetchProducts()
-            viewModel.fetchAllDraftOrdersOfApplication()
+            if UserDefaultsManager.shared.getUserHasDraftOrders(key: "HasDraft") ?? false {
+                
+                viewModel.fetchAllDraftOrdersOfApplication()
+            }
+            
         }
         
     }
