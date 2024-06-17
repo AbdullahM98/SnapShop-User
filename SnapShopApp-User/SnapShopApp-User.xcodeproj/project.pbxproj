@@ -71,6 +71,7 @@
 		56DC253F2C15B65200008690 /* ProfileModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56DC253E2C15B65200008690 /* ProfileModels.swift */; };
 		56E598E52C1FDB66009F31CE /* AboutUs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E598E42C1FDB65009F31CE /* AboutUs.swift */; };
 		56E598E72C1FDCE8009F31CE /* DeveloperInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E598E62C1FDCE8009F31CE /* DeveloperInfo.swift */; };
+		56E598E92C1FE1BF009F31CE /* NotificationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E598E82C1FE1BE009F31CE /* NotificationHandler.swift */; };
 		56FC064C2C174AE60015886D /* AddressesModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56FC064B2C174AE60015886D /* AddressesModels.swift */; };
 		56FC064E2C174B290015886D /* AddressesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56FC064D2C174B290015886D /* AddressesViewModel.swift */; };
 		7606FB982C0F74DB00E1D3AF /* Netwrok.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7606FB972C0F74DB00E1D3AF /* Netwrok.swift */; };
@@ -192,6 +193,7 @@
 		56DC253E2C15B65200008690 /* ProfileModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileModels.swift; sourceTree = "<group>"; };
 		56E598E42C1FDB65009F31CE /* AboutUs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutUs.swift; sourceTree = "<group>"; };
 		56E598E62C1FDCE8009F31CE /* DeveloperInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeveloperInfo.swift; sourceTree = "<group>"; };
+		56E598E82C1FE1BE009F31CE /* NotificationHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationHandler.swift; sourceTree = "<group>"; };
 		56FC064B2C174AE60015886D /* AddressesModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressesModels.swift; sourceTree = "<group>"; };
 		56FC064D2C174B290015886D /* AddressesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressesViewModel.swift; sourceTree = "<group>"; };
 		7606FB972C0F74DB00E1D3AF /* Netwrok.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Netwrok.swift; sourceTree = "<group>"; };
@@ -590,6 +592,7 @@
 				7606FBC22C10AF1C00E1D3AF /* AppModel.xcdatamodeld */,
 				7606FBC52C11129100E1D3AF /* UserDefaultsManager.swift */,
 				76257A3D2C177900001C4006 /* FirestoreManager.swift */,
+				56E598E82C1FE1BE009F31CE /* NotificationHandler.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -1159,6 +1162,7 @@
 				0AF5837A2C11F28A006D5059 /* FilterButtomSheet.swift in Sources */,
 				7606FBAB2C0F795F00E1D3AF /* Theme.swift in Sources */,
 				7606FBA42C0F782A00E1D3AF /* SignUpScreen.swift in Sources */,
+				56E598E92C1FE1BF009F31CE /* NotificationHandler.swift in Sources */,
 				56DC253F2C15B65200008690 /* ProfileModels.swift in Sources */,
 				0A44F0C32C1C86B10031E649 /* AutoDismissAlert.swift in Sources */,
 				0AF5834F2C11EEC4006D5059 /* TabBarButton.swift in Sources */,
