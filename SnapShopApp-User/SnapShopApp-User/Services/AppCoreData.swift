@@ -33,7 +33,7 @@ class AppCoreData{
         
         do {
             let productsEntities = try context.fetch(request)
-            var products :[ProductEntity] = []
+            
             for productEntity in productsEntities {
                 guard let userId = productEntity.value(forKey: "userId") as? String,
                       let vendor = productEntity.value(forKey: "vendor") as? String,
@@ -59,8 +59,26 @@ class AppCoreData{
         }
     }
     
+    func checkProductIfFav(productId:String)-> Bool{
+        print("check from CD")
+        if (productId != "0"){
+            print("not 0 ")
+            var isFavorite = false
+            for product in products {
+                print("inside products")
+                if product.product_id == productId {
+                    print("id \(product.product_id)")
+                    isFavorite = true
+                }
+            }
+            return isFavorite
+        }else{
+            return false
+        }
+    }
+    
     func addFavProduct(favProduct:ProductEntity) {
-        if products.count <= 4 {
+       
             guard let productEntity = NSEntityDescription.entity(forEntityName: entityName, in: context) else {
                 print("Failed to create entity description.")
                 return
@@ -72,7 +90,7 @@ class AppCoreData{
             newProduct.setValue(favProduct.product_id, forKey: "id")
             newProduct.setValue(favProduct.title, forKey: "title")
             newProduct.setValue(favProduct.vendor, forKey: "vendor")
-            newProduct.setValue(favProduct.variant_Id, forKey: "variant_Id")
+            newProduct.setValue(favProduct.variant_Id, forKey: "variant_id")
             newProduct.setValue(favProduct.tags, forKey: "tags")
             newProduct.setValue(favProduct.body_html, forKey: "body_html")
             newProduct.setValue(favProduct.inventory_quantity, forKey: "inventory_quantity")
@@ -81,13 +99,12 @@ class AppCoreData{
             newProduct.setValue(favProduct.images?[0], forKey: "images")
             do {
                 try context.save()
-                print("Customer inserted successfully.")
+                print("Product inserted successfully.")
+                self.products = self.getAllProducts(by: favProduct.userId!)
             } catch {
-                print("Failed inserting customer: \(error)")
+                print("Failed inserting product: \(error)")
             }
-        }else{
-            print("UserAlreadyHasFour")
-        }
+       
     }
     
     

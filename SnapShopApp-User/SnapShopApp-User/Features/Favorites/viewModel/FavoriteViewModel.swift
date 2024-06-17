@@ -26,6 +26,8 @@ class FavoriteViewModel : ObservableObject{
     func getUserFav(){
         // online or offline
         self.products = getAllLocalFav()
+        print("Fav count is \(products.count)")
+        print("state is  \(viewState)")
         
     }
     
@@ -41,7 +43,7 @@ class FavoriteViewModel : ObservableObject{
     
        func fetchFavProducts() {
            if viewState == .userActive{
-               guard  let userId = UserDefaults.standard.string(forKey: Support.fireBaseUserID) else{
+               guard  let userId = UserDefaults.standard.string(forKey: Support.userID) else{
                    return
                }
                firestoreService.getAllFavProductsRemote(userId: userId)
@@ -112,7 +114,8 @@ class FavoriteViewModel : ObservableObject{
        }
     
     func getAllLocalFav() ->[ProductEntity]{
-        let userId = UserDefaults.standard.string(forKey: Support.fireBaseUserID)
+        print("Getting all favs")
+        let userId = UserDefaults.standard.integer(forKey: Support.userID).description
        return  AppCoreData.shared.getAllProducts(by: userId ?? "")
     }
     func addLocalFavProduct(product:ProductEntity){
