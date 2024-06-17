@@ -59,11 +59,13 @@ struct ProductDetailView: View {
                                 Spacer()
                                 Button{
                                     if $viewModel.isFavorite.wrappedValue {
+                                       
                                         viewModel.isFavorite = false
-                                        viewModel.addLocalFavProduct(product: viewModel.product!)
+                                        viewModel.removeFromFavLocal(id: (viewModel.product?.product_id)!)
                                     }else{
                                         viewModel.isFavorite = true
-                                        viewModel.removeFromFavLocal(id: (viewModel.product?.product_id)!)
+                                        print("hhhh \(viewModel.product?.product_id ?? "22")")
+                                        viewModel.addLocalFavProduct(product: viewModel.product!)
                                     }
                                 }label: {
                                     Image(systemName: viewModel.isFavorite ? "heart.fill" : "heart").resizable().frame(width: 30,height: 28)
@@ -91,48 +93,56 @@ struct ProductDetailView: View {
                         
                         Text($viewModel.productDecription.wrappedValue).multilineTextAlignment(.leading).font(.subheadline).padding(.top,3)
                         
-                        HStack(alignment: .top) {
-                            VStack(alignment: .leading) {
-                                Text("Size")
-                                    .font(.system(size: 18))
-                                    .fontWeight(.semibold)
-                                
-                                HStack {
-                                    ForEach(["S", "M", "L"], id: \.self) { size in
-                                        Button {
-                                            print("Select item")
-                                        } label: {
-                                            Text(size)
-                                                .foregroundColor(Color.black)
-                                        }
-                                        .frame(width: 24, height: 24)
-                                        .background(Color.clear)
-                                        .clipShape(RoundedRectangle(cornerRadius: 6))
-                                        .overlay(
-                                            RoundedRectangle(cornerRadius: 6)
-                                                .stroke(Color.black, lineWidth: 2)
-                                        )
-                                    }
-                                }
-                            }.frame(maxWidth: .infinity, alignment: .leading)
-                            
-                            Spacer()
-                            VStack(alignment: .leading) {
-                                Text("Colors")
-                                    .font(.system(size: 18))
-                                    .fontWeight(.semibold)
-                                
-                                HStack {
-                                    ForEach([Color.red, Color.blue, Color.orange, Color.green], id: \.self) { color in
-                                        CustomColorDot(color: color, isSelected: color == viewModel.selectedColor)
-                                            .onTapGesture {
-                                                viewModel.selectedColor = color
+                        if $viewModel.hasOptions.wrappedValue {
+                            HStack(alignment: .top) {
+                                if viewModel.sizes!.count != 0 {
+                                    VStack(alignment: .leading) {
+                                        Text("Size")
+                                            .font(.system(size: 18))
+                                            .fontWeight(.semibold)
+                                        
+                                        HStack {
+                                            ForEach(viewModel.sizes ?? [""], id: \.self) { size in
+                                                Button {
+                                                    print("Select item")
+                                                } label: {
+                                                    Text(size)
+                                                        .foregroundColor(Color.black)
+                                                }
+                                                .frame(width: 24, height: 24)
+                                                .background(Color.clear)
+                                                .clipShape(RoundedRectangle(cornerRadius: 6))
+                                                .overlay(
+                                                    RoundedRectangle(cornerRadius: 6)
+                                                        .stroke(Color.black, lineWidth: 2)
+                                                )
                                             }
-                                    }
+                                        }
+                                    }.frame(maxWidth: .infinity, alignment: .leading)
                                 }
-                            }
-                            .frame(maxWidth: .infinity)
-                        }.padding(.top,10)
+                                
+                                Spacer()
+                                if viewModel.colors!.count != 0 {
+                                    VStack(alignment: .leading) {
+                                        Text("Colors")
+                                            .font(.system(size: 18))
+                                            .fontWeight(.semibold)
+                                        
+                                        HStack {
+                                            ForEach(viewModel.colors ?? [Color.yellow], id: \.self) { color in
+                                                CustomColorDot(color: color, isSelected: color == viewModel.selectedColor)
+                                                    .onTapGesture {
+                                                        viewModel.selectedColor = color
+                                                    }
+                                            }
+                                        }.padding(.bottom,20)
+                                   
+                                }.frame(maxWidth: .infinity)
+                                }
+                            }.padding(.top,10)
+                        }else{
+                            VStack{}.frame(height: UIScreen.screenHeight * 0.12)
+                        }
                         
                         
                         AppButton(text: "Add to Cart", width: UIScreen.screenWidth * 0.9, height: UIScreen.screenHeight * 0.06, isFilled: true){

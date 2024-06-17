@@ -22,7 +22,11 @@ class ProductDetailViewModel :ObservableObject{
     @Published var product: ProductEntity?
     @Published var productModel: ProductModel?
     @Published var errorMessage: String?
+    @Published var hasOptions:Bool = false
     @Published var imgUrl :String?
+    @Published var colors :[Color]? = []
+    @Published var sizes :[String]? = []
+    
     private var cancellables = Set<AnyCancellable>()
     
     func fetchProductByID(_ productID: String) {
@@ -38,24 +42,91 @@ class ProductDetailViewModel :ObservableObject{
             }, receiveValue: { [weak self] productResponse in
                 DispatchQueue.main.async {
                 //    self?.product = productResponse.product
-                    self?.setUpUI(product: productResponse.product!)
+                    
                     self?.productModel = productResponse.product!
+                    self?.product = self?.convertToEntity(from: productResponse.product!)
+                    self?.setUpUI(product: (self?.product)!)
                     print(productResponse.product?.product_type ?? "No product type")
                 }
             })
             .store(in: &cancellables)
     }
     
-    func setUpUI(product: ProductModel) {
-        print("Setting up UI with product ID: \(product.id ?? 0)")
+    func convertToEntity(from model: ProductModel) -> ProductEntity {
+         let imageSources = model.images?.compactMap { $0.src } ?? []
+
+         let entity = ProductEntity(
+            userId: UserDefaults.standard.integer(forKey: Support.userID).description,
+             product_id: model.id?.description,
+             variant_Id: model.variants?.first?.id?.description,
+             title: model.title,
+             body_html: model.body_html,
+             vendor: model.vendor,
+             product_type: model.product_type,
+             inventory_quantity: model.variants?.first?.inventory_quantity?.description,
+             tags: model.tags,
+             price: model.variants?.first?.price,
+             images: imageSources,
+            isFav: AppCoreData.shared.checkProductIfFav(productId: model.id?.description ?? "0")
+         )
+        print("is product fav ?? \(entity.isFav ?? false)")
+         return entity
+     }
+    
+  
+    func setUpUI(product: ProductEntity) {
+        print("Setting up UI with product ID: \(product.product_id ?? "0")")
         self.vendorTitle = product.vendor ?? "Unknown"
         self.productDecription = product.body_html ?? "No Description"
         self.productTitle = product.title ?? "NO title"
-        self.price = product.variants?[0].price ?? "30"
-        self.imgUrl = product.image?.src
-        self.availbleQuantity = "\(product.variants?.first?.inventory_quantity ?? 0)"
+        self.price = product.price ?? "30"
+        self.imgUrl = product.images?.first
+        self.isFavorite = product.isFav ?? false
+        
+        
+        if productModel?.options?.count != 0 {
+            self.hasOptions = true
+        }
+        guard let options = productModel?.options else {
+            self.hasOptions = false
+            return }
+        for option in options {
+            if option.name == "Size" {
+                self.sizes = option.values
+            } else if option.name == "Color" {
+                self.colors = self.getColors(option: option)
+            }
+        }
+        
     }
-    
+    func getColors(option:Option) ->[Color]{
+        var colors :[Color] = []
+        print("color count is \(option.values.count)")
+            if option.name == "Color" {
+                for val in option.values {
+                    switch val {
+                    case "red":
+                        colors.append(Color.red)
+                    case "black":
+                        colors.append(Color.black)
+                    case "gray":
+                        colors.append(Color.gray)
+                    case "white":
+                        colors.append(Color.white)
+                    case "blue":
+                        colors.append(Color.blue)
+                    case "green":
+                        colors.append(Color.green)
+                    case "yellow":
+                        colors.append(Color.yellow)
+                    default:
+                        colors.append(Color.purple)
+                    }
+                }
+            }
+        return colors
+    }
+  
     func addLocalFavProduct(product:ProductEntity){
         AppCoreData.shared.addFavProduct(favProduct: product)
     }
@@ -138,14 +209,7 @@ class ProductDetailViewModel :ObservableObject{
            
         }
 
-        func setUpUI(product: ProductEntity) {
-            print("Setting up UI with product ID: \(product.product_id ?? "0")")
-            self.vendorTitle = product.vendor ?? "Unknown"
-            self.productDecription = product.body_html ?? "No Description"
-            self.productTitle = product.title ?? "NO title"
-            self.price = product.price ?? "30"
-            self.imgUrl = product.images?.first
-        }
+
     
   
 }
