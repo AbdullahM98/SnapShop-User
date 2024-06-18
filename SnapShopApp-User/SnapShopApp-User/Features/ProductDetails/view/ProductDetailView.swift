@@ -61,7 +61,7 @@ struct ProductDetailView: View {
                                     if $viewModel.isFavorite.wrappedValue {
                                        
                                         viewModel.isFavorite = false
-                                        viewModel.removeFromFavLocal(id: (viewModel.product?.product_id)!)
+                                        viewModel.removeFromFavLocal(product: (viewModel.product)!)
                                     }else{
                                         viewModel.isFavorite = true
                                         print("hhhh \(viewModel.product?.product_id ?? "22")")

@@ -26,6 +26,7 @@ class ProductDetailViewModel :ObservableObject{
     @Published var imgUrl :String?
     @Published var colors :[Color]? = []
     @Published var sizes :[String]? = []
+    var fireStoreManager : FirestoreManager?
     
     private var cancellables = Set<AnyCancellable>()
     
@@ -126,11 +127,19 @@ class ProductDetailViewModel :ObservableObject{
         return colors
     }
     
-    func addLocalFavProduct(product:ProductEntity){
-        AppCoreData.shared.addFavProduct(favProduct: product)
+    func addLocalFavProduct(product: ProductEntity) {
+        fireStoreManager = FirestoreManager()
+        // Check if product already exists
+        if !AppCoreData.shared.isProductInFavorites(product: product) {
+            AppCoreData.shared.addFavProduct(favProduct: product)
+        } else {
+            print("Product already in favorites, not adding again.")
+        }
     }
-    func removeFromFavLocal(id:String){
-        AppCoreData.shared.deleteProductById(id: id)
+    func removeFromFavLocal(product:ProductEntity){
+        fireStoreManager = FirestoreManager()
+       // fireStoreManager?.removeProductFromFavRemote(productId: id)
+        AppCoreData.shared.deleteProduct(product: product)
     }
     
     func prepareDraftOrderToPost(){

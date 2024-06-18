@@ -26,6 +26,7 @@ class FavoriteViewModel : ObservableObject{
     func getUserFav(){
         // online or offline
         self.products = getAllLocalFav()
+       // self.fetchFavProducts()
         print("Fav count is \(products.count)")
         print("state is  \(viewState)")
         
@@ -36,9 +37,10 @@ class FavoriteViewModel : ObservableObject{
         self.saveProduct(product: product)
     }
     
-    func deleteProduct(id:String){
+    func deleteProduct(product:ProductEntity){
         // online or offline
-        self.removeFromFavLocal(id: id)
+        self.removeFromFavLocal(product: product)
+        //self.removeProductFromFavorites(productId: id)
     }
     
        func fetchFavProducts() {
@@ -90,8 +92,8 @@ class FavoriteViewModel : ObservableObject{
           }
        }
        
-       func removeProductFromFavorites(productId: Int) {
-           firestoreService.removeProductFromFavRemote(productId: productId.description)
+       func removeProductFromFavorites(productId: String) {
+           firestoreService.removeProductFromFavRemote(productId: productId)
                .receive(on: DispatchQueue.main)
                .sink(receiveCompletion: { completion in
                    switch completion {
@@ -121,8 +123,8 @@ class FavoriteViewModel : ObservableObject{
     func addLocalFavProduct(product:ProductEntity){
         AppCoreData.shared.addFavProduct(favProduct: product)
     }
-    func removeFromFavLocal(id:String){
-        AppCoreData.shared.deleteProductById(id: id)
+    func removeFromFavLocal(product:ProductEntity){
+        AppCoreData.shared.deleteProduct(product: product)
     }
 }
 

@@ -80,6 +80,7 @@ class FirestoreManager {
                             if let error = error {
                                 promise(.failure(error))
                             } else {
+                                print("success deletion")
                                 promise(.success(()))
                             }
                         }

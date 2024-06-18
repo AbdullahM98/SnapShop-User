@@ -50,6 +50,8 @@ class AppCoreData{
                     return []
                 }
                 let product = ProductEntity(userId: userId, product_id: id, variant_Id: variant_id, title: title, body_html: body_html, vendor: vendor, product_type: product_type, inventory_quantity: inventory_quantity, tags: tags, price: price, images: [images])
+                print("userId in fetch is \(product.userId!)")
+                print("Id in fetch is \(product.product_id!)")
                 products.append(product)
             }
             return products
@@ -107,12 +109,26 @@ class AppCoreData{
        
     }
     
-    
-    func deleteProductById(id: String) {
+    func isProductInFavorites(product: ProductEntity) -> Bool {
+        let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName:entityName)
+        fetchRequest.predicate = NSPredicate(format: "id == %@", product.product_id ?? "0")
+
+        do {
+            let results = try context.fetch(fetchRequest)
+            return results.count > 0
+        } catch {
+            print("Failed to fetch product: \(error)")
+            return false
+        }
+    }
+    func deleteProduct(product:ProductEntity) {
         // Fetch the product by ID
         let request = NSFetchRequest<NSManagedObject>(entityName: entityName)
-        request.predicate = NSPredicate(format: "id == %@", id)
-       
+        print("userId in delete is \(product.userId!)")
+        print("Id in delete is \(product.product_id!)")
+        request.predicate = NSPredicate(format: "userId == %@", product.userId ?? "0")
+        request.predicate = NSPredicate(format: "id == %@", product.product_id ?? "0")
+     
         
         do {
             let products = try context.fetch(request)
@@ -120,13 +136,8 @@ class AppCoreData{
             // Check if the product exists
             if !products.isEmpty {
                 let productToDelete = products.first
-                
-                
-                
-                // Delete the product
-                context.delete(productToDelete!)
-                
-                // Save changes
+                try context.delete(productToDelete!)
+
                 do {
                     try context.save()
                     print("Product and variants deleted successfully.")
@@ -138,6 +149,10 @@ class AppCoreData{
             }
         } catch {
             print("Failed fetching product: \(error)")
+        }
+        if let index = products.firstIndex(where: { $0.product_id == product.product_id }) {
+            
+           products.remove(at: index)
         }
     }
 
