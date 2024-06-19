@@ -104,9 +104,13 @@
 		76257A4D2C188897001C4006 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76257A4C2C188897001C4006 /* SettingsViewModel.swift */; };
 		76257A4F2C1896EF001C4006 /* customBottomSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76257A4E2C1896EF001C4006 /* customBottomSheet.swift */; };
 		76560C522C13570200B6103A /* CustomColorDot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76560C512C13570200B6103A /* CustomColorDot.swift */; };
+		766BF2492C21482200DCB5B9 /* NetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 766BF2482C21482200DCB5B9 /* NetworkMonitor.swift */; };
 		7678362F2C121327001E4BFB /* ProductDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7678362E2C121327001E4BFB /* ProductDetailView.swift */; };
 		767836332C121A04001E4BFB /* ProductDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 767836322C121A04001E4BFB /* ProductDetailViewModel.swift */; };
 		767836352C122ADA001E4BFB /* ProductModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 767836342C122ADA001E4BFB /* ProductModel.swift */; };
+		768F30E02C22505000FA1F68 /* SnackBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 768F30DF2C22505000FA1F68 /* SnackBar.swift */; };
+		768F30E22C229F8B00FA1F68 /* CountryCodes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 768F30E12C229F8B00FA1F68 /* CountryCodes.swift */; };
+		768F30E42C22B33700FA1F68 /* QuantitySelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 768F30E32C22B33700FA1F68 /* QuantitySelector.swift */; };
 		906BAD87611507B26F870BF5 /* Pods_SnapShopApp_User_SnapShopApp_UserUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE65ACFE98183A05FD1CCDC9 /* Pods_SnapShopApp_User_SnapShopApp_UserUITests.framework */; };
 /* End PBXBuildFile section */
 
@@ -229,9 +233,13 @@
 		76257A4C2C188897001C4006 /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
 		76257A4E2C1896EF001C4006 /* customBottomSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = customBottomSheet.swift; sourceTree = "<group>"; };
 		76560C512C13570200B6103A /* CustomColorDot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomColorDot.swift; sourceTree = "<group>"; };
+		766BF2482C21482200DCB5B9 /* NetworkMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkMonitor.swift; sourceTree = "<group>"; };
 		7678362E2C121327001E4BFB /* ProductDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailView.swift; sourceTree = "<group>"; };
 		767836322C121A04001E4BFB /* ProductDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailViewModel.swift; sourceTree = "<group>"; };
 		767836342C122ADA001E4BFB /* ProductModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductModel.swift; sourceTree = "<group>"; };
+		768F30DF2C22505000FA1F68 /* SnackBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnackBar.swift; sourceTree = "<group>"; };
+		768F30E12C229F8B00FA1F68 /* CountryCodes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryCodes.swift; sourceTree = "<group>"; };
+		768F30E32C22B33700FA1F68 /* QuantitySelector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuantitySelector.swift; sourceTree = "<group>"; };
 		904B12A396AEBB26D6B54798 /* Pods_SnapShopApp_User.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SnapShopApp_User.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		921EB7F323924BAB601F80CD /* Pods-SnapShopApp-UserTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SnapShopApp-UserTests.debug.xcconfig"; path = "Target Support Files/Pods-SnapShopApp-UserTests/Pods-SnapShopApp-UserTests.debug.xcconfig"; sourceTree = "<group>"; };
 		A3C1309534515CE06D2D9C87 /* Pods-SnapShopApp-UserTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SnapShopApp-UserTests.release.xcconfig"; path = "Target Support Files/Pods-SnapShopApp-UserTests/Pods-SnapShopApp-UserTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -607,6 +615,8 @@
 				7606FBB92C0F836700E1D3AF /* ScreenBounds.swift */,
 				56D5B6062C150606006EF83B /* ButtonWithImage.swift */,
 				56ACA75A2C19EE0200AD48AC /* Support.swift */,
+				766BF2482C21482200DCB5B9 /* NetworkMonitor.swift */,
+				768F30E12C229F8B00FA1F68 /* CountryCodes.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -715,6 +725,8 @@
 				0AF5837B2C11F2E1006D5059 /* CustomBackButton.swift */,
 				561695092C17421D0018F9C6 /* CustomCircularProgress.swift */,
 				76257A4E2C1896EF001C4006 /* customBottomSheet.swift */,
+				768F30DF2C22505000FA1F68 /* SnackBar.swift */,
+				768F30E32C22B33700FA1F68 /* QuantitySelector.swift */,
 			);
 			path = CustomViews;
 			sourceTree = "<group>";
@@ -1148,6 +1160,7 @@
 				0AF5835E2C11EFDE006D5059 /* ProductCell.swift in Sources */,
 				0AF583582C11EF8E006D5059 /* BrandCell.swift in Sources */,
 				7606FBAE2C0F7A6D00E1D3AF /* AuthModel.swift in Sources */,
+				768F30E22C229F8B00FA1F68 /* CountryCodes.swift in Sources */,
 				761A5CB32C0EFDC60057BA3C /* ContentView.swift in Sources */,
 				0AF5834D2C11EEA6006D5059 /* AppTabBar.swift in Sources */,
 				7606FB9C2C0F765200E1D3AF /* LoginScreen.swift in Sources */,
@@ -1161,6 +1174,7 @@
 				56A580092C14657700BBC168 /* CartCard.swift in Sources */,
 				0AF5837A2C11F28A006D5059 /* FilterButtomSheet.swift in Sources */,
 				7606FBAB2C0F795F00E1D3AF /* Theme.swift in Sources */,
+				768F30E42C22B33700FA1F68 /* QuantitySelector.swift in Sources */,
 				7606FBA42C0F782A00E1D3AF /* SignUpScreen.swift in Sources */,
 				56E598E92C1FE1BF009F31CE /* NotificationHandler.swift in Sources */,
 				56DC253F2C15B65200008690 /* ProfileModels.swift in Sources */,
@@ -1183,6 +1197,7 @@
 				0AFF598C2C1773FC002DEAFC /* CategoryViewModel.swift in Sources */,
 				56FC064C2C174AE60015886D /* AddressesModels.swift in Sources */,
 				0AF583702C11F1D3006D5059 /* CategoryView.swift in Sources */,
+				766BF2492C21482200DCB5B9 /* NetworkMonitor.swift in Sources */,
 				0AF5835A2C11EFAF006D5059 /* HomeSearchBar.swift in Sources */,
 				5627DB272C1229C700AB6464 /* PofileView.swift in Sources */,
 				56E598E72C1FDCE8009F31CE /* DeveloperInfo.swift in Sources */,
@@ -1193,6 +1208,7 @@
 				76257A3E2C177900001C4006 /* FirestoreManager.swift in Sources */,
 				0A44F0BA2C1C7CF70031E649 /* TwoButtonAlert.swift in Sources */,
 				7606FBA62C0F78B400E1D3AF /* CustomTextField.swift in Sources */,
+				768F30E02C22505000FA1F68 /* SnackBar.swift in Sources */,
 				56A580072C1460BE00BBC168 /* DrftOrdersModel.swift in Sources */,
 				5627DB2B2C12320000AB6464 /* AddAddress.swift in Sources */,
 				5606E7A92C120C5600B728FD /* CouponsViewModel.swift in Sources */,

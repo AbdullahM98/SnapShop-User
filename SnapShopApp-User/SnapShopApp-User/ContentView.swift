@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     @State var selectedTab:Tabs = .home
-    
+    @StateObject var networkMonitor = NetworkMonitor()
     var body: some View {
 
         NavigationStack{
@@ -29,6 +29,12 @@ struct ContentView: View {
                 Spacer()
                 AppTabBar(selectedTab: $selectedTab)
             }.navigationBarBackButtonHidden(true).ignoresSafeArea(edges: .bottom)
+                .onAppear {
+                    
+                         }
+                         .onChange(of: networkMonitor.isConnected) { isConnected in
+                             SnackBarHelper.showSnackBar(isConnected: isConnected)
+                         }
         }
 
     }

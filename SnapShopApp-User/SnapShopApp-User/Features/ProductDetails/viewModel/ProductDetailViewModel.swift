@@ -82,6 +82,7 @@ class ProductDetailViewModel :ObservableObject{
         self.price = product.price ?? "30"
         self.imgUrl = product.images?.first
         self.isFavorite = product.isFav ?? false
+        self.availbleQuantity = product.inventory_quantity ?? "20"
         
         
         if productModel?.options?.count != 0 {

@@ -20,5 +20,195 @@
             landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "6379E8FC-A094-4FA4-8D4C-1D73F5D75EF5"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SnapShopApp-User/ContentView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "33"
+            endingLineNumber = "33"
+            landmarkName = "body"
+            landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "9200A144-96C6-4673-84AC-4AB3A1FE5D43"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SnapShopApp-User/Utils/NetworkMonitor.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "30"
+            endingLineNumber = "30"
+            landmarkName = "setupReachability()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "471B0D58-7939-4C4F-B950-8B9D222CBA7C"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SnapShopApp-User/Utils/NetworkMonitor.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "21"
+            endingLineNumber = "21"
+            landmarkName = "setupReachability()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "B36CF196-1147-4351-B551-6C4FCE45D313"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SnapShopApp-User/Utils/NetworkMonitor.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "57"
+            endingLineNumber = "57"
+            landmarkName = "NetworkMonitor"
+            landmarkType = "3">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "CBF16DC4-592F-4C24-A3E6-33BD026DF743"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SnapShopApp-User/ContentView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "12"
+            endingLineNumber = "12"
+            landmarkName = "ContentView"
+            landmarkType = "14">
+            <Locations>
+               <Location
+                  uuid = "CBF16DC4-592F-4C24-A3E6-33BD026DF743 - 4ea2475eb40316eb"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "property wrapper backing initializer of SnapShopApp_User.ContentView.networkMonitor : SnapShopApp_User.NetworkMonitor"
+                  moduleName = "SnapShopApp-User"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/abdullahessam/Documents/GitHub/SnapShop-User/SnapShopApp-User/SnapShopApp-User/ContentView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "30">
+               </Location>
+               <Location
+                  uuid = "CBF16DC4-592F-4C24-A3E6-33BD026DF743 - 7a22300565b04202"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "SnapShopApp_User.ContentView.networkMonitor.getter : SnapShopApp_User.NetworkMonitor"
+                  moduleName = "SnapShopApp-User"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/abdullahessam/Documents/GitHub/SnapShop-User/SnapShopApp-User/SnapShopApp-User/ContentView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "16">
+               </Location>
+               <Location
+                  uuid = "CBF16DC4-592F-4C24-A3E6-33BD026DF743 - 1ce09b5dbe70a6e3"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "SnapShopApp_User.ContentView.$networkMonitor.getter : SwiftUI.ObservedObject&lt;SnapShopApp_User.NetworkMonitor&gt;.Wrapper"
+                  moduleName = "SnapShopApp-User"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/abdullahessam/Documents/GitHub/SnapShop-User/SnapShopApp-User/SnapShopApp-User/ContentView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "12"
+                  endingLineNumber = "12"
+                  offsetFromSymbolStart = "0">
+               </Location>
+               <Location
+                  uuid = "CBF16DC4-592F-4C24-A3E6-33BD026DF743 - 5c0b8e40b969883b"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "default argument 1 of SnapShopApp_User.ContentView.init(selectedTab: SnapShopApp_User.Tabs, networkMonitor: @autoclosure () -&gt; SnapShopApp_User.NetworkMonitor) -&gt; SnapShopApp_User.ContentView"
+                  moduleName = "SnapShopApp-User"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/abdullahessam/Documents/GitHub/SnapShop-User/SnapShopApp-User/SnapShopApp-User/ContentView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "4">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "D4170C32-777C-4D17-BAEA-5A6723A35F65"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SnapShopApp-User/Utils/NetworkMonitor.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "53"
+            endingLineNumber = "53"
+            landmarkName = "showSnackbarIfNeeded(isConnected:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "D4170C32-777C-4D17-BAEA-5A6723A35F65 - de411b75d3189606"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "SnapShopApp_User.NetworkMonitor.showSnackbarIfNeeded() -&gt; ()"
+                  moduleName = "SnapShopApp-User"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/abdullahessam/Documents/GitHub/SnapShop-User/SnapShopApp-User/SnapShopApp-User/Utils/NetworkMonitor.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "43"
+                  endingLineNumber = "43"
+                  offsetFromSymbolStart = "43">
+               </Location>
+               <Location
+                  uuid = "D4170C32-777C-4D17-BAEA-5A6723A35F65 - 399aa269de3ba659"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "SnapShopApp_User.NetworkMonitor.showSnackbarIfNeeded(isConnected: Swift.Bool) -&gt; ()"
+                  moduleName = "SnapShopApp-User"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/abdullahessam/Documents/GitHub/SnapShop-User/SnapShopApp-User/SnapShopApp-User/Utils/NetworkMonitor.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "43"
+                  endingLineNumber = "43"
+                  offsetFromSymbolStart = "58">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

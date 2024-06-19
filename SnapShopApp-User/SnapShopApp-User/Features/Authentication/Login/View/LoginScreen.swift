@@ -12,6 +12,7 @@ struct LoginScreen: View {
     @State private var password: String = ""
     @StateObject var viewModel = LoginViewModel()
     @State private var navigateToHome = false
+    @State private var navigateToRegister = false
     var body: some View {
         NavigationStack{
             if $viewModel.viewState.wrappedValue == .loginView {
@@ -36,7 +37,7 @@ struct LoginScreen: View {
                     
                     VStack{
                         Button(action:{
-                            
+                            self.navigateToRegister = true
                         },label:{
                             Text("Don't have an account ? Register Now").font(.footnote).fontWeight(.medium).underline().foregroundStyle(Color.gray)
                     
@@ -68,13 +69,11 @@ struct LoginScreen: View {
         }.onReceive(viewModel.$isLogIn){ _ in
             navigateToHome = true
         }
-         .background(
-        NavigationLink(destination: ContentView(), isActive: $navigateToHome) {
-            
-            EmptyView()
-        }
-            .hidden()
-    )
+        .navigationDestination(isPresented:$navigateToHome){
+            ContentView()
+        } .navigationDestination(isPresented: $navigateToRegister){
+             SignUpScreen()
+         }
     }
     }
 

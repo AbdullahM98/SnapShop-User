@@ -9,6 +9,7 @@
 import SwiftUI
 
 struct ProfileView: View {
+    @EnvironmentObject var networkMonitor :NetworkMonitor
     @State private var selectedCurrency: String?
     @State private var showingBottomSheet = false
     @State private var settingsDetents = PresentationDetent.medium
@@ -19,6 +20,8 @@ struct ProfileView: View {
     @State private var navigateToUserAddresses = false // Flag to trigger navigation
     @State private var navigateToCurrencyView = false
     @State private var navigateToLogin = false
+    @State private var navigateToRegister = false
+
     
     
     var body: some View {
@@ -165,7 +168,7 @@ struct ProfileView: View {
                     }).padding(.top , 170)
                     
                     AppButton(text: "SignUp", width: UIScreen.screenWidth*0.8, height: UIScreen.screenHeight*0.05, isFilled: false, onClick: {
-                        
+                        self.navigateToRegister = true
                     }).padding(.top , 10)
                 }
             }
@@ -180,12 +183,11 @@ struct ProfileView: View {
                 viewModel.viewState = .userInActive
             }
         }
-        .background(
-            NavigationLink(destination: LoginScreen(), isActive: $navigateToLogin) {
-                EmptyView()
-            }
-            .hidden().navigationBarBackButtonHidden(true) // Hide the navigation link
-        )
+        .navigationDestination(isPresented:$navigateToLogin ){
+            LoginScreen()
+        }.navigationDestination(isPresented: $navigateToRegister){
+            SignUpScreen()
+        }
     }
 }
 

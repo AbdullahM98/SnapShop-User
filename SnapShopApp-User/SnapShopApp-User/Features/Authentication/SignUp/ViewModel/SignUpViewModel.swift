@@ -23,8 +23,13 @@ class SignUpViewModel: ObservableObject{
     @Published var errorMessage: String = ""
     @Published var customer :Customer?
     @Published var signUpResponse:authResponse?
+    @Published  var selectedCountry: CountryCode = .Egypt
+
     private var cancellables = Set<AnyCancellable>()
   
+    init(){
+   
+    }
 
     func postCustomer(customer:Customer) {
            Network.shared.postCustomer(customer)

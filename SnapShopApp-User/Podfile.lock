@@ -1097,11 +1097,17 @@ PODS:
   - nanopb/decode (2.30910.0)
   - nanopb/encode (2.30910.0)
   - PromisesObjC (2.4.0)
+  - ReachabilitySwift (5.2.3)
   - RecaptchaInterop (100.0.0)
+  - SnackBar.swift (0.1.0):
+    - SnapKit
+  - SnapKit (5.7.1)
 
 DEPENDENCIES:
   - FirebaseAuth
   - FirebaseFirestore
+  - ReachabilitySwift
+  - SnackBar.swift
 
 SPEC REPOS:
   trunk:
@@ -1122,7 +1128,10 @@ SPEC REPOS:
     - leveldb-library
     - nanopb
     - PromisesObjC
+    - ReachabilitySwift
     - RecaptchaInterop
+    - SnackBar.swift
+    - SnapKit
 
 SPEC CHECKSUMS:
   abseil: d121da9ef7e2ff4cab7666e76c5a3e0915ae08c3
@@ -1142,8 +1151,11 @@ SPEC CHECKSUMS:
   leveldb-library: e8eadf9008a61f9e1dde3978c086d2b6d9b9dc28
   nanopb: 438bc412db1928dac798aa6fd75726007be04262
   PromisesObjC: f5707f49cb48b9636751c5b2e7d227e43fba9f47
+  ReachabilitySwift: 7f151ff156cea1481a8411701195ac6a984f4979
   RecaptchaInterop: 7d1a4a01a6b2cb1610a47ef3f85f0c411434cb21
+  SnackBar.swift: 79ea4df13ea9e6633137dd6acbd490534d26440d
+  SnapKit: d612e99e678a2d3b95bf60b0705ed0a35c03484a
 
-PODFILE CHECKSUM: 77c4b61a33fbb6292c30a0c9f1722425086e6bc8
+PODFILE CHECKSUM: 5770c2b692e77289f59e32526e37c35a03fc6727
 
 COCOAPODS: 1.15.2

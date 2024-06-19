@@ -30,7 +30,7 @@ class AppCoreData{
     func getAllProducts(by userId: String) -> [ProductEntity] {
         let request = NSFetchRequest<NSManagedObject>(entityName: entityName)
         request.predicate = NSPredicate(format: "userId == %@", userId)
-        
+        self.products = []
         do {
             let productsEntities = try context.fetch(request)
             

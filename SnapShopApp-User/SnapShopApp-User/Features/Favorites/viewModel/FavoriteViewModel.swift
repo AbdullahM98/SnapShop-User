@@ -14,8 +14,11 @@ class FavoriteViewModel : ObservableObject{
        private var cancellables = Set<AnyCancellable>()
        private var firestoreService = FirestoreManager()
     @Published var viewState : FavViewState
+    var isConnected:Bool = false
     
     init(){
+        self.isConnected = UserDefaults.standard.bool(forKey: Support.isConnected)
+        print(">>>>\(isConnected)")
         if UserDefaults.standard.bool(forKey: Support.isLoggedUDKey) {
             viewState = .userActive
         }else{
@@ -26,7 +29,7 @@ class FavoriteViewModel : ObservableObject{
     func getUserFav(){
         // online or offline
         self.products = getAllLocalFav()
-       // self.fetchFavProducts()
+        //self.fetchFavProducts()
         print("Fav count is \(products.count)")
         print("state is  \(viewState)")
         
@@ -54,6 +57,7 @@ class FavoriteViewModel : ObservableObject{
                        switch completion {
                        case .failure(let error):
                            print("Failed to fetch products: \(error)")
+                           
                            self.viewState = .userInActive
                        case .finished:
                            break

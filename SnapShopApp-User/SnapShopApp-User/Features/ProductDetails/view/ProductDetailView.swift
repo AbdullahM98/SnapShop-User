@@ -144,11 +144,12 @@ struct ProductDetailView: View {
                             VStack{}.frame(height: UIScreen.screenHeight * 0.12)
                         }
                         
-                        
+                        QuantitySelectorView(quantity: Int($viewModel.availbleQuantity.wrappedValue) ?? 3).padding(.leading,90)
                         AppButton(text: "Add to Cart", width: UIScreen.screenWidth * 0.9, height: UIScreen.screenHeight * 0.06, isFilled: true){
                             viewModel.prepareDraftOrderToPost()
                           
-                        }.padding(.top,30)
+                        }.padding(.top,10)
+                        
                     }
                     .padding()
                     .background(Color.white)

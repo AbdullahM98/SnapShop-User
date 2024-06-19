@@ -8,6 +8,8 @@ target 'SnapShopApp-User' do
   # Pods for SnapShopApp-User
     pod 'FirebaseAuth'
     pod 'FirebaseFirestore'
+    pod 'ReachabilitySwift'
+    pod 'SnackBar.swift'
   target 'SnapShopApp-UserTests' do
     inherit! :search_paths
     # Pods for testing

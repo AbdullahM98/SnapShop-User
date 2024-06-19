@@ -19,7 +19,7 @@ struct CustomColorDot: View {
                 .clipShape(Circle())
                 .overlay(
                     Circle()
-                        .stroke(isSelected ? Color.black : Color.clear, lineWidth: 2)
+                        .stroke( Color.black , lineWidth: isSelected ? 2 : 1)
                 )
 
             if isSelected {

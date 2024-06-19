@@ -21,19 +21,42 @@ struct CustomTextField_Previews: PreviewProvider {
 
 
 struct AppTextField: View {
-    var fieldModel :Binding<FieldModel>
+    @Binding var fieldModel :FieldModel
     var text:Binding<String>
     var body: some View {
         VStack(alignment: .leading){
             
-            TextField(fieldModel.fieldType.wrappedValue.placeHolder, text: text ).foregroundStyle(Color.gray)
-                      .padding(10)
-                       .overlay(
-                        RoundedRectangle(cornerRadius: 5)
-                            .stroke(Theme.strokeColor, lineWidth: 1.5)
-                       ).padding(.bottom,10)
-            if let error = fieldModel.error.wrappedValue{
-                Text(error).foregroundStyle(Color.red).font(.system(size: 15)).multilineTextAlignment(/*@START_MENU_TOKEN@*/.leading/*@END_MENU_TOKEN@*/).padding([.horizontal],0)
+            if fieldModel.fieldType == .password || fieldModel.fieldType == .confirmPass {
+                SecureField(fieldModel.fieldType.placeHolder, text: text)
+                                .foregroundColor(.gray)
+                                .padding(10)
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 5)
+                                        .stroke(Color.gray.opacity(0.5), lineWidth: 1.5)
+                                )
+                                .padding(.bottom, 10)
+                                .onChange(of: text.wrappedValue) { newValue in
+                                    fieldModel.onSubmitError()
+                                }
+            }else{
+                TextField(fieldModel.fieldType.placeHolder, text: $fieldModel.value)
+                           .foregroundColor(.gray)
+                           .padding(10)
+                           .overlay(
+                               RoundedRectangle(cornerRadius: 5)
+                                .stroke(Color.gray, lineWidth: 1.5).opacity(0.5)
+                           )
+                           .padding(.bottom, 10)
+                           .onChange(of: fieldModel.value) { newValue in
+                               fieldModel.onSubmitError()
+                }
+            }
+            if let error = fieldModel.error {
+                Text(error)
+                    .foregroundColor(.red)
+                    .font(.system(size: 15))
+                    .multilineTextAlignment(.leading)
+                    .padding([.horizontal], 0)
             }
         }
     }

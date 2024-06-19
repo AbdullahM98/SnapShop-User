@@ -16,7 +16,13 @@ class FirestoreManager {
         return Future { promise in
             self.collectionRef?.whereField("userId", isEqualTo: userId).getDocuments { snapShot, error in
                 if let error = error {
-                    promise(.failure(error))
+                                 // Check if the error is related to network connectivity
+                                 if let errCode = (error as NSError).userInfo[NSUnderlyingErrorKey] as? Int, errCode == -1009 {
+                                     promise(.failure(NetworkError.disconnected))
+                                     SnackBarHelper.showSnackBar(isConnected: false)
+                                 } else {
+                                     promise(.failure(error))
+                                 }
                 } else if let snapShot = snapShot {
                     let products = snapShot.documents.compactMap { document -> ProductEntity? in
                         return ProductEntity(
@@ -93,4 +99,7 @@ class FirestoreManager {
         .eraseToAnyPublisher()
     }
     
+}
+enum NetworkError: Error {
+    case disconnected
 }
