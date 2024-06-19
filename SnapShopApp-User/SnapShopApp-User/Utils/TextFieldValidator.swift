@@ -1,7 +1,7 @@
 import Foundation
 
 protocol FieldValidatorProtocol {
-    func validateField(value: String) -> String?
+    func validateField(value: String, comparedTo: String?) -> String?
 }
 
 struct FieldModel {
@@ -15,13 +15,13 @@ struct FieldModel {
         self.fieldType = fieldType
     }
     
-    mutating func onValidate() -> Bool {
-        error = fieldType.validateField(value: value)
+    mutating func onValidate(comparedTo otherValue: String? = nil) -> Bool {
+        error = fieldType.validateField(value: value, comparedTo: otherValue)
         return error == nil
     }
     
-    mutating func onSubmitError() {
-        error = fieldType.validateField(value: value)
+    mutating func onSubmitError(comparedTo otherValue: String? = nil) {
+        error = fieldType.validateField(value: value, comparedTo: otherValue)
     }
 }
 
@@ -59,14 +59,17 @@ enum TextfieldType: FieldValidatorProtocol {
         }
     }
     
-    func validateField(value: String) -> String? {
+    func validateField(value: String, comparedTo otherValue: String? = nil) -> String? {
         switch self {
         case .email:
             return validateEmail(email: value)
         case .password:
             return validatePassword(password: value)
         case .confirmPass:
-            return validateConfirmPassword(confirmPass: value)
+            guard let password = otherValue else {
+                return "Password is required to confirm"
+            }
+            return validateConfirmPassword(password: password, confirmPass: value)
         case .city:
             return validateCity(city: value)
         case .country:
@@ -96,15 +99,16 @@ enum TextfieldType: FieldValidatorProtocol {
         if password.isEmpty {
             return "Password cannot be empty"
         } else if password.count < 8 {
-            return "Password must be at least 6 characters long"
+            return "Password must be at least 8 characters long"
         }
         return nil
     }
     
-    private func validateConfirmPassword(confirmPass: String) -> String? {
-        // Implement custom logic for confirm password if needed
+    private func validateConfirmPassword(password: String, confirmPass: String) -> String? {
         if confirmPass.isEmpty {
             return "Confirm password cannot be empty"
+        } else if confirmPass != password {
+            return "Passwords do not match"
         }
         return nil
     }

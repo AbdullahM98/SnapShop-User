@@ -18,14 +18,10 @@ struct LoginScreen: View {
             if $viewModel.viewState.wrappedValue == .loginView {
                 VStack{
                     Spacer()
+                    Text("Login").padding(.vertical,30).font(.title3)
+                    AppTextField(fieldModel: $viewModel.emailField ,text: $text)
                     
-                    AppTextField(fieldModel: $viewModel.emailField ,text: $text).onSubmit {
-                        viewModel.emailField.onSubmitError()
-                    }
-                    
-                    AppTextField(fieldModel: $viewModel.passwordField , text: $password).onSubmit {
-                        viewModel.passwordField.onSubmitError()
-                    }
+                    AppTextField(fieldModel: $viewModel.passwordField , text: $password)
                     
                     HStack{
                         Spacer()
@@ -52,7 +48,8 @@ struct LoginScreen: View {
                     
                     
                     AppButton(text: "Login", width: UIScreen.main.bounds.width * 0.9, height: UIScreen.main.bounds.height * 0.05,isFilled: true , onClick: {
-                        viewModel.login(email: text, password: password)
+                        print(">>>>>>\( password)")
+                        viewModel.login(email: viewModel.emailField.value, password: password)
                         viewModel.viewState = .loading
                     }).padding(.bottom,50)
                     
@@ -67,7 +64,9 @@ struct LoginScreen: View {
             }
             
         }.onReceive(viewModel.$isLogIn){ _ in
-            navigateToHome = true
+   
+                navigateToHome = true
+            
         }
         .navigationDestination(isPresented:$navigateToHome){
             ContentView()

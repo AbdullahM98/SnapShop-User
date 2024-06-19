@@ -17,16 +17,16 @@ struct SignUpScreen: View {
     @State var phNo :String = ""
     @State var country :String = ""
     @State var city :String = ""
-    @State var adddress :String = ""
+    @State var address :String = ""
+    @State private var navigateToHome = false
+   
     var body: some View {
         
         NavigationView {
-        if viewModel.isLoggedIn {
-                      //  HomeView()
-                    } else {
+       
                         
                         VStack{
-                            Text($viewModel.errorMessage.wrappedValue).font(.title).bold().padding(.bottom,50)
+                            Text("Register").padding(.vertical,30).font(.title3)
                             AppTextField(fieldModel: $viewModel.firstNameField , text: $firstName)
                             
                             AppTextField(fieldModel: $viewModel.lastNameField , text: $lastName)
@@ -35,7 +35,7 @@ struct SignUpScreen: View {
                             
                             AppTextField(fieldModel: $viewModel.passwordField , text: $password)
                             
-                            AppTextField(fieldModel: $viewModel.confirmPasswordField , text: $confirmPassword)
+                            AppTextField(fieldModel: $viewModel.confirmPasswordField, text: $confirmPassword, compareTo: password)
                             AppTextField(fieldModel: $viewModel.phNoField ,text: $phNo)
                             
                             HStack(spacing:30){
@@ -58,30 +58,52 @@ struct SignUpScreen: View {
                                 
                             }
                             
-                            AppTextField(fieldModel: $viewModel.addressField , text: $adddress)
+                            AppTextField(fieldModel: $viewModel.addressField , text: $address)
                             
                             AppButton(text: "SignUp", width: UIScreen.screenWidth * 0.95, height: UIScreen.screenHeight * 0.055,isFilled: true , onClick: {
-                                let address = Address(phone: $phNo.wrappedValue, country: viewModel.selectedCountry.rawValue, province: "", zip: "", address1: $adddress.wrappedValue, first_name: $firstName.wrappedValue, last_name: $lastName.wrappedValue, city: $city.wrappedValue)
-                                var customer = Customer(password_confirmation: $password.wrappedValue,  phone: $phNo.wrappedValue, password: $password.wrappedValue, last_name: $lastName.wrappedValue, send_email_welcome: false, verified_email: true, addresses: [address], email:$email.wrappedValue, first_name: $firstName.wrappedValue)
-                                
+                                let addressObj = Address(
+                                                          phone: phNo,
+                                                          country: viewModel.selectedCountry.rawValue,
+                                                          province: "",
+                                                          zip: "",
+                                                          address1: viewModel.addressField.value,
+                                                          first_name: viewModel.firstNameField.value,
+                                                          last_name:  viewModel.lastNameField.value,
+                                                          city: viewModel.cityField.value
+                                                      )
+                                                      let customer = Customer(
+                                                        password_confirmation: confirmPassword,
+                                                        phone: viewModel.phNoField.value,
+                                                        password: password,
+                                                        last_name: viewModel.lastNameField.value,
+                                                          send_email_welcome: false,
+                                                          verified_email: true,
+                                                          addresses: [addressObj],
+                                                          email: viewModel.emailField.value,
+                                                        first_name: viewModel.firstNameField.value
+                                                      )
+                                print(" >>>>>>>>>>>> customer email is  \(customer.password) \(customer.password_confirmation) \(customer.last_name)")
                                 viewModel.customer = customer
-                               viewModel.register(customer: customer)
+                                viewModel.register(customer: customer)
+                                navigateToHome = true
                                
                             }).padding(.top,50)
                             
                             
                             
                             
-                        }.padding(.all,10)
+                        }.padding(.all,10).navigationDestination(isPresented: $navigateToHome){
+                            ContentView()
+                        }
                     }
-                    }
+                    
       
     }
 }
 
 struct SignUpScreen_Previews: PreviewProvider {
     static var previews: some View {
-        SignUpScreen(viewModel: SignUpViewModel())
+        SignUpScreen()
     }
 }
 

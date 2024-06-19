@@ -76,6 +76,7 @@ class SignUpViewModel: ObservableObject{
     private func saveUserId(signUpResponse:authResponse){
         
         UserDefaultsManager.shared.setUserId(key: Support.userID, value: signUpResponse.customer.id)
+        UserDefaultsManager.shared.setIsloggedIn(key: Support.isLoggedUDKey, value: true)
         print("from ud\(UserDefaultsManager.shared.getUserId(key: Support.userID)?.description ?? "No" )")
     }
     

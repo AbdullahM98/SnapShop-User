@@ -23,6 +23,7 @@ struct CustomTextField_Previews: PreviewProvider {
 struct AppTextField: View {
     @Binding var fieldModel :FieldModel
     var text:Binding<String>
+    var compareTo: String? = nil
     var body: some View {
         VStack(alignment: .leading){
             
