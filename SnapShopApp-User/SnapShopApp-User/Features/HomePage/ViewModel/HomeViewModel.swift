@@ -87,7 +87,7 @@ class HomeViewModel :ObservableObject{
                 DispatchQueue.main.async {
                     self?.draft = response.draft_orders
                     print("app have ",self?.draft?.count ?? 0," draft orders")
-                    print("is user having draft \(UserDefaultsManager.shared.getUserHasDraftOrders(key: "HasDraft"))")
+                    print("is user having draft \(UserDefaultsManager.shared.getUserHasDraftOrders(key: "HasDraft") ?? false)")
                     if UserDefaultsManager.shared.getUserHasDraftOrders(key: "HasDraft") ?? false {
                         self?.getUserDraftOrders()
                     }

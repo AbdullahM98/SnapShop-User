@@ -58,6 +58,9 @@
 		5627DB312C123EB100AB6464 /* UserAddresses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5627DB302C123EB100AB6464 /* UserAddresses.swift */; };
 		564B1E752C11FE9E005D515E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 564B1E742C11FE9E005D515E /* GoogleService-Info.plist */; };
 		5657AAAF2C1C9023009906AE /* ApplePayStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5657AAAE2C1C9023009906AE /* ApplePayStrategy.swift */; };
+		568D6F572C2366A6009F11D9 /* BaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568D6F562C2366A6009F11D9 /* BaseViewModel.swift */; };
+		568D6F592C2366BD009F11D9 /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568D6F582C2366BD009F11D9 /* BaseView.swift */; };
+		568D6F5B2C236705009F11D9 /* CustomCurveShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568D6F5A2C236705009F11D9 /* CustomCurveShape.swift */; };
 		56A580052C14604700BBC168 /* CartViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A580042C14604700BBC168 /* CartViewModel.swift */; };
 		56A580072C1460BE00BBC168 /* DrftOrdersModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A580062C1460BE00BBC168 /* DrftOrdersModel.swift */; };
 		56A580092C14657700BBC168 /* CartCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A580082C14657700BBC168 /* CartCard.swift */; };
@@ -184,6 +187,9 @@
 		564B1E742C11FE9E005D515E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		5657AAAD2C1C8E16009906AE /* SnapShopApp-User.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "SnapShopApp-User.entitlements"; sourceTree = "<group>"; };
 		5657AAAE2C1C9023009906AE /* ApplePayStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplePayStrategy.swift; sourceTree = "<group>"; };
+		568D6F562C2366A6009F11D9 /* BaseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewModel.swift; sourceTree = "<group>"; };
+		568D6F582C2366BD009F11D9 /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
+		568D6F5A2C236705009F11D9 /* CustomCurveShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCurveShape.swift; sourceTree = "<group>"; };
 		56A580042C14604700BBC168 /* CartViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartViewModel.swift; sourceTree = "<group>"; };
 		56A580062C1460BE00BBC168 /* DrftOrdersModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrftOrdersModel.swift; sourceTree = "<group>"; };
 		56A580082C14657700BBC168 /* CartCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartCard.swift; sourceTree = "<group>"; };
@@ -507,6 +513,32 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
+		568D6F532C236626009F11D9 /* BaseBar */ = {
+			isa = PBXGroup;
+			children = (
+				568D6F552C23664D009F11D9 /* ViewModel */,
+				568D6F542C236649009F11D9 /* View */,
+			);
+			path = BaseBar;
+			sourceTree = "<group>";
+		};
+		568D6F542C236649009F11D9 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				568D6F582C2366BD009F11D9 /* BaseView.swift */,
+				568D6F5A2C236705009F11D9 /* CustomCurveShape.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		568D6F552C23664D009F11D9 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				568D6F562C2366A6009F11D9 /* BaseViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		56A580012C14601C00BBC168 /* CartPage */ = {
 			isa = PBXGroup;
 			children = (
@@ -624,6 +656,7 @@
 		7606FB8B2C0F736100E1D3AF /* Features */ = {
 			isa = PBXGroup;
 			children = (
+				568D6F532C236626009F11D9 /* BaseBar */,
 				0AFF598F2C188737002DEAFC /* Currencies */,
 				0AFF59842C176A34002DEAFC /* Orders */,
 				56FC06472C174A6B0015886D /* Addresses */,
@@ -1138,6 +1171,7 @@
 				0AFF59812C17152A002DEAFC /* OrderResponse.swift in Sources */,
 				0AF583602C11EFF2006D5059 /* BrandProducts.swift in Sources */,
 				0AFF597F2C171401002DEAFC /* UserOrders.swift in Sources */,
+				568D6F5B2C236705009F11D9 /* CustomCurveShape.swift in Sources */,
 				767836352C122ADA001E4BFB /* ProductModel.swift in Sources */,
 				5616950A2C17421D0018F9C6 /* CustomCircularProgress.swift in Sources */,
 				5606E7A72C120C0800B728FD /* CouponCard.swift in Sources */,
@@ -1164,6 +1198,7 @@
 				761A5CB32C0EFDC60057BA3C /* ContentView.swift in Sources */,
 				0AF5834D2C11EEA6006D5059 /* AppTabBar.swift in Sources */,
 				7606FB9C2C0F765200E1D3AF /* LoginScreen.swift in Sources */,
+				568D6F592C2366BD009F11D9 /* BaseView.swift in Sources */,
 				5627DB292C12311300AB6464 /* ProfileEdit.swift in Sources */,
 				761A5CB12C0EFDC60057BA3C /* SnapShopApp_UserApp.swift in Sources */,
 				0AF583542C11EF58006D5059 /* PopularBrands.swift in Sources */,
@@ -1178,6 +1213,7 @@
 				7606FBA42C0F782A00E1D3AF /* SignUpScreen.swift in Sources */,
 				56E598E92C1FE1BF009F31CE /* NotificationHandler.swift in Sources */,
 				56DC253F2C15B65200008690 /* ProfileModels.swift in Sources */,
+				568D6F572C2366A6009F11D9 /* BaseViewModel.swift in Sources */,
 				0A44F0C32C1C86B10031E649 /* AutoDismissAlert.swift in Sources */,
 				0AF5834F2C11EEC4006D5059 /* TabBarButton.swift in Sources */,
 				56D46E912C14FCC00019EA1B /* CheckOutPage.swift in Sources */,

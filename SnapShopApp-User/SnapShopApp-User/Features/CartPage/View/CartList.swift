@@ -24,8 +24,6 @@ struct CartList: View {
                         Image("empty_box").resizable().padding(.vertical,150)
                     }
                 }else{
-                    
-                    Text("Cart").padding(.vertical,30).font(.title3)
                     ScrollView{
                         ForEach(viewModel.lineItems ?? [] ,id: \.id) { item in
                             CartCard(item: item,onDeleteClick: { product in
@@ -53,7 +51,11 @@ struct CartList: View {
                     Image("empty_box").resizable().padding(.vertical,150)
                 }
             }
-        }.onAppear{
+        }
+        .navigationBarTitle("Cart")
+        .navigationBarBackButtonHidden(true)
+        .navigationBarItems(leading: CustomBackButton())
+        .onAppear{
             viewModel.getDraftOrderById()
         }
     }
