@@ -71,6 +71,7 @@
 		568D6F572C2366A6009F11D9 /* BaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568D6F562C2366A6009F11D9 /* BaseViewModel.swift */; };
 		568D6F592C2366BD009F11D9 /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568D6F582C2366BD009F11D9 /* BaseView.swift */; };
 		568D6F5B2C236705009F11D9 /* CustomCurveShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568D6F5A2C236705009F11D9 /* CustomCurveShape.swift */; };
+		569E178A2C23D8FA0096447A /* CartViewModel_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 569E17892C23D8FA0096447A /* CartViewModel_Tests.swift */; };
 		56A580052C14604700BBC168 /* CartViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A580042C14604700BBC168 /* CartViewModel.swift */; };
 		56A580072C1460BE00BBC168 /* DrftOrdersModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A580062C1460BE00BBC168 /* DrftOrdersModel.swift */; };
 		56A580092C14657700BBC168 /* CartCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A580082C14657700BBC168 /* CartCard.swift */; };
@@ -217,6 +218,7 @@
 		568D6F562C2366A6009F11D9 /* BaseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewModel.swift; sourceTree = "<group>"; };
 		568D6F582C2366BD009F11D9 /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
 		568D6F5A2C236705009F11D9 /* CustomCurveShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCurveShape.swift; sourceTree = "<group>"; };
+		569E17892C23D8FA0096447A /* CartViewModel_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartViewModel_Tests.swift; sourceTree = "<group>"; };
 		56A580042C14604700BBC168 /* CartViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartViewModel.swift; sourceTree = "<group>"; };
 		56A580062C1460BE00BBC168 /* DrftOrdersModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrftOrdersModel.swift; sourceTree = "<group>"; };
 		56A580082C14657700BBC168 /* CartCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartCard.swift; sourceTree = "<group>"; };
@@ -632,6 +634,22 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
+		569E17872C23D8CB0096447A /* CartPage */ = {
+			isa = PBXGroup;
+			children = (
+				569E17882C23D8D10096447A /* ViewModel */,
+			);
+			path = CartPage;
+			sourceTree = "<group>";
+		};
+		569E17882C23D8D10096447A /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				569E17892C23D8FA0096447A /* CartViewModel_Tests.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		56A580012C14601C00BBC168 /* CartPage */ = {
 			isa = PBXGroup;
 			children = (
@@ -925,10 +943,14 @@
 		761A5CC02C0EFDC80057BA3C /* SnapShopApp-UserTests */ = {
 			isa = PBXGroup;
 			children = (
+
 				762443822C23E5F6001D57D6 /* Auth */,
 				7624437F2C23E0DF001D57D6 /* ProductDetail */,
 				762443742C23D83B001D57D6 /* Mocks */,
 				762443712C23D7E2001D57D6 /* Favorite */,
+
+				569E17872C23D8CB0096447A /* CartPage */,
+
 				0A9064112C23CE2B00D63102 /* AddressesPage */,
 				0A9064052C2369B300D63102 /* CategoryPage */,
 				0A9064012C2369B200D63102 /* CouponsPage */,
@@ -1413,6 +1435,7 @@
 				762443762C23D856001D57D6 /* MockNetwork.swift in Sources */,
 				762443842C23E60D001D57D6 /* SignUpViewModelTest.swift in Sources */,
 				0A9064092C2369B300D63102 /* ProfileViewModel_Tests.swift in Sources */,
+				569E178A2C23D8FA0096447A /* CartViewModel_Tests.swift in Sources */,
 				0A90640E2C2369B300D63102 /* CategoryViewModel_Tests.swift in Sources */,
 				0A90640C2C2369B300D63102 /* CouponsViewModel_Tests.swift in Sources */,
 				0A9064082C2369B300D63102 /* OrderViewModel_Tests.swift in Sources */,
