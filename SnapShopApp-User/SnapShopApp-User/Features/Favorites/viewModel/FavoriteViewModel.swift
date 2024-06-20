@@ -17,9 +17,9 @@ class FavoriteViewModel : ObservableObject{
     var isConnected:Bool = false
     
     init(){
-        print(viewState,"------")
+        
         self.isConnected = UserDefaults.standard.bool(forKey: Support.isConnected)
-        print(">>>>\(isConnected)")
+       
         if UserDefaults.standard.bool(forKey: Support.isLoggedUDKey) {
             viewState = .userActive
         }else{
@@ -31,8 +31,7 @@ class FavoriteViewModel : ObservableObject{
         // online or offline
         self.products = getAllLocalFav()
         //self.fetchFavProducts()
-        print("Fav count is \(products.count)")
-        print("state is  \(viewState)")
+     
         
     }
     
@@ -57,7 +56,6 @@ class FavoriteViewModel : ObservableObject{
                    .sink(receiveCompletion: { completion in
                        switch completion {
                        case .failure(let error):
-                           print("Failed to fetch products: \(error)")
                            
                            self.viewState = .userInActive
                        case .finished:
@@ -67,7 +65,6 @@ class FavoriteViewModel : ObservableObject{
                        DispatchQueue.main.async {
                            self?.products = products
                            self?.viewState = .userActive
-                           print(" fetch products: \(products.count)")
                            
                        }
                    })

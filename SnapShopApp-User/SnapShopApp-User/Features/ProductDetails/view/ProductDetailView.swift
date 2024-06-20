@@ -111,7 +111,12 @@ struct ProductDetailView: View {
                             
                         }
                         HStack(){
-                            Text("\($viewModel.currentCurrency.wrappedValue) \($viewModel.price.wrappedValue)").font(.headline.bold()).foregroundStyle(Color.red)
+                            Text("\(UserDefaultsManager.shared.selectedCurrencyCode ?? "USD") \(String(format: "%.2f", (Double(viewModel.price) ?? 1.0) * (Double(UserDefaultsManager.shared.selectedCurrencyValue ?? "1") ?? 1)))")
+                                .font(.headline.bold())
+                                .foregroundStyle(Color.red)
+
+
+                           
                             Spacer()
                             Text("Qty:\($viewModel.availbleQuantity.wrappedValue)").foregroundStyle(Color.gray)
                             
