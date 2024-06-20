@@ -8,12 +8,13 @@
 import SwiftUI
 
 struct AddAddress: View {
-    @State var addresses: [AddressProfileDetails]?
+    @State var address: [AddressProfileDetails]?
     @State var addressTextFieldData: String = ""
     @State var cityTextFieldData: String = ""
     @State var countryTextFieldData: String = ""
     @State var zipTextFieldData: String = ""
     @State var phoneAddressTextFieldData: String = ""
+    
     var onSaveClick : (_ address:NewAddressRoot) -> Void
     var onCancelClick : () -> Void
     @State private var validationMessages: [FieldType: String] = [:]
@@ -127,18 +128,20 @@ struct AddAddress: View {
                         .stroke(Color.black  ,lineWidth: 2)
                 )
                 Spacer()
-                Button(action: {
-                    if validateAllFields() {
-                        
-                        onSaveClick(NewAddressRoot(customer_address: NewAddressDetails(id: nil, customer_id: Int("7290794967219"), address1: addressTextFieldData, address2: nil, city: cityTextFieldData, zip: zipTextFieldData, phone: phoneAddressTextFieldData, name: nil, province_code: nil, country_code: "EG", country_name: countryTextFieldData, default: false)))
-                    }
-                }) {
-                    Text("Save")
-                        .foregroundColor(.white)
-                        .frame(width: 170, height: 44)
-                        .background(Color.black.opacity(0.9))
-                        .clipShape(RoundedRectangle(cornerRadius: 6))
-                }.disabled(!validateAllFields())
+                if validateAllFields(){
+                    
+                    Button(action: {
+                        if validateAllFields() {
+                            onSaveClick(NewAddressRoot(customer_address: NewAddressDetails(id: nil, customer_id: Int("7290794967219"), address1: addressTextFieldData, address2: nil, city: cityTextFieldData, zip: zipTextFieldData, phone: phoneAddressTextFieldData, name: nil, province_code: nil, country_code: "", country_name: countryTextFieldData, default: false)))
+                        }
+                    }) {
+                        Text("Save")
+                            .foregroundColor(.white)
+                            .frame(width: 170, height: 44)
+                            .background(Color.black.opacity(0.9))
+                            .clipShape(RoundedRectangle(cornerRadius: 6))
+                    }.disabled(!validateAllFields())
+                }
             }.padding(.horizontal)
                 .padding(.vertical,4)
                 .padding(.bottom,16)

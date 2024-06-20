@@ -61,6 +61,7 @@ struct UserAddresses: View {
                 .sheet(isPresented: $showingBottomSheet) {
                     AddAddress(onSaveClick: {address in
                         viewModel.postUserAddress(address: address)
+                        SnackBarHelper.updatingSnackBar(body: "Added Successfully")
                         showingBottomSheet.toggle()
                     }, onCancelClick: {
                         showingBottomSheet.toggle()

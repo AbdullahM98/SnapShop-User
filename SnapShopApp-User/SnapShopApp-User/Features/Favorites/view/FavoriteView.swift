@@ -14,17 +14,20 @@ struct FavoriteView: View {
     
   
             if $viewModel.viewState.wrappedValue == .userActive {
-                Text("Favorites").padding(.vertical,30).font(.title3)
-                ScrollView{
-                    ForEach(viewModel.products , id: \.product_id){ product in
-                        FavItemView(product: product, onDeleteClick: {  _ in
-                            viewModel.removeFromFavLocal(product: product)
-                            //viewModel.removeProductFromFavorites(productId: product.product_id ?? "0")
-                            if let index = viewModel.products.firstIndex(where: { $0.product_id == product.product_id }) {
-                                
-                               viewModel.products.remove(at: index)
-                            }
-                        })
+                VStack{
+                    
+                    Text("Favorites").padding(.vertical,30).font(.title3)
+                    ScrollView{
+                        ForEach(viewModel.products , id: \.product_id){ product in
+                            FavItemView(product: product, onDeleteClick: {  _ in
+                                viewModel.removeFromFavLocal(product: product)
+                                //viewModel.removeProductFromFavorites(productId: product.product_id ?? "0")
+                                if let index = viewModel.products.firstIndex(where: { $0.product_id == product.product_id }) {
+                                    
+                                   viewModel.products.remove(at: index)
+                                }
+                            })
+                        }
                     }
                 }.onAppear{
                     viewModel.getUserFav()

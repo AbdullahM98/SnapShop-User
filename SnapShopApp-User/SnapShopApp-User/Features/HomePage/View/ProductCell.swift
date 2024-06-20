@@ -66,7 +66,11 @@ struct ProductCell: View {
                 }
                 }
             }
-        }.frame(width: 175,height: 280)
+        }.padding()
+        .frame(width: 170,height: 280)
+            .background(Color.white)
+            .cornerRadius(10)
+            .shadow(radius: 5)
     }
     private func setupPageControlAppearance() {
             UIPageControl.appearance().currentPageIndicatorTintColor = UIColor.black

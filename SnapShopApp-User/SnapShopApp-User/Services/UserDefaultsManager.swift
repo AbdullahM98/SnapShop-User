@@ -32,20 +32,6 @@ class UserDefaultsManager {
         return UserDefaults.standard.integer(forKey: key)
     }
     
-    func setUserHasDraftOrders(key: String, value:Bool){
-        UserDefaults.standard.set(value, forKey: key)
-    }
-    
-    func getUserHasDraftOrders(key: String)->Bool? {
-        return UserDefaults.standard.bool(forKey: key)
-    }
-    func setUserDraftOrderId(key: String, value:Int){
-        UserDefaults.standard.set(value, forKey: key)
-    }
-    
-    func getUserDraftOrderId(key: String)->Int? {
-        return UserDefaults.standard.integer(forKey: key)
-    }
     var selectedCurrencyCode: String? {
         get{
             return UserDefaults.standard.string(forKey: "selectedCurrency")
@@ -76,6 +62,32 @@ class UserDefaultsManager {
         }
         set{
             UserDefaults.standard.set(newValue, forKey: "priceRuleId")
+        }
+    }
+    var notifyCart: Int? {
+        get{
+            return UserDefaults.standard.integer(forKey: "notifyCart")
+        }
+        set{
+            UserDefaults.standard.set(newValue, forKey: "notifyCart")
+        }
+    }
+    
+    var hasDraft: Bool? {
+        get{
+            UserDefaults.standard.bool(forKey: "HasDraft")
+        }
+        set{
+            UserDefaults.standard.set(newValue, forKey: "HasDraft")
+        }
+    }
+    
+    var userDraftId: Int? {
+        get{
+            UserDefaults.standard.integer(forKey: "UserDraftId")
+        }
+        set{
+            UserDefaults.standard.setValue(newValue, forKey: "UserDraftId")
         }
     }
 }

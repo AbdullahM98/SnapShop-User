@@ -81,7 +81,7 @@ class AddressesViewModel:ObservableObject{
     }
     
     func getDraftOrderById(){
-        guard let orderID = UserDefaultsManager.shared.getUserDraftOrderId(key: "DraftId") else { return }
+        guard let orderID = UserDefaultsManager.shared.userDraftId else { return }
         print("User Have DraftOrder and its ID3 is : \(orderID)")
         Network.shared.request("https://mad-ism-ios-1.myshopify.com/admin/api/2024-04/draft_orders/\(orderID).json", method: "GET", responseType: DraftOrderItem.self) { [weak self] result in
             switch result{
@@ -113,7 +113,7 @@ class AddressesViewModel:ObservableObject{
         self.orderToUpdate?.billing_address = selectShippingAddress(shippingAddress: shippingAddress)
         print(" after updated shipping address \(String(describing: self.orderToUpdate?.shipping_address))")
         
-        guard let orderID = UserDefaultsManager.shared.getUserDraftOrderId(key: "DraftId") else { return }
+        guard let orderID = UserDefaultsManager.shared.userDraftId else { return }
         let updatedOrder = DraftOrderItem(draft_order: self.orderToUpdate)
         Network.shared.updateData(object: updatedOrder, to: "https://mad-ism-ios-1.myshopify.com/admin/api/2024-04/draft_orders/\(orderID).json" ){result in
             switch result {

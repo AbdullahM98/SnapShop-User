@@ -62,10 +62,14 @@ struct ProductDetailView: View {
                                        
                                         viewModel.isFavorite = false
                                         viewModel.removeFromFavLocal(product: (viewModel.product)!)
+//                                        SnackBarHelper.updatingSnackBar(body: "Removed ...")
+
                                     }else{
                                         viewModel.isFavorite = true
                                         print("hhhh \(viewModel.product?.product_id ?? "22")")
                                         viewModel.addLocalFavProduct(product: viewModel.product!)
+//                                        SnackBarHelper.updatingSnackBar(body: "Inserted ...")
+
                                     }
                                 }label: {
                                     Image(systemName: viewModel.isFavorite ? "heart.fill" : "heart").resizable().frame(width: 30,height: 28)
@@ -147,8 +151,9 @@ struct ProductDetailView: View {
                         QuantitySelectorView(quantity: Int($viewModel.availbleQuantity.wrappedValue) ?? 3).padding(.leading,90)
                         AppButton(text: "Add to Cart", width: UIScreen.screenWidth * 0.9, height: UIScreen.screenHeight * 0.06, isFilled: true){
                             viewModel.prepareDraftOrderToPost()
-                          
+                            SnackBarHelper.updatingSnackBar(body: "Added to cart ...")
                         }.padding(.top,10)
+                            
                         
                     }
                     .padding()

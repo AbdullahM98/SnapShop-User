@@ -14,7 +14,7 @@ struct PopularBrands: View {
             Text("Popular Brands")
                 .font(.system(size: 20, weight: .semibold))
             ScrollView(.horizontal){
-                HStack{
+                HStack(spacing: 10){
                     ForEach(viewModel.smartCollections, id: \.id) { brand in
                         BrandCell(viewModel:viewModel,brand: brand)
                     }

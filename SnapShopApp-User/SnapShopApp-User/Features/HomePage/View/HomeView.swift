@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct HomeView: View {
-    @ObservedObject var viewModel = HomeViewModel()
+    @StateObject var viewModel = HomeViewModel()
 
     var body: some View {
         VStack{
@@ -24,12 +24,12 @@ struct HomeView: View {
                     BestSeller(viewModel: viewModel)
                 }
             }
-        }.onAppear{
+        }.padding(.bottom,60).onAppear{
             viewModel.fetchBrands()
             viewModel.fetchProducts()
-            if UserDefaultsManager.shared.getUserHasDraftOrders(key: "HasDraft") ?? false {
-                
+            if UserDefaultsManager.shared.hasDraft == false {
                 viewModel.fetchAllDraftOrdersOfApplication()
+                viewModel.getUserDraftOrders()
             }
             
         }

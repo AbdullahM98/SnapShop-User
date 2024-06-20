@@ -9,9 +9,11 @@ import SwiftUI
 
 struct BaseView: View {
     @StateObject var baseData = BaseViewModel()
+    @StateObject private var networkMonitor = NetworkMonitor()
+    
     @State var notifyCount: Int = 0
     //hiding tab bar ...
-
+    
     init(){
         UITabBar.appearance().isHidden = true
     }
@@ -34,8 +36,10 @@ struct BaseView: View {
                 
             }.onAppear{
                 print("OnAppear")
-               // notifyCount = UserDefaultsManager.shared.notifyCart ?? 0
+                notifyCount = UserDefaultsManager.shared.notifyCart ?? 0
                 print("Number of notification",notifyCount)
+            }.onChange(of: networkMonitor.isConnected) { isConnected in
+                SnackBarHelper.showSnackBar(isConnected: isConnected)
             }
             .overlay(
                 //Custom Tab Bar..
@@ -81,11 +85,11 @@ struct BaseView: View {
                     //profile tab
                     TabButton(Tab: .Profile)
                 }
-                    .background(Color.offWhite
-                    .clipShape(CustomCuverShape())
-                             //shadow
-                    .shadow(color: Color.black.opacity(0.04), radius: 5,x: -5,y: -5)
-                    .ignoresSafeArea(.container,edges: .bottom))
+                    .background(Color.black
+                        .clipShape(CustomCuverShape())
+                                //shadow
+                        .shadow(color: Color.black.opacity(0.04), radius: 5,x: -5,y: -5)
+                        .ignoresSafeArea(.container,edges: .bottom))
                 , alignment: .bottom
             )
         }

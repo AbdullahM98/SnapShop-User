@@ -14,6 +14,7 @@ struct AddressCell: View {
     var onSelectClick : (AddressProfileDetails) -> Void?
     @State private var showingBottomSheet = false
     @State private var settingsDetents = PresentationDetent.height(UIScreen.screenHeight*0.5 + 20)
+    @State private var showingDeleteAlert = false
     
     
     var body: some View {
@@ -30,12 +31,24 @@ struct AddressCell: View {
                                 
                                 HStack{
                                     Button {
-                                        onDeleteClick()
+                                        showingDeleteAlert = true
                                     } label: {
                                         Image(systemName:"minus.circle.fill").resizable().aspectRatio(contentMode: .fit)
                                             .frame(width: 24, height: 24) .foregroundColor(.black)
                                     }.padding(.trailing,6)
-                                    
+                                        .alert(isPresented: $showingDeleteAlert) {
+                                            Alert(
+                                                title: Text("Delete Confirmation"),
+                                                message: Text("Are you sure to delete this address?"),
+                                                primaryButton: .destructive(Text("Delete"), action: {
+                                                    onDeleteClick()
+                                                    showingDeleteAlert = false
+                                                }),
+                                                secondaryButton: .cancel(Text("Cancel"), action: {
+                                                    showingDeleteAlert = false
+                                                })
+                                            )
+                                        }
                                     Button {
                                         print("Edit")
                                         showingBottomSheet.toggle()

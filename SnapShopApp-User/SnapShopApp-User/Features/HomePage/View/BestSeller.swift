@@ -28,12 +28,13 @@ struct BestSeller: View {
                         ForEach(viewModel.products, id: \.id) { product in
                             ProductCell(product: product)
                         }
-                    }
+                    }.padding(.vertical,8)
                 }
             }
         }
         .padding(.horizontal, 16)
         .padding(.top, 8)
+        
     }
 }
 

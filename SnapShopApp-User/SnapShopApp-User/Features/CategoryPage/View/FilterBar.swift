@@ -49,7 +49,7 @@ struct FilterBar: View {
                 }
             }
         }
-        .padding()
+        .padding(.horizontal)
         .scrollIndicators(.hidden)
     }
 

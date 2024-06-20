@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct ButtonWithImage: View {
+    @Binding var showAlert: Bool
     var text: String
     var imageName: String
     var textColor: Color
@@ -15,11 +16,15 @@ struct ButtonWithImage: View {
     var borderColor: Color
     var imageExist: Bool = false
     var onClick : () -> Void
+   
 
     var body: some View {
         ZStack {
             HStack {
-                Button(action: onClick) {
+                Button {
+                    showAlert = true
+                    onClick()
+                } label: {
                     Text(text)
                         .foregroundColor(textColor)
                     if imageExist{
@@ -43,6 +48,6 @@ struct ButtonWithImage: View {
 
 struct ButtonWithImage_Previews: PreviewProvider {
     static var previews: some View {
-        ButtonWithImage(text: "Check out With ", imageName: "payment", textColor: .black, buttonColor: .white, borderColor: .orange, imageExist: true, onClick: {})
+        ButtonWithImage(showAlert: .constant(false), text: "Check out With ", imageName: "payment", textColor: .black, buttonColor: .white, borderColor: .orange, imageExist: true, onClick: {})
     }
 }

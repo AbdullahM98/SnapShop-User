@@ -32,7 +32,7 @@ struct CartList: View {
                         }
                     }
                     
-                    if (UserDefaultsManager.shared.getUserHasDraftOrders(key: "HasDraft") ?? false) {
+                    if (UserDefaultsManager.shared.hasDraft ?? false) {
                         HStack(alignment: .center){
                             Text("Total: \(String(format: "%.0f",(Double(viewModel.userOrder?.subtotal_price ?? "1.0" ) ?? 1 ) * (Double(UserDefaultsManager.shared.selectedCurrencyValue ?? "1") ?? 1))) \(UserDefaultsManager.shared.selectedCurrencyCode ?? "USD")")
                             Spacer()

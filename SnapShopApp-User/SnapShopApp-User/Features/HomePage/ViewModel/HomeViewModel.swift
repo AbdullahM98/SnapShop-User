@@ -13,8 +13,13 @@ class HomeViewModel :ObservableObject{
     @Published var categoryProducts: [PopularProductItem] = []
     @Published var singleCategoryProducts: [PopularProductItem] = []
     @Published var filteredProducts: [PopularProductItem] = []
+    //husayn
     @Published private (set) var draft:[DraftOrderItemDetails]?
-    @Published private (set) var userOrders:[DraftOrderItemDetails] = []
+    @Published private (set) var lineItems:[DraftOrderLineItem]? {
+        didSet {
+            UserDefaultsManager.shared.notifyCart = lineItems?.count ?? 0
+        }
+    }
     @Published var isLoading = true
     @Published var isLoadingBrandProducts = true
     
@@ -38,6 +43,7 @@ class HomeViewModel :ObservableObject{
             }
         }
     }
+    
     func fetchProducts() {
         Network.shared.request("\(Support.baseUrl)/products.json", method: "GET", responseType: PopularProductsResponse.self) { [weak self] result in
             switch result {
@@ -86,17 +92,15 @@ class HomeViewModel :ObservableObject{
                 print("getting App draft orders")
                 DispatchQueue.main.async {
                     self?.draft = response.draft_orders
+                    self?.lineItems = response.draft_orders?.first?.line_items
                     print("app have ",self?.draft?.count ?? 0," draft orders")
-                    print("is user having draft \(UserDefaultsManager.shared.getUserHasDraftOrders(key: "HasDraft") ?? false)")
-                    if UserDefaultsManager.shared.getUserHasDraftOrders(key: "HasDraft") ?? false {
-                        self?.getUserDraftOrders()
-                    }
                 }
             case .failure(let error):
                 print("Error fetching DraftOrders: \(error)")
             }
         }
     }
+    
     //see if the use have draft order or no
     func getUserDraftOrders(){
         let userDraftOrder = draft?.filter({ item in
@@ -104,13 +108,11 @@ class HomeViewModel :ObservableObject{
         })
         
         print("usser have ",userDraftOrder?.count ?? 0," draft order")
-        self.userOrders = userDraftOrder ?? []
-        print("User Have  Draft Orders -> ",self.userOrders.count)
-        if !self.userOrders.isEmpty {
+        if userDraftOrder?.count ?? 0 > 0 {
             print(" user has orders")
             //if have save in user default that he has
-            UserDefaultsManager.shared.setUserHasDraftOrders(key: "HasDraft", value: true)
-            UserDefaultsManager.shared.setUserDraftOrderId(key: "DraftId", value: self.userOrders.first?.id ?? 0)
+            UserDefaultsManager.shared.hasDraft = true
+            UserDefaultsManager.shared.userDraftId = userDraftOrder?.first?.id
         }
     }
 }

@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct CategoryView: View {
-    @ObservedObject var viewModel = CategoryViewModel()
+    @StateObject var viewModel = CategoryViewModel()
     @State var isPresented: Bool = false
     @State var settingsDetents = PresentationDetent.medium
     @AppStorage("selectedOption") private var selectedOption: String = "ALL"
@@ -42,6 +42,7 @@ struct CategoryView: View {
                 CategoryProducts(products: viewModel.filteredProducts)
             }
         }
+        .padding(.bottom,60)
         .onAppear {
             viewModel.fetchProducts()
         }.onDisappear{

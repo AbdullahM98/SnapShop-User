@@ -80,78 +80,78 @@ struct ProfileView: View {
                     .border(Color.gray, width: 1)
                     .padding(.all, 12)
                     
-                    VStack(alignment: .leading) {
-                        HStack {
-                            Text("Currency Code -> \(currenciesViewModel.selectedCurrencyCode ?? "USD") ->  \(currenciesViewModel.selectedCurrencyValue ?? "1")")
-                                .padding(.leading, 8)
-                            Spacer()
-                            NavigationLink(
-                                destination: CurrencyView(viewModel: currenciesViewModel),
-                                isActive: $navigateToCurrencyView,
-                                label: {
-                                    EmptyView()
-                                }
-                            )
-                            Button(action: {
-                                navigateToCurrencyView = true
-                            }) {
-                                Image(systemName: "arrow.right.circle")
-                                    .foregroundColor(.red)
-                            }
-                            .buttonStyle(PlainButtonStyle()) // Ensure the button style doesn't interfere with the action
-                        }
-                        .contentShape(Rectangle()) // Make the entire row tappable
-                        .padding()
-                        .background(Color(UIColor.systemGroupedBackground)) // Optional styling
-                        .cornerRadius(10)
-                        .shadow(radius: 1)
-                        .padding(.horizontal)
-                        
-                        
-                        Text("More Tools")
-                            .font(.title3)
-                            .fontWeight(.bold)
-                            .padding(.all, 8)
-                        
-                        NavigationLink(destination: UserOrders(orderList: orderViewModel.orderList)) {
-                            HStack {
-                                Image("bag")
-                                Text("My Orders")
-                                    .foregroundColor(.black)
-                            }
-                            .padding(.all, 16)
-                        }
-                        
-                        
-                        Rectangle()
-                            .frame(height: 1)
-                            .foregroundColor(.gray)
-                        
-                        NavigationLink(destination: UserAddresses(fromCart: false, didSelectAddress: {_ in}), isActive: $navigateToUserAddresses) {
-                            Button(action: {
-                                navigateToUserAddresses = true // Activate navigation
-                            }) {
-                                Image("bag")
-                                Text("Addresses")
-                                    .foregroundColor(.black)
-                            }
-                        }
-                        .padding(.all, 16)
-                        
-                        Rectangle()
-                            .frame(height: 1)
-                            .foregroundColor(.gray)
-                        
-                        Button(action: {
-                            viewModel.logout()
-                            navigateToLogin = true
-                        }) {
-                            Image("bag")
-                            Text("Log out")
-                                .foregroundColor(.black)
-                        }
-                        .padding(.all, 16)
-                    }
+//                    VStack(alignment: .leading) {
+//                        HStack {
+//                            Text("Currency Code -> \(currenciesViewModel.selectedCurrencyCode ?? "USD") ->  \(currenciesViewModel.selectedCurrencyValue ?? "1")")
+//                                .padding(.leading, 8)
+//                            Spacer()
+//                            NavigationLink(
+//                                destination: CurrencyView(viewModel: currenciesViewModel),
+//                                isActive: $navigateToCurrencyView,
+//                                label: {
+//                                    EmptyView()
+//                                }
+//                            )
+//                            Button(action: {
+//                                navigateToCurrencyView = true
+//                            }) {
+//                                Image(systemName: "arrow.right.circle")
+//                                    .foregroundColor(.red)
+//                            }
+//                            .buttonStyle(PlainButtonStyle()) // Ensure the button style doesn't interfere with the action
+//                        }
+//                        .contentShape(Rectangle()) // Make the entire row tappable
+//                        .padding()
+//                        .background(Color(UIColor.systemGroupedBackground)) // Optional styling
+//                        .cornerRadius(10)
+//                        .shadow(radius: 1)
+//                        .padding(.horizontal)
+//                        
+//                        
+//                        Text("More Tools")
+//                            .font(.title3)
+//                            .fontWeight(.bold)
+//                            .padding(.all, 8)
+//                        
+//                        NavigationLink(destination: UserOrders(orderList: orderViewModel.orderList)) {
+//                            HStack {
+//                                Image("bag")
+//                                Text("My Orders")
+//                                    .foregroundColor(.black)
+//                            }
+//                            .padding(.all, 16)
+//                        }
+//                        
+//                        
+//                        Rectangle()
+//                            .frame(height: 1)
+//                            .foregroundColor(.gray)
+//                        
+//                        NavigationLink(destination: UserAddresses(fromCart: false, didSelectAddress: {_ in}), isActive: $navigateToUserAddresses) {
+//                            Button(action: {
+//                                navigateToUserAddresses = true // Activate navigation
+//                            }) {
+//                                Image("bag")
+//                                Text("Addresses")
+//                                    .foregroundColor(.black)
+//                            }
+//                        }
+//                        .padding(.all, 16)
+//                        
+//                        Rectangle()
+//                            .frame(height: 1)
+//                            .foregroundColor(.gray)
+//                        
+//                        Button(action: {
+//                            viewModel.logout()
+//                            navigateToLogin = true
+//                        }) {
+//                            Image("bag")
+//                            Text("Log out")
+//                                .foregroundColor(.black)
+//                        }
+//                        .padding(.all, 16)
+//                    }
                     .padding(.all, 8)
                     
                     Spacer()

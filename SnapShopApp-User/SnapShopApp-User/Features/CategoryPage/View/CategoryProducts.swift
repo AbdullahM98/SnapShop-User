@@ -28,7 +28,7 @@ struct CategoryProducts: View {
                         ForEach(products, id: \.id) { product in
                             ProductCell(product: product)
                         }
-                    }
+                    }.padding(.vertical,8)
                 }
             }
         }

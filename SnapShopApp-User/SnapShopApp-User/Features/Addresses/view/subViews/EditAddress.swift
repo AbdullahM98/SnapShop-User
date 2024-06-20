@@ -23,6 +23,7 @@ struct EditAddress: View {
         .country: true,
         .phone: true
     ]
+    @State private var showingEditAlert = false
 
     var body: some View {
         VStack(alignment: .leading,spacing: 8){
@@ -127,8 +128,8 @@ struct EditAddress: View {
                 Spacer()
                 Button(action: {
                     if validateAllFields() {
+                        showingEditAlert = true
                         
-                        onSaveClick(AddressForUpdate(customer_address: AddressProfileDetails(id: customerAddress?.id, customer_id: customerAddress?.customer_id, first_name: customerAddress?.first_name, last_name: customerAddress?.last_name, company: customerAddress?.company, address1: addressEdit, address2: customerAddress?.address2, city: cityEdit, province: customerAddress?.province, country: countryEdit, zip: zipEdit, phone: phoneAddressEdit, name: customerAddress?.name, province_code: customerAddress?.province_code, country_code: customerAddress?.country_code, country_name: customerAddress?.country_name, default: false)))
                     }
                 }) {
                     Text("Save")
@@ -137,6 +138,19 @@ struct EditAddress: View {
                         .background(Color.black.opacity(0.9))
                         .clipShape(RoundedRectangle(cornerRadius: 6))
                 }.disabled(!validateAllFields())
+                    .alert(isPresented: $showingEditAlert) {
+                        Alert(
+                            title: Text("Update Confirmation"),
+                            message: Text("Are you sure to update this address?"),
+                            primaryButton: .default(Text("Update"), action: {
+                                onSaveClick(AddressForUpdate(customer_address: AddressProfileDetails(id: customerAddress?.id, customer_id: customerAddress?.customer_id, first_name: customerAddress?.first_name, last_name: customerAddress?.last_name, company: customerAddress?.company, address1: addressEdit, address2: customerAddress?.address2, city: cityEdit, province: customerAddress?.province, country: countryEdit, zip: zipEdit, phone: phoneAddressEdit, name: customerAddress?.name, province_code: customerAddress?.province_code, country_code: customerAddress?.country_code, country_name: customerAddress?.country_name, default: false)))
+                                showingEditAlert = false
+                            }),
+                            secondaryButton: .cancel(Text("Cancel"), action: {
+                                showingEditAlert = false
+                            })
+                        )
+                    }
             }.padding(.horizontal)
                 .padding(.vertical,4)
                 .padding(.bottom,16)

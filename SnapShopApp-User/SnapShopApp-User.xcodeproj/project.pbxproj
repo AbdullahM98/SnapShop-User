@@ -12,14 +12,12 @@
 		0A44F0BF2C1C82ED0031E649 /* OneButtonAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A44F0BE2C1C82ED0031E649 /* OneButtonAlert.swift */; };
 		0A44F0C12C1C84F30031E649 /* ImageButtonAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A44F0C02C1C84F30031E649 /* ImageButtonAlert.swift */; };
 		0A44F0C32C1C86B10031E649 /* AutoDismissAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A44F0C22C1C86B10031E649 /* AutoDismissAlert.swift */; };
-		0A9064062C2369B300D63102 /* AddressesViewModel_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A9063F52C2369B200D63102 /* AddressesViewModel_Tests.swift */; };
 		0A9064072C2369B300D63102 /* CurrencyViewModel_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A9063F82C2369B200D63102 /* CurrencyViewModel_Tests.swift */; };
 		0A9064082C2369B300D63102 /* OrderViewModel_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A9063F92C2369B200D63102 /* OrderViewModel_Tests.swift */; };
 		0A9064092C2369B300D63102 /* ProfileViewModel_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A9063FA2C2369B200D63102 /* ProfileViewModel_Tests.swift */; };
 		0A90640A2C2369B300D63102 /* HomeViewModel_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A9063FC2C2369B200D63102 /* HomeViewModel_Tests.swift */; };
 		0A90640B2C2369B300D63102 /* UserDefaultsManager_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A9063FE2C2369B200D63102 /* UserDefaultsManager_Tests.swift */; };
 		0A90640C2C2369B300D63102 /* CouponsViewModel_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A9064002C2369B200D63102 /* CouponsViewModel_Tests.swift */; };
-		0A90640D2C2369B300D63102 /* CartViewModel_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A9064022C2369B200D63102 /* CartViewModel_Tests.swift */; };
 		0A90640E2C2369B300D63102 /* CategoryViewModel_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A9064042C2369B300D63102 /* CategoryViewModel_Tests.swift */; };
 		0AF5834D2C11EEA6006D5059 /* AppTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF5834C2C11EEA6006D5059 /* AppTabBar.swift */; };
 		0AF5834F2C11EEC4006D5059 /* TabBarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF5834E2C11EEC4006D5059 /* TabBarButton.swift */; };
@@ -150,14 +148,12 @@
 		0A44F0BE2C1C82ED0031E649 /* OneButtonAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneButtonAlert.swift; sourceTree = "<group>"; };
 		0A44F0C02C1C84F30031E649 /* ImageButtonAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageButtonAlert.swift; sourceTree = "<group>"; };
 		0A44F0C22C1C86B10031E649 /* AutoDismissAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoDismissAlert.swift; sourceTree = "<group>"; };
-		0A9063F52C2369B200D63102 /* AddressesViewModel_Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddressesViewModel_Tests.swift; sourceTree = "<group>"; };
 		0A9063F82C2369B200D63102 /* CurrencyViewModel_Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrencyViewModel_Tests.swift; sourceTree = "<group>"; };
 		0A9063F92C2369B200D63102 /* OrderViewModel_Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderViewModel_Tests.swift; sourceTree = "<group>"; };
 		0A9063FA2C2369B200D63102 /* ProfileViewModel_Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewModel_Tests.swift; sourceTree = "<group>"; };
 		0A9063FC2C2369B200D63102 /* HomeViewModel_Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewModel_Tests.swift; sourceTree = "<group>"; };
 		0A9063FE2C2369B200D63102 /* UserDefaultsManager_Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager_Tests.swift; sourceTree = "<group>"; };
 		0A9064002C2369B200D63102 /* CouponsViewModel_Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CouponsViewModel_Tests.swift; sourceTree = "<group>"; };
-		0A9064022C2369B200D63102 /* CartViewModel_Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CartViewModel_Tests.swift; sourceTree = "<group>"; };
 		0A9064042C2369B300D63102 /* CategoryViewModel_Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryViewModel_Tests.swift; sourceTree = "<group>"; };
 		0AF5834C2C11EEA6006D5059 /* AppTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTabBar.swift; sourceTree = "<group>"; };
 		0AF5834E2C11EEC4006D5059 /* TabBarButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarButton.swift; sourceTree = "<group>"; };
@@ -320,22 +316,6 @@
 			path = Extension;
 			sourceTree = "<group>";
 		};
-		0A9063F62C2369B200D63102 /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-				0A9063F52C2369B200D63102 /* AddressesViewModel_Tests.swift */,
-			);
-			path = ViewModel;
-			sourceTree = "<group>";
-		};
-		0A9063F72C2369B200D63102 /* Addresses */ = {
-			isa = PBXGroup;
-			children = (
-				0A9063F62C2369B200D63102 /* ViewModel */,
-			);
-			path = Addresses;
-			sourceTree = "<group>";
-		};
 		0A9063FB2C2369B200D63102 /* ProfilePage */ = {
 			isa = PBXGroup;
 			children = (
@@ -368,14 +348,6 @@
 				0A9064002C2369B200D63102 /* CouponsViewModel_Tests.swift */,
 			);
 			path = CouponsPage;
-			sourceTree = "<group>";
-		};
-		0A9064032C2369B200D63102 /* CartPage */ = {
-			isa = PBXGroup;
-			children = (
-				0A9064022C2369B200D63102 /* CartViewModel_Tests.swift */,
-			);
-			path = CartPage;
 			sourceTree = "<group>";
 		};
 		0A9064052C2369B300D63102 /* CategoryPage */ = {
@@ -915,8 +887,6 @@
 		761A5CC02C0EFDC80057BA3C /* SnapShopApp-UserTests */ = {
 			isa = PBXGroup;
 			children = (
-				0A9063F72C2369B200D63102 /* Addresses */,
-				0A9064032C2369B200D63102 /* CartPage */,
 				0A9064052C2369B300D63102 /* CategoryPage */,
 				0A9064012C2369B200D63102 /* CouponsPage */,
 				0A9063FD2C2369B200D63102 /* HomePage */,
@@ -1361,8 +1331,6 @@
 				0A9064092C2369B300D63102 /* ProfileViewModel_Tests.swift in Sources */,
 				0A90640E2C2369B300D63102 /* CategoryViewModel_Tests.swift in Sources */,
 				0A90640C2C2369B300D63102 /* CouponsViewModel_Tests.swift in Sources */,
-				0A9064062C2369B300D63102 /* AddressesViewModel_Tests.swift in Sources */,
-				0A90640D2C2369B300D63102 /* CartViewModel_Tests.swift in Sources */,
 				0A9064082C2369B300D63102 /* OrderViewModel_Tests.swift in Sources */,
 				0A90640A2C2369B300D63102 /* HomeViewModel_Tests.swift in Sources */,
 			);

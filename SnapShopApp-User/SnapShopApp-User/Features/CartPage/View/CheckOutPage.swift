@@ -8,9 +8,6 @@
 import SwiftUI
 import PassKit
 
-import SwiftUI
-import PassKit
-
 struct CheckOutPage: View {
     var address: DraftOrderAddress
     @State private var showingBottomSheet = false

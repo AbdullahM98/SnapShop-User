@@ -13,10 +13,11 @@ class FavoriteViewModel : ObservableObject{
     @Published var products: [ProductEntity] = []
        private var cancellables = Set<AnyCancellable>()
        private var firestoreService = FirestoreManager()
-    @Published var viewState : FavViewState
+    @Published var viewState : FavViewState = .userActive
     var isConnected:Bool = false
     
     init(){
+        print(viewState,"------")
         self.isConnected = UserDefaults.standard.bool(forKey: Support.isConnected)
         print(">>>>\(isConnected)")
         if UserDefaults.standard.bool(forKey: Support.isLoggedUDKey) {
@@ -122,7 +123,7 @@ class FavoriteViewModel : ObservableObject{
     func getAllLocalFav() ->[ProductEntity]{
         print("Getting all favs")
         let userId = UserDefaults.standard.integer(forKey: Support.userID).description
-       return  AppCoreData.shared.getAllProducts(by: userId ?? "")
+        return  AppCoreData.shared.getAllProducts(by: userId)
     }
     func addLocalFavProduct(product:ProductEntity){
         AppCoreData.shared.addFavProduct(favProduct: product)

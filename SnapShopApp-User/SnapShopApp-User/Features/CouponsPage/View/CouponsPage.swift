@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct CouponsPage: View {
-    @ObservedObject var viewModel = CouponsViewModel()
+    @StateObject var viewModel = CouponsViewModel()
     var couponsBG: [String] = ["Coupon1", "Coupon2", "Coupon3", "Coupon4"]
     var fromCart: Bool
     @Environment(\.presentationMode) var presentationMode

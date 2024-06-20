@@ -37,6 +37,7 @@ struct PaymentPage: View {
                     .padding()
                 
                 ButtonWithImage(
+                    showAlert: $showAlert,
                     text: "Cash On Delivery",
                     imageName: "bag",
                     textColor: .white,

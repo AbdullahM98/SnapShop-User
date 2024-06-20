@@ -10,7 +10,8 @@ import SwiftUI
 struct CartCard: View {
     var item: DraftOrderLineItem
     var onDeleteClick: (_ item: DraftOrderLineItem) -> Void
-    
+    @State private var showingDeleteAlert = false
+
     var body: some View {
         VStack {
             HStack {
@@ -52,9 +53,22 @@ struct CartCard: View {
                 
                 VStack(alignment: .trailing, spacing: 20) {
                     Button {
-                        onDeleteClick(item)
+                        showingDeleteAlert = true
+
                     } label: {
                         Image("trash")
+                    }.alert(isPresented: $showingDeleteAlert) {
+                        Alert(
+                            title: Text("Delete Confirmation"),
+                            message: Text("Are you sure to delete this item?"),
+                            primaryButton: .destructive(Text("Delete"), action: {
+                                onDeleteClick(item)
+                                showingDeleteAlert = false
+                            }),
+                            secondaryButton: .cancel(Text("Cancel"), action: {
+                                showingDeleteAlert = false
+                            })
+                        )
                     }
                     .padding(.trailing, 8)
                     
