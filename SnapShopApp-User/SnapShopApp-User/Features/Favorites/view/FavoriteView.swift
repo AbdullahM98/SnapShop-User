@@ -14,7 +14,7 @@ struct FavoriteView: View {
     var body: some View {
     
   
-        if $viewModel.viewState.wrappedValue == .userActive && viewModel.products.count > 0 {
+        if $viewModel.viewState.wrappedValue == .userActive {
 
                 VStack{
                     

@@ -11,7 +11,7 @@ struct FilterBar: View {
     @State private var selectedButton: String = "All"
     @AppStorage("selectedOption") private var selectedOption: String = "ALL"
     @AppStorage("selectedCollection") private var selectedCollection: String = "ALL"
-    @ObservedObject var viewModel: CategoryViewModel
+    @StateObject var viewModel: CategoryViewModel
 
     var body: some View {
         ScrollView(.horizontal) {

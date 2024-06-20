@@ -9,7 +9,7 @@ import SwiftUI
 
 
 struct CurrencyView: View {
-    @ObservedObject var viewModel: CurrencyViewModel
+    @StateObject var viewModel: CurrencyViewModel
     @Environment(\.presentationMode) var presentationMode
     
     var body: some View {

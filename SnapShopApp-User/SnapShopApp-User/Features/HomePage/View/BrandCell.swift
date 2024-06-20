@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct BrandCell: View {
-    @ObservedObject var viewModel : HomeViewModel
+    @StateObject var viewModel : HomeViewModel
     var brand: SmartCollectionsItem
 
     var body: some View {

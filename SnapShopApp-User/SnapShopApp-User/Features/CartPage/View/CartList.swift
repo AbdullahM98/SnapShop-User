@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct CartList: View {
-    @ObservedObject var viewModel = CartViewModel()
+    @StateObject var viewModel = CartViewModel()
     @State private var navigateToPayment = false // Flag to trigger navigation
     var body: some View {
         VStack{

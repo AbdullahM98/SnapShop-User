@@ -74,13 +74,13 @@ struct ProductDetailView: View {
                                            
                                             viewModel.isFavorite = false
                                             viewModel.removeFromFavLocal(product: (viewModel.product)!)
-    //                                        SnackBarHelper.updatingSnackBar(body: "Removed ...")
+                                            SnackBarHelper.updatingSnackBar(body: "Removed ...")
 
                                         }else{
                                             viewModel.isFavorite = true
                                             print("hhhh \(viewModel.product?.product_id ?? "22")")
                                             viewModel.addLocalFavProduct(product: viewModel.product!)
-    //                                        SnackBarHelper.updatingSnackBar(body: "Inserted ...")
+                                            SnackBarHelper.updatingSnackBar(body: "Inserted ...")
 
                                         }
                                     }else{

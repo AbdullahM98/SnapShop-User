@@ -9,7 +9,7 @@ import SwiftUI
 
 struct HomeSearchBar: View {
     @State private var searchText: String = ""
-    @ObservedObject var viewModel: CategoryViewModel
+    @StateObject var viewModel: CategoryViewModel
     @AppStorage("selectedOption") private var selectedOption: String = "ALL"
     @AppStorage("selectedCollection") private var selectedCollection: String = "ALL"
 

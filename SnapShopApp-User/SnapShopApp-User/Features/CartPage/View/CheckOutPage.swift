@@ -17,7 +17,7 @@ struct CheckOutPage: View {
     @State private var selectedAddress: AddressProfileDetails?
     @State private var showAlert = false
     @State private var navigateToHome = false
-    @ObservedObject var cartViewModel = CartViewModel()
+    @StateObject var cartViewModel = CartViewModel()
     @State private var discountCode: String = "" // Use a state variable to hold the discount code
     var body: some View {
         VStack{

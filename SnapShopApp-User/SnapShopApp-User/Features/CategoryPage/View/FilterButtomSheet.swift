@@ -10,7 +10,7 @@ import SwiftUI
 struct FilterBottomSheet: View {
     @AppStorage("selectedOption") private var selectedOption: String = "ALL"
     @AppStorage("selectedCollection") private var selectedCollection: String = "ALL"
-    @ObservedObject var viewModel: CategoryViewModel
+    @StateObject var viewModel: CategoryViewModel
     @Environment(\.dismiss) var dismiss
     
     var body: some View {
