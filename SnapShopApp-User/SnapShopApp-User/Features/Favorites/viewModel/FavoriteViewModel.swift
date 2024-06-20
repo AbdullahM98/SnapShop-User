@@ -8,14 +8,20 @@
 import Foundation
 import Combine
 
+// MARK: - FavoriteViewModel
+
 class FavoriteViewModel : ObservableObject{
     
+    // MARK: - Published Properties
+
     @Published var products: [ProductEntity] = []
        private var cancellables = Set<AnyCancellable>()
         var firestoreService = FirestoreManager()
     @Published var viewState : FavViewState = .userActive
     var isConnected:Bool = false
     
+    // MARK: - Initializer
+
     init(){
         
         self.isConnected = UserDefaults.standard.bool(forKey: Support.isConnected)
@@ -27,6 +33,8 @@ class FavoriteViewModel : ObservableObject{
         }
     }
   
+    // MARK: - Public Methods
+
     func getUserFav(){
         // online or offline
         self.products = getAllLocalFav()

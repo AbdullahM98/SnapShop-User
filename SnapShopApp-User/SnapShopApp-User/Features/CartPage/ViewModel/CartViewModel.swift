@@ -7,7 +7,13 @@
 
 import Foundation
 import SwiftUI
+
+// MARK: - CartViewModel
+
 class CartViewModel :ObservableObject{
+    
+    // MARK: - Published Properties
+
     //order to append new line item
     @Published var userOrder:DraftOrderItemDetails?
     //user lineitems
@@ -20,6 +26,9 @@ class CartViewModel :ObservableObject{
     @Published var shippingAddress:DraftOrderAddress?
     @Published var isLoading = true
     @Published var isCheckOutLoading = true
+    
+    // MARK: - Initializer
+
     init(){
         print("CVM INIT")
         if UserDefaults.standard.bool(forKey: Support.isLoggedUDKey) {
@@ -28,6 +37,9 @@ class CartViewModel :ObservableObject{
             viewState = .userInActive
         }
     }
+    
+    // MARK: - Fetch Methods
+
     //method to delete
     func getDraftOrderById(){
         guard let orderID = UserDefaultsManager.shared.userDraftId else { return }
@@ -58,6 +70,8 @@ class CartViewModel :ObservableObject{
             self.isLoading = false
         }
     }
+    
+    // MARK: - Delete Methods
     
     //delete item from drafts
     func deleteLineItemFromDraftOrder(lineItem:DraftOrderLineItem){
@@ -102,11 +116,13 @@ class CartViewModel :ObservableObject{
         }
     }
     
+    // MARK: - Order Completion Methods
+    
     func postAsCompleted(){
         isCheckOutLoading = true
         guard let orderID = UserDefaultsManager.shared.userDraftId else { return }
         let updatedOrder = userOrder
-        Network.shared.updateData(object: updatedOrder, to: "https://mad-ism-ios-1.myshopify.com/admin/api/2024-04/draft_orders/\(orderID)/complete.json" ){result in
+        Network.shared.updateData(object: updatedOrder, to: "\(Support.baseUrl)/draft_orders/\(orderID)/complete.json" ){result in
             switch result {
             case .success(let response):
                 DispatchQueue.main.async {
@@ -121,6 +137,7 @@ class CartViewModel :ObservableObject{
         }
     }
     
+    // MARK: - Coupon Application Methods
     
     func fetchPriceRulesByIdForApplyingCoupons(id: Int) {
         isCheckOutLoading = true
@@ -173,6 +190,8 @@ class CartViewModel :ObservableObject{
     
     
 }
+
+// MARK: - CartViewState
 
 enum CartViewState {
     case userInActive

@@ -7,18 +7,22 @@
 
 import Foundation
 
+// MARK: - AddressesViewModel
+
 class AddressesViewModel:ObservableObject{
+    
+    // MARK: - Published Properties
+
     @Published var addresses: [AddressProfileDetails]?
     @Published var isLoading = false
     @Published var orderToUpdate:DraftOrderItemDetails?
     
+    // MARK: - Properties
+
     var userId: String = String(UserDefaultsManager.shared.getUserId(key: Support.userID) ?? 0)
-    init(){
-        print("AddressesViewModel INIT")
-    }
-    deinit{
-        print("DEINIT Addresses viewModel")
-    }
+    
+    // MARK: - Fetch Methods
+
     //get user address to UserAddresses page
     func fetchUserAddresses(){
         let url = "\(Support.baseUrl)/customers/\(userId)/addresses.json"
@@ -36,6 +40,9 @@ class AddressesViewModel:ObservableObject{
         }
         
     }
+    
+    // MARK: - Post Methods
+
     //post address
     func postUserAddress(address: NewAddressRoot){
         Network.shared.postData(object: address, to: "https://mad-ism-ios-1.myshopify.com/admin/api/2024-04/customers/\(userId)/addresses.json" ){  [weak self] result in
@@ -51,6 +58,9 @@ class AddressesViewModel:ObservableObject{
             }
         }
     }
+    
+    // MARK: - Delete Methods
+
     //delete user address
     func deleteAddress(addressId:Int){
         Network.shared.deleteObject(with: "\(Support.baseUrl)/customers/\(userId)/addresses/\(addressId).json") { [weak self] result in
@@ -67,6 +77,9 @@ class AddressesViewModel:ObservableObject{
             print(result?.localizedDescription)
         }
     }
+    
+    // MARK: - Update Methods
+
     //update user address
     func updateAddress(updatedAddress:AddressForUpdate,addressId:Int){
         Network.shared.updateData(object: updatedAddress, to: "\(Support.baseUrl)/customers/\(userId)/addresses/\(addressId).json") { [weak self] result in
@@ -82,6 +95,8 @@ class AddressesViewModel:ObservableObject{
         }
     }
     
+    // MARK: - Draft Order Methods
+
     func getDraftOrderById(){
         guard let orderID = UserDefaultsManager.shared.userDraftId else { return }
         print("User Have DraftOrder and its ID3 is : \(orderID)")
@@ -100,6 +115,8 @@ class AddressesViewModel:ObservableObject{
             }
         }
     }
+    
+    // MARK: - Address Selection Methods
     
     func selectShippingAddress(shippingAddress: AddressProfileDetails)->DraftOrderAddress{
         let newShippingAddress = DraftOrderAddress(first_name: shippingAddress.first_name ?? "", address1: shippingAddress.address1 ?? "", phone: shippingAddress.phone ?? "", city: shippingAddress.city ?? "", zip: shippingAddress.city ?? "", province: shippingAddress.province ?? "", country: shippingAddress.country ?? "", last_name: shippingAddress.last_name ?? "", address2: shippingAddress.address2 ?? "", company: shippingAddress.company ?? "", latitude: nil, longitude: nil, name: shippingAddress.name ?? "", country_code: shippingAddress.country, province_code: shippingAddress.province_code ?? "")

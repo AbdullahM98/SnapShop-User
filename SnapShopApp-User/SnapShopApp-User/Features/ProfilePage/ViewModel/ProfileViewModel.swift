@@ -7,11 +7,18 @@
 
 import Foundation
 
+// MARK: - ProfileViewModel
+
 class ProfileViewModel: ObservableObject {
+    
+    // MARK: - Published Properties
+
     @Published var viewState: ProfileViewState
     @Published var user: CustomerProfileDetails?
     @Published var isLoading: Bool = true
     
+    // MARK: - Initializer
+
     init() {
         print("PVM INIT")
         self.viewState = .loading
@@ -20,6 +27,8 @@ class ProfileViewModel: ObservableObject {
         print("PVM DEINIT")
     }
     
+    // MARK: - Public Methods
+
     func fetchUserById() {
          let userId = UserDefaults.standard.integer(forKey: Support.userID)
         let url = "\(Support.baseUrl)/customers/\(userId).json"
@@ -75,6 +84,8 @@ class ProfileViewModel: ObservableObject {
     }
     
 }
+
+// MARK: - ProfileViewState
 
 enum ProfileViewState {
     case userInActive

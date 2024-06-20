@@ -7,12 +7,21 @@
 
 import Foundation
 
-class CurrencyViewModel:ObservableObject{
-    @Published var currenciesList :ExchangeRatesResponse?
+// MARK: - CurrencyViewModel
+
+class CurrencyViewModel: ObservableObject {
+    
+    // MARK: - Published Properties
+    
+    @Published var currenciesList: ExchangeRatesResponse?
     @Published var searchText: String = ""
+    
+    // MARK: - Computed Properties
+    
     var selectedCurrencyCode: String? {
         return UserDefaults.standard.string(forKey: "selectedCurrency")
     }
+    
     var selectedCurrencyValue: String? {
         return UserDefaults.standard.string(forKey: "currencyValue")
     }
@@ -25,34 +34,38 @@ class CurrencyViewModel:ObservableObject{
         if searchText.isEmpty {
             return conversionRates.sorted(by: { $0.key < $1.key })
         } else {
+            let lowercasedSearchText = searchText.lowercased()
             return conversionRates.filter { (currencyCode, _) in
-                let lowercasedSearchText = searchText.lowercased()
                 let currencyFullName = currencyFullNames[currencyCode]?.lowercased() ?? ""
-                
                 return currencyCode.lowercased().contains(lowercasedSearchText) || currencyFullName.contains(lowercasedSearchText)
             }
             .sorted(by: { $0.key < $1.key })
         }
     }
     
+    // MARK: - Initializer
+    
     init() {
         fetchingCurrencies()
     }
     
-    func fetchingCurrencies(){
+    // MARK: - Data Fetching Methods
+    
+    /// Fetches the latest exchange rates for currencies.
+    func fetchingCurrencies() {
         Network.shared.request("https://v6.exchangerate-api.com/v6/1bb8702df59067ab555bc9ed/latest/USD", method: "GET", responseType: ExchangeRatesResponse.self) { [weak self] result in
             switch result {
             case .success(let response):
                 DispatchQueue.main.async {
                     self?.currenciesList = response
                 }
-            case .failure(let error):
-                print("Error fetching Currencies : \(error)")
+            case .failure:
+                break
             }
         }
     }
     
-    
+    // MARK: - Currency Full Names Dictionary
     
     let currencyFullNames: [String: String] = [
         "USD": "United States Dollar",
@@ -218,5 +231,4 @@ class CurrencyViewModel:ObservableObject{
         "ZMW": "Zambian Kwacha",
         "ZWL": "Zimbabwean Dollar"
     ]
-
 }
