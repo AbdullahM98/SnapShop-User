@@ -9,6 +9,7 @@ import SwiftUI
 
 struct FavoriteView: View {
     @StateObject var viewModel = FavoriteViewModel()
+
     
     var body: some View {
     
@@ -29,7 +30,8 @@ struct FavoriteView: View {
                             })
                         }
                     }
-                }.onAppear{
+                }.padding(.bottom,60)
+                .onAppear{
                     viewModel.getUserFav()
                 }
             
@@ -59,6 +61,8 @@ struct FavoriteView: View {
     struct FavItemView : View {
         var onDeleteClick:  (_ product:ProductEntity) -> Void
         var product : ProductEntity?
+        @State private var showingDeleteAlert = false
+
         init(product: ProductEntity , onDeleteClick: @escaping ( _ product:ProductEntity) -> Void) {
             self.product = product
             self.onDeleteClick = onDeleteClick
@@ -99,11 +103,25 @@ struct FavoriteView: View {
                     VStack(alignment: .trailing,spacing: 20){
                         Button {
                             print("delete item")
-                            onDeleteClick(product!)
+                            showingDeleteAlert = true
+
                         } label: {
                             Image("trash")
                             
-                        }.padding(.trailing,8)
+                        }.alert(isPresented: $showingDeleteAlert) {
+                            Alert(
+                                title: Text("Delete Confirmation"),
+                                message: Text("Are you sure to delete this item?"),
+                                primaryButton: .destructive(Text("Delete"), action: {
+                                    onDeleteClick(product!)
+                                    showingDeleteAlert = false
+                                }),
+                                secondaryButton: .cancel(Text("Cancel"), action: {
+                                    showingDeleteAlert = false
+                                })
+                            )
+                        }
+                        .padding(.trailing,8)
                         
                     }
                 }
