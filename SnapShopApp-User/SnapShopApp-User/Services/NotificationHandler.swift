@@ -23,14 +23,14 @@ class NotificationHandler {
             }
         }
     }
-    func createNotificationContent() -> UNNotificationContent {
+    private func createNotificationContent() -> UNNotificationContent {
         let content = UNMutableNotificationContent()
         content.sound = .default
         content.title = titles.randomElement() ?? "Dress to Impress"
         content.body = bodies.randomElement() ?? "Don't Miss This Opportunity!"
         return content
     }
-    func createNotificationTrigger() -> UNCalendarNotificationTrigger {
+    private func createNotificationTrigger() -> UNCalendarNotificationTrigger {
         var dateComponents = DateComponents()
         dateComponents.minute = 0
         

@@ -11,6 +11,7 @@ struct ContentView: View {
 //    @State var selectedTab:Tabs = .home
     @StateObject private var networkMonitor = NetworkMonitor()
     @AppStorage("currentPage") var currentPage = 1
+    let handler = NotificationHandler()
     var body: some View {
         VStack{
             if currentPage > totalPages {
@@ -19,6 +20,10 @@ struct ContentView: View {
                 OnBoardingView()
             }
         }.navigationBarBackButtonHidden(true)
+            .onAppear{
+                handler.askPermission()
+                handler.scheduleHourlyNotification()
+            }
         
 //        BaseView()
 //        NavigationStack{
