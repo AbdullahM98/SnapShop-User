@@ -50,4 +50,20 @@ class HomeViewModelTests: XCTestCase {
         }
         wait(for: [expectation], timeout: 5.0)
     }
+    func testFetchAllDraftOrdersOfApplication_Success() {
+            let expectation = XCTestExpectation(description: "Fetch all draft orders of application")
+            
+            // Call the method
+            viewModel.fetchAllDraftOrdersOfApplication()
+            
+            // Fulfill the expectation when the network request completes
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                // Assert expected changes in state after fetching draft orders
+                XCTAssertNotNil(self.viewModel.draft)
+                expectation.fulfill()
+            }
+            
+            wait(for: [expectation], timeout: 3.0)
+        }
+    
 }
