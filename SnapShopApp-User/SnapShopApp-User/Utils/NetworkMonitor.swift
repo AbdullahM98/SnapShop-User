@@ -19,7 +19,7 @@ class NetworkMonitor: ObservableObject {
         reachability?.whenReachable = { [weak self] reachability in
             DispatchQueue.main.async {
                 self?.isConnected = true
-                self?.showSnackbarIfNeeded(isConnected: true)
+             //   self?.showSnackbarIfNeeded(isConnected: true)
                 UserDefaults.standard.set(true, forKey: Support.isConnected)
             }
         }

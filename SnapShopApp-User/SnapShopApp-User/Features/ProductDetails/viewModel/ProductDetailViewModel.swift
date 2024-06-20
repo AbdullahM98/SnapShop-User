@@ -15,7 +15,7 @@ class ProductDetailViewModel :ObservableObject{
     @Published var currentCurrency:String = "USD"
     @Published var price:String = "300.00"
     @Published var availbleQuantity  = "30"
-    @Published var inventoryQuantity  = 0
+    @Published var inventoryQuantity  = 1
     @Published var pickedQuantity  = 1
     @Published var productTitle  = "T-shirt with long sleeves and pocket an sth else "
     @Published var productDecription  = "Experience ultimate comfort and effortless style with our Oversized T-Shirt. Made from high-quality, breathable cotton, this T-shirt is designed to provide a relaxed fit that drapes beautifully over any body type. Whether you're lounging at home, running errands, or meeting friends, this versatile piece is perfect for any casual occasion."
