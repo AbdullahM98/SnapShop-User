@@ -110,6 +110,13 @@
 		761A5CC22C0EFDC80057BA3C /* SnapShopApp_UserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761A5CC12C0EFDC80057BA3C /* SnapShopApp_UserTests.swift */; };
 		761A5CCC2C0EFDC90057BA3C /* SnapShopApp_UserUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761A5CCB2C0EFDC90057BA3C /* SnapShopApp_UserUITests.swift */; };
 		761A5CCE2C0EFDC90057BA3C /* SnapShopApp_UserUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761A5CCD2C0EFDC90057BA3C /* SnapShopApp_UserUITestsLaunchTests.swift */; };
+		762443732C23D828001D57D6 /* FavoriteViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 762443722C23D828001D57D6 /* FavoriteViewModelTest.swift */; };
+		762443762C23D856001D57D6 /* MockNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 762443752C23D856001D57D6 /* MockNetwork.swift */; };
+		7624437A2C23DBDE001D57D6 /* NetworkTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 762443792C23DBDE001D57D6 /* NetworkTest.swift */; };
+		7624437C2C23DF00001D57D6 /* MockCoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7624437B2C23DF00001D57D6 /* MockCoreData.swift */; };
+		7624437E2C23DF7D001D57D6 /* MockFireStoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7624437D2C23DF7D001D57D6 /* MockFireStoreManager.swift */; };
+		762443812C23E104001D57D6 /* ProductDetailViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 762443802C23E104001D57D6 /* ProductDetailViewModelTest.swift */; };
+		762443842C23E60D001D57D6 /* SignUpViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 762443832C23E60D001D57D6 /* SignUpViewModelTest.swift */; };
 		76257A3E2C177900001C4006 /* FirestoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76257A3D2C177900001C4006 /* FirestoreManager.swift */; };
 		76257A432C17DDDE001C4006 /* FavoriteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76257A422C17DDDE001C4006 /* FavoriteView.swift */; };
 		76257A452C17DDF2001C4006 /* FavoriteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76257A442C17DDF2001C4006 /* FavoriteViewModel.swift */; };
@@ -251,6 +258,13 @@
 		761A5CC72C0EFDC90057BA3C /* SnapShopApp-UserUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "SnapShopApp-UserUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		761A5CCB2C0EFDC90057BA3C /* SnapShopApp_UserUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapShopApp_UserUITests.swift; sourceTree = "<group>"; };
 		761A5CCD2C0EFDC90057BA3C /* SnapShopApp_UserUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapShopApp_UserUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		762443722C23D828001D57D6 /* FavoriteViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteViewModelTest.swift; sourceTree = "<group>"; };
+		762443752C23D856001D57D6 /* MockNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockNetwork.swift; sourceTree = "<group>"; };
+		762443792C23DBDE001D57D6 /* NetworkTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkTest.swift; sourceTree = "<group>"; };
+		7624437B2C23DF00001D57D6 /* MockCoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockCoreData.swift; sourceTree = "<group>"; };
+		7624437D2C23DF7D001D57D6 /* MockFireStoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockFireStoreManager.swift; sourceTree = "<group>"; };
+		762443802C23E104001D57D6 /* ProductDetailViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailViewModelTest.swift; sourceTree = "<group>"; };
+		762443832C23E60D001D57D6 /* SignUpViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModelTest.swift; sourceTree = "<group>"; };
 		76257A3D2C177900001C4006 /* FirestoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreManager.swift; sourceTree = "<group>"; };
 		76257A422C17DDDE001C4006 /* FavoriteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteView.swift; sourceTree = "<group>"; };
 		76257A442C17DDF2001C4006 /* FavoriteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteViewModel.swift; sourceTree = "<group>"; };
@@ -900,6 +914,10 @@
 		761A5CC02C0EFDC80057BA3C /* SnapShopApp-UserTests */ = {
 			isa = PBXGroup;
 			children = (
+				762443822C23E5F6001D57D6 /* Auth */,
+				7624437F2C23E0DF001D57D6 /* ProductDetail */,
+				762443742C23D83B001D57D6 /* Mocks */,
+				762443712C23D7E2001D57D6 /* Favorite */,
 				0A9064112C23CE2B00D63102 /* AddressesPage */,
 				0A9064052C2369B300D63102 /* CategoryPage */,
 				0A9064012C2369B200D63102 /* CouponsPage */,
@@ -918,6 +936,41 @@
 				761A5CCD2C0EFDC90057BA3C /* SnapShopApp_UserUITestsLaunchTests.swift */,
 			);
 			path = "SnapShopApp-UserUITests";
+			sourceTree = "<group>";
+		};
+		762443712C23D7E2001D57D6 /* Favorite */ = {
+			isa = PBXGroup;
+			children = (
+				762443722C23D828001D57D6 /* FavoriteViewModelTest.swift */,
+			);
+			path = Favorite;
+			sourceTree = "<group>";
+		};
+		762443742C23D83B001D57D6 /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				762443752C23D856001D57D6 /* MockNetwork.swift */,
+				762443792C23DBDE001D57D6 /* NetworkTest.swift */,
+				7624437B2C23DF00001D57D6 /* MockCoreData.swift */,
+				7624437D2C23DF7D001D57D6 /* MockFireStoreManager.swift */,
+			);
+			path = Mocks;
+			sourceTree = "<group>";
+		};
+		7624437F2C23E0DF001D57D6 /* ProductDetail */ = {
+			isa = PBXGroup;
+			children = (
+				762443802C23E104001D57D6 /* ProductDetailViewModelTest.swift */,
+			);
+			path = ProductDetail;
+			sourceTree = "<group>";
+		};
+		762443822C23E5F6001D57D6 /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				762443832C23E60D001D57D6 /* SignUpViewModelTest.swift */,
+			);
+			path = Auth;
 			sourceTree = "<group>";
 		};
 		76257A3F2C17DDB1001C4006 /* Favorites */ = {
@@ -1341,13 +1394,20 @@
 			buildActionMask = 2147483647;
 			files = (
 				0A90640B2C2369B300D63102 /* UserDefaultsManager_Tests.swift in Sources */,
+				7624437E2C23DF7D001D57D6 /* MockFireStoreManager.swift in Sources */,
 				0A9064072C2369B300D63102 /* CurrencyViewModel_Tests.swift in Sources */,
+				762443732C23D828001D57D6 /* FavoriteViewModelTest.swift in Sources */,
 				761A5CC22C0EFDC80057BA3C /* SnapShopApp_UserTests.swift in Sources */,
+				762443762C23D856001D57D6 /* MockNetwork.swift in Sources */,
+				762443842C23E60D001D57D6 /* SignUpViewModelTest.swift in Sources */,
 				0A9064092C2369B300D63102 /* ProfileViewModel_Tests.swift in Sources */,
 				0A90640E2C2369B300D63102 /* CategoryViewModel_Tests.swift in Sources */,
 				0A90640C2C2369B300D63102 /* CouponsViewModel_Tests.swift in Sources */,
 				0A9064082C2369B300D63102 /* OrderViewModel_Tests.swift in Sources */,
 				0A9064132C23CF6600D63102 /* AddressesViewModel_Tests.swift in Sources */,
+				762443812C23E104001D57D6 /* ProductDetailViewModelTest.swift in Sources */,
+				7624437A2C23DBDE001D57D6 /* NetworkTest.swift in Sources */,
+				7624437C2C23DF00001D57D6 /* MockCoreData.swift in Sources */,
 				0A90640A2C2369B300D63102 /* HomeViewModel_Tests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

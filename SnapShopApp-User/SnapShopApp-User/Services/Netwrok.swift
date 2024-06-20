@@ -9,7 +9,17 @@ import Foundation
 import Combine
 
 protocol NetworkService {
-    func postCustomer(_ customer: Customer) -> AnyPublisher<authResponse, Error> }
+    func postCustomer(_ customer: Customer) -> AnyPublisher<authResponse, Error>
+    func request<T: Decodable>(_ url: String,
+                                method: String,
+                                responseType: T.Type,
+                                completion: @escaping (Result<T, Error>) -> Void)
+    func postData<T: Codable>(object: T, to url: String, completion: @escaping (Result<T, Error>) -> Void)
+    func updateData<T: Codable>(object: T, to url: String, completion: @escaping (Result<T, Error>) -> Void)
+    func deleteObject(with url: String, completion: @escaping (Error?) -> Void)
+    func getItemByID<T: Decodable>(_ itemID: String, type: T.Type, endpoint: String) -> AnyPublisher<T, Error>
+    
+}
 
 enum ApiError: Error {
     case invalidUrl
@@ -18,7 +28,7 @@ enum ApiError: Error {
 }
 
 
-class Network :NetworkService{
+class Network : NetworkService {
     static let shared = Network()
     
     private init() {}
