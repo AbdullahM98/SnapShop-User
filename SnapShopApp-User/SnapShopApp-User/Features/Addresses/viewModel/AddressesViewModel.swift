@@ -54,13 +54,15 @@ class AddressesViewModel:ObservableObject{
     //delete user address
     func deleteAddress(addressId:Int){
         Network.shared.deleteObject(with: "\(Support.baseUrl)/customers/\(userId)/addresses/\(addressId).json") { [weak self] result in
-            self?.fetchUserAddresses()
+//            self?.fetchUserAddresses()
             switch result{
-            case .none:
-                print("Success")
-            case .some(let error):
-                print("error is \(error.localizedDescription)")
-                
+            default:
+                DispatchQueue.main.async{
+                    self?.addresses?.removeAll(where: {
+                        item in
+                        item.id == addressId
+                    })
+                }
             }
             print(result?.localizedDescription)
         }

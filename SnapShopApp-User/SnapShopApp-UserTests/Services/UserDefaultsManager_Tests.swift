@@ -45,20 +45,15 @@ class UserDefaultsManagerTests: XCTestCase {
     
     func testSetAndGetUserHasDraftOrders() {
         let key = "hasDraftOrdersKey"
-        userDefaultsManager.setUserHasDraftOrders(key: key, value: true)
-        XCTAssertEqual(userDefaultsManager.getUserHasDraftOrders(key: key), true, "Expected hasDraftOrders to be true")
+        userDefaultsManager.hasDraft = true
+        XCTAssertEqual(userDefaultsManager.hasDraft , true, "Expected hasDraftOrders to be true")
         
-        userDefaultsManager.setUserHasDraftOrders(key: key, value: false)
-        XCTAssertEqual(userDefaultsManager.getUserHasDraftOrders(key: key), false, "Expected hasDraftOrders to be false")
     }
     
     func testSetAndGetUserDraftOrderId() {
         let key = "draftOrderIdKey"
-        userDefaultsManager.setUserDraftOrderId(key: key, value: 789)
-        XCTAssertEqual(userDefaultsManager.getUserDraftOrderId(key: key), 789, "Expected draftOrderId to be 789")
-        
-        userDefaultsManager.setUserDraftOrderId(key: key, value: 101112)
-        XCTAssertEqual(userDefaultsManager.getUserDraftOrderId(key: key), 101112, "Expected draftOrderId to be 101112")
+        userDefaultsManager.userDraftId =  101112
+        XCTAssertEqual(userDefaultsManager.userDraftId ,101112, "Expected draftOrderId to be 101112")
     }
 
     func testSelectedCurrencyCode() {

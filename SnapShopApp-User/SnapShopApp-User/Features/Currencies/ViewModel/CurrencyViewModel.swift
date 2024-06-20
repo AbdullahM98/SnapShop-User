@@ -40,7 +40,7 @@ class CurrencyViewModel:ObservableObject{
     }
     
     func fetchingCurrencies(){
-        Network.shared.request("https://v6.exchangerate-api.com/v6/1749dccb5dcfb9411c909ea5/latest/USD", method: "GET", responseType: ExchangeRatesResponse.self) { [weak self] result in
+        Network.shared.request("https://v6.exchangerate-api.com/v6/1bb8702df59067ab555bc9ed/latest/USD", method: "GET", responseType: ExchangeRatesResponse.self) { [weak self] result in
             switch result {
             case .success(let response):
                 DispatchQueue.main.async {

@@ -17,7 +17,7 @@ struct PopularBrands: View {
                 HStack(spacing: 10){
                     ForEach(viewModel.smartCollections, id: \.id) { brand in
                         BrandCell(viewModel:viewModel,brand: brand)
-                    }
+                    }.padding(.all,4)
                 }
             }.scrollIndicators(.hidden)
         }.padding(.horizontal,16)

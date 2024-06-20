@@ -30,7 +30,7 @@ struct BaseView: View {
                 FavoriteView()
                     .frame(maxWidth: .infinity,maxHeight: .infinity)
                     .tag(Tab.Favorites)
-                ProfileView()
+                SettingsView()
                     .frame(maxWidth: .infinity,maxHeight: .infinity)
                     .tag(Tab.Profile)
                 
@@ -85,9 +85,8 @@ struct BaseView: View {
                     //profile tab
                     TabButton(Tab: .Profile)
                 }
-                    .background(Color.black
+                    .background(Color.black.opacity(0.04)
                         .clipShape(CustomCuverShape())
-                                //shadow
                         .shadow(color: Color.black.opacity(0.04), radius: 5,x: -5,y: -5)
                         .ignoresSafeArea(.container,edges: .bottom))
                 , alignment: .bottom
@@ -103,13 +102,19 @@ struct BaseView: View {
                 baseData.currentTab = Tab
             }
         } label: {
-            Image(baseData.currentTab == Tab ? Tab.rawValue + ".fill" : Tab.rawValue)
-                .resizable()
-                .renderingMode(.template)
-                .aspectRatio(contentMode: .fit)
-                .frame(width: 25,height: 25)
-                .foregroundColor(baseData.currentTab == Tab ? .black : .gray.opacity(0.5))
-                .frame(maxWidth: .infinity)
+            VStack{
+                Image(baseData.currentTab == Tab ? Tab.rawValue + ".fill" : Tab.rawValue)
+                    .resizable()
+                    .renderingMode(.template)
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 25,height: 25)
+                    .foregroundColor(baseData.currentTab == Tab ? .black : .gray.opacity(0.5))
+                    .frame(maxWidth: .infinity)
+                Text(baseData.currentTab == Tab ? Tab.rawValue : Tab.rawValue)
+                    .font(.system(size: 12))
+                    .autocapitalization(.words)
+                    .foregroundColor(.black)
+            }
         }
     }
 }

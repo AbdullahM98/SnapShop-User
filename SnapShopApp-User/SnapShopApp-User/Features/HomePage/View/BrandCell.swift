@@ -54,11 +54,9 @@ struct BrandCell: View {
                     .lineLimit(1)
                     .frame(width: 90)
             }.frame(width: 140,height: 50)
-                .background(
-                    ZStack{
-                        RoundedRectangle(cornerRadius: 10).fill(Color.white).shadow(color: Color.black.opacity(0.04), radius: 5,x: 5,y: 5)
-                    }
-                )
+                .background(Color.white)
+                .cornerRadius(10)
+                .shadow(radius: 5)
                 
         }
     }

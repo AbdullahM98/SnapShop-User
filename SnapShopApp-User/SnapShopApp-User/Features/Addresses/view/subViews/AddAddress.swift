@@ -132,7 +132,7 @@ struct AddAddress: View {
                     
                     Button(action: {
                         if validateAllFields() {
-                            onSaveClick(NewAddressRoot(customer_address: NewAddressDetails(id: nil, customer_id: Int("7290794967219"), address1: addressTextFieldData, address2: nil, city: cityTextFieldData, zip: zipTextFieldData, phone: phoneAddressTextFieldData, name: nil, province_code: nil, country_code: "", country_name: countryTextFieldData, default: false)))
+                            onSaveClick(NewAddressRoot(customer_address: NewAddressDetails(id: nil, customer_id: UserDefaultsManager.shared.getUserId(key: Support.userID), address1: addressTextFieldData, address2: nil, city: cityTextFieldData, zip: zipTextFieldData, phone: phoneAddressTextFieldData, name: nil, province_code: nil, country_code: "EG", country_name: countryTextFieldData, default: false)))
                         }
                     }) {
                         Text("Save")

@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct UserAddresses: View {
-    @ObservedObject var viewModel: AddressesViewModel = AddressesViewModel()
+    @StateObject var viewModel: AddressesViewModel = AddressesViewModel()
     @State private var showingBottomSheet = false
     @State private var settingsDetents = PresentationDetent.height(UIScreen.screenHeight*0.5 + 100)
     var fromCart: Bool

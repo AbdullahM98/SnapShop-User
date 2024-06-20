@@ -11,7 +11,7 @@ struct DeveloperInfo: View {
     var personName:String
     var personImage:String
     var body: some View {
-        VStack(alignment: .center, spacing: 20){
+        HStack(alignment: .center, spacing: 20){
             Image(personImage)
                 .resizable()
                 .aspectRatio(contentMode: .fill)
@@ -20,6 +20,22 @@ struct DeveloperInfo: View {
             Text(personName)
                 .bold()
             
+        }
+    }
+}
+struct DeveloperInfo1: View {
+    var personName:String
+    var personImage:String
+    var body: some View {
+        HStack(alignment: .center, spacing: 20){
+            
+            Text(personName)
+                .bold()
+            Image(personImage)
+                .resizable()
+                .aspectRatio(contentMode: .fill)
+                .frame(width: 100,height: 100)
+                .clipShape(Circle())
         }
     }
 }

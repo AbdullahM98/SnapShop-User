@@ -46,7 +46,7 @@ struct CarouselSlider: View {
                     .offset(y: 90)
                 }
             }
-            .frame(height: 150)
+            .frame(height: UIScreen.screenHeight / 6)
             .padding(.bottom, 16)
             .onAppear {
                 timer = Timer.publish(every: 60, on: .main, in: .common)
