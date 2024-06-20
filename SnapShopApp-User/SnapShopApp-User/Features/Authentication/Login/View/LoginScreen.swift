@@ -1,10 +1,3 @@
-//
-//  LoginScreen.swift
-//  SnapShopApp-User
-//
-//  Created by Abdullah Essam on 04/06/2024.
-//
-
 import SwiftUI
 
 struct LoginScreen: View {
@@ -19,9 +12,9 @@ struct LoginScreen: View {
                 VStack{
                     Spacer()
                     Text("Login").padding(.vertical,30).font(.title3)
-                    AppTextField(fieldModel: $viewModel.emailField ,text: $text)
+                    AppTextField(fieldModel: $viewModel.emailField,text: $text)
                     
-                    AppTextField(fieldModel: $viewModel.passwordField , text: $password)
+                    AppTextField(fieldModel: $viewModel.passwordField, text: $password)
                     
                     HStack{
                         Spacer()
@@ -35,7 +28,7 @@ struct LoginScreen: View {
                         Button(action:{
                             self.navigateToRegister = true
                         },label:{
-                            Text("Don't have an account ? Register Now").font(.footnote).fontWeight(.medium).underline().foregroundStyle(Color.gray)
+                            Text("Don't have an account? Register Now").font(.footnote).fontWeight(.medium).underline().foregroundStyle(Color.gray)
                     
                         }).padding(.bottom,10)
                         Button(action:{
@@ -45,14 +38,14 @@ struct LoginScreen: View {
                             
                         }).padding(.bottom,160)
                     }
+
                     
-                    
-                    AppButton(text: "Login", width: UIScreen.main.bounds.width * 0.9, height: UIScreen.main.bounds.height * 0.05,isFilled: true , onClick: {
+                    AppButton(text: "Login", width: UIScreen.main.bounds.width * 0.9, height: UIScreen.main.bounds.height * 0.05,isFilled: true, onClick: {
                         print(">>>>>>\( password)")
                         viewModel.login(email: viewModel.emailField.value, password: password)
                         viewModel.viewState = .loading
                     }).padding(.bottom,50)
-                    
+
                     
                 }.navigationBarBackButtonHidden(true).padding(.all,20)
             }else{
@@ -63,19 +56,18 @@ struct LoginScreen: View {
                 }
             }
             
-        }.onReceive(viewModel.$isLogIn){ _ in
-   
+        }.onReceive(viewModel.$isLogIn){ isLoggedIn in
+            if isLoggedIn {
                 navigateToHome = true
-            
+            }
         }
-        .navigationDestination(isPresented:$navigateToHome){
+       .navigationDestination(isPresented:$navigateToHome){
             ContentView()
-        } .navigationDestination(isPresented: $navigateToRegister){
+        }.navigationDestination(isPresented: $navigateToRegister){
              SignUpScreen()
          }
     }
-    }
-
+}
 
 struct LoginScreen_Previews: PreviewProvider {
     static var previews: some View {

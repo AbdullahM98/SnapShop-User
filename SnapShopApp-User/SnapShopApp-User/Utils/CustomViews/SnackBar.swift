@@ -21,4 +21,15 @@ class SnackBarHelper {
         snackBar.backgroundColor = backgroundColor
         snackBar.show()
     }
+    static func showSnackBar(message:String , color :Color) {
+        guard let keyWindow = UIApplication.shared.windows.first(where: { $0.isKeyWindow }) else { return }
+       
+        let backgroundColor: UIColor = UIColor(color)
+        let snackBar = SnackBar.make(in: keyWindow,
+                                     message: message,
+                                     duration: .lengthShort)
+        
+        snackBar.backgroundColor = backgroundColor
+        snackBar.show()
+    }
 }
