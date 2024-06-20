@@ -10,8 +10,8 @@ struct LoginScreen: View {
         NavigationStack{
             if $viewModel.viewState.wrappedValue == .loginView {
                 VStack{
-                    Spacer()
-                    Text("Login").padding(.vertical,30).font(.title3)
+                    Image("app-logo").resizable().frame(width: UIScreen.screenWidth * 0.4).clipShape(/*@START_MENU_TOKEN@*/Circle()/*@END_MENU_TOKEN@*/)
+                    Text("Login").padding(.vertical,30).font(.title2).fontWeight(.bold)
                     AppTextField(fieldModel: $viewModel.emailField,text: $text)
                     
                     AppTextField(fieldModel: $viewModel.passwordField, text: $password)
