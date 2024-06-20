@@ -14,6 +14,7 @@ struct ProductDetailView: View {
     var productID: String
     var selectedQuantity = 1 
     @StateObject var viewModel = ProductDetailViewModel()
+    @State private var showingDeleteAlert = false
     
     var body: some View {
         ScrollView {
@@ -68,22 +69,37 @@ struct ProductDetailView: View {
                                 Text("(4.5)").font(.subheadline).foregroundStyle(Color.black)
                                 Spacer()
                                 Button{
-                                    if $viewModel.isFavorite.wrappedValue {
-                                       
-                                        viewModel.isFavorite = false
-                                        viewModel.removeFromFavLocal(product: (viewModel.product)!)
-//                                        SnackBarHelper.updatingSnackBar(body: "Removed ...")
+                                    if UserDefaults.standard.bool(forKey: Support.isLoggedUDKey){
+                                        if $viewModel.isFavorite.wrappedValue {
+                                           
+                                            viewModel.isFavorite = false
+                                            viewModel.removeFromFavLocal(product: (viewModel.product)!)
+    //                                        SnackBarHelper.updatingSnackBar(body: "Removed ...")
 
+                                        }else{
+                                            viewModel.isFavorite = true
+                                            print("hhhh \(viewModel.product?.product_id ?? "22")")
+                                            viewModel.addLocalFavProduct(product: viewModel.product!)
+    //                                        SnackBarHelper.updatingSnackBar(body: "Inserted ...")
+
+                                        }
                                     }else{
-                                        viewModel.isFavorite = true
-                                        print("hhhh \(viewModel.product?.product_id ?? "22")")
-                                        viewModel.addLocalFavProduct(product: viewModel.product!)
-//                                        SnackBarHelper.updatingSnackBar(body: "Inserted ...")
-
+                                        showingDeleteAlert = true
                                     }
                                 }label: {
                                     Image(systemName: viewModel.isFavorite ? "heart.fill" : "heart").resizable().frame(width: 30,height: 28)
                                     
+                                }.alert(isPresented: $showingDeleteAlert) {
+                                    Alert(
+                                        title: Text("Not Logged In"),
+                                        message: Text("Please Login to continue"),
+                                        primaryButton: .destructive(Text("Ok"), action: {
+                                            showingDeleteAlert = false
+                                        }),
+                                        secondaryButton: .cancel(Text("Cancel"), action: {
+                                            showingDeleteAlert = false
+                                        })
+                                    )
                                 }
                             }
                             .foregroundColor(.gray)
@@ -162,8 +178,14 @@ struct ProductDetailView: View {
                         QuantitySelectorView(quantity:$viewModel.inventoryQuantity.wrappedValue , viewModel:viewModel)
                             .padding(.leading,90)
                         AppButton(text: "Add to Cart", width: UIScreen.screenWidth * 0.9, height: UIScreen.screenHeight * 0.06, isFilled: true){
-                            viewModel.prepareDraftOrderToPost()
-                            SnackBarHelper.updatingSnackBar(body: "Added to cart ...")
+                            if UserDefaults.standard.bool(forKey: Support.isLoggedUDKey){
+                                viewModel.prepareDraftOrderToPost()
+                                SnackBarHelper.updatingSnackBar(body: "Added to cart ...")
+                            }else{
+                                showingDeleteAlert = true
+
+                            }
+                            
                         }.padding(.top,10)
                             
                         
