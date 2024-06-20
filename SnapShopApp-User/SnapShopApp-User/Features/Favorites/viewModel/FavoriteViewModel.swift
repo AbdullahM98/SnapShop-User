@@ -12,7 +12,7 @@ class FavoriteViewModel : ObservableObject{
     
     @Published var products: [ProductEntity] = []
        private var cancellables = Set<AnyCancellable>()
-       private var firestoreService = FirestoreManager()
+        var firestoreService = FirestoreManager()
     @Published var viewState : FavViewState = .userActive
     var isConnected:Bool = false
     
