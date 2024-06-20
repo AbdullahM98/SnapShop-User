@@ -10,8 +10,11 @@ import SwiftUI
 
 @main
 struct SnapShopApp_UserApp: App {
+    let handler = NotificationHandler()
     init(){
-      FirebaseApp.configure()
+        FirebaseApp.configure()
+        handler.askPermission()
+        
     }
     var body: some Scene {
         WindowGroup {
@@ -21,10 +24,15 @@ struct SnapShopApp_UserApp: App {
 }
 
 
-class AppDelegate: NSObject, UIApplicationDelegate {
-  func application(_ application: UIApplication,
-                   didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
-   // FirebaseApp.configure()
-    return true
-  }
+class AppDelegate: NSObject, UIApplicationDelegate,UNUserNotificationCenterDelegate {
+    func application(_ application: UIApplication,
+                     didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
+        UNUserNotificationCenter.current().delegate = self
+        return true
+    }
+
+       
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        completionHandler([.alert,.sound])
+    }
 }

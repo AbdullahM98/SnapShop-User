@@ -9,43 +9,43 @@ import Foundation
 import FirebaseAuth
 import FirebaseFirestore
 
+// MARK: - FirebaseManager Class
+
 class FirebaseManager {
     
-    static let shared = FirebaseManager()
-
+    // MARK: - Singleton Instance
     
-    private init(){
-        //collectionRef = db.collection("Favorite_Products")
+    static let shared = FirebaseManager()
+    
+    // MARK: - Initializer
+    
+    private init() {
+        // You can initialize any properties or setup needed here
     }
     
-    func registerUser(email:String, password:String , compeltionHandler:@escaping (Bool,String?,Error?)->Void){
-        var userId = ""
+    // MARK: - User Authentication Methods
+    
+    func registerUser(email: String, password: String, completionHandler: @escaping (Bool, String?, Error?) -> Void) {
         Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
-                 if let error = error {
-                     print("Error creating user: \(error.localizedDescription)")
-                     compeltionHandler(false,nil, error)
-                 } else {
-                     print("User registered successfully")
-                     
-                     if let user = Auth.auth().currentUser {
-                         let uid = user.uid
-                       userId = uid
-                         UserDefaults.standard.set(uid, forKey: Support.fireBaseUserID)
-
-                     }
-                     compeltionHandler(true,userId, nil)
-                 }
-             }
+            if let error = error {
+                completionHandler(false, nil, error)
+            } else {
+                var userId = ""
+                if let user = Auth.auth().currentUser {
+                    let uid = user.uid
+                    userId = uid
+                    UserDefaults.standard.set(uid, forKey: Support.fireBaseUserID)
+                }
+                completionHandler(true, userId, nil)
+            }
+        }
     }
     
     func login(email: String, password: String, completion: @escaping (Bool, Error?) -> Void) {
-       
         Auth.auth().signIn(withEmail: email, password: password) { authResult, error in
             if let error = error {
-                print("Error signing in: \(error.localizedDescription)")
                 completion(false, error)
             } else {
-                print("Logged in successfully")
                 if let user = Auth.auth().currentUser {
                     let uid = user.uid
                     UserDefaults.standard.set(uid, forKey: Support.fireBaseUserID)
@@ -54,12 +54,14 @@ class FirebaseManager {
             }
         }
     }
+    
     func logout() {
-           try? Auth.auth().signOut()
-           print("Logged out successfully")
-           // Handle post-logout logic here, such as navigating back to the login view
-       }
-   
-
-
+        do {
+            try Auth.auth().signOut()
+            // Optionally, handle any post-logout logic here, such as navigating back to the login view
+        } catch let error {
+            // Handle the error if needed, potentially logging it or showing an alert
+            print("Error logging out: \(error.localizedDescription)")
+        }
+    }
 }
