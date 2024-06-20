@@ -7,6 +7,7 @@
 
 import Foundation
 import Combine
+import SwiftUI
 
 class SignUpViewModel: ObservableObject{
     
@@ -23,7 +24,8 @@ class SignUpViewModel: ObservableObject{
     @Published var errorMessage: String = ""
     @Published var customer :Customer?
     @Published var signUpResponse:authResponse?
-    @Published  var selectedCountry: CountryCode = .Egypt
+    @Published var selectedCountry: CountryCode = .Egypt
+    @Published var viewState: SignUpViewState = .active
 
     private var cancellables = Set<AnyCancellable>()
   
@@ -40,13 +42,19 @@ class SignUpViewModel: ObservableObject{
                    case.failure(let error):
                        DispatchQueue.main.async {
                            self?.handleError(error)
+                           self?.viewState = .active
+                           SnackBarHelper.showSnackBar(message: "Register failed", color: Color.white)
+
                        }
                      
                    }
                }, receiveValue: {  response in
                    DispatchQueue.main.async {
                     self.signUpResponse = response
+                       self.isLoggedIn = true
+                       self.viewState = .active
                        self.saveUserId(signUpResponse: response)
+                       SnackBarHelper.showSnackBar(message: "Registered Succefully", color: Color.white)
                     }
                    
                })
@@ -56,14 +64,15 @@ class SignUpViewModel: ObservableObject{
     
     
     func register(customer:  Customer) {
+        self.viewState = .loading
         FirebaseManager.shared.registerUser(email: customer.email!, password: customer.password!) { [weak self] success, userId , error in
               if let error = error {
                   DispatchQueue.main.async {
                       self?.errorMessage = error.localizedDescription
+                      SnackBarHelper.showSnackBar(message: "Register Failed , Try Again", color: Color.white)
+                      self?.viewState = .active
                   }
               } else {
-                  self?.isLoggedIn = true
-                  
                   print("posting \(customer.email!)")
                   print("posting \(customer.password!)")
                   print("posting \(customer.first_name!)")

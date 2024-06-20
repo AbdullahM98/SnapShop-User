@@ -10,11 +10,13 @@ import SwiftUI
 
 struct QuantitySelectorView: View {
     @State private var quantity: Int = 1
+    @ObservedObject var viewModel :ProductDetailViewModel
     let maxValue: Int // Maximum value allowed
-    
-    init(quantity : Int) {
+  
+    init(quantity : Int , viewModel:ProductDetailViewModel) {
         self.quantity = quantity
-        maxValue = quantity - 2
+        maxValue = quantity - 5
+        self.viewModel = viewModel
     }
     
     var body: some View {
@@ -22,6 +24,7 @@ struct QuantitySelectorView: View {
             Button(action: {
                 if quantity > 1 {
                     quantity -= 1
+                    viewModel.pickedQuantity = quantity
                 }
             }) {
                 Image(systemName: "minus.circle")
@@ -40,6 +43,8 @@ struct QuantitySelectorView: View {
             Button(action: {
                 if quantity < maxValue {
                     quantity += 1
+                    viewModel.pickedQuantity = quantity
+                    print("Picked Quantity \(viewModel.pickedQuantity)")
                 }
             }) {
                 Image(systemName: "plus.circle")
@@ -60,6 +65,6 @@ struct QuantitySelectorView: View {
 
 struct QuantitySelectorView_Previews: PreviewProvider {
     static var previews: some View {
-        QuantitySelectorView(quantity: 3)
+        QuantitySelectorView(quantity: 3 , viewModel: ProductDetailViewModel())
     }
 }

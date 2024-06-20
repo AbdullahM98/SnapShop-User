@@ -12,37 +12,47 @@ import Combine
 
 struct ProductDetailView: View {
     var productID: String
+    var selectedQuantity = 1 
     @StateObject var viewModel = ProductDetailViewModel()
     
     var body: some View {
         ScrollView {
             VStack {
-                //  Color.white
-                VStack() {
-                    
-                    //                    CarouselSlider(adsImages: ["1","2"]).padding(.bottom,4).ignoresSafeArea(edges: .top)
-                    //                        .frame(height: UIScreen.screenHeight * 0.4).background(Color.gray)
-                    AsyncImage(url: URL(string: viewModel.imgUrl ?? "https://cdn.dummyjson.com/products/images/beauty/Eyeshadow%20Palette%20with%20Mirror/thumbnail.png")) { phase in
-                        switch phase {
-                        case .empty:
-                            ProgressView()
-                                .frame(width: UIScreen.screenWidth * 0.8, height: UIScreen.screenHeight * 0.3)
-                        case .success(let image):
-                            image
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .frame(width: UIScreen.screenWidth * 0.8, height: UIScreen.screenHeight * 0.3)
-                        case .failure:
-                            Image(systemName: "photo")
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .frame(width: UIScreen.screenWidth * 0.8, height: UIScreen.screenHeight * 0.3)
-                        @unknown default:
-                            EmptyView()
-                                .frame(width: UIScreen.screenWidth * 0.8, height: UIScreen.screenHeight * 0.3)
-                        }
-                    }
-                    .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/)
+        
+                    if let images = $viewModel.images.wrappedValue{
+                        if !(viewModel.images?.isEmpty ?? false) {
+                          TabView {
+                              ForEach(viewModel.images!, id: \.self) { imageUrl in
+                                  if let url = URL(string: imageUrl) {
+                                      AsyncImage(url: url) { image in
+                                          image
+                                              .resizable()
+                                              .scaledToFit()
+                                              .frame(width: UIScreen.screenWidth * 0.8, height: UIScreen.screenHeight * 0.3)
+                                      } placeholder: {
+                                          ProgressView()
+                                      }
+                                      .clipShape(RoundedRectangle(cornerRadius: 10))
+                                      .padding()
+                                  } else {
+                                      Color.gray
+                                          .frame(width: UIScreen.screenWidth * 0.6, height: UIScreen.screenHeight * 0.36)
+                                          .clipShape(RoundedRectangle(cornerRadius: 10))
+                                          .padding()
+                                  }
+                              }
+                          }.tabViewStyle(PageTabViewStyle())
+                        
+                          .frame(width: UIScreen.screenWidth , height: UIScreen.screenHeight * 0.36)
+                      } else {
+                          Color.gray
+                              .frame(width: UIScreen.screenWidth, height: UIScreen.screenHeight * 0.35)
+                              .padding()
+                      }
+                }
+                
+               
+               
                     
                     
                     VStack(alignment: .leading) {
@@ -109,6 +119,7 @@ struct ProductDetailView: View {
                                             ForEach(viewModel.sizes ?? [""], id: \.self) { size in
                                                 Button {
                                                     print("Select item")
+                                                    viewModel.selectedSize = size
                                                 } label: {
                                                     Text(size)
                                                         .foregroundColor(Color.black)
@@ -148,7 +159,8 @@ struct ProductDetailView: View {
                             VStack{}.frame(height: UIScreen.screenHeight * 0.12)
                         }
                         
-                        QuantitySelectorView(quantity: Int($viewModel.availbleQuantity.wrappedValue) ?? 3).padding(.leading,90)
+                        QuantitySelectorView(quantity:$viewModel.inventoryQuantity.wrappedValue , viewModel:viewModel)
+                            .padding(.leading,90)
                         AppButton(text: "Add to Cart", width: UIScreen.screenWidth * 0.9, height: UIScreen.screenHeight * 0.06, isFilled: true){
                             viewModel.prepareDraftOrderToPost()
                             SnackBarHelper.updatingSnackBar(body: "Added to cart ...")
@@ -156,18 +168,19 @@ struct ProductDetailView: View {
                             
                         
                     }
-                    .padding()
+                    
+                    
                     .background(Color.white)
                     
-                    .offset(y: -30)
-                }
+                    .padding(.horizontal,30)
+                
             }.onAppear{
                 viewModel.fetchProductByID(productID)
             }.navigationBarTitle("\(viewModel.vendorTitle)")
                 .navigationBarBackButtonHidden(true)
                 .navigationBarItems(leading: CustomBackButton())
             
-        }
+        }.padding(.all,20)
     }
     
     

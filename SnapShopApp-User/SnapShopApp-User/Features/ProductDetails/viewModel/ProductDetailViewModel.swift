@@ -15,17 +15,22 @@ class ProductDetailViewModel :ObservableObject{
     @Published var currentCurrency:String = "USD"
     @Published var price:String = "300.00"
     @Published var availbleQuantity  = "30"
+    @Published var inventoryQuantity  = 0
+    @Published var pickedQuantity  = 1
     @Published var productTitle  = "T-shirt with long sleeves and pocket an sth else "
     @Published var productDecription  = "Experience ultimate comfort and effortless style with our Oversized T-Shirt. Made from high-quality, breathable cotton, this T-shirt is designed to provide a relaxed fit that drapes beautifully over any body type. Whether you're lounging at home, running errands, or meeting friends, this versatile piece is perfect for any casual occasion."
     @Published var selectedColor: Color? = nil
+    @Published var selectedSize: String? = nil
     @Published var isFavorite :Bool = false
     @Published var product: ProductEntity?
     @Published var productModel: ProductModel?
     @Published var errorMessage: String?
     @Published var hasOptions:Bool = false
     @Published var imgUrl :String?
+    @Published var images :[String]? = []
     @Published var colors :[Color]? = []
     @Published var sizes :[String]? = []
+    
     var fireStoreManager : FirestoreManager?
     
     private var cancellables = Set<AnyCancellable>()
@@ -45,6 +50,7 @@ class ProductDetailViewModel :ObservableObject{
                     
                     self?.productModel = productResponse.product!
                     self?.product = self?.convertToEntity(from: productResponse.product!)
+                    self?.inventoryQuantity  = self?.productModel?.variants?.first?.inventory_quantity ?? 1
                     self?.setUpUI(product: (self?.product)!)
                     print(productResponse.product?.product_type ?? "No product type")
                 }
@@ -69,6 +75,8 @@ class ProductDetailViewModel :ObservableObject{
             images: imageSources,
             isFav: AppCoreData.shared.checkProductIfFav(productId: model.id?.description ?? "0")
         )
+        
+        self.images = imageSources
         print("is product fav ?? \(entity.isFav ?? false)")
         return entity
     }
@@ -144,10 +152,11 @@ class ProductDetailViewModel :ObservableObject{
     }
     
     func prepareDraftOrderToPost(){
+        print("picked \(pickedQuantity)")
         guard let productToPost = productModel else { return }
         guard let customerID = UserDefaultsManager.shared.getUserId(key: Support.userID) else { return }
         
-        let userOrder = DraftOrderItem(draft_order: DraftOrderItemDetails(id: nil, note: nil, email: nil, taxes_included: nil, currency: "USD", invoice_sent_at: nil, created_at: nil, updated_at: nil, tax_exempt: nil, completed_at: nil, name: nil, status: nil, line_items: [DraftOrderLineItem(id: nil, variant_id: productToPost.variants?.first?.id, product_id: productToPost.id, title: productTitle, variant_title: nil, sku: nil, vendor: vendorTitle, quantity: 1, requires_shipping: nil, taxable: true, gift_card: nil, fulfillment_service: nil, grams: nil, tax_lines: nil, applied_discount: nil, name: nil, properties: [DraftOrderProperties(name: "productImage", value: imgUrl ?? "")], custom: nil, price: price, admin_graphql_api_id: nil)], shipping_address: nil, billing_address: nil, invoice_url: nil, applied_discount: nil, order_id: nil, shipping_line: nil, tax_lines: nil, tags: nil, note_attributes: nil, total_price: nil, subtotal_price: nil, total_tax: nil, payment_terms: nil, presentment_currency: nil, admin_graphql_api_id: nil, customer: DraftOrderCustomer(id: customerID , email: nil, created_at: nil, updated_at: nil, first_name: nil, last_name: nil, orders_count: nil, state: nil, total_spent: nil, last_order_id: nil, note: nil, verified_email: nil, multipass_identifier: nil, tax_exempt: nil, tags: nil, last_order_name: nil, currency: nil, phone: nil, tax_exemptions: nil, email_marketing_consent: nil, sms_marketing_consent: nil, admin_graphql_api_id: nil, default_address: nil), use_customer_default_address: true))
+        let userOrder = DraftOrderItem(draft_order: DraftOrderItemDetails(id: nil, note: nil, email: nil, taxes_included: nil, currency: "USD", invoice_sent_at: nil, created_at: nil, updated_at: nil, tax_exempt: nil, completed_at: nil, name: nil, status: nil, line_items: [DraftOrderLineItem(id: nil, variant_id: productToPost.variants?.first?.id, product_id: productToPost.id, title: productTitle, variant_title: nil, sku: nil, vendor: vendorTitle, quantity: pickedQuantity, requires_shipping: nil, taxable: true, gift_card: nil, fulfillment_service: nil, grams: nil, tax_lines: nil, applied_discount: nil, name: nil, properties: [DraftOrderProperties(name: "productImage", value: imgUrl ?? "")], custom: nil, price: price, admin_graphql_api_id: nil)], shipping_address: nil, billing_address: nil, invoice_url: nil, applied_discount: nil, order_id: nil, shipping_line: nil, tax_lines: nil, tags: nil, note_attributes: nil, total_price: nil, subtotal_price: nil, total_tax: nil, payment_terms: nil, presentment_currency: nil, admin_graphql_api_id: nil, customer: DraftOrderCustomer(id: customerID , email: nil, created_at: nil, updated_at: nil, first_name: nil, last_name: nil, orders_count: nil, state: nil, total_spent: nil, last_order_id: nil, note: nil, verified_email: nil, multipass_identifier: nil, tax_exempt: nil, tags: nil, last_order_name: nil, currency: nil, phone: nil, tax_exemptions: nil, email_marketing_consent: nil, sms_marketing_consent: nil, admin_graphql_api_id: nil, default_address: nil), use_customer_default_address: true))
         //if user does not have draft order post one
         if UserDefaultsManager.shared.hasDraft == false {
             print("User Does not have any draft orders \(UserDefaultsManager.shared.hasDraft ?? false)")

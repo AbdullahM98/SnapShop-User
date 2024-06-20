@@ -25,6 +25,7 @@ class LoginViewModel : ObservableObject {
             if let error = error {
                 DispatchQueue.main.async {
                     self.errorMessage = error.localizedDescription
+                   
                 }
             } else {
                 

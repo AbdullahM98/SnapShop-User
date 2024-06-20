@@ -15,6 +15,7 @@ struct FavoriteView: View {
     
   
             if $viewModel.viewState.wrappedValue == .userActive {
+
                 VStack{
                     
                     Text("Favorites").padding(.vertical,30).font(.title3)
@@ -29,6 +30,7 @@ struct FavoriteView: View {
                                 }
                             })
                         }
+
                     }
                 }.padding(.bottom,60)
                 .onAppear{
