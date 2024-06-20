@@ -92,7 +92,7 @@ struct BaseView: View {
                 , alignment: .bottom
             )
         }
-        .navigationBarBackButtonHidden(true).ignoresSafeArea(edges: .bottom)
+        .navigationBarBackButtonHidden(true)
         
     }
     @ViewBuilder

@@ -10,9 +10,14 @@ import SwiftUI
 struct ContentView: View {
 //    @State var selectedTab:Tabs = .home
     @StateObject private var networkMonitor = NetworkMonitor()
+    @AppStorage("currentPage") var currentPage = 1
     var body: some View {
-
-        BaseView()
+        if currentPage > totalPages {
+            BaseView()
+        }else{
+            OnBoardingView()
+        }
+//        BaseView()
 //        NavigationStack{
 //            VStack {
 //                switch selectedTab{
