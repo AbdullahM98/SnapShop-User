@@ -53,7 +53,7 @@ struct LoginScreen: View {
                     Spacer()
                     CustomCircularProgress()
                     Spacer()
-                }
+                }.navigationBarBackButtonHidden(true)
             }
             
         }.onReceive(viewModel.$isLogIn){ isLoggedIn in

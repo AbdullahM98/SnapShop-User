@@ -63,6 +63,9 @@ class ProfileViewModel: ObservableObject {
     func logout(){
         FirebaseManager.shared.logout()
         UserDefaults.standard.set(false, forKey: Support.isLoggedUDKey)
+        UserDefaultsManager.shared.hasDraft = false
+        UserDefaultsManager.shared.notifyCart = 0
+        UserDefaultsManager.shared.userDraftId = nil
     }
     func isUserValidated() -> Bool{
         guard let isLoggedIn = UserDefaults.standard.value(forKey: Support.isLoggedUDKey) else{

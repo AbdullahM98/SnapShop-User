@@ -92,7 +92,6 @@ class HomeViewModel :ObservableObject{
                 print("getting App draft orders")
                 DispatchQueue.main.async {
                     self?.draft = response.draft_orders
-                    self?.lineItems = response.draft_orders?.first?.line_items
                     print("app have ",self?.draft?.count ?? 0," draft orders")
                 }
             case .failure(let error):
@@ -106,7 +105,8 @@ class HomeViewModel :ObservableObject{
         let userDraftOrder = draft?.filter({ item in
             item.customer?.id == (UserDefaultsManager.shared.getUserId(key: Support.userID) ?? 0)
         })
-        
+        self.lineItems = userDraftOrder?.first?.line_items
+
         print("usser have ",userDraftOrder?.count ?? 0," draft order")
         if userDraftOrder?.count ?? 0 > 0 {
             print(" user has orders")

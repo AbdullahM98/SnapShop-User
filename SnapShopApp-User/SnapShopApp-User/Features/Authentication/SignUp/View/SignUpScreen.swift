@@ -24,7 +24,7 @@ struct SignUpScreen: View {
                 Spacer()
                 CustomCircularProgress()
                 Spacer()
-            }
+            }.navigationBarBackButtonHidden(true)
         }else  {
             NavigationView {
                 VStack {
@@ -111,7 +111,9 @@ struct SignUpScreen: View {
                                  )
                 }
                 .padding(.all, 10)
-            }
+            }.navigationBarTitle("Sign Up")
+                .navigationBarBackButtonHidden(true)
+                .navigationBarItems(leading: CustomBackButton())
         }
     }
 }

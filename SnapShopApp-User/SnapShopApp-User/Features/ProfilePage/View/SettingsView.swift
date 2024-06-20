@@ -12,13 +12,16 @@ struct SettingsView: View {
     @State private var selectedCurrency: String?
     @State private var showingBottomSheet = false
     @State private var settingsDetents = PresentationDetent.medium
-    @ObservedObject var viewModel : ProfileViewModel = ProfileViewModel()
-    @ObservedObject var orderViewModel : OrdersViewModel = OrdersViewModel()
-    @ObservedObject var currenciesViewModel : CurrencyViewModel = CurrencyViewModel()
+    @StateObject var viewModel : ProfileViewModel = ProfileViewModel()
+    @StateObject var orderViewModel : OrdersViewModel = OrdersViewModel()
+    @StateObject var currenciesViewModel : CurrencyViewModel = CurrencyViewModel()
     @State private var navigateToUserAddresses = false // Flag to trigger navigation
     @State private var navigateToCurrencyView = false
     @State private var navigateToLogin = false
     @State private var navigateToRegister = false
+    @State private var navigateToBase = false
+    @State private var logoutAlert = false
+
 
     var body: some View {
         VStack {
@@ -103,14 +106,28 @@ struct SettingsView: View {
                                 
                                 Button(
                                     action: {
-                                    viewModel.logout()
-                                    navigateToLogin = true
-                                }) {
-                                    
-                                    Text("Log out")
-                                        .foregroundColor(.black)
-                                }
+                                        logoutAlert = true
+                                    }) {
+                                        
+                                        Text("Log out")
+                                            .foregroundColor(.black)
+                                    }.alert(isPresented: $logoutAlert) {
+                                        Alert(
+                                            title: Text("LogOut!!"),
+                                            message: Text("Are you sure to logout?"),
+                                            primaryButton: .destructive(Text("Logout"), action: {
+                                                viewModel.logout()
+                                                navigateToBase = true
+                                                logoutAlert = false
+                                                
+                                            }),
+                                            secondaryButton: .cancel(Text("Cancel"), action: {
+                                                logoutAlert = false
+                                            })
+                                        )
+                                    }
                             }
+                            
                         }
                         //Plicy section
                         Section(header: Text("POLICY")){
@@ -131,7 +148,7 @@ struct SettingsView: View {
                         }
                     }
                 }
-            } else{
+            } else {
                 VStack(alignment:.center){
                     Image("not_verified").resizable().padding(.top,50).frame(width: UIScreen.screenWidth * 0.8, height: UIScreen.screenHeight * 0.3)
                     Text("You are not logged in ").padding(.top,20).font(.title3)
@@ -162,6 +179,8 @@ struct SettingsView: View {
             LoginScreen()
         }.navigationDestination(isPresented: $navigateToRegister){
             SignUpScreen()
+        }.navigationDestination(isPresented: $navigateToBase){
+            BaseView()
         }
     }
 }

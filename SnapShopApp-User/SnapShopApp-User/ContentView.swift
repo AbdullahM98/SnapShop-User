@@ -12,11 +12,14 @@ struct ContentView: View {
     @StateObject private var networkMonitor = NetworkMonitor()
     @AppStorage("currentPage") var currentPage = 1
     var body: some View {
-        if currentPage > totalPages {
-            BaseView()
-        }else{
-            OnBoardingView()
-        }
+        VStack{
+            if currentPage > totalPages {
+                BaseView()
+            }else{
+                OnBoardingView()
+            }
+        }.navigationBarBackButtonHidden(true)
+        
 //        BaseView()
 //        NavigationStack{
 //            VStack {
