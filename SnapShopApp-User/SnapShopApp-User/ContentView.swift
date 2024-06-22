@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
+    @StateObject private var locationViewModel = LocationViewModel()
     @StateObject private var networkMonitor = NetworkMonitor()
     @AppStorage("currentPage") var currentPage = 1
     let handler = NotificationHandler()
@@ -22,6 +23,7 @@ struct ContentView: View {
             .onAppear{
                 handler.askPermission()
                 handler.sendNotification(date: Date(), type: "time", timeInterval: 60 * 5)
+                locationViewModel.requestLocation()
             }
         
 
