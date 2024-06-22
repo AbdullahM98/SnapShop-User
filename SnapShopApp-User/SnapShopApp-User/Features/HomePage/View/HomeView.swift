@@ -14,8 +14,9 @@ struct HomeView: View {
         VStack{
             if viewModel.isLoading {
                 Spacer()
-                CustomCircularProgress()
+                ProgressView()
                 Spacer()
+                    .navigationBarBackButtonHidden(true)
             }else{
                 CustomAppBar()
                 CarouselSlider()
