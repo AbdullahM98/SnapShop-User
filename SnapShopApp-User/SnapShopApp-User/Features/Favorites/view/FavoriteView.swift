@@ -70,60 +70,62 @@ struct FavoriteView: View {
         }
         var body : some View{
             VStack{
-                HStack{
-                    AsyncImage(url: URL(string: product?.images![0] ?? "https://cdn.dummyjson.com/products/images/beauty/Eyeshadow%20Palette%20with%20Mirror/thumbnail.png")) { phase in
-                        switch phase {
-                        case .empty:
-                            ProgressView()
-                                .frame(width: UIScreen.screenWidth * 0.2, height: UIScreen.screenHeight * 0.2)
-                        case .success(let image):
-                            image
-                                .resizable()
-                                .frame(width: 64,height: 64)
-                                .cornerRadius(10)
-                                .aspectRatio(contentMode: .fit)
-                        case .failure:
-                            Image(systemName: "photo")
-                                .resizable()
-                                .frame(width: 64,height: 64)
-                                .cornerRadius(10)
-                                .aspectRatio(contentMode: .fit)
-                        @unknown default:
-                            EmptyView()
-                                .frame(width: UIScreen.screenWidth * 0.2, height: UIScreen.screenHeight * 0.2)
+                NavigationLink(destination: ProductDetailView(productID: product?.product_id?.description ?? " ")) {
+                    HStack{
+                        AsyncImage(url: URL(string: product?.images![0] ?? "https://cdn.dummyjson.com/products/images/beauty/Eyeshadow%20Palette%20with%20Mirror/thumbnail.png")) { phase in
+                            switch phase {
+                            case .empty:
+                                ProgressView()
+                                    .frame(width: UIScreen.screenWidth * 0.2, height: UIScreen.screenHeight * 0.2)
+                            case .success(let image):
+                                image
+                                    .resizable()
+                                    .frame(width: 64,height: 64)
+                                    .cornerRadius(10)
+                                    .aspectRatio(contentMode: .fit)
+                            case .failure:
+                                Image(systemName: "photo")
+                                    .resizable()
+                                    .frame(width: 64,height: 64)
+                                    .cornerRadius(10)
+                                    .aspectRatio(contentMode: .fit)
+                            @unknown default:
+                                EmptyView()
+                                    .frame(width: UIScreen.screenWidth * 0.2, height: UIScreen.screenHeight * 0.2)
+                            }
                         }
-                    }
-                    VStack(alignment: .leading,spacing: 2){
-                        Text(product?.title ?? "")
-                            .lineLimit(1)
-                            .frame(width: 220)
-                        Text(product?.vendor ?? "").foregroundColor(Color.gray)
-                        Text(product?.price ?? "")
-                            .bold()
-                    }
-                    VStack(alignment: .trailing,spacing: 20){
-                        Button {
-                            print("delete item")
-                            showingDeleteAlert = true
-
-                        } label: {
-                            Image("trash")
+                        VStack(alignment: .leading,spacing: 2){
+                            Text(product?.title ?? "")
+                                .lineLimit(1)
+                                .frame(width: 220)
+                            Text(product?.vendor ?? "").foregroundColor(Color.gray)
+                            Text(product?.price ?? "")
+                                .bold()
+                        }
+                        VStack(alignment: .trailing,spacing: 20){
+                            Button {
+                                print("delete item")
+                                showingDeleteAlert = true
+                                
+                            } label: {
+                                Image("trash")
+                                
+                            }.alert(isPresented: $showingDeleteAlert) {
+                                Alert(
+                                    title: Text("Delete Confirmation"),
+                                    message: Text("Are you sure to delete this item?"),
+                                    primaryButton: .destructive(Text("Delete"), action: {
+                                        onDeleteClick(product!)
+                                        showingDeleteAlert = false
+                                    }),
+                                    secondaryButton: .cancel(Text("Cancel"), action: {
+                                        showingDeleteAlert = false
+                                    })
+                                )
+                            }
+                            .padding(.trailing,8)
                             
-                        }.alert(isPresented: $showingDeleteAlert) {
-                            Alert(
-                                title: Text("Delete Confirmation"),
-                                message: Text("Are you sure to delete this item?"),
-                                primaryButton: .destructive(Text("Delete"), action: {
-                                    onDeleteClick(product!)
-                                    showingDeleteAlert = false
-                                }),
-                                secondaryButton: .cancel(Text("Cancel"), action: {
-                                    showingDeleteAlert = false
-                                })
-                            )
                         }
-                        .padding(.trailing,8)
-                        
                     }
                 }
             }.padding(.all,8)

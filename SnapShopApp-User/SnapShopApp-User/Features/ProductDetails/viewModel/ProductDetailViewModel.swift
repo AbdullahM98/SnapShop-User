@@ -30,13 +30,14 @@ class ProductDetailViewModel :ObservableObject{
     @Published var images :[String]? = []
     @Published var colors :[Color]? = []
     @Published var sizes :[String]? = []
+    @Published var isLoading = true
     
     var fireStoreManager : FirestoreManager?
     
     private var cancellables = Set<AnyCancellable>()
     
     func fetchProductByID(_ productID: String) {
-        
+        self.isLoading = true
         Network.shared.getItemByID(productID, type: ProductResponse.self, endpoint: "products")
             .sink(receiveCompletion: { completion in
                 switch completion {
@@ -53,6 +54,7 @@ class ProductDetailViewModel :ObservableObject{
                     self?.inventoryQuantity  = self?.productModel?.variants?.first?.inventory_quantity ?? 1
                     self?.setUpUI(product: (self?.product)!)
                     print(productResponse.product?.product_type ?? "No product type")
+                    self?.isLoading = false
                 }
             })
             .store(in: &cancellables)

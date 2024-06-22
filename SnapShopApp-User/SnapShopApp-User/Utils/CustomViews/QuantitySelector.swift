@@ -14,7 +14,7 @@ struct QuantitySelectorView: View {
     let maxValue: Int // Maximum value allowed
   
     init(quantity : Int , viewModel:ProductDetailViewModel) {
-        self.quantity = quantity
+//        self.quantity = quantity
         maxValue = quantity - 5
         self.viewModel = viewModel
     }

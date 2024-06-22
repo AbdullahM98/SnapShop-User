@@ -12,50 +12,50 @@ import Combine
 
 struct ProductDetailView: View {
     var productID: String
-    var selectedQuantity = 1 
+    var selectedQuantity = 1
     @StateObject var viewModel = ProductDetailViewModel()
     @State private var showingDeleteAlert = false
+    @State private var showingOutOfStockAlert = false
     
     var body: some View {
-        ScrollView {
-            VStack {
-        
+        VStack{
+            if viewModel.isLoading {
+                Spacer()
+                ProgressView()
+                Spacer()
+            }else{
+                ScrollView{
                     if let images = $viewModel.images.wrappedValue{
                         if !(viewModel.images?.isEmpty ?? false) {
-                          TabView {
-                              ForEach(viewModel.images!, id: \.self) { imageUrl in
-                                  if let url = URL(string: imageUrl) {
-                                      AsyncImage(url: url) { image in
-                                          image
-                                              .resizable()
-                                              .scaledToFit()
-                                              .frame(width: UIScreen.screenWidth * 0.8, height: UIScreen.screenHeight * 0.3)
-                                      } placeholder: {
-                                          ProgressView()
-                                      }
-                                      .clipShape(RoundedRectangle(cornerRadius: 10))
-                                      .padding()
-                                  } else {
-                                      Color.gray
-                                          .frame(width: UIScreen.screenWidth * 0.6, height: UIScreen.screenHeight * 0.36)
-                                          .clipShape(RoundedRectangle(cornerRadius: 10))
-                                          .padding()
-                                  }
-                              }
-                          }.tabViewStyle(PageTabViewStyle())
-                        
-                          .frame(width: UIScreen.screenWidth , height: UIScreen.screenHeight * 0.36)
-                      } else {
-                          Color.gray
-                              .frame(width: UIScreen.screenWidth, height: UIScreen.screenHeight * 0.35)
-                              .padding()
-                      }
-                }
-                
-               
-               
-                    
-                    
+                            TabView {
+                                ForEach(viewModel.images!, id: \.self) { imageUrl in
+                                    if let url = URL(string: imageUrl) {
+                                        AsyncImage(url: url) { image in
+                                            image
+                                                .resizable()
+                                                .scaledToFit()
+                                                .frame(width: UIScreen.screenWidth * 0.8, height: UIScreen.screenHeight * 0.3)
+                                        } placeholder: {
+                                            ProgressView()
+                                        }
+                                        .clipShape(RoundedRectangle(cornerRadius: 10))
+                                        .padding()
+                                    } else {
+                                        Color.gray
+                                            .frame(width: UIScreen.screenWidth * 0.6, height: UIScreen.screenHeight * 0.36)
+                                            .clipShape(RoundedRectangle(cornerRadius: 10))
+                                            .padding()
+                                    }
+                                }
+                            }.tabViewStyle(PageTabViewStyle())
+                            
+                                .frame(width: UIScreen.screenWidth , height: UIScreen.screenHeight * 0.36)
+                        } else {
+                            Color.gray
+                                .frame(width: UIScreen.screenWidth, height: UIScreen.screenHeight * 0.35)
+                                .padding()
+                        }
+                    }
                     VStack(alignment: .leading) {
                         HStack {
                             Text($viewModel.vendorTitle.wrappedValue).foregroundColor(.gray).font(.subheadline)
@@ -71,17 +71,17 @@ struct ProductDetailView: View {
                                 Button{
                                     if UserDefaults.standard.bool(forKey: Support.isLoggedUDKey){
                                         if $viewModel.isFavorite.wrappedValue {
-                                           
+                                            
                                             viewModel.isFavorite = false
                                             viewModel.removeFromFavLocal(product: (viewModel.product)!)
                                             SnackBarHelper.updatingSnackBar(body: "Removed ...")
-
+                                            
                                         }else{
                                             viewModel.isFavorite = true
                                             print("hhhh \(viewModel.product?.product_id ?? "22")")
                                             viewModel.addLocalFavProduct(product: viewModel.product!)
                                             SnackBarHelper.updatingSnackBar(body: "Inserted ...")
-
+                                            
                                         }
                                     }else{
                                         showingDeleteAlert = true
@@ -90,16 +90,11 @@ struct ProductDetailView: View {
                                     Image(systemName: viewModel.isFavorite ? "heart.fill" : "heart").resizable().frame(width: 30,height: 28)
                                     
                                 }.alert(isPresented: $showingDeleteAlert) {
-                                    Alert(
-                                        title: Text("Not Logged In"),
-                                        message: Text("Please Login to continue"),
-                                        primaryButton: .destructive(Text("Ok"), action: {
-                                            showingDeleteAlert = false
-                                        }),
-                                        secondaryButton: .cancel(Text("Cancel"), action: {
-                                            showingDeleteAlert = false
-                                        })
-                                    )
+                                    Alert(title: Text("Guest Mode"),
+                                          message: Text("Please Login for more features"),dismissButton: .destructive(Text("OK"), action: {
+                                        showingDeleteAlert = false
+                                    }))
+                                    
                                 }
                             }
                             .foregroundColor(.gray)
@@ -114,9 +109,9 @@ struct ProductDetailView: View {
                             Text("\(UserDefaultsManager.shared.selectedCurrencyCode ?? "USD") \(String(format: "%.2f", (Double(viewModel.price) ?? 1.0) * (Double(UserDefaultsManager.shared.selectedCurrencyValue ?? "1") ?? 1)))")
                                 .font(.headline.bold())
                                 .foregroundStyle(Color.red)
-
-
-                           
+                            
+                            
+                            
                             Spacer()
                             Text("Qty:\($viewModel.availbleQuantity.wrappedValue)").foregroundStyle(Color.gray)
                             
@@ -172,8 +167,8 @@ struct ProductDetailView: View {
                                                     }
                                             }
                                         }.padding(.bottom,20)
-                                   
-                                }.frame(maxWidth: .infinity)
+                                        
+                                    }.frame(maxWidth: .infinity)
                                 }
                             }.padding(.top,10)
                         }else{
@@ -184,30 +179,38 @@ struct ProductDetailView: View {
                             .padding(.leading,90)
                         AppButton(text: "Add to Cart", width: UIScreen.screenWidth * 0.9, height: UIScreen.screenHeight * 0.06, isFilled: true){
                             if UserDefaults.standard.bool(forKey: Support.isLoggedUDKey){
-                                viewModel.prepareDraftOrderToPost()
-                                SnackBarHelper.updatingSnackBar(body: "Added to cart ...")
+                                if Int($viewModel.availbleQuantity.wrappedValue) ?? 0 < 0 {
+                                    showingOutOfStockAlert = true
+                                } else {
+                                    viewModel.prepareDraftOrderToPost()
+                                    SnackBarHelper.updatingSnackBar(body: "Added to cart ...")
+                                }
                             }else{
                                 showingDeleteAlert = true
-
                             }
                             
                         }.padding(.top,10)
-                            
+                            .alert(isPresented: $showingOutOfStockAlert) {
+                                Alert(title: Text("Sorry!"),
+                                      message: Text("This Product Out of Stock."),dismissButton: .cancel(Text("OK"), action: {
+                                    showingOutOfStockAlert = false
+                                }))
+                            }
+                        
                         
                     }
+                    .padding(.horizontal,24)
                     
-                    
-                    .background(Color.white)
-                    
-                    .padding(.horizontal,30)
-                
-            }.onAppear{
-                viewModel.fetchProductByID(productID)
-            }.navigationBarTitle("\(viewModel.vendorTitle)")
-                .navigationBarBackButtonHidden(true)
-                .navigationBarItems(leading: CustomBackButton())
+                }
+                .background(Color.white)
+            }
             
         }.padding(.all,20)
+            .onAppear{
+                viewModel.fetchProductByID(productID)
+            }.navigationBarTitle("\(viewModel.vendorTitle)")
+            .navigationBarBackButtonHidden(true)
+            .navigationBarItems(leading: CustomBackButton())
     }
     
     
@@ -223,9 +226,9 @@ struct ProductDetailView: View {
     }
 }
 
-    struct ProductDetailView_Previews: PreviewProvider {
-        static var previews: some View {
-            
-            ProductDetailView(productID: "")
-        }
+struct ProductDetailView_Previews: PreviewProvider {
+    static var previews: some View {
+        
+        ProductDetailView(productID: "")
     }
+}
