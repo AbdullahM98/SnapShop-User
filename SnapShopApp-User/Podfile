@@ -10,6 +10,7 @@ target 'SnapShopApp-User' do
     pod 'FirebaseFirestore'
     pod 'ReachabilitySwift'
     pod 'SnackBar.swift'
+    pod 'lottie-ios'
   target 'SnapShopApp-UserTests' do
     inherit! :search_paths
     # Pods for testing
