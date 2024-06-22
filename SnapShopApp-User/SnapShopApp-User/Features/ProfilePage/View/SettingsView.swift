@@ -116,6 +116,10 @@ struct SettingsView: View {
                                             title: Text("LogOut!!"),
                                             message: Text("Are you sure to logout?"),
                                             primaryButton: .destructive(Text("Logout"), action: {
+                                                UserDefaultsManager.shared.hasDraft = false
+                                                UserDefaultsManager.shared.notifyCart = 0
+                                                UserDefaultsManager.shared.userDraftId = 0
+                                                UserDefaultsManager.shared.setUserId(key: Support.userID, value: 0)
                                                 viewModel.logout()
                                                 navigateToBase = true
                                                 logoutAlert = false

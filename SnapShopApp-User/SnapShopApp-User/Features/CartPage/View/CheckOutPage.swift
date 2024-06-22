@@ -9,7 +9,6 @@ import SwiftUI
 import PassKit
 
 struct CheckOutPage: View {
-    var address: DraftOrderAddress
     @State private var showingBottomSheet = false
     @State private var settingsDetents = PresentationDetent.medium
     @State private var navigateToCoupons = false
@@ -30,25 +29,24 @@ struct CheckOutPage: View {
                     VStack(alignment: .leading) {
                         Text("Delivery Address")
                             .bold()
-                        
                         OrderAddressCell(address: selectedAddress ?? AddressProfileDetails(
                             id: 0,
                             customer_id: 0,
-                            first_name: address.first_name,
-                            last_name: address.last_name,
-                            company: address.company,
-                            address1: address.address1,
-                            address2: address.address2,
-                            city: address.city,
-                            province: "",
-                            country: address.country,
-                            zip: address.zip,
-                            phone: address.phone,
-                            name: "",
-                            province_code: "",
-                            country_code: "",
+                            first_name: cartViewModel.shippingAddress?.first_name,
+                            last_name: cartViewModel.shippingAddress?.last_name,
+                            company: cartViewModel.shippingAddress?.company,
+                            address1: cartViewModel.shippingAddress?.address1,
+                            address2: cartViewModel.shippingAddress?.address2,
+                            city: cartViewModel.shippingAddress?.city,
+                            province: cartViewModel.shippingAddress?.province,
+                            country: cartViewModel.shippingAddress?.country,
+                            zip: cartViewModel.shippingAddress?.zip,
+                            phone: cartViewModel.shippingAddress?.phone,
+                            name: cartViewModel.shippingAddress?.name,
+                            province_code: cartViewModel.shippingAddress?.province_code,
+                            country_code: cartViewModel.shippingAddress?.country_code,
                             country_name: "",
-                            default: true
+                            default: false
                         ))
                         
                         NavigationLink(destination: UserAddresses(
@@ -58,7 +56,7 @@ struct CheckOutPage: View {
                         ), isActive: $navigateToAddresses) {
                             HStack {
                                 Spacer()
-                                AppButton(text: "Address", width: 80, height: 50, isFilled: true) {
+                                AppButton(text: "Select Address", width: 80, height: 50, isFilled: true) {
                                     print("addAddress")
                                     navigateToAddresses = true
                                 }

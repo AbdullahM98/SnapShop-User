@@ -60,7 +60,7 @@ class NotificationHandler {
             trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)
             
         }else if type == "time"{
-            trigger = UNTimeIntervalNotificationTrigger(timeInterval: timeInterval, repeats: true)
+            trigger = UNTimeIntervalNotificationTrigger(timeInterval: timeInterval, repeats: false)
         }
         let content = UNMutableNotificationContent()
         content.title = titles.randomElement() ?? "Dress to Impress"

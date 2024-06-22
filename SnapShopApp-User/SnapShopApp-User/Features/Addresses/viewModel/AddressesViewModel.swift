@@ -134,7 +134,7 @@ class AddressesViewModel:ObservableObject{
         
         guard let orderID = UserDefaultsManager.shared.userDraftId else { return }
         let updatedOrder = DraftOrderItem(draft_order: self.orderToUpdate)
-        Network.shared.updateData(object: updatedOrder, to: "https://mad-ism-ios-1.myshopify.com/admin/api/2024-04/draft_orders/\(orderID).json" ){result in
+        Network.shared.updateData(object: updatedOrder, to: "\(Support.baseUrl)/draft_orders/\(orderID).json" ){result in
             switch result {
             case .success(let response):
                 DispatchQueue.main.async {

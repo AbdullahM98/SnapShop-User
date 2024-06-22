@@ -59,7 +59,7 @@ class HomeViewModelTests: XCTestCase {
             // Fulfill the expectation when the network request completes
             DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
                 // Assert expected changes in state after fetching draft orders
-                XCTAssertNotNil(self.viewModel.draft)
+                XCTAssertNotNil(self.viewModel.appDraftOrder)
                 expectation.fulfill()
             }
             

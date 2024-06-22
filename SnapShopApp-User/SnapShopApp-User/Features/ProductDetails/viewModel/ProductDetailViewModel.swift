@@ -147,39 +147,40 @@ class ProductDetailViewModel :ObservableObject{
     }
     func removeFromFavLocal(product:ProductEntity){
         fireStoreManager = FirestoreManager()
-       // fireStoreManager?.removeProductFromFavRemote(productId: id)
+        // fireStoreManager?.removeProductFromFavRemote(productId: id)
         AppCoreData.shared.deleteProduct(product: product)
     }
     
     func prepareDraftOrderToPost(){
         print("picked \(pickedQuantity)")
         guard let productToPost = productModel else { return }
+        //get Customer ID
         guard let customerID = UserDefaultsManager.shared.getUserId(key: Support.userID) else { return }
         
-        let userOrder = DraftOrderItem(draft_order: DraftOrderItemDetails(id: nil, note: nil, email: nil, taxes_included: nil, currency: "USD", invoice_sent_at: nil, created_at: nil, updated_at: nil, tax_exempt: nil, completed_at: nil, name: nil, status: nil, line_items: [DraftOrderLineItem(id: nil, variant_id: productToPost.variants?.first?.id, product_id: productToPost.id, title: productTitle, variant_title: nil, sku: nil, vendor: vendorTitle, quantity: pickedQuantity, requires_shipping: nil, taxable: true, gift_card: nil, fulfillment_service: nil, grams: nil, tax_lines: nil, applied_discount: nil, name: nil, properties: [DraftOrderProperties(name: "productImage", value: imgUrl ?? "")], custom: nil, price: price, admin_graphql_api_id: nil)], shipping_address: nil, billing_address: nil, invoice_url: nil, applied_discount: nil, order_id: nil, shipping_line: nil, tax_lines: nil, tags: nil, note_attributes: nil, total_price: nil, subtotal_price: nil, total_tax: nil, payment_terms: nil, presentment_currency: nil, admin_graphql_api_id: nil, customer: DraftOrderCustomer(id: customerID , email: nil, created_at: nil, updated_at: nil, first_name: nil, last_name: nil, orders_count: nil, state: nil, total_spent: nil, last_order_id: nil, note: nil, verified_email: nil, multipass_identifier: nil, tax_exempt: nil, tags: nil, last_order_name: nil, currency: nil, phone: nil, tax_exemptions: nil, email_marketing_consent: nil, sms_marketing_consent: nil, admin_graphql_api_id: nil, default_address: nil), use_customer_default_address: true))
+        let userOrder = DraftOrderItem(draft_order: DraftOrderItemDetails(id: nil, note: nil, email: nil, taxes_included: nil, currency: "USD", invoice_sent_at: nil, created_at: nil, updated_at: nil, tax_exempt: nil, completed_at: nil, name: nil, status: nil, line_items: [DraftOrderLineItem(id: nil, variant_id: productToPost.variants?.first?.id, product_id: productToPost.id, title: productTitle, variant_title: nil, sku: nil, vendor: vendorTitle, quantity: pickedQuantity, requires_shipping: nil, taxable: true, gift_card: nil, fulfillment_service: nil, grams: nil, tax_lines: nil, applied_discount: nil, name: nil, properties: [DraftOrderProperties(name: "productImage", value: imgUrl ?? ""),DraftOrderProperties(name: "Color", value: "\(String(describing: selectedColor) )"),DraftOrderProperties(name: "Size", value: "\(selectedSize ?? "")")], custom: nil, price: price, admin_graphql_api_id: nil)], shipping_address: nil, billing_address: nil, invoice_url: nil, applied_discount: nil, order_id: nil, shipping_line: nil, tax_lines: nil, tags: nil, note_attributes: nil, total_price: nil, subtotal_price: nil, total_tax: nil, payment_terms: nil, presentment_currency: nil, admin_graphql_api_id: nil, customer: DraftOrderCustomer(id: customerID , email: nil, created_at: nil, updated_at: nil, first_name: nil, last_name: nil, orders_count: nil, state: nil, total_spent: nil, last_order_id: nil, note: nil, verified_email: nil, multipass_identifier: nil, tax_exempt: nil, tags: nil, last_order_name: nil, currency: nil, phone: nil, tax_exemptions: nil, email_marketing_consent: nil, sms_marketing_consent: nil, admin_graphql_api_id: nil, default_address: nil), use_customer_default_address: true))
         //if user does not have draft order post one
         if UserDefaultsManager.shared.hasDraft == false {
-            print("User Does not have any draft orders \(UserDefaultsManager.shared.hasDraft ?? false)")
+            print("User Does not have any draft orders \(UserDefaultsManager.shared.hasDraft) must be false, so post order")
             postCardDraftOrder(draftOrder: userOrder)
         }else{
             //else if user have draft order update it
-            print("user cant post because User have draft order because  \(UserDefaultsManager.shared.hasDraft ?? false) and his draft Order id is \(UserDefaultsManager.shared.userDraftId ?? 0)")
+            print("user cant post because User have draft order ==  \(UserDefaultsManager.shared.hasDraft) and his draft Order id is \(UserDefaultsManager.shared.userDraftId ?? 0)")
             guard let itemToUpdate = userOrder.draft_order?.line_items?.first else { return }
             getDraftOrderById(lineItem: itemToUpdate)
-            
         }
     }
     
     func postCardDraftOrder(draftOrder:DraftOrderItem){
-        Network.shared.postData(object: draftOrder, to: "https://mad-ism-ios-1.myshopify.com/admin/api/2024-04/draft_orders.json" ){  [weak self] result in
+        Network.shared.postData(object: draftOrder, to: "\(Support.baseUrl)/draft_orders.json" ){  [weak self] result in
             switch result {
             case .success(let response):
                 DispatchQueue.main.async {
+                    print("post draf order with id \(response.draft_order?.id)")
                     self?.orderToPost = response.draft_order
                     UserDefaultsManager.shared.hasDraft = true
                     UserDefaultsManager.shared.userDraftId = response.draft_order?.id
                     UserDefaultsManager.shared.notifyCart = response.draft_order?.line_items?.count
-                    print("Posting order with name : ",self?.orderToPost?.name ?? "-1")
+                    print("Posting order with Id : ",self?.orderToPost?.id ?? -1)
                 }
             case .failure(let error):
                 print("Error posting user order: \(error)")
@@ -189,9 +190,10 @@ class ProductDetailViewModel :ObservableObject{
     }
     
     func getDraftOrderById(lineItem:DraftOrderLineItem){
+        //get draft orders to
         guard let orderID = UserDefaultsManager.shared.userDraftId else { return }
         print("User Have DraftOrder and its ID1 is : \(orderID)")
-        Network.shared.request("https://mad-ism-ios-1.myshopify.com/admin/api/2024-04/draft_orders/\(orderID).json", method: "GET", responseType: DraftOrderItem.self) { [weak self] result in
+        Network.shared.request("\(Support.baseUrl)/draft_orders/\(orderID).json", method: "GET", responseType: DraftOrderItem.self) { [weak self] result in
             switch result{
             case .success(let order):
                 DispatchQueue.main.async {
@@ -201,13 +203,12 @@ class ProductDetailViewModel :ObservableObject{
                 }
             case .failure(let err):
                 print("Error get the user order : \(err)")
-                
-                
             }
         }
     }
     
     func updateUserData(lineItem:DraftOrderLineItem){
+        //check for item if its exist in draft order
         print("old order line items before update ",self.orderToUpdate?.line_items?.count ?? 0)
         if let existingIndex = self.orderToUpdate?.line_items?.firstIndex(where: { $0.product_id == lineItem.product_id }) {
             // If it exists, update its quantity
@@ -224,7 +225,7 @@ class ProductDetailViewModel :ObservableObject{
         
         guard let orderID = UserDefaultsManager.shared.userDraftId else { return }
         let updatedOrder = DraftOrderItem(draft_order: self.orderToUpdate)
-        Network.shared.updateData(object: updatedOrder, to: "https://mad-ism-ios-1.myshopify.com/admin/api/2024-04/draft_orders/\(orderID).json" ){result in
+        Network.shared.updateData(object: updatedOrder, to: "\(Support.baseUrl)/draft_orders/\(orderID).json" ){result in
             switch result {
             case .success(let response):
                 DispatchQueue.main.async {
@@ -237,9 +238,6 @@ class ProductDetailViewModel :ObservableObject{
                 print("Error updating user draft order: \(error)")
             }
         }
-        
-        
-        
     }
 }
 

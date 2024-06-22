@@ -7,8 +7,6 @@
 
 import Foundation
 
-import Foundation
-
 class CouponsViewModel: ObservableObject {
     @Published var coupones: [DiscountCodes] = []
     @Published var priceRules: [PriceRule] = []
@@ -31,6 +29,7 @@ class CouponsViewModel: ObservableObject {
         let dispatchGroup = DispatchGroup()
         
         for rule in self.priceRules {
+            //fetch coupons for every price rule
             dispatchGroup.enter()
             Network.shared.request("\(Support.baseUrl)/price_rules/\(String(describing: rule.id ?? 1123082305715))/discount_codes.json", method: "GET", responseType: DiscountCodesRoot.self) { [weak self] result in
                 switch result {
@@ -53,6 +52,7 @@ class CouponsViewModel: ObservableObject {
     }
     
     func fetchPriceRules() {
+        //fetch all price rules ->
         Network.shared.request("\(Support.baseUrl)/price_rules.json", method: "GET", responseType: PriceRulesArray.self) { [weak self] result in
             switch result {
             case .success(let response):
