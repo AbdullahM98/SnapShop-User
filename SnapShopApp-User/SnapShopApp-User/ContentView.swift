@@ -21,7 +21,7 @@ struct ContentView: View {
         }.navigationBarBackButtonHidden(true)
             .onAppear{
                 handler.askPermission()
-                handler.sendNotification(date: Date(), type: "time", timeInterval: 600)
+                handler.sendNotification(date: Date(), type: "time", timeInterval: 3600)
             }
         
 

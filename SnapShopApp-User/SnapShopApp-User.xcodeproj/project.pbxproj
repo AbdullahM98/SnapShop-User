@@ -451,7 +451,6 @@
 		0AFF59842C176A34002DEAFC /* Orders */ = {
 			isa = PBXGroup;
 			children = (
-				0AFF59872C176A52002DEAFC /* Model */,
 				0AFF59862C176A49002DEAFC /* ViewModel */,
 				0AFF59852C176A3D002DEAFC /* View */,
 			);
@@ -473,13 +472,6 @@
 				0AFF598D2C177AF1002DEAFC /* OrdersViewModel.swift */,
 			);
 			path = ViewModel;
-			sourceTree = "<group>";
-		};
-		0AFF59872C176A52002DEAFC /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
 			sourceTree = "<group>";
 		};
 		0AFF59882C176A7E002DEAFC /* subViews */ = {
@@ -943,14 +935,11 @@
 		761A5CC02C0EFDC80057BA3C /* SnapShopApp-UserTests */ = {
 			isa = PBXGroup;
 			children = (
-
 				762443822C23E5F6001D57D6 /* Auth */,
 				7624437F2C23E0DF001D57D6 /* ProductDetail */,
 				762443742C23D83B001D57D6 /* Mocks */,
 				762443712C23D7E2001D57D6 /* Favorite */,
-
 				569E17872C23D8CB0096447A /* CartPage */,
-
 				0A9064112C23CE2B00D63102 /* AddressesPage */,
 				0A9064052C2369B300D63102 /* CategoryPage */,
 				0A9064012C2369B200D63102 /* CouponsPage */,
