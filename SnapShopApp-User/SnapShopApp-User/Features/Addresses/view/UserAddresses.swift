@@ -49,6 +49,9 @@ struct UserAddresses: View {
                         presentationMode.wrappedValue.dismiss() // Dismiss the second view
                         return nil
 
+                    }, onMakeDefault: {
+                        makeDefault in
+                        viewModel.makeDefaultAddress(updatedAddress: makeDefault, addressId: makeDefault.customer_address?.id ?? 0)
                     })
                 }
             }

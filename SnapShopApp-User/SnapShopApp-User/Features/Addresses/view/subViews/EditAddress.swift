@@ -9,6 +9,7 @@ import SwiftUI
 
 struct EditAddress: View {
     var onSaveClick : (AddressForUpdate) -> Void
+    var onMakeDefaultClick : (AddressForUpdate) -> Void
     var onCancelClick : () -> Void
     var customerAddress: AddressProfileDetails?
     @State var addressEdit: String = ""
@@ -24,15 +25,20 @@ struct EditAddress: View {
         .phone: true
     ]
     @State private var showingEditAlert = false
+    @State private var isDefaultAddress = false
 
     var body: some View {
         VStack(alignment: .leading,spacing: 8){
+            
             HStack{
                 Spacer()
-                Text("Edit Address")
                     .font(.title2)
+                    Toggle(isOn: $isDefaultAddress) {
+                        Text("Default Address")
+                            .bold()
+                    }.toggleStyle(SwitchToggleStyle(tint: .blue))
                 Spacer()
-            }
+            }.padding()
             VStack(alignment: .leading){
                 Text("Address")
                     .padding(.top,4)
@@ -144,6 +150,9 @@ struct EditAddress: View {
                             message: Text("Are you sure to update this address?"),
                             primaryButton: .default(Text("Update"), action: {
                                 onSaveClick(AddressForUpdate(customer_address: AddressProfileDetails(id: customerAddress?.id, customer_id: customerAddress?.customer_id, first_name: customerAddress?.first_name, last_name: customerAddress?.last_name, company: customerAddress?.company, address1: addressEdit, address2: customerAddress?.address2, city: cityEdit, province: customerAddress?.province, country: countryEdit, zip: zipEdit, phone: phoneAddressEdit, name: customerAddress?.name, province_code: customerAddress?.province_code, country_code: customerAddress?.country_code, country_name: customerAddress?.country_name, default: false)))
+                                if isDefaultAddress {
+                                    onMakeDefaultClick(AddressForUpdate(customer_address: AddressProfileDetails(id: customerAddress?.id, customer_id: customerAddress?.customer_id, first_name: customerAddress?.first_name, last_name: customerAddress?.last_name, company: customerAddress?.company, address1: addressEdit, address2: customerAddress?.address2, city: cityEdit, province: customerAddress?.province, country: countryEdit, zip: zipEdit, phone: phoneAddressEdit, name: customerAddress?.name, province_code: customerAddress?.province_code, country_code: customerAddress?.country_code, country_name: customerAddress?.country_name, default: false)))
+                                }
                                 showingEditAlert = false
                             }),
                             secondaryButton: .cancel(Text("Cancel"), action: {
@@ -217,6 +226,6 @@ struct EditAddress: View {
 
 struct EditAddress_Previews: PreviewProvider {
     static var previews: some View {
-        EditAddress(onSaveClick: {_ in }, onCancelClick: {})
+        EditAddress(onSaveClick: {_ in }, onMakeDefaultClick: {_ in}, onCancelClick: {})
     }
 }

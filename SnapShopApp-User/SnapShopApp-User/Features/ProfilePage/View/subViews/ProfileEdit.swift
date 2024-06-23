@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-
+import Combine
 struct ProfileEdit: View {
     var onSaveClick : (CustomerUpdateRequest) -> Void
     var onCancelClick : () -> Void
@@ -22,6 +22,19 @@ struct ProfileEdit: View {
         .email: true,
         .phone: true
     ]
+    
+    //fore phone
+    @State var presentSheet = false
+    @State var countryCode : String = "+2"
+    @State var countryFlag : String = "🇪🇬"
+    @State var countryPattern : String = "#### ### ####"
+    @State var countryLimit : Int = 17
+    @State private var searchCountry: String = ""
+    @Environment(\.colorScheme) var colorScheme
+    @FocusState private var keyIsFocused: Bool
+    
+    let counrties: [CPData] = Bundle.main.decode("CountryNumbers.json")
+
     
     var body: some View {
         VStack(alignment: .leading){
@@ -87,21 +100,33 @@ struct ProfileEdit: View {
                 }
             }.padding(.horizontal,16)
             VStack(alignment: .leading){
-                Text("Phone Number")
-                TextField(user?.phone ?? "+20 XXXX XXX XXX", text: $phoneTextFieldData,onEditingChanged: { (isEditing) in
-                    if !isEditing {
-                        validateField(fieldType: .phone, value: $phoneTextFieldData.wrappedValue)
+                HStack {
+                    Button {
+                        presentSheet = true
+                        keyIsFocused = false
+                    } label: {
+                        Text("\(countryFlag) \(countryCode)")
+                            .padding(10)
+                            .frame(minWidth: 80, minHeight: 47)
+                            .background(backgroundColor, in: RoundedRectangle(cornerRadius: 10, style: .continuous))
+                            .foregroundColor(foregroundColor)
                     }
-                })
-                    .padding(.all,8).overlay(
-                        RoundedRectangle(cornerRadius: 8)
-                            .stroke(isFieldValid[.phone]! ? Color.gray : Color.red, lineWidth: 1)
-                    ).keyboardType(.phonePad)
-                if let message = validationMessages[.phone], !message.isEmpty {
-                    Text(message)
-                        .foregroundColor(.red)
-                        .padding(.leading)
+                    TextField("", text: $phoneTextFieldData)
+                        .placeholder(when: phoneTextFieldData.isEmpty) {
+                            Text("Phone number")
+                                .foregroundColor(.secondary)
+                        }
+                        .focused($keyIsFocused)
+                        .keyboardType(.numbersAndPunctuation)
+                        .onReceive(Just(phoneTextFieldData)) { _ in
+                            applyPatternOnNumbers(&phoneTextFieldData, pattern: countryPattern, replacementCharacter: "#")
+                        }
+                        .padding(10)
+                        .frame(minWidth: 80, minHeight: 47)
+                        .background(backgroundColor, in: RoundedRectangle(cornerRadius: 10, style: .continuous))
                 }
+                .padding(.top, 20)
+                .padding(.bottom, 15)
             }.padding(.horizontal,16)
             HStack{
                 ZStack {
@@ -203,6 +228,46 @@ struct ProfileEdit: View {
     func validateAllFields() -> Bool {
         return  isFieldValid.values.allSatisfy{ $0 }
     }
+    
+    var filteredResorts: [CPData] {
+        if searchCountry.isEmpty {
+            return counrties
+        } else {
+            return counrties.filter { $0.name.contains(searchCountry) }
+        }
+    }
+    
+    var foregroundColor: Color {
+        if colorScheme == .dark {
+            return Color(.white)
+        } else {
+            return Color(.black)
+        }
+    }
+    
+    var backgroundColor: Color {
+        if colorScheme == .dark {
+            return Color(.systemGray5)
+        } else {
+            return Color(.systemGray6)
+        }
+    }
+    
+    func applyPatternOnNumbers(_ stringvar: inout String, pattern: String, replacementCharacter: Character) {
+        var pureNumber = stringvar.replacingOccurrences( of: "[^0-9]", with: "", options: .regularExpression)
+        for index in 0 ..< pattern.count {
+            guard index < pureNumber.count else {
+                stringvar = pureNumber
+                return
+            }
+            let stringIndex = String.Index(utf16Offset: index, in: pattern)
+            let patternCharacter = pattern[stringIndex]
+            guard patternCharacter != replacementCharacter else { continue }
+            pureNumber.insert(patternCharacter, at: stringIndex)
+        }
+        stringvar = pureNumber
+    }
+    
     
 }
 

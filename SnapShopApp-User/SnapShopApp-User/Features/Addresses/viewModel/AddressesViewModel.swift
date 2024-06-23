@@ -94,6 +94,20 @@ class AddressesViewModel:ObservableObject{
             }
         }
     }
+    //update user address
+    func makeDefaultAddress(updatedAddress:AddressForUpdate,addressId:Int){
+        Network.shared.updateData(object: updatedAddress, to: "\(Support.baseUrl)/customers/\(userId)/addresses/\(addressId)/default.json") { [weak self] result in
+            switch result{
+            case .success(let response):
+                DispatchQueue.main.async {
+                    print("\(response.customer_address?.country_name ?? "")")
+                    self?.fetchUserAddresses()
+                }
+            case .failure(let err):
+                print("error updating user address: \(err)")
+            }
+        }
+    }
     
     // MARK: - Draft Order Methods
 
