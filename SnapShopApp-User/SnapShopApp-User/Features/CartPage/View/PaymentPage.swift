@@ -13,11 +13,17 @@ struct PaymentPage: View {
     var onApplePayClick: () -> Void
     var onCashOnDeliveryClick: () -> Void
     var userOrders: DraftOrderItemDetails
+    @ObservedObject var networkMonitor = NetworkMonitor()
+
     @AppStorage("isDarkMode") private var isDarkMode = false
 
 
     var body: some View {
+        if !networkMonitor.isConnected {
+           NetworkUnavailableView()
+        }else{
         VStack(alignment: .leading) {
+            
             HStack {
                 Spacer()
                 Image("payment")
@@ -52,6 +58,7 @@ struct PaymentPage: View {
             .padding(.horizontal, 8)
         }
         .padding(.horizontal, 8)
+    }
     }
 }
 

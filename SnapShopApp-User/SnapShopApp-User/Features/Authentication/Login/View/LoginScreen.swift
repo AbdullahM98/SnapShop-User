@@ -82,7 +82,6 @@ struct LoginScreen: View {
                                     .font(.callout)
                                     .lineLimit(1)
                             }.foregroundColor(.white)
-                                .padding(.horizontal,16)
                                 .background(RoundedRectangle(cornerRadius: 10.0, style: .continuous).fill(.black).frame(width: UIScreen.screenWidth * 0.9 , height: UIScreen.screenHeight * 0.05))
                             
                         }.frame(width: UIScreen.main.bounds.width * 0.9, height: UIScreen.main.bounds.height * 0.05).padding(.bottom,20)

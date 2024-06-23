@@ -20,7 +20,7 @@ struct CheckOutPage: View {
     @State private var discountCode: String = "" // Use a state variable to hold the discount code
     var body: some View {
         VStack{
-            if cartViewModel.isCheckOutLoading {
+            if !cartViewModel.isCheckOutLoading {
                 Spacer()
                 CustomCircularProgress()
                 Spacer()
@@ -56,7 +56,7 @@ struct CheckOutPage: View {
                         ), isActive: $navigateToAddresses) {
                             HStack {
                                 Spacer()
-                                AppButton(text: "Select Address", width: 80, height: 50, isFilled: true) {
+                                AppButton(text: "Select Address", width: UIScreen.screenWidth * 0.9, height: 40, isFilled: true) {
                                     print("addAddress")
                                     navigateToAddresses = true
                                 }
@@ -111,7 +111,7 @@ struct CheckOutPage: View {
                                 let originalPrice = calculateOriginalPrice(afterDiscount: Double(totalTax) ?? 0.0, discountRate: Double(discountValue) ?? 0.0)
                                 //                        Text("\(String(format: "%.2f", originalPrice)) EGP")
                                 Text("\(String(format: "%.2f", originalPrice  * (Double(UserDefaultsManager.shared.selectedCurrencyValue ?? "1") ?? 1))) \(UserDefaultsManager.shared.selectedCurrencyCode ?? "USD")")
-                                    .foregroundColor(.gray)
+                                    .foregroundColor(.red)
                                 
                             } else {
                                 
@@ -154,7 +154,7 @@ struct CheckOutPage: View {
                         
                         HStack {
                             Spacer()
-                            AppButton(text: "Go To Payment", width: 120, height: 40, isFilled: true, onClick: {
+                            AppButton(text: "Go To Payment", width: UIScreen.screenWidth * 0.9, height: 40, isFilled: true, onClick: {
                                 showingBottomSheet.toggle()
                             }).sheet(isPresented: $showingBottomSheet) {
                                 PaymentPage(
@@ -221,4 +221,8 @@ struct CheckOutPage: View {
         return priceAfterDiscount / (1 - discountRate/100)
     }
     
+}
+
+#Preview {
+    CheckOutPage()
 }
