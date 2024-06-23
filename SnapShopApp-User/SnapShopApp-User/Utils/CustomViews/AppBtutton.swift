@@ -14,6 +14,8 @@ struct AppButton: View {
    
     private var isFilled: Bool
     private var onClick : () -> Void
+    @AppStorage("isDarkMode") private var isDarkMode = false
+
     
     init(text: String, width: CGFloat, height: CGFloat, isFilled: Bool, onClick: @escaping () -> Void) {
         self.text = text
@@ -39,7 +41,7 @@ struct AppButton: View {
             }
            .overlay(
                 RoundedRectangle(cornerRadius: 6)
-                   .stroke(isFilled ? Color.clear : Color.black, lineWidth: 2)
+                    .stroke(isFilled ? (isDarkMode ? Color.black : Color.clear ) : (isDarkMode ? Color.white : Color.black), lineWidth: 2)
             )
         }
     }
