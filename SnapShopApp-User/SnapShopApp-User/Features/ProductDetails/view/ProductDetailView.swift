@@ -133,6 +133,20 @@ struct ProductDetailView: View {
                         
                         Text($viewModel.productDecription.wrappedValue).multilineTextAlignment(.leading).font(.subheadline).padding(.top,3)
                         
+                        
+                            VStack(alignment: .leading){
+                                Text("Reviews")
+                                    .padding(.top,4)
+                                    .font(.system(size: 20, weight: .semibold))
+                                ScrollView(.horizontal){
+                                    HStack{
+                                        ForEach(0 ..< 8, id: \.self) { index in
+                                            ReviewCell(reviewerName: viewModel.reviewers.randomElement() ?? "Eng. Beshoy", reviewText: viewModel.reviews.randomElement() ?? "Great Product To Buy.", ratingText: viewModel.rating.randomElement() ?? "4.8")
+                                        }
+                                    }
+                                }.scrollIndicators(.hidden)
+                            }
+                        
                         if $viewModel.hasOptions.wrappedValue {
                             HStack(alignment: .top) {
                                 if viewModel.sizes!.count != 0 {

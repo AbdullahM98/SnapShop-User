@@ -71,6 +71,7 @@
 		56470C762C28B70B00DD7B45 /* SplashScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56470C752C28B70B00DD7B45 /* SplashScreen.swift */; };
 		56470C782C28C6F300DD7B45 /* LottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56470C772C28C6F300DD7B45 /* LottieView.swift */; };
 		56470C7A2C28C73000DD7B45 /* ShoppingAnimation.json in Resources */ = {isa = PBXBuildFile; fileRef = 56470C792C28C73000DD7B45 /* ShoppingAnimation.json */; };
+		56470C7E2C28CD2D00DD7B45 /* ReviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56470C7D2C28CD2D00DD7B45 /* ReviewCell.swift */; };
 		5657AAAF2C1C9023009906AE /* ApplePayStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5657AAAE2C1C9023009906AE /* ApplePayStrategy.swift */; };
 		568D6F572C2366A6009F11D9 /* BaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568D6F562C2366A6009F11D9 /* BaseViewModel.swift */; };
 		568D6F592C2366BD009F11D9 /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568D6F582C2366BD009F11D9 /* BaseView.swift */; };
@@ -227,6 +228,7 @@
 		56470C752C28B70B00DD7B45 /* SplashScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreen.swift; sourceTree = "<group>"; };
 		56470C772C28C6F300DD7B45 /* LottieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieView.swift; sourceTree = "<group>"; };
 		56470C792C28C73000DD7B45 /* ShoppingAnimation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ShoppingAnimation.json; sourceTree = "<group>"; };
+		56470C7D2C28CD2D00DD7B45 /* ReviewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewCell.swift; sourceTree = "<group>"; };
 		5657AAAD2C1C8E16009906AE /* SnapShopApp-User.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "SnapShopApp-User.entitlements"; sourceTree = "<group>"; };
 		5657AAAE2C1C9023009906AE /* ApplePayStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplePayStrategy.swift; sourceTree = "<group>"; };
 		568D6F562C2366A6009F11D9 /* BaseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewModel.swift; sourceTree = "<group>"; };
@@ -1074,6 +1076,7 @@
 			children = (
 				7678362E2C121327001E4BFB /* ProductDetailView.swift */,
 				76560C512C13570200B6103A /* CustomColorDot.swift */,
+				56470C7D2C28CD2D00DD7B45 /* ReviewCell.swift */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -1371,6 +1374,7 @@
 				5606E7A22C1207DB00B728FD /* CouponsPage.swift in Sources */,
 				0AF5836A2C11F0D1006D5059 /* CustomAppBar.swift in Sources */,
 				76257A452C17DDF2001C4006 /* FavoriteViewModel.swift in Sources */,
+				56470C7E2C28CD2D00DD7B45 /* ReviewCell.swift in Sources */,
 				76257A4F2C1896EF001C4006 /* customBottomSheet.swift in Sources */,
 				767836332C121A04001E4BFB /* ProductDetailViewModel.swift in Sources */,
 				7606FBB12C0F813900E1D3AF /* FirebaseManager.swift in Sources */,
