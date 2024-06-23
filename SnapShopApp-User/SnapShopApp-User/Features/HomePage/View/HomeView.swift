@@ -14,7 +14,9 @@ struct HomeView: View {
         VStack{
             if viewModel.isLoading {
                 Spacer()
-                ProgressView()
+                
+                LottieView(animationFileName: "ShoppingAnimation", loopMode: .loop)
+                    .frame(width: 200, height: 200)
                 Spacer()
                     .navigationBarBackButtonHidden(true)
             }else{

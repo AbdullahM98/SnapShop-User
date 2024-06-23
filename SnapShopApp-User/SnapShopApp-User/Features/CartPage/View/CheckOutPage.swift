@@ -22,7 +22,9 @@ struct CheckOutPage: View {
         VStack{
             if cartViewModel.isCheckOutLoading {
                 Spacer()
-                CustomCircularProgress()
+                
+                LottieView(animationFileName: "ShoppingAnimation", loopMode: .loop)
+                    .frame(width: 200, height: 200)
                 Spacer()
             } else {
                 ScrollView {

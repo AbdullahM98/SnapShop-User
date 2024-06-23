@@ -69,6 +69,8 @@
 		5627DB2F2C123D2500AB6464 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5627DB2E2C123D2500AB6464 /* ProfileViewModel.swift */; };
 		5627DB312C123EB100AB6464 /* UserAddresses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5627DB302C123EB100AB6464 /* UserAddresses.swift */; };
 		56470C762C28B70B00DD7B45 /* SplashScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56470C752C28B70B00DD7B45 /* SplashScreen.swift */; };
+		56470C782C28C6F300DD7B45 /* LottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56470C772C28C6F300DD7B45 /* LottieView.swift */; };
+		56470C7A2C28C73000DD7B45 /* ShoppingAnimation.json in Resources */ = {isa = PBXBuildFile; fileRef = 56470C792C28C73000DD7B45 /* ShoppingAnimation.json */; };
 		5657AAAF2C1C9023009906AE /* ApplePayStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5657AAAE2C1C9023009906AE /* ApplePayStrategy.swift */; };
 		568D6F572C2366A6009F11D9 /* BaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568D6F562C2366A6009F11D9 /* BaseViewModel.swift */; };
 		568D6F592C2366BD009F11D9 /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568D6F582C2366BD009F11D9 /* BaseView.swift */; };
@@ -223,6 +225,8 @@
 		5627DB2E2C123D2500AB6464 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		5627DB302C123EB100AB6464 /* UserAddresses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAddresses.swift; sourceTree = "<group>"; };
 		56470C752C28B70B00DD7B45 /* SplashScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreen.swift; sourceTree = "<group>"; };
+		56470C772C28C6F300DD7B45 /* LottieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieView.swift; sourceTree = "<group>"; };
+		56470C792C28C73000DD7B45 /* ShoppingAnimation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ShoppingAnimation.json; sourceTree = "<group>"; };
 		5657AAAD2C1C8E16009906AE /* SnapShopApp-User.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "SnapShopApp-User.entitlements"; sourceTree = "<group>"; };
 		5657AAAE2C1C9023009906AE /* ApplePayStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplePayStrategy.swift; sourceTree = "<group>"; };
 		568D6F562C2366A6009F11D9 /* BaseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewModel.swift; sourceTree = "<group>"; };
@@ -782,6 +786,7 @@
 				56ACA75A2C19EE0200AD48AC /* Support.swift */,
 				766BF2482C21482200DCB5B9 /* NetworkMonitor.swift */,
 				768F30E12C229F8B00FA1F68 /* CountryCodes.swift */,
+				56470C772C28C6F300DD7B45 /* LottieView.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -945,6 +950,7 @@
 			children = (
 				76B08DED2C2789890077C649 /* Info.plist */,
 				5657AAAD2C1C8E16009906AE /* SnapShopApp-User.entitlements */,
+				56470C792C28C73000DD7B45 /* ShoppingAnimation.json */,
 				7606FB8C2C0F737F00E1D3AF /* Models */,
 				7606FB8B2C0F736100E1D3AF /* Features */,
 				7606FB8A2C0F733C00E1D3AF /* Utils */,
@@ -1216,6 +1222,7 @@
 				56B0BB0A2C28510A00267578 /* GoogleService-Info.plist in Resources */,
 				761A5CB52C0EFDC80057BA3C /* Assets.xcassets in Resources */,
 				56B0BB0C2C2863E100267578 /* CountryNumbers.json in Resources */,
+				56470C7A2C28C73000DD7B45 /* ShoppingAnimation.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1426,6 +1433,7 @@
 				766BF2492C21482200DCB5B9 /* NetworkMonitor.swift in Sources */,
 				0AF5835A2C11EFAF006D5059 /* HomeSearchBar.swift in Sources */,
 				5627DB272C1229C700AB6464 /* PofileView.swift in Sources */,
+				56470C782C28C6F300DD7B45 /* LottieView.swift in Sources */,
 				56E598E72C1FDCE8009F31CE /* DeveloperInfo.swift in Sources */,
 				0AF5835C2C11EFC5006D5059 /* BestSeller.swift in Sources */,
 				7606FBA22C0F77C000E1D3AF /* SignUpViewModel.swift in Sources */,
