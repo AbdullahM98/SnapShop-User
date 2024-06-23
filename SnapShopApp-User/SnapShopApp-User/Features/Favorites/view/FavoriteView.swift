@@ -12,49 +12,49 @@ struct FavoriteView: View {
 
     
     var body: some View {
-    
-  
+        
+        
         if $viewModel.viewState.wrappedValue == .userActive {
-
-                VStack{
-                    
-                    Text("Favorites").padding(.vertical,30).font(.title3)
-                    ScrollView{
-                        ForEach(viewModel.products , id: \.product_id){ product in
-                            FavItemView(product: product, onDeleteClick: {  _ in
-                                viewModel.removeFromFavLocal(product: product)
-                                if let index = viewModel.products.firstIndex(where: { $0.product_id == product.product_id }) {
-                                    
-                                   viewModel.products.remove(at: index)
-                                }
-                            })
-                        }
-
+            
+            VStack{
+                
+                Text("Favorites").padding(.vertical,30).font(.title3)
+                ScrollView{
+                    ForEach(viewModel.products , id: \.product_id){ product in
+                        FavItemView(product: product, onDeleteClick: {  _ in
+                            viewModel.removeFromFavLocal(product: product)
+                            if let index = viewModel.products.firstIndex(where: { $0.product_id == product.product_id }) {
+                                
+                                viewModel.products.remove(at: index)
+                            }
+                        })
                     }
-                }.padding(.bottom,60)
+                    
+                }
+            }.padding(.bottom,60)
                 .onAppear{
                     viewModel.getUserFav()
                 }
             
-                
-                
-            }else if $viewModel.viewState.wrappedValue == .loading {
-                VStack {
-                    Spacer()
-                    CustomCircularProgress()
-                    Spacer()
-                }
-                
-            }else{
-                // show no fav image
-                VStack(alignment:.center){
-                    Image("empty_box").resizable().padding(.vertical,150)
-                }
+            
+            
+        }else if $viewModel.viewState.wrappedValue == .loading {
+            VStack {
+                Spacer()
+                CustomCircularProgress()
+                Spacer()
             }
+            
+        }else{
+            // show no fav image
+            VStack(alignment:.center){
+                Image("empty_box").resizable().padding(.vertical,150)
+            }
+        }
         
         
-  
-      
+        
+        
         
     }
     
@@ -63,7 +63,8 @@ struct FavoriteView: View {
         var onDeleteClick:  (_ product:ProductEntity) -> Void
         var product : ProductEntity?
         @State private var showingDeleteAlert = false
-
+        @AppStorage("isDarkMode") private var isDarkMode = false
+        
         init(product: ProductEntity , onDeleteClick: @escaping ( _ product:ProductEntity) -> Void) {
             self.product = product
             self.onDeleteClick = onDeleteClick
@@ -97,10 +98,11 @@ struct FavoriteView: View {
                         VStack(alignment: .leading,spacing: 2){
                             Text(product?.title ?? "")
                                 .lineLimit(1)
-                                .frame(width: 220)
+                                .foregroundColor(isDarkMode ? Color.white : Color.black)
                             Text(product?.vendor ?? "").foregroundColor(Color.gray)
-                            Text(product?.price ?? "")
+                            Text("\(String(format: "%.2f",(Double(product?.price ?? "0") ?? 1 ) * (Double(UserDefaultsManager.shared.selectedCurrencyValue ?? "1") ?? 1))) \(UserDefaultsManager.shared.selectedCurrencyCode ?? "USD")")
                                 .bold()
+                                .foregroundColor(isDarkMode ? Color.white : Color.black)
                         }
                         VStack(alignment: .trailing,spacing: 20){
                             Button {
@@ -110,24 +112,28 @@ struct FavoriteView: View {
                             } label: {
                                 Image("trash")
                                 
-
-                        }.alert(isPresented: $showingDeleteAlert) {
-                            Alert(
-                                title: Text("Remove Confirmation"),
-                                message: Text("Are you sure to remove this item?"),
-                                primaryButton: .destructive(Text("Remove"), action: {
-                                    onDeleteClick(product!)
-                                    showingDeleteAlert = false
-                                }),
-                                secondaryButton: .cancel(Text("Cancel"), action: {
-                                    showingDeleteAlert = false
-                                })
-                            )
-
+                                
+                            }.alert(isPresented: $showingDeleteAlert) {
+                                Alert(
+                                    title: Text("Remove Confirmation"),
+                                    message: Text("Are you sure to remove this item?"),
+                                    primaryButton: .destructive(Text("Remove"), action: {
+                                        onDeleteClick(product!)
+                                        showingDeleteAlert = false
+                                    }),
+                                    secondaryButton: .cancel(Text("Cancel"), action: {
+                                        showingDeleteAlert = false
+                                    })
+                                )
+                                
+                            }
                         }
                     }
-                }
+                }.padding(.all,8).background(isDarkMode ? Color.black : Color.white).cornerRadius(10).shadow(radius: 5)
             }.padding(.all,8)
+            
         }
+     
     }
+
 }

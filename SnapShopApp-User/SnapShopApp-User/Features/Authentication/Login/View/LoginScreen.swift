@@ -10,49 +10,84 @@ struct LoginScreen: View {
         NavigationStack{
             if $viewModel.viewState.wrappedValue == .loginView {
                 VStack{
-                    Image("app-logo").resizable().frame(width: UIScreen.screenWidth * 0.4).clipShape(/*@START_MENU_TOKEN@*/Circle()/*@END_MENU_TOKEN@*/)
+                    HStack(alignment: .top){
+                        Spacer()
+                        Button(action:{
+                            navigateToHome = true
+                        },label:{
+                            Text("SKIP")
+                                .font(.callout)
+                                .fontWeight(.medium)
+                                .underline()
+                                .foregroundStyle(Color.black)
+                            
+                        })
+                        
+                    }
+                    Image("app-logo").resizable().aspectRatio(contentMode: .fit).frame(width: UIScreen.screenWidth * 0.3).clipShape(/*@START_MENU_TOKEN@*/Circle()/*@END_MENU_TOKEN@*/)
                     Text("Login").padding(.bottom,30).font(.title2).fontWeight(.bold)
                     AppTextField(fieldModel: $viewModel.emailField,text: $text).padding(/*@START_MENU_TOKEN@*/EdgeInsets()/*@END_MENU_TOKEN@*/)
                     
                     AppTextField(fieldModel: $viewModel.passwordField, text: $password)
                     
-                    HStack{
-                        Spacer()
-                        Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
-                            Text("Forgot Password?").font(.footnote).fontWeight(.medium).underline().foregroundStyle(Color.gray)
-                        }).padding(.trailing,10)
-                        
-                    }.padding(.bottom,15)
-                    
                     VStack{
-                        Button(action:{
-                            self.navigateToRegister = true
-                        },label:{
-                            Text("Don't have an account? Register Now").font(.footnote).fontWeight(.medium).underline().foregroundStyle(Color.gray)
-                    
-                        }).padding(.bottom,10)
-                        Button(action:{
-                            navigateToHome = true
-                        },label:{
-                            Text("Continue as Guest").font(.footnote).fontWeight(.medium).underline().foregroundStyle(Color.gray)
-                            
+                        
+                        AppButton(text: "Login", width: UIScreen.main.bounds.width * 0.9, height: UIScreen.main.bounds.height * 0.05,isFilled: true, onClick: {
+                            print(">>>>>>\( password)")
+                            viewModel.login(email: viewModel.emailField.value, password: password)
+                            viewModel.viewState = .loading
                         }).padding(.bottom,10)
                         
-                        Button(action: {
+                        
+                        HStack{
+                            Rectangle()
+                                .frame(height: 1)
+                                .foregroundColor(.gray)
+                            Text("or").padding(.horizontal)
+                            
+                            Rectangle()
+                                .frame(height: 1)
+                                .foregroundColor(.gray)
+                        }.padding(.vertical)
+                        
+                        Button {
                             viewModel.signInWithGoogle()
-                        }, label: {
-                            Image("google-icon").resizable().frame(width: UIScreen.screenWidth * 0.12, height: UIScreen.screenHeight * 0.05)
-                        }).padding(.bottom,160)
+
+                        } label: {
+                            
+                            HStack{
+                                Image("google-icon")
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .frame(width: UIScreen.screenWidth * 0.12, height: UIScreen.screenHeight * 0.035)
+                             
+                                
+                                Text("Sign in with Google")
+                                    .font(.callout)
+                                    .lineLimit(1)
+                            }.foregroundColor(.white)
+                                .padding(.horizontal,16)
+                                .background(RoundedRectangle(cornerRadius: 10.0, style: .continuous).fill(.black).frame(width: UIScreen.screenWidth * 0.9 , height: UIScreen.screenHeight * 0.05))
+                            
+                        }.frame(width: UIScreen.main.bounds.width * 0.9, height: UIScreen.main.bounds.height * 0.05)
+
+                        
+                        Button {
+                            
+                                self.navigateToRegister = true
+                        } label: {
+                            
+                            HStack{
+                                    Text("Sign Up").fontWeight(.medium)
+                                    .font(.callout)
+                                    .lineLimit(1)
+                            }.foregroundColor(.white)
+                                .padding(.horizontal,16)
+                                .background(RoundedRectangle(cornerRadius: 10.0, style: .continuous).fill(.black).frame(width: UIScreen.screenWidth * 0.9 , height: UIScreen.screenHeight * 0.05))
+                            
+                        }.frame(width: UIScreen.main.bounds.width * 0.9, height: UIScreen.main.bounds.height * 0.05).padding(.bottom,20)
+                        
                     }
-
-                    
-                    AppButton(text: "Login", width: UIScreen.main.bounds.width * 0.9, height: UIScreen.main.bounds.height * 0.05,isFilled: true, onClick: {
-                        print(">>>>>>\( password)")
-                        viewModel.login(email: viewModel.emailField.value, password: password)
-                        viewModel.viewState = .loading
-                    }).padding(.bottom,10)
-
-                    
                 }.navigationBarBackButtonHidden(true).padding(.all,20)
             }else{
                 VStack {
@@ -67,11 +102,11 @@ struct LoginScreen: View {
                 navigateToHome = true
             }
         }
-       .navigationDestination(isPresented:$navigateToHome){
+        .navigationDestination(isPresented:$navigateToHome){
             BaseView()
         }.navigationDestination(isPresented: $navigateToRegister){
-             SignUpScreen()
-         }
+            SignUpScreen()
+        }
     }
 }
 

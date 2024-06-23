@@ -50,7 +50,7 @@ struct CartCard: View {
                         Text("\(String(format: "%.0f",(Double(formatPrice(price: item.price, quantity: item.quantity)) ?? 1 ) * (Double(UserDefaultsManager.shared.selectedCurrencyValue ?? "1") ?? 1))) \(UserDefaultsManager.shared.selectedCurrencyCode ?? "USD")")
                             .bold()
                             .foregroundColor(isDarkMode ? Color.white : Color.black)
-                            .bold()
+                            
                     }
                     Spacer()
                     

@@ -74,6 +74,7 @@ class FavoriteViewModel : ObservableObject{
                    }, receiveValue: { [weak self] products in
                        DispatchQueue.main.async {
                            if products.count != 0 {
+                               print(">>>>>>>> count is \(products.count)")
                                self?.products = products
                                self?.viewState = .userActive
                            }else{
