@@ -53,7 +53,7 @@ struct AddressCell: View {
                     
                 }
                 if let zip = address.zip {
-                    if !zip.isEmpty{
+                    if !zip.isEmpty && zip != address.city{
                         HStack{
                             Text("Zip Code: ")
                                 .foregroundColor(.gray)

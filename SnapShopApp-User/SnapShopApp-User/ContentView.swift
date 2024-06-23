@@ -22,7 +22,7 @@ struct ContentView: View {
                     OnBoardingView()
                 }
             }
-            .offset(y: endAnimation ? 0 : getRect().height)
+//            .offset(y: endAnimation ? 0 : getRect().height)
             .navigationBarBackButtonHidden(true)
                 .onAppear{
                     handler.askPermission()
