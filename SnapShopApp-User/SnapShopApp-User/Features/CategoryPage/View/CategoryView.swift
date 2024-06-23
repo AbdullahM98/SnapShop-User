@@ -18,7 +18,7 @@ struct CategoryView: View {
         VStack {
             if viewModel.isLoading {
                 Spacer()
-                CustomCircularProgress()
+                ProgressView()
                 Spacer()
             } else {
                 HStack {

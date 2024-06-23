@@ -17,8 +17,9 @@ struct BrandProducts: View {
         VStack{
             if viewModel.isLoadingBrandProducts {
                 Spacer()
-                CustomCircularProgress()
+                ProgressView()
                 Spacer()
+                    .navigationBarBackButtonHidden(true)
             }else{
                 CategoryProducts(products: viewModel.singleCategoryProducts)
                     .navigationBarTitle("\(String(describing: brand.title ?? "")) Products")

@@ -13,6 +13,7 @@ target 'SnapShopApp-User' do
     pod 'ReachabilitySwift'
     pod 'SnackBar.swift'
     pod 'GoogleSignIn'
+    pod 'lottie-ios'
 
   target 'SnapShopApp-UserTests' do
     inherit! :search_paths

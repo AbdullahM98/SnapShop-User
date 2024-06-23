@@ -10,6 +10,7 @@ import SwiftUI
 struct UserAddresses: View {
     @StateObject var viewModel: AddressesViewModel = AddressesViewModel()
     @State private var showingBottomSheet = false
+    @State private var showingLocationBottomSheet = false
     @State private var settingsDetents = PresentationDetent.height(UIScreen.screenHeight*0.5 + 100)
     var fromCart: Bool
     @Environment(\.presentationMode) var presentationMode
@@ -53,20 +54,38 @@ struct UserAddresses: View {
             }
             .navigationBarTitle("Addresses")
             .navigationBarBackButtonHidden(true)
-            .navigationBarItems(leading: CustomBackButton(),trailing: Button(action: {
-                showingBottomSheet.toggle()
-            }) {
-                Image(systemName:"plus.circle.fill").foregroundColor(.black)
-            }
-                .sheet(isPresented: $showingBottomSheet) {
-                    AddAddress(onSaveClick: {address in
+            .navigationBarItems(leading: CustomBackButton(),trailing: HStack {
+//                Button(action: {
+//                    showingBottomSheet.toggle()
+//                }) {
+//                    Image(systemName:"plus.circle.fill").foregroundColor(.black)
+//                }
+//                    .sheet(isPresented: $showingBottomSheet) {
+//                        AddAddress(onSaveClick: {address in
+//                            viewModel.postUserAddress(address: address)
+//                            SnackBarHelper.updatingSnackBar(body: "Added Successfully")
+//                            showingBottomSheet.toggle()
+//                        }, onCancelClick: {
+//                            showingBottomSheet.toggle()
+//                        }).presentationDetents([.height(UIScreen.screenHeight*0.5 + 100)], selection: $settingsDetents)
+//                }
+                Button(action: {
+                    showingLocationBottomSheet.toggle()
+                    print("Location button pressed!")
+                }) {
+                    Image(systemName:"plus.circle.fill").foregroundColor(.black)
+                }.sheet(isPresented: $showingLocationBottomSheet) {
+                    LocationAddress(onSaveClick: {address in
                         viewModel.postUserAddress(address: address)
-                        SnackBarHelper.updatingSnackBar(body: "Added Successfully")
-                        showingBottomSheet.toggle()
+//                        SnackBarHelper.updatingSnackBar(body: "Added Successfully")
+                        showingLocationBottomSheet.toggle()
                     }, onCancelClick: {
-                        showingBottomSheet.toggle()
-                    }).presentationDetents([.height(UIScreen.screenHeight*0.5 + 100)], selection: $settingsDetents)
-                })
+                        showingLocationBottomSheet.toggle()
+                    }).presentationDetents([.large], selection: $settingsDetents)
+            }
+                .padding(.horizontal, 10)
+                
+            })
         }.onAppear{
             viewModel.fetchUserAddresses()
             if fromCart == true {

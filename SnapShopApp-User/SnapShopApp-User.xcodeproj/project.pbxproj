@@ -22,6 +22,8 @@
 		0A9064102C23BA0800D63102 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A90640F2C23BA0800D63102 /* SettingsView.swift */; };
 		0A9064132C23CF6600D63102 /* AddressesViewModel_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A9064122C23CF6600D63102 /* AddressesViewModel_Tests.swift */; };
 		0A90641D2C23EFA000D63102 /* OnBoardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A90641C2C23EFA000D63102 /* OnBoardingView.swift */; };
+		0A9064202C2704DD00D63102 /* LocationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A90641F2C2704DD00D63102 /* LocationViewModel.swift */; };
+		0A9064222C2708F300D63102 /* LocationAddress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A9064212C2708F300D63102 /* LocationAddress.swift */; };
 		0AF5834D2C11EEA6006D5059 /* AppTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF5834C2C11EEA6006D5059 /* AppTabBar.swift */; };
 		0AF5834F2C11EEC4006D5059 /* TabBarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF5834E2C11EEC4006D5059 /* TabBarButton.swift */; };
 		0AF583542C11EF58006D5059 /* PopularBrands.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF583532C11EF58006D5059 /* PopularBrands.swift */; };
@@ -170,6 +172,8 @@
 		0A90640F2C23BA0800D63102 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		0A9064122C23CF6600D63102 /* AddressesViewModel_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressesViewModel_Tests.swift; sourceTree = "<group>"; };
 		0A90641C2C23EFA000D63102 /* OnBoardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingView.swift; sourceTree = "<group>"; };
+		0A90641F2C2704DD00D63102 /* LocationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationViewModel.swift; sourceTree = "<group>"; };
+		0A9064212C2708F300D63102 /* LocationAddress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationAddress.swift; sourceTree = "<group>"; };
 		0AF5834C2C11EEA6006D5059 /* AppTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTabBar.swift; sourceTree = "<group>"; };
 		0AF5834E2C11EEC4006D5059 /* TabBarButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarButton.swift; sourceTree = "<group>"; };
 		0AF583532C11EF58006D5059 /* PopularBrands.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularBrands.swift; sourceTree = "<group>"; };
@@ -399,6 +403,14 @@
 			path = onBoarding;
 			sourceTree = "<group>";
 		};
+		0A90641E2C2704C900D63102 /* Location */ = {
+			isa = PBXGroup;
+			children = (
+				0A90641F2C2704DD00D63102 /* LocationViewModel.swift */,
+			);
+			path = Location;
+			sourceTree = "<group>";
+		};
 		0AF583502C11EF01006D5059 /* HomePage */ = {
 			isa = PBXGroup;
 			children = (
@@ -491,6 +503,7 @@
 				5627DB2A2C12320000AB6464 /* AddAddress.swift */,
 				5627DB2C2C12324100AB6464 /* AddressCell.swift */,
 				56ACA7562C19ED6B00AD48AC /* EditAddress.swift */,
+				0A9064212C2708F300D63102 /* LocationAddress.swift */,
 			);
 			path = subViews;
 			sourceTree = "<group>";
@@ -740,6 +753,7 @@
 		7606FB892C0F721500E1D3AF /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				0A90641E2C2704C900D63102 /* Location */,
 				7606FB972C0F74DB00E1D3AF /* Netwrok.swift */,
 				7606FBB02C0F813900E1D3AF /* FirebaseManager.swift */,
 				7606FBC02C10AE0B00E1D3AF /* AppCoreData.swift */,
@@ -1346,6 +1360,7 @@
 				767836332C121A04001E4BFB /* ProductDetailViewModel.swift in Sources */,
 				7606FBB12C0F813900E1D3AF /* FirebaseManager.swift in Sources */,
 				0AFF59982C188D1B002DEAFC /* CurrencyModel.swift in Sources */,
+				0A9064202C2704DD00D63102 /* LocationViewModel.swift in Sources */,
 				0AF583742C11F227006D5059 /* FilterButton.swift in Sources */,
 				56ACA75B2C19EE0200AD48AC /* Support.swift in Sources */,
 				0AFF59952C188CA4002DEAFC /* CurrencyViewModel.swift in Sources */,
@@ -1414,6 +1429,7 @@
 				5627DB2B2C12320000AB6464 /* AddAddress.swift in Sources */,
 				5606E7A92C120C5600B728FD /* CouponsViewModel.swift in Sources */,
 				0AF583782C11F271006D5059 /* CategoryProductCell.swift in Sources */,
+				0A9064222C2708F300D63102 /* LocationAddress.swift in Sources */,
 				76560C522C13570200B6103A /* CustomColorDot.swift in Sources */,
 				76257A432C17DDDE001C4006 /* FavoriteView.swift in Sources */,
 				0A44F0C12C1C84F30031E649 /* ImageButtonAlert.swift in Sources */,
@@ -1607,7 +1623,11 @@
 				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+
 				INFOPLIST_FILE = "SnapShopApp-User/Info.plist";
+
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "This app requires access to the device's location";
+
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -1639,7 +1659,11 @@
 				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+
 				INFOPLIST_FILE = "SnapShopApp-User/Info.plist";
+
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "This app requires access to the device's location";
+
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

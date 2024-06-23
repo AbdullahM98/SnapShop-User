@@ -46,7 +46,7 @@ struct ProductCell: View {
                     Text(product.product_type ?? "sho").font(.system(size: 12, weight: .regular))
                 }
                 HStack{
-                    Text(product.title ?? "Adidas shoes").lineLimit(1).font(.system(size: 12, weight: .regular)).foregroundColor(.black)
+                    Text(extractedTitle(product.title)).lineLimit(1).font(.system(size: 12, weight: .regular)).foregroundColor(.black)
                 }
                 HStack{
                     Text("\(String(format: "%.0f",(Double(product.variants?[0].price ?? "1.0" ) ?? 1 ) * (Double(UserDefaultsManager.shared.selectedCurrencyValue ?? "1") ?? 1))) \(UserDefaultsManager.shared.selectedCurrencyCode ?? "USD")").foregroundColor(.red).font(.system(size: 14, weight: .regular))
@@ -72,6 +72,17 @@ struct ProductCell: View {
             .cornerRadius(10)
             .shadow(radius: 5)
     }
+    
+    private func extractedTitle(_ title: String?) -> String {
+        guard let title = title else { return "Unknown Title" }
+        let components = title.split(separator: "|").map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
+        if components.count > 1 {
+            return components[1]
+        } else {
+            return title
+        }
+    }
+    
     private func setupPageControlAppearance() {
             UIPageControl.appearance().currentPageIndicatorTintColor = UIColor.black
             UIPageControl.appearance().pageIndicatorTintColor = UIColor.lightGray
