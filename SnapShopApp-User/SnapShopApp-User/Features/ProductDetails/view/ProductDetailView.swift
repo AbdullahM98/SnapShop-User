@@ -112,9 +112,6 @@ struct ProductDetailView: View {
                             Text("\(UserDefaultsManager.shared.selectedCurrencyCode ?? "USD") \(String(format: "%.2f", (Double(viewModel.price) ?? 1.0) * (Double(UserDefaultsManager.shared.selectedCurrencyValue ?? "1") ?? 1)))")
                                 .font(.headline.bold())
                                 .foregroundStyle(Color.red)
-                            
-                            
-                            
                             Spacer()
                             if let qty = $viewModel.availbleQuantity.wrappedValue {
                                 if Int(qty) ?? 1 > 0 {
