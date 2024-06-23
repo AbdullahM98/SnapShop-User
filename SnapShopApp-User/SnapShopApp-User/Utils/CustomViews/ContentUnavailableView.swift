@@ -43,11 +43,3 @@ extension ContentUnavailableView where Description == EmptyView {
         self.description = nil
     }
 }
-
-#Preview {
-    ContentUnavailableView(
-        title: "No Internet Connection",
-        imageName: "wifi.exclamationmark",
-        description: Text("Please check your connection and try again.")
-    )
-}

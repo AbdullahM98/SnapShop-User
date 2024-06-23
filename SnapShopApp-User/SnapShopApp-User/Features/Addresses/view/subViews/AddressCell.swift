@@ -16,6 +16,8 @@ struct AddressCell: View {
     @State private var showingBottomSheet = false
     @State private var settingsDetents = PresentationDetent.height(UIScreen.screenHeight*0.5 + 20)
     @State private var showingDeleteAlert = false
+    @AppStorage("isDarkMode") private var isDarkMode = false
+
     
     
     var body: some View {
@@ -82,7 +84,7 @@ struct AddressCell: View {
                                 showingDeleteAlert = true
                             } label: {
                                 Image(systemName:"minus.circle.fill").resizable().aspectRatio(contentMode: .fit)
-                                    .frame(width: 24, height: 24) .foregroundColor(.black)
+                                    .frame(width: 24, height: 24) .foregroundColor(isDarkMode ? Color.blue : Color.black)
                             }.padding(.trailing,6)
                                 .alert(isPresented: $showingDeleteAlert) {
                                     Alert(
@@ -103,7 +105,7 @@ struct AddressCell: View {
                                 
                             } label: {
                                 Image(systemName: "pencil.circle.fill").resizable().aspectRatio(contentMode: .fit)
-                                    .frame(width: 24, height: 24) .foregroundColor(.black)
+                                    .frame(width: 24, height: 24) .foregroundColor(isDarkMode ? Color.blue : Color.black)
                             }.sheet(isPresented: $showingBottomSheet) {
                                 EditAddress(onSaveClick: { updatedAddress in
                                     onUpdateClick(updatedAddress)
@@ -128,7 +130,7 @@ struct AddressCell: View {
                                 .foregroundColor(.white)
                                 .padding(.horizontal,8)
                                 .padding(.vertical,2)
-                                .background(Color.black)
+                                .background(isDarkMode ? Color.blue : Color.black)
                                 .cornerRadius(8)
                         }.padding(.trailing,6)
                         
@@ -140,7 +142,7 @@ struct AddressCell: View {
                             .foregroundColor(.white)
                             .padding(.horizontal,8)
                             .padding(.vertical,2)
-                            .background(Color.black)
+                            .background(isDarkMode ? Color.blue : Color.black)
                             .cornerRadius(8)
                     }else{
                         Button {
@@ -151,7 +153,7 @@ struct AddressCell: View {
                                 .foregroundColor(.white)
                                 .padding(.horizontal,8)
                                 .padding(.vertical,2)
-                                .background(Color.black)
+                                .background(isDarkMode ? Color.blue : Color.black)
                                 .cornerRadius(8)
                         }.padding(.trailing,6)
                         
@@ -164,7 +166,7 @@ struct AddressCell: View {
         }
         .padding(.vertical,20).overlay {
             RoundedRectangle(cornerRadius: 20)
-                .stroke(address.default ?? false ? Color.green : Color.black, lineWidth: 1).shadow(radius: 5)
+                .stroke(address.default ?? false ? Color.green : Color.blue, lineWidth: 1).shadow(radius: 5)
         }.padding()
     }
 }

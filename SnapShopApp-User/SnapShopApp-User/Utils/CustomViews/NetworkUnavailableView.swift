@@ -17,6 +17,3 @@ struct NetworkUnavailableView: View {
     }
 }
 
-#Preview {
-    NetworkUnavailableView()
-}

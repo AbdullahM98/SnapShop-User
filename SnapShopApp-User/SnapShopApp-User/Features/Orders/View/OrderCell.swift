@@ -9,7 +9,8 @@ import SwiftUI
 
 struct OrderCell: View {
     @State var orderDetails: Order
-    
+    @AppStorage("isDarkMode") private var isDarkMode = false
+
     var body: some View {
         VStack(alignment: .leading, spacing: 20) {
             if let orderNumber = orderDetails.name {
@@ -64,7 +65,7 @@ struct OrderCell: View {
         .padding(.vertical, 20)
         .overlay(
             RoundedRectangle(cornerRadius: 20)
-                .stroke(Color.black, lineWidth: 1)
+                .stroke(isDarkMode ? Color.blue : Color.black, lineWidth: 1)
                 .shadow(radius: 5)
         )
         .padding()

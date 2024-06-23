@@ -14,7 +14,7 @@ struct OrderAddressCell: View {
             if let customerAddress = address.address1 {
                 if !customerAddress.isEmpty{
                     HStack{
-                        Text("Address: ")
+                        Text("Street: ")
                             .foregroundColor(.gray)
                         Text("\(address.address1 ?? "")")
                         Spacer()
@@ -38,16 +38,6 @@ struct OrderAddressCell: View {
                         Text("Country: ")
                             .foregroundColor(.gray)
                         Text("\(address.country ?? "")")
-                    }.padding(.horizontal,16)
-                }
-                
-            }
-            if let zip = address.zip {
-                if !zip.isEmpty{
-                    HStack{
-                        Text("Zip Code: ")
-                            .foregroundColor(.gray)
-                        Text("\(zip)")
                     }.padding(.horizontal,16)
                 }
                 

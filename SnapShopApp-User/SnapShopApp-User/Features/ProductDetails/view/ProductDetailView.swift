@@ -177,9 +177,11 @@ struct ProductDetailView: View {
                         }else{
                             VStack{}.frame(height: UIScreen.screenHeight * 0.12)
                         }
-                        
-                        QuantitySelectorView(quantity:$viewModel.inventoryQuantity.wrappedValue , viewModel:viewModel)
-                            .padding(.leading,90)
+                        HStack{
+                            Spacer()
+                            QuantitySelectorView(quantity:$viewModel.inventoryQuantity.wrappedValue , viewModel:viewModel)
+                                Spacer()
+                        }
                         AppButton(text: "Add to Cart", width: UIScreen.screenWidth * 0.9, height: UIScreen.screenHeight * 0.06, isFilled: true){
                             if UserDefaults.standard.bool(forKey: Support.isLoggedUDKey){
                                 if Int($viewModel.availbleQuantity.wrappedValue) ?? 0 < 0 {

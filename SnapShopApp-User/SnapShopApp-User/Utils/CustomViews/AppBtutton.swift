@@ -33,10 +33,10 @@ struct AppButton: View {
                 }) {
                     Text(text)
                        .font(.custom(FontTypes.bold.rawValue, size: CGFloat(FontSizes.subtitle.rawValue)))
-                       .foregroundColor(isFilled ? Color.white : Color.black)
+                       .foregroundColor(isFilled ? (isDarkMode ? Color.black : Color.white) : (isDarkMode ? Color.white : Color.black))
                 }
                .frame(width: width, height: height)
-               .background(isFilled ? Color.black : Color.clear)
+               .background(isFilled ? (isDarkMode ? Color.white : Color.black ) : (isDarkMode ? Color.black : Color.clear))
                .clipShape(RoundedRectangle(cornerRadius: 6))
             }
            .overlay(
