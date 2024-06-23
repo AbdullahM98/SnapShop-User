@@ -1121,11 +1121,8 @@ DEPENDENCIES:
   - FirebaseAuth
   - FirebaseCore
   - FirebaseFirestore
-
   - GoogleSignIn
-
   - lottie-ios
-
   - ReachabilitySwift
   - SnackBar.swift
 
@@ -1184,8 +1181,6 @@ SPEC CHECKSUMS:
   SnackBar.swift: 79ea4df13ea9e6633137dd6acbd490534d26440d
   SnapKit: d612e99e678a2d3b95bf60b0705ed0a35c03484a
 
-
-PODFILE CHECKSUM: a71b4bdcd89a92a985ee0773bc90caaea83361ab
-
+PODFILE CHECKSUM: e0200c3b253b078c160cd86389567428488a6ff2
 
 COCOAPODS: 1.15.2
