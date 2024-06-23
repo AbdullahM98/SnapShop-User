@@ -95,7 +95,8 @@ struct ProductDetailView: View {
                                     Alert(title: Text("Guest Mode"),
                                           message: Text("Please Login for more features"),dismissButton: .destructive(Text("OK"), action: {
                                         showingDeleteAlert = false
-                                    }))
+                                    })
+                                    )
                                     
                                 }
                             }

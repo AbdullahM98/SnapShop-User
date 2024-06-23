@@ -35,11 +35,11 @@ struct OnBoardingView: View {
             VStack{
                 HStack{
                     if currentPage == 1 {
-                        
-                        Text("Hello SnapShop")
+                        /*
+                        Text("SnapShop")
                             .font(.title2)
                             .fontWeight(.semibold)
-                            .kerning(1.4)
+                            .kerning(1.4)*/
                     }else {
                         Button(action: {
                             currentPage -= 1

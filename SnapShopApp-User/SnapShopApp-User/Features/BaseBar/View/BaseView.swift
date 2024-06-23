@@ -11,7 +11,7 @@ struct BaseView: View {
     @StateObject var baseData = BaseViewModel()
     @StateObject private var networkMonitor = NetworkMonitor()
     @AppStorage("isDarkMode") private var isDarkMode = false
-
+    @State var showingGuestAlert:Bool = false
     @State var notifyCount: Int = 0
     //hiding tab bar ...
     
@@ -54,29 +54,38 @@ struct BaseView: View {
                     //center curverd cart button
                     //for badge and cart navigation
                     NavigationLink(destination: CartList()) {
-                        Image("cart")
-                            .resizable()
-                            .renderingMode(.template)
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: 26, height: 26)
-                            .foregroundColor(.white)
-                            .offset(x: -1)
-                            .padding(18)
-                            .background(isDarkMode ? Color.blue : Color.black)
-                            .clipShape(Circle())
-                            .shadow(color: isDarkMode ? Color.clear : Color.black.opacity(0.04), radius: 5, x: 5, y: 5)
-                            .shadow(color: isDarkMode ? Color.clear :Color.black.opacity(0.04), radius: 5, x: -5, y: -5)
-                        // Badge view
-                        //for badge if exist
-                        if notifyCount > 0 {
-                            Text("\(notifyCount)")
+                        ZStack{
+                            
+                            Image("cart")
+                                .resizable()
+                                .renderingMode(.template)
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 26, height: 26)
                                 .foregroundColor(.white)
-                                .font(Font.system(size: 12).bold())
-                                .padding(EdgeInsets(top: 2, leading: 6, bottom: 2, trailing: 6))
-                                .background(Color.red)
+                                .offset(x: -1)
+                                .padding(18)
+                                .background(isDarkMode ? Color.blue : Color.black)
                                 .clipShape(Circle())
-                                .frame(width: 18,height: 18)
-                                .offset(x: -18, y: -22) // Adjust badge position as needed
+                                .shadow(color: isDarkMode ? Color.clear : Color.black.opacity(0.04), radius: 5, x: 5, y: 5)
+                                .shadow(color: isDarkMode ? Color.clear :Color.black.opacity(0.04), radius: 5, x: -5, y: -5)
+                            // Badge view
+                            //for badge if exist
+                            if notifyCount > 0 {
+                                Text("\(notifyCount)")
+                                    .foregroundColor(.white)
+                                    .font(Font.system(size: 12).bold())
+                                    .padding(EdgeInsets(top: 2, leading: 6, bottom: 2, trailing: 6))
+                                    .background(Color.red)
+                                    .clipShape(Circle())
+                                    .frame(width: 18,height: 18)
+                                    .offset(x: -18, y: -22) // Adjust badge position as needed
+                            }
+                        }.onTapGesture {
+                            if UserDefaultsManager.shared.getUserId(key: Support.userID) == 0 {
+                                
+                                showingGuestAlert = true
+                            }
+
                         }
                     }
                     .offset(x: notifyCount > 0 ? 12 : 0,y: -28)
@@ -93,7 +102,13 @@ struct BaseView: View {
                         .shadow(color: Color.black.opacity(0.04), radius: 5,x: -5,y: -5)
                         .ignoresSafeArea(.container,edges: .bottom))
                 , alignment: .bottom
-            )
+            ) .alert(isPresented: $showingGuestAlert) {
+                Alert(
+                    title: Text("Guest Mode"),
+                    message: Text("Please log in to access this feature."),
+                    dismissButton: .default(Text("OK"))
+                )
+            }
         }
         .navigationBarBackButtonHidden(true)
         

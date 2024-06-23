@@ -80,6 +80,7 @@
 		56ACA7572C19ED6B00AD48AC /* EditAddress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56ACA7562C19ED6B00AD48AC /* EditAddress.swift */; };
 		56ACA7592C19EDD000AD48AC /* FieldValidation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56ACA7582C19EDD000AD48AC /* FieldValidation.swift */; };
 		56ACA75B2C19EE0200AD48AC /* Support.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56ACA75A2C19EE0200AD48AC /* Support.swift */; };
+		56B0BB0A2C28510A00267578 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 56B0BB092C28510A00267578 /* GoogleService-Info.plist */; };
 		56D46E912C14FCC00019EA1B /* CheckOutPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D46E902C14FCC00019EA1B /* CheckOutPage.swift */; };
 		56D5B6052C1505C2006EF83B /* PaymentPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D5B6042C1505C2006EF83B /* PaymentPage.swift */; };
 		56D5B6072C150606006EF83B /* ButtonWithImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D5B6062C150606006EF83B /* ButtonWithImage.swift */; };
@@ -133,7 +134,6 @@
 		768F30E02C22505000FA1F68 /* SnackBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 768F30DF2C22505000FA1F68 /* SnackBar.swift */; };
 		768F30E22C229F8B00FA1F68 /* CountryCodes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 768F30E12C229F8B00FA1F68 /* CountryCodes.swift */; };
 		768F30E42C22B33700FA1F68 /* QuantitySelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 768F30E32C22B33700FA1F68 /* QuantitySelector.swift */; };
-		76B08DEC2C2789570077C649 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 76B08DEB2C2789570077C649 /* GoogleService-Info.plist */; };
 		76B08DEF2C27B69C0077C649 /* MockFirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76B08DEE2C27B69C0077C649 /* MockFirebaseManager.swift */; };
 		906BAD87611507B26F870BF5 /* Pods_SnapShopApp_User_SnapShopApp_UserUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE65ACFE98183A05FD1CCDC9 /* Pods_SnapShopApp_User_SnapShopApp_UserUITests.framework */; };
 /* End PBXBuildFile section */
@@ -230,6 +230,7 @@
 		56ACA7562C19ED6B00AD48AC /* EditAddress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditAddress.swift; sourceTree = "<group>"; };
 		56ACA7582C19EDD000AD48AC /* FieldValidation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FieldValidation.swift; sourceTree = "<group>"; };
 		56ACA75A2C19EE0200AD48AC /* Support.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Support.swift; sourceTree = "<group>"; };
+		56B0BB092C28510A00267578 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		56D46E902C14FCC00019EA1B /* CheckOutPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckOutPage.swift; sourceTree = "<group>"; };
 		56D5B6042C1505C2006EF83B /* PaymentPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentPage.swift; sourceTree = "<group>"; };
 		56D5B6062C150606006EF83B /* ButtonWithImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonWithImage.swift; sourceTree = "<group>"; };
@@ -286,7 +287,6 @@
 		768F30DF2C22505000FA1F68 /* SnackBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnackBar.swift; sourceTree = "<group>"; };
 		768F30E12C229F8B00FA1F68 /* CountryCodes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryCodes.swift; sourceTree = "<group>"; };
 		768F30E32C22B33700FA1F68 /* QuantitySelector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuantitySelector.swift; sourceTree = "<group>"; };
-		76B08DEB2C2789570077C649 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		76B08DED2C2789890077C649 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		76B08DEE2C27B69C0077C649 /* MockFirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockFirebaseManager.swift; sourceTree = "<group>"; };
 		904B12A396AEBB26D6B54798 /* Pods_SnapShopApp_User.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SnapShopApp_User.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -905,7 +905,7 @@
 		761A5CA42C0EFDC60057BA3C = {
 			isa = PBXGroup;
 			children = (
-				76B08DEB2C2789570077C649 /* GoogleService-Info.plist */,
+				56B0BB092C28510A00267578 /* GoogleService-Info.plist */,
 				761A5CAF2C0EFDC60057BA3C /* SnapShopApp-User */,
 				761A5CC02C0EFDC80057BA3C /* SnapShopApp-UserTests */,
 				761A5CCA2C0EFDC90057BA3C /* SnapShopApp-UserUITests */,
@@ -1198,8 +1198,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				761A5CB82C0EFDC80057BA3C /* Preview Assets.xcassets in Resources */,
+				56B0BB0A2C28510A00267578 /* GoogleService-Info.plist in Resources */,
 				761A5CB52C0EFDC80057BA3C /* Assets.xcassets in Resources */,
-				76B08DEC2C2789570077C649 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1615,11 +1615,8 @@
 				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-
 				INFOPLIST_FILE = "SnapShopApp-User/Info.plist";
-
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "This app requires access to the device's location";
-
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -1651,11 +1648,8 @@
 				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-
 				INFOPLIST_FILE = "SnapShopApp-User/Info.plist";
-
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "This app requires access to the device's location";
-
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
