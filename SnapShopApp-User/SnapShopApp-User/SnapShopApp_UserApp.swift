@@ -10,6 +10,7 @@ import SwiftUI
 
 @main
 struct SnapShopApp_UserApp: App {
+    @AppStorage("isDarkMode") private var isDarkMode = false
     let handler = NotificationHandler()
     init(){
         FirebaseApp.configure()
@@ -19,6 +20,7 @@ struct SnapShopApp_UserApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .preferredColorScheme(isDarkMode ? .dark : .light)
         }
     }
 }

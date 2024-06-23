@@ -10,6 +10,7 @@ import SwiftUI
 struct BrandCell: View {
     @StateObject var viewModel : HomeViewModel
     var brand: SmartCollectionsItem
+    @AppStorage("isDarkMode") private var isDarkMode = false
 
     var body: some View {
         NavigationLink(destination: BrandProducts(viewModel: viewModel,brand: brand)) {
@@ -39,7 +40,7 @@ struct BrandCell: View {
                                 ProgressView()
                                     .frame(width: 27, height: 27)
                             }
-                        }.background(Color.white)
+                        }.background(isDarkMode ? Color.black : Color.white)
 //                            .cornerRadius(10)
 //                            .shadow(radius: 5)
                     } else {
@@ -54,7 +55,7 @@ struct BrandCell: View {
                     .lineLimit(1)
                     .frame(width: 90)
             }.frame(width: 140,height: 50)
-                .background(Color.white)
+                .background(isDarkMode ? Color.black : Color.white)
                 .cornerRadius(10)
                 .shadow(radius: 5)
                 

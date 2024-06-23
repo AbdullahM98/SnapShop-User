@@ -9,6 +9,8 @@ import SwiftUI
 
 struct CustomBackButton: View {
     @Environment(\.presentationMode) var presentationMode
+    @AppStorage("isDarkMode") private var isDarkMode = false
+
 
     var body: some View {
         Button(action: {
@@ -18,7 +20,7 @@ struct CustomBackButton: View {
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .frame(width: 15, height: 15)
-                .foregroundColor(.black)
+                .foregroundColor(isDarkMode ? Color.white : Color.black)
         }
     }
 }

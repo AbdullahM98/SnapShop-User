@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct FilterButton: View {
+    @AppStorage("isDarkMode") private var isDarkMode = false
+
     var buttonName: String
     var nameWidth: Double
     var isSelected: Bool
@@ -20,8 +22,8 @@ struct FilterButton: View {
                     .font(.system(size: 12, weight: .semibold))
             }
             .padding()
-            .background(.white)
-            .foregroundColor(isSelected ? Color.red : Color.black)
+            .background(isDarkMode ? Color.black : Color.white)
+            .foregroundColor(isSelected ? Color.red : isDarkMode ? Color.white : Color.black)
             .cornerRadius(8)
             .frame(width: nameWidth, height: 30)
             .overlay(

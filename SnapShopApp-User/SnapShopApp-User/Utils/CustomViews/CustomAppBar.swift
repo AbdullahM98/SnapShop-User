@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct CustomAppBar: View {
+    @AppStorage("isDarkMode") private var isDarkMode = false
+
     var body: some View {
         HStack {
             Image(uiImage: UIImage(named: "snapshopLogo") ?? UIImage())
@@ -19,8 +21,8 @@ struct CustomAppBar: View {
             Spacer()
         }
         .padding(.horizontal)
-        .foregroundColor(.black)
-        Divider().background(Color.black)
+        .foregroundColor(isDarkMode ? Color.white : Color.black)
+        Divider().background(isDarkMode ? Color.white : Color.black)
         
     }
 }

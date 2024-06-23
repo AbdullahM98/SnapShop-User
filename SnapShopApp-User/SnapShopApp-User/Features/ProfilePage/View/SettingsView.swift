@@ -21,7 +21,7 @@ struct SettingsView: View {
     @State private var navigateToRegister = false
     @State private var navigateToBase = false
     @State private var logoutAlert = false
-
+    @AppStorage("isDarkMode") private var isDarkMode = false
 
     var body: some View {
         VStack {
@@ -97,6 +97,11 @@ struct SettingsView: View {
                                         EmptyView()
                                     }
                                 )// Ensure the button style doesn't interfere with the action
+                            }
+                            HStack{
+                                Toggle(isOn: $isDarkMode) {
+                                    Text("Dark Mode")
+                                }.toggleStyle(SwitchToggleStyle(tint: .blue))                                
                             }
                         }
                         //Plicy section

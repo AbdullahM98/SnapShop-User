@@ -10,7 +10,8 @@ import SwiftUI
 struct BaseView: View {
     @StateObject var baseData = BaseViewModel()
     @StateObject private var networkMonitor = NetworkMonitor()
-    
+    @AppStorage("isDarkMode") private var isDarkMode = false
+
     @State var notifyCount: Int = 0
     //hiding tab bar ...
     
@@ -61,10 +62,10 @@ struct BaseView: View {
                             .foregroundColor(.white)
                             .offset(x: -1)
                             .padding(18)
-                            .background(Color.black)
+                            .background(isDarkMode ? Color.blue : Color.black)
                             .clipShape(Circle())
-                            .shadow(color: Color.black.opacity(0.04), radius: 5, x: 5, y: 5)
-                            .shadow(color: Color.black.opacity(0.04), radius: 5, x: -5, y: -5)
+                            .shadow(color: isDarkMode ? Color.clear : Color.black.opacity(0.04), radius: 5, x: 5, y: 5)
+                            .shadow(color: isDarkMode ? Color.clear :Color.black.opacity(0.04), radius: 5, x: -5, y: -5)
                         // Badge view
                         //for badge if exist
                         if notifyCount > 0 {
@@ -85,7 +86,9 @@ struct BaseView: View {
                     //profile tab
                     TabButton(Tab: .Profile)
                 }
-                    .background(Color.black.opacity(0.04)
+                    .background(isDarkMode ? Color.blue.opacity(0.04).clipShape(CustomCuverShape())
+                        .shadow(color: Color.black.opacity(0.04), radius: 5,x: -5,y: -5)
+                        .ignoresSafeArea(.container,edges: .bottom) : Color.black.opacity(0.04)
                         .clipShape(CustomCuverShape())
                         .shadow(color: Color.black.opacity(0.04), radius: 5,x: -5,y: -5)
                         .ignoresSafeArea(.container,edges: .bottom))
@@ -108,12 +111,12 @@ struct BaseView: View {
                     .renderingMode(.template)
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 25,height: 25)
-                    .foregroundColor(baseData.currentTab == Tab ? .black : .gray.opacity(0.5))
+                    .foregroundColor(isDarkMode ? baseData.currentTab == Tab ? .white : .gray.opacity(0.5) :baseData.currentTab == Tab ? .black : .gray.opacity(0.5) )
                     .frame(maxWidth: .infinity)
                 Text(baseData.currentTab == Tab ? Tab.rawValue : Tab.rawValue)
                     .font(.system(size: 12))
                     .autocapitalization(.words)
-                    .foregroundColor(.black)
+                    .foregroundColor(isDarkMode ? .white : .black)
             }
         }
     }

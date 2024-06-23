@@ -11,7 +11,8 @@ struct CartCard: View {
     var item: DraftOrderLineItem
     var onDeleteClick: (_ item: DraftOrderLineItem) -> Void
     @State private var showingDeleteAlert = false
-    
+    @AppStorage("isDarkMode") private var isDarkMode = false
+
     var body: some View {
         NavigationLink(destination: ProductDetailView(productID: item.product_id?.description ?? " ")) {
             VStack{
@@ -42,13 +43,13 @@ struct CartCard: View {
                     VStack(alignment: .leading, spacing: 2) {
                         Text(extractedTitle(item.title ?? ""))
                             .lineLimit(1)
-                            .foregroundColor(.black)
+                            .foregroundColor(isDarkMode ? Color.white : Color.black)
                         Text(item.vendor ?? "")
                             .foregroundColor(Color.gray)
                         
                         Text("\(String(format: "%.0f",(Double(formatPrice(price: item.price, quantity: item.quantity)) ?? 1 ) * (Double(UserDefaultsManager.shared.selectedCurrencyValue ?? "1") ?? 1))) \(UserDefaultsManager.shared.selectedCurrencyCode ?? "USD")")
                             .bold()
-                            .foregroundColor(.black)
+                            .foregroundColor(isDarkMode ? Color.white : Color.black)
                             .bold()
                     }
                     Spacer()
@@ -75,9 +76,9 @@ struct CartCard: View {
                         .padding(.trailing, 8)
                         
                         Text("Qty: \(item.quantity ?? 0)")
-                            .foregroundColor(.black)
+                            .foregroundColor(isDarkMode ? Color.white : Color.black)
                     }.padding()
-                }.padding(.all,8).background(.white).cornerRadius(10).shadow(radius: 5)
+                }.padding(.all,8).background(isDarkMode ? Color.black : Color.white).cornerRadius(10).shadow(radius: 5)
 
             }.padding(.all,8)
             

@@ -9,6 +9,8 @@ import SwiftUI
 
 struct ProductCell: View {
     let product: PopularProductItem
+    @AppStorage("isDarkMode") private var isDarkMode = false
+
     init(product: PopularProductItem) {
         self.product = product
         setupPageControlAppearance()
@@ -68,7 +70,7 @@ struct ProductCell: View {
             }
         }.padding()
         .frame(width: 170,height: 280)
-            .background(Color.white)
+        .background(isDarkMode ? Color.black : Color.white)
             .cornerRadius(10)
             .shadow(radius: 5)
     }

@@ -16,6 +16,8 @@ struct ProductDetailView: View {
     @StateObject var viewModel = ProductDetailViewModel()
     @State private var showingDeleteAlert = false
     @State private var showingOutOfStockAlert = false
+    @AppStorage("isDarkMode") private var isDarkMode = false
+
     
     var body: some View {
         VStack{
@@ -66,7 +68,7 @@ struct ProductDetailView: View {
                                     .frame(width: 15, height: 15)
                                     .foregroundColor(.yellow)
                                 
-                                Text("(4.5)").font(.subheadline).foregroundStyle(Color.black)
+                                Text("(4.5)").font(.subheadline).foregroundStyle(isDarkMode ? Color.white : Color.black)
                                 Spacer()
                                 Button{
                                     if UserDefaults.standard.bool(forKey: Support.isLoggedUDKey){
@@ -138,14 +140,14 @@ struct ProductDetailView: View {
                                                     viewModel.selectedSize = size
                                                 } label: {
                                                     Text(size)
-                                                        .foregroundColor(Color.black)
+                                                        .foregroundColor(isDarkMode ? Color.white : Color.black)
                                                 }
                                                 .frame(width: 24, height: 24)
                                                 .background(Color.clear)
                                                 .clipShape(RoundedRectangle(cornerRadius: 6))
                                                 .overlay(
                                                     RoundedRectangle(cornerRadius: 6)
-                                                        .stroke(Color.black, lineWidth: 2)
+                                                        .stroke(isDarkMode ? Color.white : Color.black, lineWidth: 2)
                                                 )
                                             }
                                         }
@@ -202,7 +204,7 @@ struct ProductDetailView: View {
                     .padding(.horizontal,24)
                     
                 }
-                .background(Color.white)
+                .background(isDarkMode ? Color.black : Color.white)
             }
             
         }.padding(.all,20)
