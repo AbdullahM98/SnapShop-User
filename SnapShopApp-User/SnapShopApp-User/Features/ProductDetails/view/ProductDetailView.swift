@@ -116,7 +116,15 @@ struct ProductDetailView: View {
                             
                             
                             Spacer()
-                            Text("Qty:\($viewModel.availbleQuantity.wrappedValue)").foregroundStyle(Color.gray)
+                            if let qty = $viewModel.availbleQuantity.wrappedValue {
+                                if Int(qty) ?? 1 > 0 {
+                                    
+                                    Text("Qty:\($viewModel.availbleQuantity.wrappedValue)").foregroundStyle(Color.gray)
+                                }else {
+                                    
+                                    Text("Qty: Out Of Stock").foregroundStyle(Color.gray)
+                                }
+                            }
                             
                         }.padding(.top,-5)
                         Text("Description")

@@ -26,7 +26,8 @@ struct BestSeller: View {
                 } else {
                     LazyVGrid(columns: adaptiveColumns) {
                         ForEach(viewModel.products, id: \.id) { product in
-                            ProductCell(product: product)
+                                ProductCell(product: product)
+                            
                         }
                     }.padding(.vertical,8)
                 }
