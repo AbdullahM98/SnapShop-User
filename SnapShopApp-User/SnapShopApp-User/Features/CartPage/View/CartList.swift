@@ -36,7 +36,7 @@ struct CartList: View {
                         HStack(alignment: .center){
                             Text("Total: \(String(format: "%.0f",(Double(viewModel.userOrder?.subtotal_price ?? "1.0" ) ?? 1 ) * (Double(UserDefaultsManager.shared.selectedCurrencyValue ?? "1") ?? 1))) \(UserDefaultsManager.shared.selectedCurrencyCode ?? "USD")")
                             Spacer()
-                            NavigationLink(destination: CheckOutPage(address: viewModel.shippingAddress ?? DraftOrderAddress(first_name: "", address1: "", phone: "", city: "", zip: "", province: "", country: "", last_name: "", address2: "", company: "", latitude: 0.0, longitude: 0.0, name: "", country_code: "", province_code: "")), isActive: $navigateToPayment) {
+                            NavigationLink(destination: CheckOutPage(), isActive: $navigateToPayment) {
                                 AppButton(text: "Checkout",width: 140,height: 40, isFilled: true, onClick: {
                                     UserDefaultsManager.shared.selectedCouponCodeValue = ""
                                     navigateToPayment = true

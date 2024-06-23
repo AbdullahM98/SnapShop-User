@@ -466,7 +466,6 @@
 		0AFF59842C176A34002DEAFC /* Orders */ = {
 			isa = PBXGroup;
 			children = (
-				0AFF59872C176A52002DEAFC /* Model */,
 				0AFF59862C176A49002DEAFC /* ViewModel */,
 				0AFF59852C176A3D002DEAFC /* View */,
 			);
@@ -488,13 +487,6 @@
 				0AFF598D2C177AF1002DEAFC /* OrdersViewModel.swift */,
 			);
 			path = ViewModel;
-			sourceTree = "<group>";
-		};
-		0AFF59872C176A52002DEAFC /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
 			sourceTree = "<group>";
 		};
 		0AFF59882C176A7E002DEAFC /* subViews */ = {

@@ -13,6 +13,8 @@ struct CategoryView: View {
     @State var settingsDetents = PresentationDetent.medium
     @AppStorage("selectedOption") private var selectedOption: String = "ALL"
     @AppStorage("selectedCollection") private var selectedCollection: String = "ALL"
+    @AppStorage("isDarkMode") private var isDarkMode = false
+
 
     var body: some View {
         VStack {
@@ -30,14 +32,14 @@ struct CategoryView: View {
                             .font(.system(size: 24, weight: .semibold))
                             .padding(.horizontal)
                             .padding(.vertical, 1)
-                            .foregroundColor(.black)
+                            .foregroundColor(isDarkMode ? Color.white : Color.black)
                     })
                     .sheet(isPresented: $isPresented, content: {
                         FilterBottomSheet(viewModel: viewModel)
                             .presentationDetents([.medium], selection: $settingsDetents)
                     })
                 }
-                Divider().background(Color.black)
+                Divider().background(isDarkMode ? Color.white : Color.black)
                 FilterBar(viewModel: viewModel)
                 CategoryProducts(products: viewModel.filteredProducts)
             }

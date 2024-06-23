@@ -11,6 +11,8 @@ import SwiftUI
 struct CustomColorDot: View {
     var color: Color
     var isSelected: Bool
+    @AppStorage("isDarkMode") private var isDarkMode = false
+
 
     var body: some View {
         ZStack {
@@ -19,7 +21,7 @@ struct CustomColorDot: View {
                 .clipShape(Circle())
                 .overlay(
                     Circle()
-                        .stroke( Color.black , lineWidth: isSelected ? 2 : 1)
+                        .stroke(isDarkMode ? Color.white : Color.black , lineWidth: isSelected ? 2 : 1)
                 )
 
             if isSelected {

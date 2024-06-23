@@ -129,7 +129,7 @@ class AddressesViewModel:ObservableObject{
         print(" before updated shipping address \(String(describing: self.orderToUpdate?.shipping_address))")
         print(shippingAddress ,"Thats coming from para")
         self.orderToUpdate?.shipping_address = selectShippingAddress(shippingAddress: shippingAddress)
-        self.orderToUpdate?.billing_address = selectShippingAddress(shippingAddress: shippingAddress)
+//        self.orderToUpdate?.billing_address = selectShippingAddress(shippingAddress: shippingAddress)
         print(" after updated shipping address \(String(describing: self.orderToUpdate?.shipping_address))")
         
         guard let orderID = UserDefaultsManager.shared.userDraftId else { return }

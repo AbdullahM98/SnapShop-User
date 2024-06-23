@@ -45,7 +45,7 @@ struct OrderCell: View {
                 HStack {
                     Text("Money Paid: ")
                         .foregroundColor(.gray)
-                    Text(moneyPaid)
+                    Text("\(moneyPaid) USD")
                     Spacer()
                 }
                 .padding(.horizontal, 16)

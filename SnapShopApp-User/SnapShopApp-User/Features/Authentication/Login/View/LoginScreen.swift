@@ -68,7 +68,7 @@ struct LoginScreen: View {
             }
         }
        .navigationDestination(isPresented:$navigateToHome){
-            ContentView()
+            BaseView()
         }.navigationDestination(isPresented: $navigateToRegister){
              SignUpScreen()
          }

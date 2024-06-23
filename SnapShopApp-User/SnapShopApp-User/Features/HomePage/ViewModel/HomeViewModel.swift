@@ -19,12 +19,15 @@ class HomeViewModel: ObservableObject {
     @Published var singleCategoryProducts: [PopularProductItem] = []
     @Published var filteredProducts: [PopularProductItem] = []
     
-    @Published private(set) var draft: [DraftOrderItemDetails]?
-    @Published private(set) var lineItems: [DraftOrderLineItem]? {
+    @Published private(set) var appDraftOrder: [DraftOrderItemDetails]?
+    @Published private(set) var userLineItems: [DraftOrderLineItem]? {
         didSet {
-            UserDefaultsManager.shared.notifyCart = lineItems?.count ?? 0
+            //for badge
+            UserDefaultsManager.shared.notifyCart = userLineItems?.count ?? 0
+            print("user line items to be notified \(userLineItems?.count)")
         }
     }
+    
     
     @Published var isLoading = true
     @Published var isLoadingBrandProducts = true
@@ -83,13 +86,18 @@ class HomeViewModel: ObservableObject {
     }
     
     func fetchAllDraftOrdersOfApplication() {
+        //fetch all draft orders of the application
         Network.shared.request("\(Support.baseUrl)/draft_orders.json", method: "GET", responseType: ListOfDraftOrders.self) { [weak self] result in
             switch result {
             case .success(let response):
                 DispatchQueue.main.async {
-                    self?.draft = response.draft_orders
+                    self?.appDraftOrder = response.draft_orders
+                    print("--Application Has \(self?.appDraftOrder?.count) Draft Orders --")
+                    print("Start Checking if user Have Drafts or not")
+                    self?.checkUserDrafts()
                 }
-            case .failure:
+            case .failure(let err):
+                print("-- There is A Failure Happend When getting Application Draft Orders \(err) --- \(err.localizedDescription)")
                 break
             }
         }
@@ -97,16 +105,28 @@ class HomeViewModel: ObservableObject {
     
     // MARK: - Draft Order Methods
     
-    func getUserDraftOrders() {
-        let userDraftOrder = draft?.filter { item in
+    func checkUserDrafts() {
+        //filter draft orders by user ID
+        print("Before Filtering")
+        let userDraftOrder = appDraftOrder?.filter { item in
             item.customer?.id == (UserDefaultsManager.shared.getUserId(key: Support.userID) ?? 0)
         }
-        
-        self.lineItems = userDraftOrder?.first?.line_items
-        
-        if let draftCount = userDraftOrder?.count, draftCount > 0 {
+        print("User Draft Orders ----> \(userDraftOrder?.count) must be 1 or 0 lw one ydkhol if lw 0 ydkhol else")
+        if userDraftOrder?.count ?? -1 > 0 {
+            //for badge
+            self.userLineItems = userDraftOrder?.first?.line_items
             UserDefaultsManager.shared.hasDraft = true
             UserDefaultsManager.shared.userDraftId = userDraftOrder?.first?.id
+            print("Inside if ")
+            print("User Draft Order is Not Empty!!")
+            print("User Has DraftOrders --> \(userDraftOrder?.count) == 1 ")
+            print("User Line Items is --> \(self.userLineItems?.count)")
+            print("Saving User Have Draft Order and its ID \(userDraftOrder?.first?.id)")
+        }else{
+            print("inside else")
+            print("User Draft Order is Empty!!")
+            print("User Have No Draft Order \(UserDefaultsManager.shared.hasDraft) == false")
+            print("User Have No Draft Order ID\(UserDefaultsManager.shared.userDraftId) == 0")
         }
     }
 }

@@ -13,6 +13,8 @@ struct PaymentPage: View {
     var onApplePayClick: () -> Void
     var onCashOnDeliveryClick: () -> Void
     var userOrders: DraftOrderItemDetails
+    @AppStorage("isDarkMode") private var isDarkMode = false
+
 
     var body: some View {
         VStack(alignment: .leading) {
@@ -41,8 +43,8 @@ struct PaymentPage: View {
                     text: "Cash On Delivery",
                     imageName: "bag",
                     textColor: .white,
-                    buttonColor: .black,
-                    borderColor: .black,
+                    buttonColor: isDarkMode ? Color.white : Color.black,
+                    borderColor: isDarkMode ? Color.white :  Color.black,
                     imageExist: false,
                     onClick: onCashOnDeliveryClick
                 )

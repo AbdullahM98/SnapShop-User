@@ -42,20 +42,20 @@ class CartViewModel :ObservableObject{
 
     //method to delete
     func getDraftOrderById(){
-        guard let orderID = UserDefaultsManager.shared.userDraftId else { return }
-        print("order ID is -> ",orderID)
         print("user has order -> ",UserDefaultsManager.shared.hasDraft)
-        if UserDefaultsManager.shared.hasDraft ?? false{
+        if UserDefaultsManager.shared.hasDraft == true ?? false{
+            guard let orderID = UserDefaultsManager.shared.userDraftId else { return }
+            print("order ID is -> ",orderID)
             Network.shared.request("\(Support.baseUrl)/draft_orders/\(orderID).json", method: "GET", responseType: DraftOrderItem.self) { [weak self] result in
                 switch result{
                 case .success(let order):
                     DispatchQueue.main.async {
                         self?.userOrder = order.draft_order
                         guard let items = self?.userOrder?.line_items  else { return }
+                        self?.lineItems = items
                         guard let newAddress = self?.userOrder?.shipping_address else { return }
                         self?.shippingAddress = newAddress
                         print("Coupon is \(self?.userOrder?.applied_discount?.description ?? "NONO")")
-                        self?.lineItems = items
                         self?.isLoading = false
                         self?.isCheckOutLoading = false
                     }

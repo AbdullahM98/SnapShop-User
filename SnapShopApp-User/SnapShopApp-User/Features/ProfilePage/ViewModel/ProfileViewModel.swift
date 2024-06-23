@@ -71,12 +71,14 @@ class ProfileViewModel: ObservableObject {
     
     
     func logout(){
-        FirebaseManager.shared.logout()
         UserDefaults.standard.set(false, forKey: Support.isLoggedUDKey)
         UserDefaultsManager.shared.hasDraft = false
         UserDefaultsManager.shared.notifyCart = 0
-        UserDefaultsManager.shared.userDraftId = nil
-     
+
+        UserDefaultsManager.shared.userDraftId = 0
+        FirebaseManager.shared.logout()
+        print("User draft ID in log out \(UserDefaultsManager.shared.userDraftId) must be 0")
+
     }
     
     func isUserValidated() -> Bool{

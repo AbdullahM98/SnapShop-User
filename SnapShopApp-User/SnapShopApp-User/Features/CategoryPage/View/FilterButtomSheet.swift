@@ -12,13 +12,15 @@ struct FilterBottomSheet: View {
     @AppStorage("selectedCollection") private var selectedCollection: String = "ALL"
     @StateObject var viewModel: CategoryViewModel
     @Environment(\.dismiss) var dismiss
+    @AppStorage("isDarkMode") private var isDarkMode = false
+
     
     var body: some View {
         VStack {
             Text("Filter By ").font(.title)
             HStack{
                 Text("ALL")
-                    .foregroundColor(selectedOption == "ALL" ? .red : .black)
+                    .foregroundColor(selectedOption == "ALL" ? .red : isDarkMode ? Color.white : Color.black)
                 Spacer()
             }.padding()
             .onTapGesture {
@@ -30,7 +32,7 @@ struct FilterBottomSheet: View {
             
             HStack{
                 Text("T-SHIRTS")
-                    .foregroundColor(selectedOption == "T-SHIRTS" ? .red : .black)
+                    .foregroundColor(selectedOption == "T-SHIRTS" ? .red : isDarkMode ? Color.white : Color.black)
                 Spacer()
             }.padding()
             .onTapGesture {
@@ -41,7 +43,7 @@ struct FilterBottomSheet: View {
             
             HStack{
                 Text("ACCESSORIES")
-                    .foregroundColor(selectedOption == "ACCESSORIES" ? .red : .black)
+                    .foregroundColor(selectedOption == "ACCESSORIES" ? .red : isDarkMode ? Color.white : Color.black)
                 Spacer()
             }.padding()
             .onTapGesture {
@@ -52,7 +54,7 @@ struct FilterBottomSheet: View {
             
             HStack{
                 Text("SHOES")
-                    .foregroundColor(selectedOption == "SHOES" ? .red : .black)
+                    .foregroundColor(selectedOption == "SHOES" ? .red : isDarkMode ? Color.white : Color.black)
                 Spacer()
             }.padding()
             .onTapGesture {

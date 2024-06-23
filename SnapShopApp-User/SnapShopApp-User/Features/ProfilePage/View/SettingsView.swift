@@ -21,7 +21,7 @@ struct SettingsView: View {
     @State private var navigateToRegister = false
     @State private var navigateToBase = false
     @State private var logoutAlert = false
-
+    @AppStorage("isDarkMode") private var isDarkMode = false
 
     var body: some View {
         VStack {
@@ -70,25 +70,9 @@ struct SettingsView: View {
                             Text("Phone Number: \(viewModel.user?.phone ?? "")")
                                 .padding(.bottom, 8)
                         }
-                        Section(header: Text("CURRENCY")){
-                            
-                            HStack {
-                                Text("Currency \(currenciesViewModel.selectedCurrencyCode ?? "USD")")
-                                    
-                                Spacer()
-                                NavigationLink(
-                                    destination: CurrencyView(viewModel: currenciesViewModel),
-                                    isActive: $navigateToCurrencyView,
-                                    label: {
-                                        EmptyView()
-                                    }
-                                )// Ensure the button style doesn't interfere with the action
-                            }
-
-                        }
                         
                         //account section
-                        Section(header: Text("ACCOUNT")){
+                        Section(header: Text("Settings")){
                             NavigationLink(destination: UserOrders(orderList: orderViewModel.orderList)) {
                                 
                                 HStack{
@@ -102,7 +86,44 @@ struct SettingsView: View {
                                 }
                                 
                             }
-                            HStack(){
+                            HStack {
+                                Text("Currency \(currenciesViewModel.selectedCurrencyCode ?? "USD")")
+                                    
+                                Spacer()
+                                NavigationLink(
+                                    destination: CurrencyView(viewModel: currenciesViewModel),
+                                    isActive: $navigateToCurrencyView,
+                                    label: {
+                                        EmptyView()
+                                    }
+                                )// Ensure the button style doesn't interfere with the action
+                            }
+                            HStack{
+                                Toggle(isOn: $isDarkMode) {
+                                    Text("Dark Mode")
+                                }.toggleStyle(SwitchToggleStyle(tint: .blue))                                
+                            }
+                        }
+                        //Plicy section
+                        Section(header: Text("Support")){
+                            NavigationLink(destination: AboutUs()) {
+                                HStack{
+                                    Text("About Us")
+                                }
+                            }
+                        }
+                        Section(header: Text("POLICY")){
+                            
+                            
+                            HStack{
+                                Image(systemName:"gear")
+                                Text("Version")
+                                Spacer()
+                                Text("1.0.0").foregroundColor(.gray)
+                            }
+                        }
+                        Section(header:Text("Account")){
+                            HStack{
                                 
                                 Button(
                                     action: {
@@ -110,12 +131,17 @@ struct SettingsView: View {
                                     }) {
                                         
                                         Text("Log out")
-                                            .foregroundColor(.black)
+                                            .foregroundColor(.red)
+                                            .bold()
                                     }.alert(isPresented: $logoutAlert) {
                                         Alert(
                                             title: Text("LogOut!!"),
                                             message: Text("Are you sure to logout?"),
                                             primaryButton: .destructive(Text("Logout"), action: {
+                                                UserDefaultsManager.shared.hasDraft = false
+                                                UserDefaultsManager.shared.notifyCart = 0
+                                                UserDefaultsManager.shared.userDraftId = 0
+                                                UserDefaultsManager.shared.setUserId(key: Support.userID, value: 0)
                                                 viewModel.logout()
                                                 navigateToBase = true
                                                 logoutAlert = false
@@ -127,24 +153,7 @@ struct SettingsView: View {
                                         )
                                     }
                             }
-                            
-                        }
-                        //Plicy section
-                        Section(header: Text("POLICY")){
-                            NavigationLink(destination: AboutUs()) {
-                                HStack{
-                                    Text("About Us")
-                                }
-                            }
-                            
-                        }
-                        Section(header:Text("GENERAL")){
-                            HStack{
-                                Image(systemName:"gear")
-                                Text("Version")
-                                Spacer()
-                                Text("1.0.0").foregroundColor(.gray)
-                            }
+
                         }
                     }
                 }
