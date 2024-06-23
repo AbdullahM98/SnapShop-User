@@ -12,10 +12,13 @@ final class SignUpViewModelTest: XCTestCase {
     var viewModel: SignUpViewModel!
      var cancellables: Set<AnyCancellable>!
     var network:MockNetworkService!
+    var firebaseManager : MockFirebaseManager!
     override func setUpWithError() throws {
-        viewModel = SignUpViewModel()
+        
         cancellables = []
         network = MockNetworkService()
+        firebaseManager = MockFirebaseManager()
+        viewModel = SignUpViewModel(networkServices: network, firebaseManager: firebaseManager)
     }
 
     override func tearDownWithError() throws {

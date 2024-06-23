@@ -6,10 +6,14 @@ target 'SnapShopApp-User' do
   use_frameworks!
 
   # Pods for SnapShopApp-User
+
     pod 'FirebaseAuth'
+    pod 'FirebaseCore'
     pod 'FirebaseFirestore'
     pod 'ReachabilitySwift'
     pod 'SnackBar.swift'
+    pod 'GoogleSignIn'
+
   target 'SnapShopApp-UserTests' do
     inherit! :search_paths
     # Pods for testing

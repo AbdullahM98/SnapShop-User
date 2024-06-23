@@ -9,6 +9,7 @@ import Foundation
 import Combine
 import SwiftUI
 
+
 class SignUpViewModel: ObservableObject{
     
     @Published var emailField : FieldModel = FieldModel(value: "",  fieldType: .email)
@@ -28,13 +29,16 @@ class SignUpViewModel: ObservableObject{
     @Published var viewState: SignUpViewState = .active
 
     private var cancellables = Set<AnyCancellable>()
+    private var networkServices : NetworkService?
+    private var firebaseManager : AuthenticationProtocol?
   
-    init(){
-   
+    init(networkServices : NetworkService ,firebaseManager : AuthenticationProtocol){
+        self.networkServices = networkServices
+        self.firebaseManager = firebaseManager
     }
 
     func postCustomer(customer:Customer) {
-           Network.shared.postCustomer(customer)
+           networkServices?.postCustomer(customer)
               .sink(receiveCompletion: { [weak self] completion in
                    switch completion {
                    case.finished:
@@ -65,7 +69,7 @@ class SignUpViewModel: ObservableObject{
     
     func register(customer:  Customer) {
         self.viewState = .loading
-        FirebaseManager.shared.registerUser(email: customer.email!, password: customer.password!) { [weak self] success, userId , error in
+        firebaseManager?.registerUser(email: customer.email!, password: customer.password!) { [weak self] success, userId , error in
               if let error = error {
                   DispatchQueue.main.async {
                       self?.errorMessage = error.localizedDescription
@@ -97,4 +101,20 @@ class SignUpViewModel: ObservableObject{
         }
     }
     
+//    
+//    private func authenticateUser(for user: GIDGoogleUser?, with error: Error?) {
+//        if let error = error {
+//            print(error.localizedDescription)
+//            return
+//        }
+//        guard let authentication = user?.authentication, let idToken = authentication.idToken else { return }
+//        let credential = GoogleAuthProvider.credential(withIDToken: idToken, accessToken: authentication.accessToken)
+//        Auth.auth().signIn(with: credential) { [weak self] (_, error) in
+//            if let error = error {
+//                print(error.localizedDescription)
+//            } else {
+//                self?.state =.signedIn
+//            }
+//        }
+//    }
 }

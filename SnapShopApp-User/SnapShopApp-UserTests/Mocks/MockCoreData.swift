@@ -7,7 +7,7 @@
 
 import Foundation
 @testable import SnapShopApp_User
-class MockAppCoreData  {
+class MockAppCoreData : CoreDbService {
     var products: [ProductEntity] = []
     var isProductInFavoritesReturnValue = false
 
@@ -29,7 +29,6 @@ class MockAppCoreData  {
 }
 
 class MockUserDefaultsManager {
-   
 
     var getUserIdResult: Int?
     var hasDraft  = false

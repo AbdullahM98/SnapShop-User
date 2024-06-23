@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct SignUpScreen: View {
-    @StateObject var viewModel: SignUpViewModel = SignUpViewModel()
+    @StateObject var viewModel: SignUpViewModel = SignUpViewModel(networkServices: Network.shared, firebaseManager: FirebaseManager.shared)
     @State var email: String = ""
     @State var password: String = ""
     @State var firstName: String = ""
@@ -28,7 +28,7 @@ struct SignUpScreen: View {
         }else  {
             NavigationView {
                 VStack {
-                    Text("Register").padding(.vertical, 30).font(.title3)
+                    
                     AppTextField(fieldModel: $viewModel.firstNameField, text: $firstName)
                     AppTextField(fieldModel: $viewModel.lastNameField, text: $lastName)
                     AppTextField(fieldModel: $viewModel.emailField, text: $email)

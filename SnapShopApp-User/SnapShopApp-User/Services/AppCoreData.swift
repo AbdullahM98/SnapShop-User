@@ -8,9 +8,15 @@
 import Foundation
 import CoreData
 
+
+protocol CoreDbService {
+    func getAllProducts(by userId: String) -> [ProductEntity]
+    func addFavProduct(favProduct: ProductEntity)
+    func deleteProduct(product: ProductEntity)
+}
 // MARK: - AppCoreData Class
 
-class AppCoreData {
+class AppCoreData : CoreDbService {
     // MARK: - Singleton Instance
     
     static let shared = AppCoreData()

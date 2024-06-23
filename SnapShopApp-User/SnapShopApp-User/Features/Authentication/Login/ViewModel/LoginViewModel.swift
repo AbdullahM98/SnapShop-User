@@ -6,7 +6,10 @@
 //
 
 import Foundation
-
+import GoogleSignIn
+import FirebaseCore
+import FirebaseAuth
+import SwiftUI
 class LoginViewModel : ObservableObject {
     @Published var emailField : FieldModel = FieldModel(value: "",  fieldType: .email)
     @Published var passwordField : FieldModel = FieldModel(value: "",  fieldType: .password)
@@ -26,7 +29,8 @@ class LoginViewModel : ObservableObject {
                 DispatchQueue.main.async {
                     self.errorMessage = error.localizedDescription
                     UserDefaultsManager.shared.notifyCart = 0 
-                   
+                    self.viewState = .loginView
+                    SnackBarHelper.showSnackBar(message: "Couldn't sign in , Please try again", color: Color.red)
                 }
             } else {
                 
@@ -50,10 +54,21 @@ class LoginViewModel : ObservableObject {
                         if let customerResponse = self.isUserExists(email: email, responses: responsesList.customers).1 {
                                self.saveUserId(authResponse: customerResponse)
                            }
-                           }
+                    }else{
+                        DispatchQueue.main.async{
+                            self.viewState = .loginView
+                            SnackBarHelper.showSnackBar(message: "Couldn't sign in , Please try again", color: Color.red)
+
+                        }
+                    }
                        }
             case .failure(let error):
                 print("Error fetching customers: \(error)")
+                DispatchQueue.main.async{
+                    self.viewState = .loginView
+                    SnackBarHelper.showSnackBar(message: "Couldn't sign in , Please try again", color: Color.red)
+
+                }
             }
         }
     }
@@ -86,6 +101,42 @@ class LoginViewModel : ObservableObject {
     func setISLoggedIn(isLogged :Bool) {
         UserDefaultsManager.shared.setIsloggedIn(key: Support.isLoggedUDKey, value: isLogged)
     }
+    
+    func signInWithGoogle() {
+           guard let clientID = FirebaseApp.app()?.options.clientID else { return }
+           
+           // Create Google Sign In configuration object.
+           let config = GIDConfiguration(clientID: clientID)
+           GIDSignIn.sharedInstance.configuration = config
+
+           // Get the root view controller for presenting the sign-in flow
+           guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+                 let rootViewController = windowScene.windows.first?.rootViewController else { return }
+
+           // Start the sign-in flow
+           GIDSignIn.sharedInstance.signIn(withPresenting: rootViewController) { [weak self] result, error in
+               guard error == nil else {
+                   self?.errorMessage = error?.localizedDescription ?? "Error Signing in with Google"
+                   return
+               }
+
+               FirebaseManager.shared.signInWithGoogle(result: result) { success, error in
+                   if success {
+                      
+                       if let user = Auth.auth().currentUser {
+                           UserDefaults.standard.setValue(user.uid, forKey: Support.fireBaseUserID)
+                           self?.getUsers(email: user.email ?? "no")
+                       }
+                   } else {
+                       self?.errorMessage = error?.localizedDescription ?? " error with google"
+                       print(error?.localizedDescription ?? " error with google")
+                       SnackBarHelper.showSnackBar(message: "Error logging with Google", color: Color.red)
+                   }
+               }
+           }
+       }
+
+    
 
 }
 

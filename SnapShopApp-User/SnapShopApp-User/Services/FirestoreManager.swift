@@ -2,9 +2,18 @@ import Foundation
 import FirebaseFirestore
 import Combine
 
+// MARK: - FirestoreManager Protocol
+
+protocol FirestoreService {
+    func getAllFavProductsRemote(userId: String) -> AnyPublisher<[ProductEntity], Error>
+    func addProductToFavRemote(product: ProductEntity) -> AnyPublisher<Void, Error>
+    func removeProductFromFavRemote(productId: String) -> AnyPublisher<Void, Error>
+    
+}
+
 // MARK: - FirestoreManager Class
 
-class FirestoreManager {
+class FirestoreManager : FirestoreService{
     // MARK: - Properties
     
     let db: Firestore

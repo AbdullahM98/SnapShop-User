@@ -11,8 +11,8 @@ struct LoginScreen: View {
             if $viewModel.viewState.wrappedValue == .loginView {
                 VStack{
                     Image("app-logo").resizable().frame(width: UIScreen.screenWidth * 0.4).clipShape(/*@START_MENU_TOKEN@*/Circle()/*@END_MENU_TOKEN@*/)
-                    Text("Login").padding(.vertical,30).font(.title2).fontWeight(.bold)
-                    AppTextField(fieldModel: $viewModel.emailField,text: $text)
+                    Text("Login").padding(.bottom,30).font(.title2).fontWeight(.bold)
+                    AppTextField(fieldModel: $viewModel.emailField,text: $text).padding(/*@START_MENU_TOKEN@*/EdgeInsets()/*@END_MENU_TOKEN@*/)
                     
                     AppTextField(fieldModel: $viewModel.passwordField, text: $password)
                     
@@ -36,6 +36,12 @@ struct LoginScreen: View {
                         },label:{
                             Text("Continue as Guest").font(.footnote).fontWeight(.medium).underline().foregroundStyle(Color.gray)
                             
+                        }).padding(.bottom,10)
+                        
+                        Button(action: {
+                            viewModel.signInWithGoogle()
+                        }, label: {
+                            Image("google-icon").resizable().frame(width: UIScreen.screenWidth * 0.12, height: UIScreen.screenHeight * 0.05)
                         }).padding(.bottom,160)
                     }
 
@@ -44,7 +50,7 @@ struct LoginScreen: View {
                         print(">>>>>>\( password)")
                         viewModel.login(email: viewModel.emailField.value, password: password)
                         viewModel.viewState = .loading
-                    }).padding(.bottom,50)
+                    }).padding(.bottom,10)
 
                     
                 }.navigationBarBackButtonHidden(true).padding(.all,20)

@@ -7,6 +7,7 @@
 import FirebaseCore
 
 import SwiftUI
+import GoogleSignIn
 
 @main
 struct SnapShopApp_UserApp: App {
@@ -35,4 +36,7 @@ class AppDelegate: NSObject, UIApplicationDelegate,UNUserNotificationCenterDeleg
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
         completionHandler([.alert,.sound])
     }
+    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+           return GIDSignIn.sharedInstance.handle(url)
+       }
 }

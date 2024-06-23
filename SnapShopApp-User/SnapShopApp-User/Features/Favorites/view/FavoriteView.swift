@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct FavoriteView: View {
-    @StateObject var viewModel = FavoriteViewModel()
+    @StateObject var viewModel = FavoriteViewModel(firestoreService: FirestoreManager(), coreDBService: AppCoreData.shared)
 
     
     var body: some View {
@@ -111,9 +111,9 @@ struct FavoriteView: View {
                             
                         }.alert(isPresented: $showingDeleteAlert) {
                             Alert(
-                                title: Text("Delete Confirmation"),
-                                message: Text("Are you sure to delete this item?"),
-                                primaryButton: .destructive(Text("Delete"), action: {
+                                title: Text("Remove Confirmation"),
+                                message: Text("Are you sure to remove this item?"),
+                                primaryButton: .destructive(Text("Remove"), action: {
                                     onDeleteClick(product!)
                                     showingDeleteAlert = false
                                 }),

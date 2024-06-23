@@ -15,15 +15,17 @@ class FavoriteViewModel : ObservableObject{
     // MARK: - Published Properties
 
     @Published var products: [ProductEntity] = []
-       private var cancellables = Set<AnyCancellable>()
-        var firestoreService = FirestoreManager()
+    private var cancellables = Set<AnyCancellable>()
+    var firestoreService : FirestoreService?
+    var coreDBService : CoreDbService?
     @Published var viewState : FavViewState = .userActive
     var isConnected:Bool = false
     
     // MARK: - Initializer
 
-    init(){
-        
+    init(firestoreService : FirestoreService ,  coreDBService : CoreDbService){
+        self.firestoreService = FirestoreManager()
+        self.coreDBService = AppCoreData.shared
         self.isConnected = UserDefaults.standard.bool(forKey: Support.isConnected)
        
         if UserDefaults.standard.bool(forKey: Support.isLoggedUDKey) {
@@ -59,7 +61,7 @@ class FavoriteViewModel : ObservableObject{
                guard  let userId = UserDefaults.standard.string(forKey: Support.userID) else{
                    return
                }
-               firestoreService.getAllFavProductsRemote(userId: userId)
+               firestoreService?.getAllFavProductsRemote(userId: userId)
                    .receive(on: DispatchQueue.main)
                    .sink(receiveCompletion: { completion in
                        switch completion {
@@ -71,8 +73,12 @@ class FavoriteViewModel : ObservableObject{
                        }
                    }, receiveValue: { [weak self] products in
                        DispatchQueue.main.async {
-                           self?.products = products
-                           self?.viewState = .userActive
+                           if products.count != 0 {
+                               self?.products = products
+                               self?.viewState = .userActive
+                           }else{
+                               self?.viewState = .userInActive
+                           }
                            
                        }
                    })
@@ -84,7 +90,7 @@ class FavoriteViewModel : ObservableObject{
        
     func addProductToFavorites(product: ProductEntity) {
         if viewState == .userActive{
-            firestoreService.addProductToFavRemote(product: product)
+            firestoreService?.addProductToFavRemote(product: product)
             .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: { completion in
                 switch completion {
@@ -103,7 +109,7 @@ class FavoriteViewModel : ObservableObject{
        }
        
        func removeProductFromFavorites(productId: String) {
-           firestoreService.removeProductFromFavRemote(productId: productId)
+           firestoreService?.removeProductFromFavRemote(productId: productId)
                .receive(on: DispatchQueue.main)
                .sink(receiveCompletion: { completion in
                    switch completion {
@@ -128,13 +134,13 @@ class FavoriteViewModel : ObservableObject{
     func getAllLocalFav() ->[ProductEntity]{
         print("Getting all favs")
         let userId = UserDefaults.standard.integer(forKey: Support.userID).description
-        return  AppCoreData.shared.getAllProducts(by: userId)
+        return  coreDBService?.getAllProducts(by: userId) ?? []
     }
     func addLocalFavProduct(product:ProductEntity){
-        AppCoreData.shared.addFavProduct(favProduct: product)
+        coreDBService?.addFavProduct(favProduct: product)
     }
     func removeFromFavLocal(product:ProductEntity){
-        AppCoreData.shared.deleteProduct(product: product)
+        coreDBService?.deleteProduct(product: product)
     }
 }
 

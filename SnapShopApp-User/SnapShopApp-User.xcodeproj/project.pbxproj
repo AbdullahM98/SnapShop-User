@@ -66,7 +66,6 @@
 		5627DB2D2C12324100AB6464 /* AddressCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5627DB2C2C12324100AB6464 /* AddressCell.swift */; };
 		5627DB2F2C123D2500AB6464 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5627DB2E2C123D2500AB6464 /* ProfileViewModel.swift */; };
 		5627DB312C123EB100AB6464 /* UserAddresses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5627DB302C123EB100AB6464 /* UserAddresses.swift */; };
-		564B1E752C11FE9E005D515E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 564B1E742C11FE9E005D515E /* GoogleService-Info.plist */; };
 		5657AAAF2C1C9023009906AE /* ApplePayStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5657AAAE2C1C9023009906AE /* ApplePayStrategy.swift */; };
 		568D6F572C2366A6009F11D9 /* BaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568D6F562C2366A6009F11D9 /* BaseViewModel.swift */; };
 		568D6F592C2366BD009F11D9 /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568D6F582C2366BD009F11D9 /* BaseView.swift */; };
@@ -132,6 +131,8 @@
 		768F30E02C22505000FA1F68 /* SnackBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 768F30DF2C22505000FA1F68 /* SnackBar.swift */; };
 		768F30E22C229F8B00FA1F68 /* CountryCodes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 768F30E12C229F8B00FA1F68 /* CountryCodes.swift */; };
 		768F30E42C22B33700FA1F68 /* QuantitySelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 768F30E32C22B33700FA1F68 /* QuantitySelector.swift */; };
+		76B08DEC2C2789570077C649 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 76B08DEB2C2789570077C649 /* GoogleService-Info.plist */; };
+		76B08DEF2C27B69C0077C649 /* MockFirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76B08DEE2C27B69C0077C649 /* MockFirebaseManager.swift */; };
 		906BAD87611507B26F870BF5 /* Pods_SnapShopApp_User_SnapShopApp_UserUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE65ACFE98183A05FD1CCDC9 /* Pods_SnapShopApp_User_SnapShopApp_UserUITests.framework */; };
 /* End PBXBuildFile section */
 
@@ -212,7 +213,6 @@
 		5627DB2C2C12324100AB6464 /* AddressCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressCell.swift; sourceTree = "<group>"; };
 		5627DB2E2C123D2500AB6464 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		5627DB302C123EB100AB6464 /* UserAddresses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAddresses.swift; sourceTree = "<group>"; };
-		564B1E742C11FE9E005D515E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		5657AAAD2C1C8E16009906AE /* SnapShopApp-User.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "SnapShopApp-User.entitlements"; sourceTree = "<group>"; };
 		5657AAAE2C1C9023009906AE /* ApplePayStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplePayStrategy.swift; sourceTree = "<group>"; };
 		568D6F562C2366A6009F11D9 /* BaseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewModel.swift; sourceTree = "<group>"; };
@@ -282,6 +282,9 @@
 		768F30DF2C22505000FA1F68 /* SnackBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnackBar.swift; sourceTree = "<group>"; };
 		768F30E12C229F8B00FA1F68 /* CountryCodes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryCodes.swift; sourceTree = "<group>"; };
 		768F30E32C22B33700FA1F68 /* QuantitySelector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuantitySelector.swift; sourceTree = "<group>"; };
+		76B08DEB2C2789570077C649 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		76B08DED2C2789890077C649 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		76B08DEE2C27B69C0077C649 /* MockFirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockFirebaseManager.swift; sourceTree = "<group>"; };
 		904B12A396AEBB26D6B54798 /* Pods_SnapShopApp_User.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SnapShopApp_User.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		921EB7F323924BAB601F80CD /* Pods-SnapShopApp-UserTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SnapShopApp-UserTests.debug.xcconfig"; path = "Target Support Files/Pods-SnapShopApp-UserTests/Pods-SnapShopApp-UserTests.debug.xcconfig"; sourceTree = "<group>"; };
 		A3C1309534515CE06D2D9C87 /* Pods-SnapShopApp-UserTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SnapShopApp-UserTests.release.xcconfig"; path = "Target Support Files/Pods-SnapShopApp-UserTests/Pods-SnapShopApp-UserTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -896,6 +899,7 @@
 		761A5CA42C0EFDC60057BA3C = {
 			isa = PBXGroup;
 			children = (
+				76B08DEB2C2789570077C649 /* GoogleService-Info.plist */,
 				761A5CAF2C0EFDC60057BA3C /* SnapShopApp-User */,
 				761A5CC02C0EFDC80057BA3C /* SnapShopApp-UserTests */,
 				761A5CCA2C0EFDC90057BA3C /* SnapShopApp-UserUITests */,
@@ -918,8 +922,8 @@
 		761A5CAF2C0EFDC60057BA3C /* SnapShopApp-User */ = {
 			isa = PBXGroup;
 			children = (
+				76B08DED2C2789890077C649 /* Info.plist */,
 				5657AAAD2C1C8E16009906AE /* SnapShopApp-User.entitlements */,
-				564B1E742C11FE9E005D515E /* GoogleService-Info.plist */,
 				7606FB8C2C0F737F00E1D3AF /* Models */,
 				7606FB8B2C0F736100E1D3AF /* Features */,
 				7606FB8A2C0F733C00E1D3AF /* Utils */,
@@ -943,14 +947,11 @@
 		761A5CC02C0EFDC80057BA3C /* SnapShopApp-UserTests */ = {
 			isa = PBXGroup;
 			children = (
-
 				762443822C23E5F6001D57D6 /* Auth */,
 				7624437F2C23E0DF001D57D6 /* ProductDetail */,
 				762443742C23D83B001D57D6 /* Mocks */,
 				762443712C23D7E2001D57D6 /* Favorite */,
-
 				569E17872C23D8CB0096447A /* CartPage */,
-
 				0A9064112C23CE2B00D63102 /* AddressesPage */,
 				0A9064052C2369B300D63102 /* CategoryPage */,
 				0A9064012C2369B200D63102 /* CouponsPage */,
@@ -986,6 +987,7 @@
 				762443792C23DBDE001D57D6 /* NetworkTest.swift */,
 				7624437B2C23DF00001D57D6 /* MockCoreData.swift */,
 				7624437D2C23DF7D001D57D6 /* MockFireStoreManager.swift */,
+				76B08DEE2C27B69C0077C649 /* MockFirebaseManager.swift */,
 			);
 			path = Mocks;
 			sourceTree = "<group>";
@@ -1191,7 +1193,7 @@
 			files = (
 				761A5CB82C0EFDC80057BA3C /* Preview Assets.xcassets in Resources */,
 				761A5CB52C0EFDC80057BA3C /* Assets.xcassets in Resources */,
-				564B1E752C11FE9E005D515E /* GoogleService-Info.plist in Resources */,
+				76B08DEC2C2789570077C649 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1431,6 +1433,7 @@
 				7624437E2C23DF7D001D57D6 /* MockFireStoreManager.swift in Sources */,
 				0A9064072C2369B300D63102 /* CurrencyViewModel_Tests.swift in Sources */,
 				762443732C23D828001D57D6 /* FavoriteViewModelTest.swift in Sources */,
+				76B08DEF2C27B69C0077C649 /* MockFirebaseManager.swift in Sources */,
 				761A5CC22C0EFDC80057BA3C /* SnapShopApp_UserTests.swift in Sources */,
 				762443762C23D856001D57D6 /* MockNetwork.swift in Sources */,
 				762443842C23E60D001D57D6 /* SignUpViewModelTest.swift in Sources */,
@@ -1604,6 +1607,7 @@
 				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "SnapShopApp-User/Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -1635,6 +1639,7 @@
 				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "SnapShopApp-User/Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

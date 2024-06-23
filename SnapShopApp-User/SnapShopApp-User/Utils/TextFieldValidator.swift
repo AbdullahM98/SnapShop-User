@@ -99,7 +99,7 @@ enum TextfieldType: FieldValidatorProtocol {
         if password.isEmpty {
             return "Password cannot be empty"
         } else if password.count < 8 {
-            return "Password must be at least 8 characters long"
+            return "Password must be at least 8 characters or digits"
         }
         return nil
     }
