@@ -81,6 +81,9 @@
 		56ACA7592C19EDD000AD48AC /* FieldValidation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56ACA7582C19EDD000AD48AC /* FieldValidation.swift */; };
 		56ACA75B2C19EE0200AD48AC /* Support.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56ACA75A2C19EE0200AD48AC /* Support.swift */; };
 		56B0BB0A2C28510A00267578 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 56B0BB092C28510A00267578 /* GoogleService-Info.plist */; };
+		56B0BB0C2C2863E100267578 /* CountryNumbers.json in Resources */ = {isa = PBXBuildFile; fileRef = 56B0BB0B2C2863E100267578 /* CountryNumbers.json */; };
+		56B0BB0E2C28652900267578 /* CPData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B0BB0D2C28652900267578 /* CPData.swift */; };
+		56B0BB102C2869CE00267578 /* temp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B0BB0F2C2869CE00267578 /* temp.swift */; };
 		56D46E912C14FCC00019EA1B /* CheckOutPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D46E902C14FCC00019EA1B /* CheckOutPage.swift */; };
 		56D5B6052C1505C2006EF83B /* PaymentPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D5B6042C1505C2006EF83B /* PaymentPage.swift */; };
 		56D5B6072C150606006EF83B /* ButtonWithImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D5B6062C150606006EF83B /* ButtonWithImage.swift */; };
@@ -231,6 +234,9 @@
 		56ACA7582C19EDD000AD48AC /* FieldValidation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FieldValidation.swift; sourceTree = "<group>"; };
 		56ACA75A2C19EE0200AD48AC /* Support.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Support.swift; sourceTree = "<group>"; };
 		56B0BB092C28510A00267578 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		56B0BB0B2C2863E100267578 /* CountryNumbers.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = CountryNumbers.json; sourceTree = "<group>"; };
+		56B0BB0D2C28652900267578 /* CPData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CPData.swift; sourceTree = "<group>"; };
+		56B0BB0F2C2869CE00267578 /* temp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = temp.swift; sourceTree = "<group>"; };
 		56D46E902C14FCC00019EA1B /* CheckOutPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckOutPage.swift; sourceTree = "<group>"; };
 		56D5B6042C1505C2006EF83B /* PaymentPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentPage.swift; sourceTree = "<group>"; };
 		56D5B6062C150606006EF83B /* ButtonWithImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonWithImage.swift; sourceTree = "<group>"; };
@@ -496,6 +502,7 @@
 				5627DB2C2C12324100AB6464 /* AddressCell.swift */,
 				56ACA7562C19ED6B00AD48AC /* EditAddress.swift */,
 				0A9064212C2708F300D63102 /* LocationAddress.swift */,
+				56B0BB0F2C2869CE00267578 /* temp.swift */,
 			);
 			path = subViews;
 			sourceTree = "<group>";
@@ -702,6 +709,8 @@
 			children = (
 				56DC253E2C15B65200008690 /* ProfileModels.swift */,
 				0AFF59802C17152A002DEAFC /* OrderResponse.swift */,
+				56B0BB0B2C2863E100267578 /* CountryNumbers.json */,
+				56B0BB0D2C28652900267578 /* CPData.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1200,6 +1209,7 @@
 				761A5CB82C0EFDC80057BA3C /* Preview Assets.xcassets in Resources */,
 				56B0BB0A2C28510A00267578 /* GoogleService-Info.plist in Resources */,
 				761A5CB52C0EFDC80057BA3C /* Assets.xcassets in Resources */,
+				56B0BB0C2C2863E100267578 /* CountryNumbers.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1416,6 +1426,7 @@
 				76257A3E2C177900001C4006 /* FirestoreManager.swift in Sources */,
 				0A44F0BA2C1C7CF70031E649 /* TwoButtonAlert.swift in Sources */,
 				7606FBA62C0F78B400E1D3AF /* CustomTextField.swift in Sources */,
+				56B0BB102C2869CE00267578 /* temp.swift in Sources */,
 				768F30E02C22505000FA1F68 /* SnackBar.swift in Sources */,
 				56A580072C1460BE00BBC168 /* DrftOrdersModel.swift in Sources */,
 				5627DB2B2C12320000AB6464 /* AddAddress.swift in Sources */,
@@ -1427,6 +1438,7 @@
 				0A44F0C12C1C84F30031E649 /* ImageButtonAlert.swift in Sources */,
 				0AF583562C11EF6D006D5059 /* HomeView.swift in Sources */,
 				0AF5836C2C11F10A006D5059 /* CarouselSlider.swift in Sources */,
+				56B0BB0E2C28652900267578 /* CPData.swift in Sources */,
 				0AF5837C2C11F2E1006D5059 /* CustomBackButton.swift in Sources */,
 				7606FBC42C10AF1C00E1D3AF /* AppModel.xcdatamodeld in Sources */,
 				7606FBB82C0F82FF00E1D3AF /* FontOptions.swift in Sources */,

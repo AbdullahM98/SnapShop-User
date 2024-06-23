@@ -15,6 +15,20 @@ struct AddAddress: View {
     @State var zipTextFieldData: String = ""
     @State var phoneAddressTextFieldData: String = ""
     
+    //fore phone
+    @State var presentSheet = false
+    @State var countryCode : String = "+2"
+    @State var countryFlag : String = "🇪🇬"
+    @State var countryPattern : String = "#### ### ####"
+    @State var countryLimit : Int = 17
+    @State var mobPhoneNumber = ""
+    @State private var searchCountry: String = ""
+    @Environment(\.colorScheme) var colorScheme
+    @FocusState private var keyIsFocused: Bool
+    
+    let counrties: [CPData] = Bundle.main.decode("CountryNumbers.json")
+
+    
     var onSaveClick : (_ address:NewAddressRoot) -> Void
     var onCancelClick : () -> Void
     @State private var validationMessages: [FieldType: String] = [:]
@@ -204,3 +218,5 @@ struct AddAddress_Previews: PreviewProvider {
         AddAddress(onSaveClick: {address in }, onCancelClick: {})
     }
 }
+
+

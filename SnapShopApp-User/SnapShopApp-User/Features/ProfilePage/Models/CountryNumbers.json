@@ -1,0 +1,17 @@
+[{
+    "id": "0232",
+    "name": "Egypt",
+    "flag": "🇪🇬",
+    "code": "EG",
+    "dial_code": "+2",
+    "pattern": "#### ### ####",
+    "limit": 17
+}, {
+    "id": "0235",
+    "name": "United States",
+    "flag": "🇺🇸",
+    "code": "US",
+    "dial_code": "+1",
+    "pattern": "### ### ####",
+    "limit": 17
+}]
