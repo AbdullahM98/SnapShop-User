@@ -110,20 +110,21 @@ struct FavoriteView: View {
                             } label: {
                                 Image("trash")
                                 
-
-                        }.alert(isPresented: $showingDeleteAlert) {
-                            Alert(
-                                title: Text("Remove Confirmation"),
-                                message: Text("Are you sure to remove this item?"),
-                                primaryButton: .destructive(Text("Remove"), action: {
-                                    onDeleteClick(product!)
-                                    showingDeleteAlert = false
-                                }),
-                                secondaryButton: .cancel(Text("Cancel"), action: {
-                                    showingDeleteAlert = false
-                                })
-                            )
-
+                                
+                            }.alert(isPresented: $showingDeleteAlert) {
+                                Alert(
+                                    title: Text("Remove Confirmation"),
+                                    message: Text("Are you sure to remove this item?"),
+                                    primaryButton: .destructive(Text("Remove"), action: {
+                                        onDeleteClick(product!)
+                                        showingDeleteAlert = false
+                                    }),
+                                    secondaryButton: .cancel(Text("Cancel"), action: {
+                                        showingDeleteAlert = false
+                                    })
+                                )
+                                
+                            }
                         }
                     }
                 }
