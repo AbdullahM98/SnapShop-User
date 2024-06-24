@@ -7,19 +7,18 @@
 
 import Foundation
 
-import Foundation
-
 class CouponsViewModel: ObservableObject {
     @Published var coupones: [DiscountCodes] = []
     @Published var priceRules: [PriceRule] = []
     @Published var singleRule: PriceRule?
     @Published var dict: [DiscountCodes: PriceRule] = [:]
-    
-    static let shared = CouponsViewModel()
-    
-    private init() {
-        fetchPriceRules()
+    @Published var orderToUpdate:DraftOrderItemDetails?
+    @Published var isLoading = true
+    init() {
         print("INIT CouponsVM")
+    }
+    deinit{
+        print("DEINIT CouponsVM")
     }
     
     func fetchCoupons() {
@@ -30,6 +29,7 @@ class CouponsViewModel: ObservableObject {
         let dispatchGroup = DispatchGroup()
         
         for rule in self.priceRules {
+            //fetch coupons for every price rule
             dispatchGroup.enter()
             Network.shared.request("\(Support.baseUrl)/price_rules/\(String(describing: rule.id ?? 1123082305715))/discount_codes.json", method: "GET", responseType: DiscountCodesRoot.self) { [weak self] result in
                 switch result {
@@ -47,10 +47,12 @@ class CouponsViewModel: ObservableObject {
         
         dispatchGroup.notify(queue: .main) {
             self.setUpDict()
+            self.isLoading = false
         }
     }
     
     func fetchPriceRules() {
+        //fetch all price rules ->
         Network.shared.request("\(Support.baseUrl)/price_rules.json", method: "GET", responseType: PriceRulesArray.self) { [weak self] result in
             switch result {
             case .success(let response):
@@ -62,28 +64,11 @@ class CouponsViewModel: ObservableObject {
                 print("before fetching coupons")
                 
             case .failure(let error):
-                print("Error fetching data2: \(error)")
+                print("Error fetching price rules: \(error)")
             }
         }
     }
-    
-    func fetchPriceRulesById(id: Int) {
-        Network.shared.request("\(Support.baseUrl)/price_rules/\(String(describing: id)).json", method: "GET", responseType: PriceRulesRoot.self) { [weak self] result in
-            switch result {
-            case .success(let response):
-                print("im in switch price rules")
-                DispatchQueue.main.async {
-                    self?.singleRule = response.price_rule
-                    self?.fetchCoupons()
-                }
-                print("before fetching coupons")
-                
-            case .failure(let error):
-                print("Error fetching data2: \(error)")
-            }
-        }
-    }
-    
+
     func setUpDict() {
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
@@ -96,4 +81,5 @@ class CouponsViewModel: ObservableObject {
             }
         }
     }
+
 }

@@ -14,6 +14,8 @@ struct AppButton: View {
    
     private var isFilled: Bool
     private var onClick : () -> Void
+    @AppStorage("isDarkMode") private var isDarkMode = false
+
     
     init(text: String, width: CGFloat, height: CGFloat, isFilled: Bool, onClick: @escaping () -> Void) {
         self.text = text
@@ -31,15 +33,15 @@ struct AppButton: View {
                 }) {
                     Text(text)
                        .font(.custom(FontTypes.bold.rawValue, size: CGFloat(FontSizes.subtitle.rawValue)))
-                       .foregroundColor(isFilled ? Color.white : Color.black)
+                       .foregroundColor(isFilled ? (isDarkMode ? Color.black : Color.white) : (isDarkMode ? Color.white : Color.black))
                 }
                .frame(width: width, height: height)
-               .background(isFilled ? Color.black : Color.clear)
+               .background(isFilled ? (isDarkMode ? Color.white : Color.black ) : (isDarkMode ? Color.black : Color.clear))
                .clipShape(RoundedRectangle(cornerRadius: 6))
             }
            .overlay(
                 RoundedRectangle(cornerRadius: 6)
-                   .stroke(isFilled ? Color.clear : Color.black, lineWidth: 2)
+                    .stroke(isFilled ? (isDarkMode ? Color.black : Color.clear ) : (isDarkMode ? Color.white : Color.black), lineWidth: 2)
             )
         }
     }

@@ -7,24 +7,38 @@
 import FirebaseCore
 
 import SwiftUI
+import GoogleSignIn
 
 @main
 struct SnapShopApp_UserApp: App {
+    @AppStorage("isDarkMode") private var isDarkMode = false
+    let handler = NotificationHandler()
     init(){
-//       FirebaseApp.configure()
+        FirebaseApp.configure()
+        handler.askPermission()
+        
     }
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .preferredColorScheme(isDarkMode ? .dark : .light)
         }
     }
 }
 
 
-class AppDelegate: NSObject, UIApplicationDelegate {
-  func application(_ application: UIApplication,
-                   didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
-   // FirebaseApp.configure()
-    return true
-  }
+class AppDelegate: NSObject, UIApplicationDelegate,UNUserNotificationCenterDelegate {
+    func application(_ application: UIApplication,
+                     didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
+        UNUserNotificationCenter.current().delegate = self
+        return true
+    }
+
+       
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        completionHandler([.alert,.sound])
+    }
+    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+           return GIDSignIn.sharedInstance.handle(url)
+       }
 }

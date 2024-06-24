@@ -9,6 +9,8 @@ import SwiftUI
 
 struct ProductCell: View {
     let product: PopularProductItem
+    @AppStorage("isDarkMode") private var isDarkMode = false
+
     init(product: PopularProductItem) {
         self.product = product
         setupPageControlAppearance()
@@ -46,28 +48,46 @@ struct ProductCell: View {
                     Text(product.product_type ?? "sho").font(.system(size: 12, weight: .regular))
                 }
                 HStack{
-                    Text(product.title ?? "Adidas shoes").lineLimit(1).font(.system(size: 12, weight: .regular))
+                    Text(extractedTitle(product.title))
+                        .lineLimit(1)
+                        .font(.system(size: 12, weight: .regular))
+                        .foregroundColor(isDarkMode ? Color.white : Color.black)
                 }
                 HStack{
-                    Text("\(product.variants?[0].price ?? "100") USD").foregroundColor(.red).font(.system(size: 16, weight: .regular))
+                    Text("\(String(format: "%.0f",(Double(product.variants?[0].price ?? "1.0" ) ?? 1 ) * (Double(UserDefaultsManager.shared.selectedCurrencyValue ?? "1") ?? 1))) \(UserDefaultsManager.shared.selectedCurrencyCode ?? "USD")").foregroundColor(.red).font(.system(size: 14, weight: .regular))
                     Spacer()
                     if let priceString = product.variants?.first?.price,
                        let price = Double(priceString) {
-                        Text(String(format: "%.2f USD", price + 20))
+                        Text("\(String(format: "%.0f",((Double(product.variants?[0].price ?? "1.0" ) ?? 1 )  * (Double(UserDefaultsManager.shared.selectedCurrencyValue ?? "1") ?? 1)) * 1.1)) \(UserDefaultsManager.shared.selectedCurrencyCode ?? "USD")")
                             .foregroundColor(.gray)
                             .strikethrough(color: .gray)
-                            .font(.system(size: 16, weight: .regular))
+                            .font(.system(size: 14, weight: .regular))
                     } else {
-                        Text("N/A USD")
+                        Text("N/A")
                             .foregroundColor(.gray)
                             .strikethrough(color: .gray)
-                            .font(.system(size: 16, weight: .regular))
+                            .font(.system(size: 14, weight: .regular))
                     }
                 }
                 }
             }
-        }.frame(width: 175,height: 280)
+        }.padding()
+        .frame(width: 170,height: 280)
+        .background(isDarkMode ? Color.black : Color.white)
+            .cornerRadius(10)
+            .shadow(radius: 5)
     }
+    
+    private func extractedTitle(_ title: String?) -> String {
+        guard let title = title else { return "Unknown Title" }
+        let components = title.split(separator: "|").map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
+        if components.count > 1 {
+            return components[1]
+        } else {
+            return title
+        }
+    }
+    
     private func setupPageControlAppearance() {
             UIPageControl.appearance().currentPageIndicatorTintColor = UIColor.black
             UIPageControl.appearance().pageIndicatorTintColor = UIColor.lightGray

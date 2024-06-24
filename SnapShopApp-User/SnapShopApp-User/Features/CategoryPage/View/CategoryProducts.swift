@@ -9,27 +9,30 @@ import SwiftUI
 
 struct CategoryProducts: View {
     var products: [PopularProductItem]
-    private let
-    adaptiveColumns = [
-        GridItem(.adaptive (minimum: 170))
+    private let adaptiveColumns = [
+        GridItem(.adaptive(minimum: 170))
     ]
     
     var body: some View {
-        VStack(alignment:.leading ){
-            ScrollView {
-                LazyVGrid(columns: [GridItem(.adaptive(minimum: UIScreen.screenWidth/2-35,maximum: UIScreen.screenWidth/2-5))]) {
-                    ForEach(products, id: \.id) { product in
-                        CategoryProductCell(product: product)
-                    }
+        VStack(alignment: .leading) {
+            if products.isEmpty {
+                Spacer()
+                Image("no-products")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .padding()
+                Spacer()
+            } else {
+                ScrollView {
+                    LazyVGrid(columns: adaptiveColumns) {
+                        ForEach(products, id: \.id) { product in
+                            ProductCell(product: product)
+                        }
+                    }.padding(.vertical,8)
                 }
             }
-        }.padding(.horizontal,16).padding(.top,8)
-    }
-}
-
-
-struct CategoryProducts_Previews: PreviewProvider {
-    static var previews: some View {
-        CategoryProducts(products: [PopularProductItem]())
+        }
+        .padding(.horizontal, 16)
+        .padding(.top, 8)
     }
 }

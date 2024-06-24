@@ -13,6 +13,7 @@ struct CarouselSlider: View {
     @State private var timer: AnyCancellable?
     @State private var selectedImageIndex: Int = 0
     @State private var navigateToCoupons = false
+    @AppStorage("isDarkMode") private var isDarkMode = false
 
     var body: some View {
         VStack {
@@ -37,7 +38,7 @@ struct CarouselSlider: View {
                 HStack {
                     ForEach(0..<adsImages.count, id: \.self) { index in
                         Capsule()
-                            .fill(Color.black.opacity(selectedImageIndex == index ? 0.7 : 0.2))
+                            .fill(isDarkMode ? Color.white.opacity (selectedImageIndex == index ? 0.7 : 0.2) : Color.black.opacity(selectedImageIndex == index ? 0.7 : 0.2))
                             .frame(width: 8, height: 8)
                             .onTapGesture {
                                 selectedImageIndex = index
@@ -46,7 +47,7 @@ struct CarouselSlider: View {
                     .offset(y: 90)
                 }
             }
-            .frame(height: 150)
+            .frame(height: UIScreen.screenHeight / 6)
             .padding(.bottom, 16)
             .onAppear {
                 timer = Timer.publish(every: 60, on: .main, in: .common)
@@ -61,7 +62,7 @@ struct CarouselSlider: View {
                 timer?.cancel()
             }
 
-            NavigationLink(destination: CouponsPage(), isActive: $navigateToCoupons) {
+            NavigationLink(destination: CouponsPage(fromCart:  false), isActive: $navigateToCoupons) {
                 EmptyView()
             }
         }

@@ -8,39 +8,58 @@
 import SwiftUI
 
 struct CategoryView: View {
-    @ObservedObject var viewModel = HomeViewModel.shared
-    @State var isPresented : Bool = false
+    @StateObject var viewModel = CategoryViewModel()
+    @State var isPresented: Bool = false
     @State var settingsDetents = PresentationDetent.medium
     @AppStorage("selectedOption") private var selectedOption: String = "ALL"
+    @AppStorage("selectedCollection") private var selectedCollection: String = "ALL"
+    @AppStorage("isDarkMode") private var isDarkMode = false
+
+
     var body: some View {
-        HStack{
-            HomeSearchBar(viewModel: viewModel)
-            Button(action: {
-                isPresented.toggle()
-            }, label: {
-                Image(systemName: "line.horizontal.3.decrease")
-                    .font(.system(size: 24, weight: .semibold))
-                    .padding(.horizontal)
-                    .padding(.vertical,1)
-                    .foregroundColor(.black)
-            })
-            .sheet(isPresented: $isPresented, content: {
-                FilterBottomSheet(viewModel: viewModel).presentationDetents([.medium], selection: $settingsDetents)
-            })
-        }
-        Divider().background(Color.black)
-        FilterBar(viewModel: viewModel)
-        CategoryProducts(products: viewModel.filteredProducts)
-            .onDisappear {
-                selectedOption = "ALL"
+        VStack {
+            if viewModel.isLoading {
+                Spacer()
+                
+                LottieView(animationFileName: "ShoppingAnimation", loopMode: .loop)
+                    .frame(width: 200, height: 200)
+                Spacer()
+            } else {
+                HStack {
+                    HomeSearchBar(viewModel: viewModel)
+                    Button(action: {
+                        isPresented.toggle()
+                    }, label: {
+                        Image(systemName: "line.horizontal.3.decrease")
+                            .font(.system(size: 24, weight: .semibold))
+                            .padding(.horizontal)
+                            .padding(.vertical, 1)
+                            .foregroundColor(isDarkMode ? Color.white : Color.black)
+                    })
+                    .sheet(isPresented: $isPresented, content: {
+                        FilterBottomSheet(viewModel: viewModel)
+                            .presentationDetents([.medium], selection: $settingsDetents)
+                    })
+                }
+                Divider().background(isDarkMode ? Color.white : Color.black)
+                FilterBar(viewModel: viewModel)
+                CategoryProducts(products: viewModel.filteredProducts)
             }
+        }
+        .padding(.bottom,60)
+        .onAppear {
+            viewModel.fetchProducts()
+        }.onDisappear{
+            selectedOption = "ALL"
+            selectedCollection = "ALL"
+        }
     }
 }
 
 struct CategoryView_Previews: PreviewProvider {
     static var previews: some View {
         CategoryView()
-        
     }
 }
+
 

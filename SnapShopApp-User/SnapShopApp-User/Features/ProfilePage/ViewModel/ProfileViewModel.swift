@@ -6,25 +6,94 @@
 //
 
 import Foundation
+import SwiftUI
+
+// MARK: - ProfileViewModel
 
 class ProfileViewModel: ObservableObject {
-    @Published var user: CustomerDetails?
     
-    init() {
-        fetchUserById(id: "7290794967219")
-    }
+    // MARK: - Published Properties
 
-    func fetchUserById(id: String) {
-        let url = "\(Support.baseUrl)/customers/\(id).json"
-        Network.shared.request(url, method: "GET", responseType: CustomerResponse.self) { [weak self] result in
+    @Published var viewState: ProfileViewState
+    @Published var user: CustomerProfileDetails?
+    @Published var isLoading: Bool = true
+    
+    // MARK: - Initializer
+
+    init() {
+        print("PVM INIT")
+        self.viewState = .loading
+    }
+    deinit {
+        print("PVM DEINIT")
+    }
+    
+    // MARK: - Public Methods
+
+    func fetchUserById() {
+         let userId = UserDefaults.standard.integer(forKey: Support.userID)
+        let url = "\(Support.baseUrl)/customers/\(userId).json"
+        Network.shared.request(url, method: "GET", responseType: CustomerProfileRoot.self) { [weak self] result in
             switch result {
             case .success(let user):
                 DispatchQueue.main.async {
+                    self?.isLoading = false
+                    self?.viewState = .userActive
                     self?.user = user.customer
                 }
+
             case .failure(let error):
                 print("Error fetching user details: \(error)")
+                DispatchQueue.main.async{
+                    self?.viewState = .userInActive
+                }
+                
+                
             }
         }
     }
+    
+    func updateUserData(user:CustomerUpdateRequest){
+        let customerId = UserDefaults.standard.integer(forKey: Support.userID)
+        Network.shared.updateData(object: user, to: "https://mad-ism-ios-1.myshopify.com/admin/api/2024-04/customers/\(customerId).json" ){  [weak self] result in
+            switch result {
+            case .success(let response):
+                DispatchQueue.main.async {
+                    print("\(response.customer?.email)")
+                    self?.fetchUserById()
+                    
+                }
+            case .failure(let error):
+                print("Error updating user data: \(error)")
+            }
+        }
+    }
+    
+    
+    func logout(){
+        UserDefaults.standard.set(false, forKey: Support.isLoggedUDKey)
+        UserDefaultsManager.shared.hasDraft = false
+        UserDefaultsManager.shared.notifyCart = 0
+
+        UserDefaultsManager.shared.userDraftId = 0
+        FirebaseManager.shared.logout()
+        print("User draft ID in log out \(UserDefaultsManager.shared.userDraftId) must be 0")
+
+    }
+    
+    func isUserValidated() -> Bool{
+        guard let isLoggedIn = UserDefaults.standard.value(forKey: Support.isLoggedUDKey) else{
+            return false
+        }
+      return isLoggedIn as! Bool
+    }
+    
+}
+
+// MARK: - ProfileViewState
+
+enum ProfileViewState {
+    case userInActive
+    case userActive
+    case loading
 }

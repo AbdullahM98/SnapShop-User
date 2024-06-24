@@ -8,28 +8,47 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State var selectedTab:Tabs = .home
+    @StateObject private var locationViewModel = LocationViewModel()
+    @StateObject private var networkMonitor = NetworkMonitor()
+    @State var endAnimation: Bool = false
+    @AppStorage("currentPage") var currentPage = 1
+    let handler = NotificationHandler()
     var body: some View {
-
-        NavigationStack{
-            VStack {
-                switch selectedTab{
-                case .home:
-                    HomeView()
-                case .explore:
-                    CategoryView()
-                case .cart:
-                    Text("Cart")
-                case .saved:
-                    Text("Saved")
-                case .profile:
-                    ProfileView()
+        ZStack{
+            VStack{
+                if currentPage > totalPages {
+                    BaseView()
+                }else{
+                    OnBoardingView()
                 }
-                Spacer()
-                AppTabBar(selectedTab: $selectedTab)
-            }.ignoresSafeArea(edges: .bottom)
-        }
+            }
+            //.offset(y: endAnimation ? 0 : getRect().height)
+            .navigationBarBackButtonHidden(true)
+                .onAppear{
+                    handler.askPermission()
 
+                    locationViewModel.requestLocation()
+
+                    handler.sendNotification(date: Date(), type: "time", timeInterval: 3600)
+
+                }
+            SplashScreen(endAnimation: $endAnimation)
+        }
+        /*VStack{
+            if currentPage > totalPages {
+                BaseView()
+            }else{
+                OnBoardingView()
+            }
+        }.navigationBarBackButtonHidden(true)
+            .onAppear{
+                handler.askPermission()
+
+                locationViewModel.requestLocation()
+
+                handler.sendNotification(date: Date(), type: "time", timeInterval: 3600)
+
+            }*/
     }
 }
 

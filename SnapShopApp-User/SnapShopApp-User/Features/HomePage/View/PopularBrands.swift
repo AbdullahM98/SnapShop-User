@@ -8,16 +8,16 @@
 import SwiftUI
 
 struct PopularBrands: View {
-    @ObservedObject var viewModel = HomeViewModel.shared
+    @StateObject var viewModel : HomeViewModel
     var body: some View {
         VStack(alignment: .leading){
             Text("Popular Brands")
                 .font(.system(size: 20, weight: .semibold))
             ScrollView(.horizontal){
-                HStack{
+                HStack(spacing: 10){
                     ForEach(viewModel.smartCollections, id: \.id) { brand in
-                        BrandCell(brand: brand)
-                    }
+                        BrandCell(viewModel:viewModel,brand: brand)
+                    }.padding(.all,4)
                 }
             }.scrollIndicators(.hidden)
         }.padding(.horizontal,16)
@@ -30,6 +30,6 @@ struct PopularBrands: View {
 
 struct BrandsView_Previews: PreviewProvider {
     static var previews: some View {
-        PopularBrands()
+        PopularBrands(viewModel: HomeViewModel())
     }
 }

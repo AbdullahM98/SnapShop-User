@@ -25,7 +25,11 @@ struct TabBarButton: View {
                     .scaledToFit()
                     .frame(width: 24,height: 24)
                 Text("\(buttonText)")
+                    .font(.system(size: 12))
+                    .foregroundColor(.black)
+                    
             }.frame(width: geo.size.width,height: geo.size.height)
+            
         }
     }
 }
