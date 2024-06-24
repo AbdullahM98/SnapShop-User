@@ -146,6 +146,7 @@ struct ProfileEdit: View {
                             .stroke(Color.black  ,lineWidth: 2)
                     )
                 }
+                Spacer()
                 ZStack {
                     HStack {
                         Button(action: {

@@ -48,7 +48,10 @@ struct ProductCell: View {
                     Text(product.product_type ?? "sho").font(.system(size: 12, weight: .regular))
                 }
                 HStack{
-                    Text(extractedTitle(product.title)).lineLimit(1).font(.system(size: 12, weight: .regular)).foregroundColor(.black)
+                    Text(extractedTitle(product.title))
+                        .lineLimit(1)
+                        .font(.system(size: 12, weight: .regular))
+                        .foregroundColor(isDarkMode ? Color.white : Color.black)
                 }
                 HStack{
                     Text("\(String(format: "%.0f",(Double(product.variants?[0].price ?? "1.0" ) ?? 1 ) * (Double(UserDefaultsManager.shared.selectedCurrencyValue ?? "1") ?? 1))) \(UserDefaultsManager.shared.selectedCurrencyCode ?? "USD")").foregroundColor(.red).font(.system(size: 14, weight: .regular))

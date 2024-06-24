@@ -23,7 +23,9 @@ struct ProductDetailView: View {
         VStack{
             if viewModel.isLoading {
                 Spacer()
-                ProgressView()
+                
+                LottieView(animationFileName: "ShoppingAnimation", loopMode: .loop)
+                    .frame(width: 200, height: 200)
                 Spacer()
             }else{
                 ScrollView{
@@ -112,11 +114,16 @@ struct ProductDetailView: View {
                             Text("\(UserDefaultsManager.shared.selectedCurrencyCode ?? "USD") \(String(format: "%.2f", (Double(viewModel.price) ?? 1.0) * (Double(UserDefaultsManager.shared.selectedCurrencyValue ?? "1") ?? 1)))")
                                 .font(.headline.bold())
                                 .foregroundStyle(Color.red)
-                            
-                            
-                            
                             Spacer()
-                            Text("Qty:\($viewModel.availbleQuantity.wrappedValue)").foregroundStyle(Color.gray)
+                            if let qty = $viewModel.availbleQuantity.wrappedValue {
+                                if Int(qty) ?? 1 > 0 {
+                                    
+                                    Text("Qty:\($viewModel.availbleQuantity.wrappedValue)").foregroundStyle(Color.gray)
+                                }else {
+                                    
+                                    Text("Qty: Out Of Stock").foregroundStyle(Color.gray)
+                                }
+                            }
                             
                         }.padding(.top,-5)
                         Text("Description")
@@ -125,6 +132,20 @@ struct ProductDetailView: View {
                             .padding(.top, 15)
                         
                         Text($viewModel.productDecription.wrappedValue).multilineTextAlignment(.leading).font(.subheadline).padding(.top,3)
+                        
+                        
+                            VStack(alignment: .leading){
+                                Text("Reviews")
+                                    .padding(.top,4)
+                                    .font(.system(size: 20, weight: .semibold))
+                                ScrollView(.horizontal){
+                                    HStack{
+                                        ForEach(0 ..< 8, id: \.self) { index in
+                                            ReviewCell(reviewerName: viewModel.reviewers.randomElement() ?? "Eng. Beshoy", reviewText: viewModel.reviews.randomElement() ?? "Great Product To Buy.", ratingText: viewModel.rating.randomElement() ?? "4.8")
+                                        }
+                                    }
+                                }.scrollIndicators(.hidden)
+                            }
                         
                         if $viewModel.hasOptions.wrappedValue {
                             HStack(alignment: .top) {
@@ -177,9 +198,11 @@ struct ProductDetailView: View {
                         }else{
                             VStack{}.frame(height: UIScreen.screenHeight * 0.12)
                         }
-                        
-                        QuantitySelectorView(quantity:$viewModel.inventoryQuantity.wrappedValue , viewModel:viewModel)
-                            .padding(.leading,90)
+                        HStack{
+                            Spacer()
+                            QuantitySelectorView(quantity:$viewModel.inventoryQuantity.wrappedValue , viewModel:viewModel)
+                                Spacer()
+                        }
                         AppButton(text: "Add to Cart", width: UIScreen.screenWidth * 0.9, height: UIScreen.screenHeight * 0.06, isFilled: true){
                             if UserDefaults.standard.bool(forKey: Support.isLoggedUDKey){
                                 if Int($viewModel.availbleQuantity.wrappedValue) ?? 0 < 0 {

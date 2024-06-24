@@ -44,7 +44,9 @@ struct FavoriteView: View {
         }else if $viewModel.viewState.wrappedValue == .loading {
             VStack {
                 Spacer()
-                CustomCircularProgress()
+                
+                LottieView(animationFileName: "ShoppingAnimation", loopMode: .loop)
+                    .frame(width: 200, height: 200)
                 Spacer()
             }
             

@@ -34,7 +34,7 @@ class NotificationHandler {
         var dateComponents = DateComponents()
         dateComponents.minute = 0
         
-        let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
+        let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)
         return trigger
     }
     func scheduleHourlyNotification(){

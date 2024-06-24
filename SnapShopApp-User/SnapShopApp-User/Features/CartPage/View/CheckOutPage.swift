@@ -20,9 +20,11 @@ struct CheckOutPage: View {
     @State private var discountCode: String = "" // Use a state variable to hold the discount code
     var body: some View {
         VStack{
-            if !cartViewModel.isCheckOutLoading {
+            if cartViewModel.isCheckOutLoading {
                 Spacer()
-                CustomCircularProgress()
+                
+                LottieView(animationFileName: "ShoppingAnimation", loopMode: .loop)
+                    .frame(width: 200, height: 200)
                 Spacer()
             } else {
                 ScrollView {
@@ -223,6 +225,3 @@ struct CheckOutPage: View {
     
 }
 
-#Preview {
-    CheckOutPage()
-}

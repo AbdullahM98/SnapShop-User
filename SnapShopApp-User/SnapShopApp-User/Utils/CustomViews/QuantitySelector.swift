@@ -12,6 +12,8 @@ struct QuantitySelectorView: View {
     @State private var quantity: Int = 1
     @ObservedObject var viewModel :ProductDetailViewModel
     let maxValue: Int // Maximum value allowed
+    @AppStorage("isDarkMode") private var isDarkMode = false
+
   
     init(quantity : Int , viewModel:ProductDetailViewModel) {
 //        self.quantity = quantity
@@ -29,14 +31,14 @@ struct QuantitySelectorView: View {
             }) {
                 Image(systemName: "minus.circle")
                     .font(.title)
-                    .foregroundColor(quantity > 1 ? .black : .gray) // Disable if quantity is 1
+                    .foregroundColor(quantity > 1 ? (isDarkMode ? Color.blue : Color.black) : .gray) // Disable if quantity is 1
             }
             .padding(.trailing, 8)
             
             Text("\(quantity)")
                 .font(.title3)
                 .fontWeight(.bold)
-                .foregroundColor(.black)
+                .foregroundColor(isDarkMode ? Color.white : Color.black)
                 .frame(width: 40)
                 .multilineTextAlignment(.center)
             
@@ -49,7 +51,7 @@ struct QuantitySelectorView: View {
             }) {
                 Image(systemName: "plus.circle")
                     .font(.title)
-                    .foregroundColor(quantity < maxValue ? .black : .gray) // Disable if quantity reaches maxValue
+                    .foregroundColor(quantity < maxValue ? (isDarkMode ? Color.blue : Color.black) : .gray) // Disable if quantity reaches maxValue
             }
             .padding(.leading, 8)
         }
@@ -57,9 +59,8 @@ struct QuantitySelectorView: View {
         .padding(.vertical, 8)
         .background(
             RoundedRectangle(cornerRadius: 10)
-                .stroke(Color.black, lineWidth: 1.5).opacity(0.3).frame(width: UIScreen.screenWidth * 0.9, height: UIScreen.screenHeight * 0.06)
+                .stroke(isDarkMode ? Color.blue : Color.black, lineWidth: 1.5).opacity(0.3).frame(width: UIScreen.screenWidth * 0.9, height: UIScreen.screenHeight * 0.06)
         )
-        
     }
 }
 

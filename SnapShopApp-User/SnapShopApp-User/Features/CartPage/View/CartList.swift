@@ -16,7 +16,9 @@ struct CartList: View {
                 if viewModel.isLoading {
                     VStack {
                         Spacer()
-                        CustomCircularProgress()
+                        
+                        LottieView(animationFileName: "ShoppingAnimation", loopMode: .loop)
+                            .frame(width: 200, height: 200)
                         Spacer()
                     }
                 }else if ((viewModel.lineItems) == nil) {

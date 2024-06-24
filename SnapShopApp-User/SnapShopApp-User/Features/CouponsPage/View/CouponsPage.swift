@@ -17,7 +17,9 @@ struct CouponsPage: View {
         VStack{
             if viewModel.isLoading{
                 Spacer()
-                CustomCircularProgress()
+                
+                LottieView(animationFileName: "ShoppingAnimation", loopMode: .loop)
+                    .frame(width: 200, height: 200)
                     .navigationTitle("Coupons")
                     .navigationBarBackButtonHidden(true)
                     .navigationBarItems(leading: CustomBackButton())

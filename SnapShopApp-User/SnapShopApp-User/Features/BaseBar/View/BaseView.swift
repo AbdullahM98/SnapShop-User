@@ -123,7 +123,7 @@ struct BaseView: View {
                     .renderingMode(.template)
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 25,height: 25)
-                    .foregroundColor(isDarkMode ? baseData.currentTab == Tab ? .white : .gray.opacity(0.5) :baseData.currentTab == Tab ? .black : .gray.opacity(0.5) )
+                    .foregroundColor(isDarkMode ? baseData.currentTab == Tab ? .blue.opacity(0.5) : .white :baseData.currentTab == Tab ? .black : .gray.opacity(0.5) )
                     .frame(maxWidth: .infinity)
                 Text(baseData.currentTab == Tab ? Tab.rawValue : Tab.rawValue)
                     .font(.system(size: 12))

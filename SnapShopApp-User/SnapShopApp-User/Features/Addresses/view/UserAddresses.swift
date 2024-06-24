@@ -15,12 +15,14 @@ struct UserAddresses: View {
     var fromCart: Bool
     @Environment(\.presentationMode) var presentationMode
     var didSelectAddress: (AddressProfileDetails) -> Void? // Closure to be called when an address is selected
-    
+    @AppStorage("isDarkMode") private var isDarkMode = false
+
     var body: some View {
         VStack{
             if viewModel.isLoading {
                 Spacer()
-                CustomCircularProgress()
+                LottieView(animationFileName: "ShoppingAnimation", loopMode: .loop)
+                    .frame(width: 200, height: 200)
                     .navigationBarTitle("Addresses")
                     .navigationBarBackButtonHidden(true)
                     .navigationBarItems(leading: CustomBackButton())
@@ -76,7 +78,7 @@ struct UserAddresses: View {
                     showingLocationBottomSheet.toggle()
                     print("Location button pressed!")
                 }) {
-                    Image(systemName:"plus.circle.fill").foregroundColor(.black)
+                    Image(systemName:"plus.circle.fill").foregroundColor(isDarkMode ? Color.blue : Color.black)
                 }.sheet(isPresented: $showingLocationBottomSheet) {
                     LocationAddress(onSaveClick: {address in
                         viewModel.postUserAddress(address: address)

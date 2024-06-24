@@ -9,6 +9,10 @@ import Foundation
 import Combine
 import SwiftUI
 class ProductDetailViewModel :ObservableObject{
+    let reviews:[String] = ["Fantastic product! It exceeded my expectations in terms of quality and performance.","Great value for money. This product is a game-changer.","Disappointing. It didn't work as advertised.","Highly recommended. Sturdy build and easy to use.","Not bad, but there are better options available.","Excellent customer service. They resolved my issue promptly.","Perfect for my needs. I use it every day without any issues.", "Could be better. The design needs improvement.", "I'm impressed! It arrived earlier than expected.", "Poor quality. It broke after a few uses.", "Exactly what I was looking for. Works like a charm.", "Too expensive for what it offers. I expected more.", "Compact and lightweight. Ideal for travel.","Needs clearer instructions. I had trouble setting it up.", "Good buy. It's durable and reliable.", "Not suitable for heavy-duty use. It's more for light tasks.","Great addition to my kitchen gadgets. Makes cooking easier.", "I wish I bought it sooner. It simplifies my daily routine.", "Average product. It does the job but nothing extraordinary.","Impressive build quality. Feels like it will last a long time."
+    ]
+    let reviewers:[String] = ["Abdullah Essam","Al-Hussein Abdulaziz","Ahmed Fekry","Mostafa Sobaih","Ibrahim Mareay","Micheal Magdy","Ramez Hamdi","Mohamed Abdo","Hadir Elnajdy","Aya Hany","Shimaa Samy","Raneem Ashraf","Marwa Mohamed","Rwan Elmatry","Mayar Mohamed","Nareman Sharkan"]
+    let rating:[String] = ["4.9","4.7","4.8","4.6","4.5","4.3","4.2","4.1","4.0","5.0","3.9","3.8","3.7","3.6","3.5"]
     @Published var orderToPost:DraftOrderItemDetails?
     @Published var orderToUpdate:DraftOrderItemDetails?
     @Published var vendorTitle:String = "Nike"
@@ -31,7 +35,6 @@ class ProductDetailViewModel :ObservableObject{
     @Published var colors :[Color]? = []
     @Published var sizes :[String]? = []
     @Published var isLoading = true
-    
     var fireStoreManager : FirestoreManager?
     
     private var cancellables = Set<AnyCancellable>()
@@ -241,5 +244,6 @@ class ProductDetailViewModel :ObservableObject{
             }
         }
     }
+    
 }
 

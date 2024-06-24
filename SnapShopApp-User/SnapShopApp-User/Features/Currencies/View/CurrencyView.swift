@@ -11,12 +11,13 @@ import SwiftUI
 struct CurrencyView: View {
     @StateObject var viewModel: CurrencyViewModel
     @Environment(\.presentationMode) var presentationMode
-    
+    @AppStorage("isDarkMode") private var isDarkMode = false
+
     var body: some View {
         VStack {
             HStack {
                 Image(systemName: "magnifyingglass")
-                    .foregroundColor(.gray)
+                    .foregroundColor(isDarkMode ? Color.white : Color.gray)
                 TextField("Search currency...", text: $viewModel.searchText)
                     .padding(8)
                     .background(Color(.systemGray6))
@@ -36,11 +37,11 @@ struct CurrencyView: View {
                         HStack {
                             Text("\(currencyCode) - \(viewModel.currencyFullNames[currencyCode] ?? "Unknown Currency")")
                                 .font(.headline)
-                                .foregroundColor(currencyCode == UserDefaultsManager.shared.selectedCurrencyCode ? .red : Color(uiColor: UIColor.darkGray))
+                                .foregroundColor(currencyCode == UserDefaultsManager.shared.selectedCurrencyCode ? .red : Color(uiColor: isDarkMode ? UIColor.white : UIColor.darkGray))
                             Spacer()
                             Text(String(format: "%.2f", rate))
                                 .font(.subheadline)
-                                .foregroundColor(.gray)
+                                .foregroundColor(isDarkMode ? Color.white : Color.gray)
                         }
                         .frame(height: 60)
                         .padding(.horizontal, 8)
