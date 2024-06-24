@@ -10,20 +10,7 @@ struct LoginScreen: View {
         NavigationStack{
             if $viewModel.viewState.wrappedValue == .loginView {
                 VStack{
-                    HStack(alignment: .top){
-                        Spacer()
-                        Button(action:{
-                            navigateToHome = true
-                        },label:{
-                            Text("SKIP")
-                                .font(.callout)
-                                .fontWeight(.medium)
-                                .underline()
-                                .foregroundStyle(Color.black)
-                            
-                        })
-                        
-                    }
+                    
                     Image("app-logo").resizable().aspectRatio(contentMode: .fit).frame(width: UIScreen.screenWidth * 0.3).clipShape(/*@START_MENU_TOKEN@*/Circle()/*@END_MENU_TOKEN@*/)
                     Text("Login").padding(.bottom,30).font(.title2).fontWeight(.bold)
                     AppTextField(fieldModel: $viewModel.emailField,text: $text).padding(/*@START_MENU_TOKEN@*/EdgeInsets()/*@END_MENU_TOKEN@*/)
@@ -78,7 +65,7 @@ struct LoginScreen: View {
                         } label: {
                             
                             HStack{
-                                    Text("Sign Up").fontWeight(.medium)
+                                    Text("Register").fontWeight(.medium)
                                     .font(.callout)
                                     .lineLimit(1)
                             }.foregroundColor(.white)
@@ -87,7 +74,17 @@ struct LoginScreen: View {
                         }.frame(width: UIScreen.main.bounds.width * 0.9, height: UIScreen.main.bounds.height * 0.05).padding(.bottom,20)
                         
                     }
-                }.navigationBarBackButtonHidden(true).padding(.all,20)
+                }.navigationBarBackButtonHidden(true).padding(.all,20).navigationBarItems( trailing:  Button(action:{
+                    navigateToHome = true
+                },label:{
+                    Text("SKIP")
+                        .font(.callout)
+                        .fontWeight(.medium)
+                        .underline()
+                        .foregroundStyle(Color.black)
+                    
+                })
+                 )
             }else{
                 VStack {
                     Spacer()

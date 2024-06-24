@@ -62,6 +62,10 @@ class CartViewModel :ObservableObject{
                 case .failure(let err):
                     print("Error get the user order : \(err)")
                     print("Error is \(err.localizedDescription)")
+                    DispatchQueue.main.async {
+                        SnackBarHelper.showSnackBar(message: "Couldnt load Card , please try again", color: Color.red)
+                        self?.viewState = .userInActive
+                    }
                 }
             }
         }else{

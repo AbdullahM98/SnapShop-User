@@ -83,7 +83,6 @@
 		56B0BB0A2C28510A00267578 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 56B0BB092C28510A00267578 /* GoogleService-Info.plist */; };
 		56B0BB0C2C2863E100267578 /* CountryNumbers.json in Resources */ = {isa = PBXBuildFile; fileRef = 56B0BB0B2C2863E100267578 /* CountryNumbers.json */; };
 		56B0BB0E2C28652900267578 /* CPData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B0BB0D2C28652900267578 /* CPData.swift */; };
-		56B0BB102C2869CE00267578 /* temp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B0BB0F2C2869CE00267578 /* temp.swift */; };
 		56D46E912C14FCC00019EA1B /* CheckOutPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D46E902C14FCC00019EA1B /* CheckOutPage.swift */; };
 		56D5B6052C1505C2006EF83B /* PaymentPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D5B6042C1505C2006EF83B /* PaymentPage.swift */; };
 		56D5B6072C150606006EF83B /* ButtonWithImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D5B6062C150606006EF83B /* ButtonWithImage.swift */; };
@@ -238,7 +237,6 @@
 		56B0BB092C28510A00267578 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		56B0BB0B2C2863E100267578 /* CountryNumbers.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = CountryNumbers.json; sourceTree = "<group>"; };
 		56B0BB0D2C28652900267578 /* CPData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CPData.swift; sourceTree = "<group>"; };
-		56B0BB0F2C2869CE00267578 /* temp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = temp.swift; sourceTree = "<group>"; };
 		56D46E902C14FCC00019EA1B /* CheckOutPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckOutPage.swift; sourceTree = "<group>"; };
 		56D5B6042C1505C2006EF83B /* PaymentPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentPage.swift; sourceTree = "<group>"; };
 		56D5B6062C150606006EF83B /* ButtonWithImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonWithImage.swift; sourceTree = "<group>"; };
@@ -376,6 +374,7 @@
 		0A9063FF2C2369B200D63102 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				762443792C23DBDE001D57D6 /* NetworkTest.swift */,
 				0A9063FE2C2369B200D63102 /* UserDefaultsManager_Tests.swift */,
 			);
 			path = Services;
@@ -506,7 +505,6 @@
 				5627DB2C2C12324100AB6464 /* AddressCell.swift */,
 				56ACA7562C19ED6B00AD48AC /* EditAddress.swift */,
 				0A9064212C2708F300D63102 /* LocationAddress.swift */,
-				56B0BB0F2C2869CE00267578 /* temp.swift */,
 			);
 			path = subViews;
 			sourceTree = "<group>";
@@ -1005,7 +1003,6 @@
 			isa = PBXGroup;
 			children = (
 				762443752C23D856001D57D6 /* MockNetwork.swift */,
-				762443792C23DBDE001D57D6 /* NetworkTest.swift */,
 				7624437B2C23DF00001D57D6 /* MockCoreData.swift */,
 				7624437D2C23DF7D001D57D6 /* MockFireStoreManager.swift */,
 				76B08DEE2C27B69C0077C649 /* MockFirebaseManager.swift */,
@@ -1434,7 +1431,6 @@
 				76257A3E2C177900001C4006 /* FirestoreManager.swift in Sources */,
 				0A44F0BA2C1C7CF70031E649 /* TwoButtonAlert.swift in Sources */,
 				7606FBA62C0F78B400E1D3AF /* CustomTextField.swift in Sources */,
-				56B0BB102C2869CE00267578 /* temp.swift in Sources */,
 				768F30E02C22505000FA1F68 /* SnackBar.swift in Sources */,
 				56A580072C1460BE00BBC168 /* DrftOrdersModel.swift in Sources */,
 				5627DB2B2C12320000AB6464 /* AddAddress.swift in Sources */,

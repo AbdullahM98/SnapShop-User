@@ -76,14 +76,14 @@ struct ProductDetailView: View {
                                             
                                             viewModel.isFavorite = false
                                             viewModel.removeFromFavLocal(product: (viewModel.product)!)
-                                            SnackBarHelper.showSnackBar(message: "Removed ...", color: Color.red.opacity(0.4))
+                                            SnackBarHelper.showSnackBar(message: "Removed ...", color: Color.red.opacity(0.8))
                                             
                                         }else{
                                             viewModel.isFavorite = true
                                             print("hhhh \(viewModel.product?.product_id ?? "22")")
                                             viewModel.addLocalFavProduct(product: viewModel.product!)
                                             
-                                            SnackBarHelper.showSnackBar(message: "Inserted ..", color: Color.green.opacity(0.4))
+                                            SnackBarHelper.showSnackBar(message: "Inserted ..", color: Color.green)
                                         }
                                     }else{
                                         showingDeleteAlert = true
@@ -187,7 +187,7 @@ struct ProductDetailView: View {
                                 } else {
                                     viewModel.prepareDraftOrderToPost()
                                     //SnackBarHelper.updatingSnackBar(body: "Added to cart ...")
-                                    SnackBarHelper.showSnackBar(message: "Added to cart ...", color: Color.green.opacity(0.4))
+                                    SnackBarHelper.showSnackBar(message: "Added to cart ...", color: Color.green)
                                 }
                             }else{
                                 showingDeleteAlert = true

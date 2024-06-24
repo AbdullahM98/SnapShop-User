@@ -9,23 +9,25 @@ import SwiftUI
 
 struct FavoriteView: View {
     @StateObject var viewModel = FavoriteViewModel(firestoreService: FirestoreManager(), coreDBService: AppCoreData.shared)
+    @ObservedObject var networkMonitor = NetworkMonitor()
 
     
     var body: some View {
         
         
-        if $viewModel.viewState.wrappedValue == .userActive {
+        if $viewModel.viewState.wrappedValue == .userActive  {
             
-            VStack{
+          VStack{
                 
                 Text("Favorites").padding(.vertical,30).font(.title3)
                 ScrollView{
                     ForEach(viewModel.products , id: \.product_id){ product in
                         FavItemView(product: product, onDeleteClick: {  _ in
-                            viewModel.removeFromFavLocal(product: product)
+                            viewModel.deleteProduct(product: product)
                             if let index = viewModel.products.firstIndex(where: { $0.product_id == product.product_id }) {
                                 
                                 viewModel.products.remove(at: index)
+                                viewModel.getUserFav()
                             }
                         })
                     }
@@ -33,6 +35,7 @@ struct FavoriteView: View {
                 }
             }.padding(.bottom,60)
                 .onAppear{
+                    print("on Appear")
                     viewModel.getUserFav()
                 }
             
@@ -49,6 +52,8 @@ struct FavoriteView: View {
             // show no fav image
             VStack(alignment:.center){
                 Image("empty_box").resizable().padding(.vertical,150)
+            }.onAppear{
+                viewModel.getUserFav()
             }
         }
         
@@ -129,11 +134,14 @@ struct FavoriteView: View {
                             }
                         }
                     }
-                }.padding(.all,8).background(isDarkMode ? Color.black : Color.white).cornerRadius(10).shadow(radius: 5)
+                }.padding(.all,8).background(isDarkMode ? Color.black : Color.white).cornerRadius(10).shadow(radius: 5).frame(width: UIScreen.screenWidth * 0.9 )
+                
             }.padding(.all,8)
-            
         }
      
     }
 
+}
+#Preview {
+    FavoriteView()
 }

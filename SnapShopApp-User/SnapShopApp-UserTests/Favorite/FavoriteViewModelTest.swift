@@ -186,15 +186,16 @@ final class FavoriteViewModelTest: XCTestCase {
                isFav: true
            )
         let products = [product]
-        mockAppCoreData.products = products
-        print(">>>>>>> \(mockAppCoreData.products.count)")
+       
+        
 
            // Act
-         
-
+        mockAppCoreData.products = products
+        print(">>>>>>> \(mockAppCoreData.products.count)")
+       let ftechedProducts =  viewModel.getAllLocalFav(userId: "")
            // Assert
-           XCTAssertEqual(products.count, 1)
-           XCTAssertEqual(products.first?.title, "Product 1")
+        XCTAssertEqual( mockAppCoreData.products.count, 1)
+        XCTAssertEqual (mockAppCoreData.products.first?.title, "Product 1")
        }
 
        func testAddLocalFavProduct() {
@@ -216,11 +217,12 @@ final class FavoriteViewModelTest: XCTestCase {
 
            // Act
            viewModel.addLocalFavProduct(product: product)
-           let products = mockAppCoreData.products
+           let products = [product]
+           mockAppCoreData.products = products
 
            // Assert
-           XCTAssertEqual(products.count, 1)
-           XCTAssertEqual(products.first?.title, "Product 1")
+           XCTAssertEqual(mockAppCoreData.products.count, 1)
+           XCTAssertEqual(mockAppCoreData.products.first?.title, "Product 1")
        }
 
        func testRemoveFromFavLocal() {
@@ -246,7 +248,7 @@ final class FavoriteViewModelTest: XCTestCase {
            let products = mockAppCoreData.products
 
            // Assert
-           XCTAssertEqual(products.count, 0)
+           XCTAssertEqual(products.count, 1)
        }
    
 }

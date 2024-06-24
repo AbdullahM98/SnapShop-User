@@ -10,7 +10,7 @@ import Foundation
 class MockAppCoreData : CoreDbService {
     var products: [ProductEntity] = []
     var isProductInFavoritesReturnValue = false
-
+//    var userId = "7294848041139"
      func getAllProducts(by userId: String) -> [ProductEntity] {
         return products
     }

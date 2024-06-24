@@ -13,12 +13,11 @@ import Combine
 class FavoriteViewModel : ObservableObject{
     
     // MARK: - Published Properties
-
     @Published var products: [ProductEntity] = []
     private var cancellables = Set<AnyCancellable>()
     var firestoreService : FirestoreService?
     var coreDBService : CoreDbService?
-    @Published var viewState : FavViewState = .userActive
+    @Published var viewState : FavViewState = .loading
     var isConnected:Bool = false
     
     // MARK: - Initializer
@@ -27,10 +26,13 @@ class FavoriteViewModel : ObservableObject{
         self.firestoreService = FirestoreManager()
         self.coreDBService = AppCoreData.shared
         self.isConnected = UserDefaults.standard.bool(forKey: Support.isConnected)
-       
+       print("Fav init")
         if UserDefaults.standard.bool(forKey: Support.isLoggedUDKey) {
+            print(" signed in ")
             viewState = .userActive
         }else{
+            print("not signed in ")
+
             viewState = .userInActive
         }
     }
@@ -39,7 +41,17 @@ class FavoriteViewModel : ObservableObject{
 
     func getUserFav(){
         // online or offline
-        self.products = getAllLocalFav()
+        
+        
+        self.products = getAllLocalFav(userId:UserDefaults.standard.integer(forKey: Support.userID).description)
+        if self.products.count == 0  {
+            print(" >>>>>>>>>> == 0\(self.products.count)")
+            self.viewState = .userInActive
+        }else{      
+            print(" >>>>>>>>>> != 0\(self.products.count)")
+
+            self.viewState = .userActive
+        }
         //self.fetchFavProducts()
      
         
@@ -132,9 +144,9 @@ class FavoriteViewModel : ObservableObject{
                .store(in: &cancellables)
        }
     
-    func getAllLocalFav() ->[ProductEntity]{
+    func getAllLocalFav(userId:String) ->[ProductEntity]{
         print("Getting all favs")
-        let userId = UserDefaults.standard.integer(forKey: Support.userID).description
+       // let  = UserDefaults.standard.integer(forKey: Support.userID).description
         return  coreDBService?.getAllProducts(by: userId) ?? []
     }
     func addLocalFavProduct(product:ProductEntity){

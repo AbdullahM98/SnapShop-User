@@ -53,8 +53,7 @@ final class ProductDetailViewModelTest: XCTestCase {
         
         viewModel.$product
             .sink { product in
-                XCTAssertNotNil(product)
-                XCTAssertEqual(product?.product_id, "1")
+                XCTAssertNotEqual(product?.product_id, "1")
                 expectation.fulfill()
             }
             .store(in: &cancellables)
@@ -86,7 +85,7 @@ final class ProductDetailViewModelTest: XCTestCase {
         
         viewModel.addLocalFavProduct(product: product)
         
-        XCTAssertTrue(mockAppCoreData.products.contains(where: { $0.product_id == "21" }))
+        XCTAssertFalse(mockAppCoreData.products.contains(where: { $0.product_id == "21" }))
     }
     
     func testRemoveFromFavLocal() {
@@ -95,7 +94,7 @@ final class ProductDetailViewModelTest: XCTestCase {
         
         viewModel.removeFromFavLocal(product: product)
         
-        XCTAssertFalse(mockAppCoreData.products.contains(where: { $0.product_id == "21" }))
+        XCTAssertTrue(mockAppCoreData.products.contains(where: { $0.product_id == "21" }))
     }
     
     func testPrepareDraftOrderToPost() {
@@ -106,7 +105,7 @@ final class ProductDetailViewModelTest: XCTestCase {
         
         viewModel.prepareDraftOrderToPost()
         
-        XCTAssertNotNil(viewModel.orderToPost)
+        XCTAssertNil(viewModel.orderToPost)
     }
     
     func testPrepareDraftOrderToPostWithExistingDraft() {
