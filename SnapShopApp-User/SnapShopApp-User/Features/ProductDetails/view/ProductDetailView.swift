@@ -118,7 +118,7 @@ struct ProductDetailView: View {
                             if let qty = $viewModel.availbleQuantity.wrappedValue {
                                 if Int(qty) ?? 1 > 0 {
                                     
-                                    Text("Qty:\($viewModel.availbleQuantity.wrappedValue)").foregroundStyle(Color.gray)
+                                    Text("Qty:\($viewModel.availbleQuantity.wrappedValue ?? "0")").foregroundStyle(Color.gray)
                                 }else {
                                     
                                     Text("Qty: Out Of Stock").foregroundStyle(Color.gray)
@@ -205,7 +205,7 @@ struct ProductDetailView: View {
                         }
                         AppButton(text: "Add to Cart", width: UIScreen.screenWidth * 0.9, height: UIScreen.screenHeight * 0.06, isFilled: true){
                             if UserDefaults.standard.bool(forKey: Support.isLoggedUDKey){
-                                if Int($viewModel.availbleQuantity.wrappedValue) ?? 0 < 0 {
+                                if Int($viewModel.availbleQuantity.wrappedValue ?? "0") ?? 0 < 0 {
                                     showingOutOfStockAlert = true
                                 } else {
                                     viewModel.prepareDraftOrderToPost()

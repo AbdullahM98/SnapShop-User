@@ -111,6 +111,7 @@ struct FavoriteView: View {
                                 .bold()
                                 .foregroundColor(isDarkMode ? Color.white : Color.black)
                         }
+                        Spacer()
                         VStack(alignment: .trailing,spacing: 20){
                             Button {
                                 print("delete item")
@@ -135,8 +136,8 @@ struct FavoriteView: View {
                                 
                             }
                         }
-                    }
-                }.padding(.all,8).background(isDarkMode ? Color.black : Color.white).cornerRadius(10).shadow(radius: 5).frame(width: UIScreen.screenWidth * 0.9 )
+                    }.padding(.all,8).background(isDarkMode ? Color.black : Color.white).cornerRadius(10).shadow(radius: 5).frame(width: UIScreen.screenWidth * 0.9 )
+                }
                 
             }.padding(.all,8)
         }

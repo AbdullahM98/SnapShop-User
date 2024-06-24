@@ -18,7 +18,7 @@ class ProductDetailViewModel :ObservableObject{
     @Published var vendorTitle:String = "Nike"
     @Published var currentCurrency:String = "USD"
     @Published var price:String = "300.00"
-    @Published var availbleQuantity  = "30"
+    @Published var availbleQuantity : String?  = "30"
     @Published var inventoryQuantity  = 1
     @Published var pickedQuantity  = 1
     @Published var productTitle  = "T-shirt with long sleeves and pocket an sth else "

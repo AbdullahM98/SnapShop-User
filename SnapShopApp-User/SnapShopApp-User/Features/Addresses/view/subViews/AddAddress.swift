@@ -25,6 +25,10 @@ struct AddAddress: View {
     @State private var searchCountry: String = ""
     @Environment(\.colorScheme) var colorScheme
     @FocusState private var keyIsFocused: Bool
+    private var isValid: Bool {
+        !addressTextFieldData.isEmpty && !cityTextFieldData.isEmpty && !countryTextFieldData.isEmpty && !phoneAddressTextFieldData.isEmpty
+     
+    }
     
     let counrties: [CPData] = Bundle.main.decode("CountryNumbers.json")
 
@@ -142,11 +146,13 @@ struct AddAddress: View {
                         .stroke(Color.black  ,lineWidth: 2)
                 )
                 Spacer()
-                if validateAllFields(){
+              
                     
                     Button(action: {
-                        if validateAllFields() {
+                        if isValid {
                             onSaveClick(NewAddressRoot(customer_address: NewAddressDetails(id: nil, customer_id: UserDefaultsManager.shared.getUserId(key: Support.userID), address1: addressTextFieldData, address2: nil, city: cityTextFieldData, zip: zipTextFieldData, phone: phoneAddressTextFieldData, name: nil, province_code: nil, country_code: "EG", country_name: countryTextFieldData, default: false)))
+                        }else{
+                            SnackBarHelper.showSnackBar(message: "All fields are required", color: Color.red.opacity(0.8))
                         }
                     }) {
                         Text("Save")
@@ -154,8 +160,8 @@ struct AddAddress: View {
                             .frame(width: 170, height: 44)
                             .background(Color.black.opacity(0.9))
                             .clipShape(RoundedRectangle(cornerRadius: 6))
-                    }.disabled(!validateAllFields())
-                }
+                    }.disabled(!isValid)
+                
             }.padding(.horizontal)
                 .padding(.vertical,4)
                 .padding(.bottom,16)

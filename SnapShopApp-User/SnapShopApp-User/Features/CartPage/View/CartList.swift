@@ -23,7 +23,7 @@ struct CartList: View {
                     }
                 }else if ((viewModel.lineItems) == nil) {
                     VStack(alignment:.center){
-                        Image("empty_box").resizable().padding(.vertical,150)
+                        Image("empty-cart").resizable().padding(.vertical,150)
                     }
                 }else{
                     ScrollView{

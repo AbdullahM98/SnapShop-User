@@ -104,7 +104,7 @@ struct SignUpScreen: View {
                     }
                     .background(
                                      NavigationLink(
-                                         destination: ContentView(),
+                                         destination: BaseView(),
                                          isActive: $navigateToHome,
                                          label: { EmptyView() }
                                      )

@@ -213,7 +213,7 @@ struct CheckOutPage: View {
         )
         .background(
             NavigationLink(
-                destination: ContentView(), // Replace with your actual home view
+                destination: BaseView(), // Replace with your actual home view
                 isActive: $navigateToHome,
                 label: { EmptyView() }
             )

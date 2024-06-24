@@ -49,7 +49,7 @@ struct LoginScreen: View {
                                     .frame(width: UIScreen.screenWidth * 0.12, height: UIScreen.screenHeight * 0.035)
                              
                                 
-                                Text("Sign in with Google")
+                                Text("Continue with Google")
                                     .font(.callout)
                                     .lineLimit(1)
                             }.foregroundColor(.white)

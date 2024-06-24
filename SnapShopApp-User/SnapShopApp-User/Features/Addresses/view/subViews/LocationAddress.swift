@@ -46,7 +46,10 @@ struct LocationAddress: View {
     ]
     @State private var isUsingCurrentLocation = false
     @State private var selectedLocation: IdentifiableLocation?
-    
+    private var isValid: Bool {
+        !addressTextFieldData.isEmpty && !cityTextFieldData.isEmpty && !countryTextFieldData.isEmpty && !mobPhoneNumber.isEmpty
+     
+    }
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 8) {
@@ -80,10 +83,10 @@ struct LocationAddress: View {
                                 reverseGeocodeAndUpdateFields(coordinate: coordinate)
                             }
                         
-                        if let location = selectedLocation {
-                            Text("Selected Location: \(location.coordinate.latitude), \(location.coordinate.longitude)")
-                                .foregroundColor(.blue)
-                        }
+//                        if let location = selectedLocation {
+//                            Text("Selected Location: \(location.coordinate.latitude), \(location.coordinate.longitude)")
+//                                .foregroundColor(.blue)
+//                        }
                     }
                     Text("Street")
                     
@@ -248,7 +251,7 @@ struct LocationAddress: View {
                     
                     if validateAllFields() {
                         Button(action: {
-                            if validateAllFields() {
+                            if isValid {
                                 let newAddress = NewAddressRoot(
                                     customer_address: NewAddressDetails(
                                         id: nil,
@@ -266,6 +269,8 @@ struct LocationAddress: View {
                                     )
                                 )
                                 onSaveClick(newAddress)
+                            }else{
+                                SnackBarHelper.showSnackBar(message: "All fields are required", color: Color.red.opacity(0.8))
                             }
                         }) {
                             Text("Save")
@@ -274,7 +279,7 @@ struct LocationAddress: View {
                                 .background(Color.black.opacity(0.9))
                                 .clipShape(RoundedRectangle(cornerRadius: 6))
                         }
-                        .disabled(!validateAllFields())
+                        .disabled(!isValid)
                     }
                 }
                 .padding(.horizontal)
